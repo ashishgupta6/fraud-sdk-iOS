@@ -1,0 +1,479 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */; };
+		398EB5B12C63BC6B002FC9CA /* Sign3Intelligence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398EB5A62C63BC6A002FC9CA /* Sign3Intelligence.framework */; };
+		398EB5B62C63BC6B002FC9CA /* Sign3IntelligenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5B52C63BC6B002FC9CA /* Sign3IntelligenceTests.swift */; };
+		398EB5B72C63BC6B002FC9CA /* Sign3Intelligence.h in Headers */ = {isa = PBXBuildFile; fileRef = 398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5C12C63BCAF002FC9CA /* DeviceSiganlsApi.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		398EB5B22C63BC6B002FC9CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 398EB59D2C63BC6A002FC9CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 398EB5A52C63BC6A002FC9CA;
+			remoteInfo = Sign3Intelligence;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		398EB5A62C63BC6A002FC9CA /* Sign3Intelligence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Sign3Intelligence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sign3Intelligence.h; sourceTree = "<group>"; };
+		398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Sign3Intelligence.docc; sourceTree = "<group>"; };
+		398EB5B02C63BC6B002FC9CA /* Sign3IntelligenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sign3IntelligenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		398EB5B52C63BC6B002FC9CA /* Sign3IntelligenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceTests.swift; sourceTree = "<group>"; };
+		398EB5C12C63BCAF002FC9CA /* DeviceSiganlsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSiganlsApi.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		398EB5A32C63BC6A002FC9CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		398EB5AD2C63BC6B002FC9CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				398EB5B12C63BC6B002FC9CA /* Sign3Intelligence.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		398EB59C2C63BC6A002FC9CA = {
+			isa = PBXGroup;
+			children = (
+				398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */,
+				398EB5B42C63BC6B002FC9CA /* Sign3IntelligenceTests */,
+				398EB5A72C63BC6A002FC9CA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		398EB5A72C63BC6A002FC9CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				398EB5A62C63BC6A002FC9CA /* Sign3Intelligence.framework */,
+				398EB5B02C63BC6B002FC9CA /* Sign3IntelligenceTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
+			isa = PBXGroup;
+			children = (
+				398EB5C02C63BC8A002FC9CA /* DeviceSignals */,
+				398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */,
+				398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */,
+			);
+			path = Sign3Intelligence;
+			sourceTree = "<group>";
+		};
+		398EB5B42C63BC6B002FC9CA /* Sign3IntelligenceTests */ = {
+			isa = PBXGroup;
+			children = (
+				398EB5B52C63BC6B002FC9CA /* Sign3IntelligenceTests.swift */,
+			);
+			path = Sign3IntelligenceTests;
+			sourceTree = "<group>";
+		};
+		398EB5C02C63BC8A002FC9CA /* DeviceSignals */ = {
+			isa = PBXGroup;
+			children = (
+				398EB5C12C63BCAF002FC9CA /* DeviceSiganlsApi.swift */,
+			);
+			name = DeviceSignals;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		398EB5A12C63BC6A002FC9CA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				398EB5B72C63BC6B002FC9CA /* Sign3Intelligence.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		398EB5A52C63BC6A002FC9CA /* Sign3Intelligence */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 398EB5BA2C63BC6B002FC9CA /* Build configuration list for PBXNativeTarget "Sign3Intelligence" */;
+			buildPhases = (
+				398EB5A12C63BC6A002FC9CA /* Headers */,
+				398EB5A22C63BC6A002FC9CA /* Sources */,
+				398EB5A32C63BC6A002FC9CA /* Frameworks */,
+				398EB5A42C63BC6A002FC9CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sign3Intelligence;
+			productName = Sign3Intelligence;
+			productReference = 398EB5A62C63BC6A002FC9CA /* Sign3Intelligence.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		398EB5AF2C63BC6B002FC9CA /* Sign3IntelligenceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 398EB5BD2C63BC6B002FC9CA /* Build configuration list for PBXNativeTarget "Sign3IntelligenceTests" */;
+			buildPhases = (
+				398EB5AC2C63BC6B002FC9CA /* Sources */,
+				398EB5AD2C63BC6B002FC9CA /* Frameworks */,
+				398EB5AE2C63BC6B002FC9CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				398EB5B32C63BC6B002FC9CA /* PBXTargetDependency */,
+			);
+			name = Sign3IntelligenceTests;
+			productName = Sign3IntelligenceTests;
+			productReference = 398EB5B02C63BC6B002FC9CA /* Sign3IntelligenceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		398EB59D2C63BC6A002FC9CA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					398EB5A52C63BC6A002FC9CA = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					398EB5AF2C63BC6B002FC9CA = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 398EB5A02C63BC6A002FC9CA /* Build configuration list for PBXProject "Sign3Intelligence" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 398EB59C2C63BC6A002FC9CA;
+			productRefGroup = 398EB5A72C63BC6A002FC9CA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				398EB5A52C63BC6A002FC9CA /* Sign3Intelligence */,
+				398EB5AF2C63BC6B002FC9CA /* Sign3IntelligenceTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		398EB5A42C63BC6A002FC9CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		398EB5AE2C63BC6B002FC9CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		398EB5A22C63BC6A002FC9CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */,
+				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		398EB5AC2C63BC6B002FC9CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				398EB5B62C63BC6B002FC9CA /* Sign3IntelligenceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		398EB5B32C63BC6B002FC9CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 398EB5A52C63BC6A002FC9CA /* Sign3Intelligence */;
+			targetProxy = 398EB5B22C63BC6B002FC9CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		398EB5B82C63BC6B002FC9CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		398EB5B92C63BC6B002FC9CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		398EB5BB2C63BC6B002FC9CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.Sign3Intelligence;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		398EB5BC2C63BC6B002FC9CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.Sign3Intelligence;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		398EB5BE2C63BC6B002FC9CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.Sign3IntelligenceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		398EB5BF2C63BC6B002FC9CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.Sign3IntelligenceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		398EB5A02C63BC6A002FC9CA /* Build configuration list for PBXProject "Sign3Intelligence" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				398EB5B82C63BC6B002FC9CA /* Debug */,
+				398EB5B92C63BC6B002FC9CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		398EB5BA2C63BC6B002FC9CA /* Build configuration list for PBXNativeTarget "Sign3Intelligence" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				398EB5BB2C63BC6B002FC9CA /* Debug */,
+				398EB5BC2C63BC6B002FC9CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		398EB5BD2C63BC6B002FC9CA /* Build configuration list for PBXNativeTarget "Sign3IntelligenceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				398EB5BE2C63BC6B002FC9CA /* Debug */,
+				398EB5BF2C63BC6B002FC9CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 398EB59D2C63BC6A002FC9CA /* Project object */;
+}
