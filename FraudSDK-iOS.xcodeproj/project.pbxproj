@@ -33,16 +33,16 @@
 			remoteGlobalIDString = 398EB5672C63BB0E002FC9CA;
 			remoteInfo = "FraudSDK-iOS";
 		};
-		398EB5C82C63BD0F002FC9CA /* PBXContainerItemProxy */ = {
+		398EB5D62C63C0CE002FC9CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 398EB5C32C63BD0F002FC9CA /* Sign3Intelligence.xcodeproj */;
+			containerPortal = 398EB5D12C63C0CE002FC9CA /* Sign3Intelligence.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 398EB5A62C63BC6A002FC9CA;
 			remoteInfo = Sign3Intelligence;
 		};
-		398EB5CA2C63BD0F002FC9CA /* PBXContainerItemProxy */ = {
+		398EB5D82C63C0CE002FC9CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 398EB5C32C63BD0F002FC9CA /* Sign3Intelligence.xcodeproj */;
+			containerPortal = 398EB5D12C63C0CE002FC9CA /* Sign3Intelligence.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 398EB5B02C63BC6B002FC9CA;
 			remoteInfo = Sign3IntelligenceTests;
@@ -63,7 +63,7 @@
 		398EB5882C63BB10002FC9CA /* FraudSDK-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FraudSDK-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		398EB58C2C63BB10002FC9CA /* FraudSDK_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FraudSDK_iOSUITests.swift; sourceTree = "<group>"; };
 		398EB58E2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FraudSDK_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		398EB5C32C63BD0F002FC9CA /* Sign3Intelligence.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sign3Intelligence.xcodeproj; path = ../Sign3Intelligence/Sign3Intelligence.xcodeproj; sourceTree = "<group>"; };
+		398EB5D12C63C0CE002FC9CA /* Sign3Intelligence.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sign3Intelligence.xcodeproj; path = Sign3Intelligence/Sign3Intelligence.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +94,7 @@
 		398EB55F2C63BB0E002FC9CA = {
 			isa = PBXGroup;
 			children = (
-				398EB5C32C63BD0F002FC9CA /* Sign3Intelligence.xcodeproj */,
+				398EB5D12C63C0CE002FC9CA /* Sign3Intelligence.xcodeproj */,
 				398EB56A2C63BB0E002FC9CA /* FraudSDK-iOS */,
 				398EB5812C63BB10002FC9CA /* FraudSDK-iOSTests */,
 				398EB58B2C63BB10002FC9CA /* FraudSDK-iOSUITests */,
@@ -151,11 +151,11 @@
 			name = App;
 			sourceTree = "<group>";
 		};
-		398EB5C42C63BD0F002FC9CA /* Products */ = {
+		398EB5D22C63C0CE002FC9CA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				398EB5C92C63BD0F002FC9CA /* Sign3Intelligence.framework */,
-				398EB5CB2C63BD0F002FC9CA /* Sign3IntelligenceTests.xctest */,
+				398EB5D72C63C0CE002FC9CA /* Sign3Intelligence.framework */,
+				398EB5D92C63C0CE002FC9CA /* Sign3IntelligenceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -252,8 +252,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 398EB5C42C63BD0F002FC9CA /* Products */;
-					ProjectRef = 398EB5C32C63BD0F002FC9CA /* Sign3Intelligence.xcodeproj */;
+					ProductGroup = 398EB5D22C63C0CE002FC9CA /* Products */;
+					ProjectRef = 398EB5D12C63C0CE002FC9CA /* Sign3Intelligence.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -266,18 +266,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		398EB5C92C63BD0F002FC9CA /* Sign3Intelligence.framework */ = {
+		398EB5D72C63C0CE002FC9CA /* Sign3Intelligence.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Sign3Intelligence.framework;
-			remoteRef = 398EB5C82C63BD0F002FC9CA /* PBXContainerItemProxy */;
+			remoteRef = 398EB5D62C63C0CE002FC9CA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		398EB5CB2C63BD0F002FC9CA /* Sign3IntelligenceTests.xctest */ = {
+		398EB5D92C63C0CE002FC9CA /* Sign3IntelligenceTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = Sign3IntelligenceTests.xctest;
-			remoteRef = 398EB5CA2C63BD0F002FC9CA /* PBXContainerItemProxy */;
+			remoteRef = 398EB5D82C63C0CE002FC9CA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
