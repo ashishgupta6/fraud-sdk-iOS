@@ -1,0 +1,665 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		398EB56C2C63BB0E002FC9CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB56B2C63BB0E002FC9CA /* AppDelegate.swift */; };
+		398EB56E2C63BB0E002FC9CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB56D2C63BB0E002FC9CA /* SceneDelegate.swift */; };
+		398EB5702C63BB0E002FC9CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB56F2C63BB0E002FC9CA /* ViewController.swift */; };
+		398EB5732C63BB0E002FC9CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 398EB5712C63BB0E002FC9CA /* Main.storyboard */; };
+		398EB5752C63BB0F002FC9CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 398EB5742C63BB0F002FC9CA /* Assets.xcassets */; };
+		398EB5782C63BB0F002FC9CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 398EB5762C63BB0F002FC9CA /* LaunchScreen.storyboard */; };
+		398EB5832C63BB10002FC9CA /* FraudSDK_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5822C63BB10002FC9CA /* FraudSDK_iOSTests.swift */; };
+		398EB58D2C63BB10002FC9CA /* FraudSDK_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB58C2C63BB10002FC9CA /* FraudSDK_iOSUITests.swift */; };
+		398EB58F2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB58E2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		398EB57F2C63BB10002FC9CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 398EB5602C63BB0E002FC9CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 398EB5672C63BB0E002FC9CA;
+			remoteInfo = "FraudSDK-iOS";
+		};
+		398EB5892C63BB10002FC9CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 398EB5602C63BB0E002FC9CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 398EB5672C63BB0E002FC9CA;
+			remoteInfo = "FraudSDK-iOS";
+		};
+		398EB5C82C63BD0F002FC9CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 398EB5C32C63BD0F002FC9CA /* Sign3Intelligence.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 398EB5A62C63BC6A002FC9CA;
+			remoteInfo = Sign3Intelligence;
+		};
+		398EB5CA2C63BD0F002FC9CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 398EB5C32C63BD0F002FC9CA /* Sign3Intelligence.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 398EB5B02C63BC6B002FC9CA;
+			remoteInfo = Sign3IntelligenceTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		398EB5682C63BB0E002FC9CA /* FraudSDK-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FraudSDK-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		398EB56B2C63BB0E002FC9CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		398EB56D2C63BB0E002FC9CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		398EB56F2C63BB0E002FC9CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		398EB5722C63BB0E002FC9CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		398EB5742C63BB0F002FC9CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		398EB5772C63BB0F002FC9CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		398EB5792C63BB0F002FC9CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		398EB57E2C63BB10002FC9CA /* FraudSDK-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FraudSDK-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		398EB5822C63BB10002FC9CA /* FraudSDK_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FraudSDK_iOSTests.swift; sourceTree = "<group>"; };
+		398EB5882C63BB10002FC9CA /* FraudSDK-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FraudSDK-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		398EB58C2C63BB10002FC9CA /* FraudSDK_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FraudSDK_iOSUITests.swift; sourceTree = "<group>"; };
+		398EB58E2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FraudSDK_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		398EB5C32C63BD0F002FC9CA /* Sign3Intelligence.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sign3Intelligence.xcodeproj; path = ../Sign3Intelligence/Sign3Intelligence.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		398EB5652C63BB0E002FC9CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		398EB57B2C63BB10002FC9CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		398EB5852C63BB10002FC9CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		398EB55F2C63BB0E002FC9CA = {
+			isa = PBXGroup;
+			children = (
+				398EB5C32C63BD0F002FC9CA /* Sign3Intelligence.xcodeproj */,
+				398EB56A2C63BB0E002FC9CA /* FraudSDK-iOS */,
+				398EB5812C63BB10002FC9CA /* FraudSDK-iOSTests */,
+				398EB58B2C63BB10002FC9CA /* FraudSDK-iOSUITests */,
+				398EB5692C63BB0E002FC9CA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		398EB5692C63BB0E002FC9CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				398EB5682C63BB0E002FC9CA /* FraudSDK-iOS.app */,
+				398EB57E2C63BB10002FC9CA /* FraudSDK-iOSTests.xctest */,
+				398EB5882C63BB10002FC9CA /* FraudSDK-iOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		398EB56A2C63BB0E002FC9CA /* FraudSDK-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				398EB59B2C63BBA6002FC9CA /* App */,
+				398EB5712C63BB0E002FC9CA /* Main.storyboard */,
+				398EB5742C63BB0F002FC9CA /* Assets.xcassets */,
+				398EB5762C63BB0F002FC9CA /* LaunchScreen.storyboard */,
+				398EB5792C63BB0F002FC9CA /* Info.plist */,
+			);
+			path = "FraudSDK-iOS";
+			sourceTree = "<group>";
+		};
+		398EB5812C63BB10002FC9CA /* FraudSDK-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				398EB5822C63BB10002FC9CA /* FraudSDK_iOSTests.swift */,
+			);
+			path = "FraudSDK-iOSTests";
+			sourceTree = "<group>";
+		};
+		398EB58B2C63BB10002FC9CA /* FraudSDK-iOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				398EB58C2C63BB10002FC9CA /* FraudSDK_iOSUITests.swift */,
+				398EB58E2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift */,
+			);
+			path = "FraudSDK-iOSUITests";
+			sourceTree = "<group>";
+		};
+		398EB59B2C63BBA6002FC9CA /* App */ = {
+			isa = PBXGroup;
+			children = (
+				398EB56B2C63BB0E002FC9CA /* AppDelegate.swift */,
+				398EB56D2C63BB0E002FC9CA /* SceneDelegate.swift */,
+				398EB56F2C63BB0E002FC9CA /* ViewController.swift */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		398EB5C42C63BD0F002FC9CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				398EB5C92C63BD0F002FC9CA /* Sign3Intelligence.framework */,
+				398EB5CB2C63BD0F002FC9CA /* Sign3IntelligenceTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		398EB5672C63BB0E002FC9CA /* FraudSDK-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 398EB5922C63BB10002FC9CA /* Build configuration list for PBXNativeTarget "FraudSDK-iOS" */;
+			buildPhases = (
+				398EB5642C63BB0E002FC9CA /* Sources */,
+				398EB5652C63BB0E002FC9CA /* Frameworks */,
+				398EB5662C63BB0E002FC9CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FraudSDK-iOS";
+			productName = "FraudSDK-iOS";
+			productReference = 398EB5682C63BB0E002FC9CA /* FraudSDK-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		398EB57D2C63BB10002FC9CA /* FraudSDK-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 398EB5952C63BB10002FC9CA /* Build configuration list for PBXNativeTarget "FraudSDK-iOSTests" */;
+			buildPhases = (
+				398EB57A2C63BB10002FC9CA /* Sources */,
+				398EB57B2C63BB10002FC9CA /* Frameworks */,
+				398EB57C2C63BB10002FC9CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				398EB5802C63BB10002FC9CA /* PBXTargetDependency */,
+			);
+			name = "FraudSDK-iOSTests";
+			productName = "FraudSDK-iOSTests";
+			productReference = 398EB57E2C63BB10002FC9CA /* FraudSDK-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		398EB5872C63BB10002FC9CA /* FraudSDK-iOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 398EB5982C63BB10002FC9CA /* Build configuration list for PBXNativeTarget "FraudSDK-iOSUITests" */;
+			buildPhases = (
+				398EB5842C63BB10002FC9CA /* Sources */,
+				398EB5852C63BB10002FC9CA /* Frameworks */,
+				398EB5862C63BB10002FC9CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				398EB58A2C63BB10002FC9CA /* PBXTargetDependency */,
+			);
+			name = "FraudSDK-iOSUITests";
+			productName = "FraudSDK-iOSUITests";
+			productReference = 398EB5882C63BB10002FC9CA /* FraudSDK-iOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		398EB5602C63BB0E002FC9CA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					398EB5672C63BB0E002FC9CA = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					398EB57D2C63BB10002FC9CA = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 398EB5672C63BB0E002FC9CA;
+					};
+					398EB5872C63BB10002FC9CA = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 398EB5672C63BB0E002FC9CA;
+					};
+				};
+			};
+			buildConfigurationList = 398EB5632C63BB0E002FC9CA /* Build configuration list for PBXProject "FraudSDK-iOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 398EB55F2C63BB0E002FC9CA;
+			productRefGroup = 398EB5692C63BB0E002FC9CA /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 398EB5C42C63BD0F002FC9CA /* Products */;
+					ProjectRef = 398EB5C32C63BD0F002FC9CA /* Sign3Intelligence.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				398EB5672C63BB0E002FC9CA /* FraudSDK-iOS */,
+				398EB57D2C63BB10002FC9CA /* FraudSDK-iOSTests */,
+				398EB5872C63BB10002FC9CA /* FraudSDK-iOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		398EB5C92C63BD0F002FC9CA /* Sign3Intelligence.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Sign3Intelligence.framework;
+			remoteRef = 398EB5C82C63BD0F002FC9CA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		398EB5CB2C63BD0F002FC9CA /* Sign3IntelligenceTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Sign3IntelligenceTests.xctest;
+			remoteRef = 398EB5CA2C63BD0F002FC9CA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		398EB5662C63BB0E002FC9CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				398EB5782C63BB0F002FC9CA /* LaunchScreen.storyboard in Resources */,
+				398EB5752C63BB0F002FC9CA /* Assets.xcassets in Resources */,
+				398EB5732C63BB0E002FC9CA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		398EB57C2C63BB10002FC9CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		398EB5862C63BB10002FC9CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		398EB5642C63BB0E002FC9CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				398EB5702C63BB0E002FC9CA /* ViewController.swift in Sources */,
+				398EB56C2C63BB0E002FC9CA /* AppDelegate.swift in Sources */,
+				398EB56E2C63BB0E002FC9CA /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		398EB57A2C63BB10002FC9CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				398EB5832C63BB10002FC9CA /* FraudSDK_iOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		398EB5842C63BB10002FC9CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				398EB58F2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift in Sources */,
+				398EB58D2C63BB10002FC9CA /* FraudSDK_iOSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		398EB5802C63BB10002FC9CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 398EB5672C63BB0E002FC9CA /* FraudSDK-iOS */;
+			targetProxy = 398EB57F2C63BB10002FC9CA /* PBXContainerItemProxy */;
+		};
+		398EB58A2C63BB10002FC9CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 398EB5672C63BB0E002FC9CA /* FraudSDK-iOS */;
+			targetProxy = 398EB5892C63BB10002FC9CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		398EB5712C63BB0E002FC9CA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				398EB5722C63BB0E002FC9CA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		398EB5762C63BB0F002FC9CA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				398EB5772C63BB0F002FC9CA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		398EB5902C63BB10002FC9CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		398EB5912C63BB10002FC9CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		398EB5932C63BB10002FC9CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "FraudSDK-iOS/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sign3labs.fraudsdkios.FraudSDK-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		398EB5942C63BB10002FC9CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "FraudSDK-iOS/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sign3labs.fraudsdkios.FraudSDK-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		398EB5962C63BB10002FC9CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sign3labs.fraudsdkios.FraudSDK-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FraudSDK-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FraudSDK-iOS";
+			};
+			name = Debug;
+		};
+		398EB5972C63BB10002FC9CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sign3labs.fraudsdkios.FraudSDK-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FraudSDK-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FraudSDK-iOS";
+			};
+			name = Release;
+		};
+		398EB5992C63BB10002FC9CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sign3labs.fraudsdkios.FraudSDK-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "FraudSDK-iOS";
+			};
+			name = Debug;
+		};
+		398EB59A2C63BB10002FC9CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sign3labs.fraudsdkios.FraudSDK-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "FraudSDK-iOS";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		398EB5632C63BB0E002FC9CA /* Build configuration list for PBXProject "FraudSDK-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				398EB5902C63BB10002FC9CA /* Debug */,
+				398EB5912C63BB10002FC9CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		398EB5922C63BB10002FC9CA /* Build configuration list for PBXNativeTarget "FraudSDK-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				398EB5932C63BB10002FC9CA /* Debug */,
+				398EB5942C63BB10002FC9CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		398EB5952C63BB10002FC9CA /* Build configuration list for PBXNativeTarget "FraudSDK-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				398EB5962C63BB10002FC9CA /* Debug */,
+				398EB5972C63BB10002FC9CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		398EB5982C63BB10002FC9CA /* Build configuration list for PBXNativeTarget "FraudSDK-iOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				398EB5992C63BB10002FC9CA /* Debug */,
+				398EB59A2C63BB10002FC9CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 398EB5602C63BB0E002FC9CA /* Project object */;
+}
