@@ -7,11 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		393E768B2C809C0C00572A77 /* DeviceSignalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768A2C809C0C00572A77 /* DeviceSignalsViewModel.swift */; };
+		393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768D2C809FE700572A77 /* IntelligenceResponse.swift */; };
+		396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */; };
+		397950EA2C7DC73E0043677B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397950E92C7DC73E0043677B /* Utils.swift */; };
 		398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */; };
 		398EB5B12C63BC6B002FC9CA /* Sign3Intelligence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398EB5A62C63BC6A002FC9CA /* Sign3Intelligence.framework */; };
 		398EB5B62C63BC6B002FC9CA /* Sign3IntelligenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5B52C63BC6B002FC9CA /* Sign3IntelligenceTests.swift */; };
 		398EB5B72C63BC6B002FC9CA /* Sign3Intelligence.h in Headers */ = {isa = PBXBuildFile; fileRef = 398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5C12C63BCAF002FC9CA /* DeviceSiganlsApi.swift */; };
+		39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */; };
+		39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */; };
+		39CC8F782C7F63FE00239032 /* DisplayAllSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F772C7F63FE00239032 /* DisplayAllSignals.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,12 +32,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		393E768A2C809C0C00572A77 /* DeviceSignalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsViewModel.swift; sourceTree = "<group>"; };
+		393E768D2C809FE700572A77 /* IntelligenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponse.swift; sourceTree = "<group>"; };
+		396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsApiImpl.swift; sourceTree = "<group>"; };
+		397950E92C7DC73E0043677B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		398EB5A62C63BC6A002FC9CA /* Sign3Intelligence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Sign3Intelligence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sign3Intelligence.h; sourceTree = "<group>"; };
 		398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Sign3Intelligence.docc; sourceTree = "<group>"; };
 		398EB5B02C63BC6B002FC9CA /* Sign3IntelligenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sign3IntelligenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		398EB5B52C63BC6B002FC9CA /* Sign3IntelligenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceTests.swift; sourceTree = "<group>"; };
 		398EB5C12C63BCAF002FC9CA /* DeviceSiganlsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSiganlsApi.swift; sourceTree = "<group>"; };
+		39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3Intelligence.swift; sourceTree = "<group>"; };
+		39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceInternal.swift; sourceTree = "<group>"; };
+		39CC8F772C7F63FE00239032 /* DisplayAllSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAllSignals.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +66,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		393E76892C809BFB00572A77 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				393E768A2C809C0C00572A77 /* DeviceSignalsViewModel.swift */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		393E768C2C809FC100572A77 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				393E768D2C809FE700572A77 /* IntelligenceResponse.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		397950E82C7DC6F80043677B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				397950E92C7DC73E0043677B /* Utils.swift */,
+				39CC8F772C7F63FE00239032 /* DisplayAllSignals.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		398EB59C2C63BC6A002FC9CA = {
 			isa = PBXGroup;
 			children = (
@@ -73,9 +112,14 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
+				393E768C2C809FC100572A77 /* Model */,
+				393E76892C809BFB00572A77 /* ViewModels */,
+				397950E82C7DC6F80043677B /* Utils */,
 				398EB5C02C63BC8A002FC9CA /* DeviceSignals */,
 				398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */,
 				398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */,
+				39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */,
+				39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */,
 			);
 			path = Sign3Intelligence;
 			sourceTree = "<group>";
@@ -92,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				398EB5C12C63BCAF002FC9CA /* DeviceSiganlsApi.swift */,
+				396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */,
 			);
 			name = DeviceSignals;
 			sourceTree = "<group>";
@@ -207,6 +252,13 @@
 			files = (
 				398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */,
 				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
+				39CC8F782C7F63FE00239032 /* DisplayAllSignals.swift in Sources */,
+				39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */,
+				393E768B2C809C0C00572A77 /* DeviceSignalsViewModel.swift in Sources */,
+				396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */,
+				393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */,
+				397950EA2C7DC73E0043677B /* Utils.swift in Sources */,
+				39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +332,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -337,7 +389,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -368,15 +420,19 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.Sign3Intelligence;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -399,15 +455,19 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.Sign3Intelligence;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
