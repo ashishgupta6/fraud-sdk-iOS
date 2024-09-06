@@ -9,13 +9,14 @@ import Foundation
 import UIKit
 import AdSupport
 import CoreTelephony
+import CloudKit
+import AppTrackingTransparency
 
-
-public class DeviceSignalsApiImpl : DeviceSignalsApi{
+class DeviceSignalsApiImpl : DeviceSignalsApi{
     
-    public init() {}
+    init() {}
     
-    public func getiOSDeviceId() async -> String {
+    func getiOSDeviceId() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getiOSDeviceId",
             requestId: UUID().uuidString,
@@ -29,22 +30,40 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getIDFA() async -> String {
+    func getIDFA() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getIDFA",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
-                    return ASIdentifierManager.shared().advertisingIdentifier.uuidString
-                } else {
-                    return "IDFA is not available"
+                if isTrackingAccessAvailable() {
+                    if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
+                        return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+                    } else {
+                        return "Unknown"
+                    }
                 }
+                return "IDFA is not available"
             }
         )
     }
     
-    public func getIDFV() async -> String {
+    func isTrackingAccessAvailable() -> Bool {
+        if #available(iOS 14, *) {
+            switch ATTrackingManager.trackingAuthorizationStatus {
+            case .authorized:
+                return true
+            case .notDetermined, .restricted, .denied:
+                return false
+            @unknown default:
+                return false
+            }
+        } else {
+            return true // As there is no tracking authorization in earlier versions
+        }
+    }
+    
+    func getIDFV() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getIDFV",
             requestId: UUID().uuidString,
@@ -58,7 +77,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getUUID() async -> String {
+    func getUUID() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getUUID",
             requestId: UUID().uuidString,
@@ -69,19 +88,27 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getCloudId() async -> String {
+    func getCloudId() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getCloudId",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                // Implement actual logic to retrieve Cloud ID if available
+                //You need an paid Apple Developer account to access iCloud services, including CloudKit, in your app. Here’s what’s required:
+                //                let container = CKContainer.default()
+                //                do {
+                //                    let recordID = try await container.userRecordID()
+                //                    return recordID.recordName
+                //                }catch {
+                //                    print("Error fetching iCloud ID: \(error.localizedDescription)")
+                //                    return "Cloud ID is not available"
+                //                }
                 return "Cloud ID is not available"
             }
         )
     }
     
-    public func getApplicationId() async -> String {
+    func getApplicationId() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getApplicationId",
             requestId: UUID().uuidString,
@@ -92,7 +119,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getBatteryStatus() async -> String {
+    func getBatteryStatus() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getBatteryStatus",
             requestId: UUID().uuidString,
@@ -123,7 +150,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         }
     }
     
-    public func getBatteryLevel() async -> Float {
+    func getBatteryLevel() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getBatteryLevel",
             requestId: UUID().uuidString,
@@ -134,7 +161,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    private func fetchBatteryLevel() async -> Float {
+    func fetchBatteryLevel() async -> Float {
         // Perform the UIDevice.current access and mutation on the main actor
         return await MainActor.run {
             let device = UIDevice.current
@@ -143,7 +170,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         }
     }
     
-    public func getCpuCount() async -> Int {
+    func getCpuCount() async -> Int {
         return await Utils.getDeviceSignals(
             functionName: "getCpuCount",
             requestId: UUID().uuidString,
@@ -155,9 +182,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    public func getFreeDiskSpace() async -> String {
+    func getFreeDiskSpace() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getTotalDiskSpace",
+            functionName: "getFreeDiskSpace",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -171,9 +198,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getTotalDiskSpace() async -> String {
+    func getTotalDiskSpace() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getFreeDiskSpace",
+            functionName: "getTotalDiskSpace",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -187,7 +214,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getUsedDiskSpace() async -> String {
+    func getUsedDiskSpace() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getUsedDiskSpace",
             requestId: UUID().uuidString,
@@ -208,7 +235,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    public func getDeviceModel() async -> String {
+    func getDeviceModel() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getDeviceModel",
             requestId: UUID().uuidString,
@@ -219,7 +246,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getDeviceName() async -> String {
+    func getDeviceName() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getDeviceName",
             requestId: UUID().uuidString,
@@ -230,9 +257,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getWifiMacAddress() async -> String {
+    func getIPAddress() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getWiFiIPAddress",
+            functionName: "getWifiMacAddress",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -268,7 +295,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getDisplayScale() async -> CGFloat {
+    func getDisplayScale() async -> CGFloat {
         return await Utils.getDeviceSignals(
             functionName: "getDisplayScale",
             requestId: UUID().uuidString,
@@ -279,9 +306,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getDisplayWidth() async -> CGFloat {
+    func getDisplayWidth() async -> CGFloat {
         return await Utils.getDeviceSignals(
-            functionName: "getDisplayHeight",
+            functionName: "getDisplayWidth",
             requestId: UUID().uuidString,
             defaultValue: 0.0,
             function: {
@@ -290,9 +317,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getDisplayHeight() async -> CGFloat {
+    func getDisplayHeight() async -> CGFloat {
         return await Utils.getDeviceSignals(
-            functionName: "getDisplayWidth",
+            functionName: "getDisplayHeight",
             requestId: UUID().uuidString,
             defaultValue: 0.0,
             function: {
@@ -301,7 +328,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getTimeZone() async -> String {
+    func getTimeZone() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getTimeZone",
             requestId: UUID().uuidString,
@@ -312,7 +339,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getCurrentTime() async -> String {
+    func getCurrentTime() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getCurrentTime",
             requestId: UUID().uuidString,
@@ -325,7 +352,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getCurrentLocal() async -> String {
+    func getCurrentLocal() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getCurrentLocal",
             requestId: UUID().uuidString,
@@ -339,7 +366,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getPreferredLanguage() async -> String {
+    func getPreferredLanguage() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getPreferredLanguage",
             requestId: UUID().uuidString,
@@ -350,7 +377,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getSandboxPath() async -> String {
+    func getSandboxPath() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getSandboxPath",
             requestId: UUID().uuidString,
@@ -361,9 +388,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getMobileCountryCode() async -> String {
+    func getMobileCountryCode() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getMCC",
+            functionName: "getMobileCountryCode",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -377,9 +404,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    public func getNetworkCountryCode() async -> String {
+    func getNetworkCountryCode() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getMNC",
+            functionName: "getNetworkCountryCode",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -392,7 +419,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getHostName() async -> String {
+    func getHostName() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getHostName",
             requestId: UUID().uuidString,
@@ -404,7 +431,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    public func isiOSAppOnMac() async -> Bool {
+    func isiOSAppOnMac() async -> Bool {
         return await Utils.getDeviceSignals(
             functionName: "isiOSAppOnMac",
             requestId: UUID().uuidString,
@@ -419,7 +446,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getOrientation() async -> String {
+    func getOrientation() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getOrientation",
             requestId: UUID().uuidString,
@@ -479,7 +506,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getCarrierName() async -> String {
+    func getCarrierName() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getCarrierName",
             requestId: UUID().uuidString,
@@ -494,7 +521,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getNetworkType() async -> String {
+    func getNetworkType() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getNetworkType",
             requestId: UUID().uuidString,
@@ -509,7 +536,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getSystemUptime() async -> String {
+    func getSystemUptime() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getSystemUptime",
             requestId: UUID().uuidString,
@@ -525,7 +552,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getRAMUsage() async -> String {
+    func getRAMUsage() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getRAMUsage",
             requestId: UUID().uuidString,
@@ -548,7 +575,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getTotalRAMSize() async -> String {
+    func getTotalRAMSize() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getTotalRAMSize",
             requestId: UUID().uuidString,
@@ -575,9 +602,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getKernelVersion() async -> String {
+    func getKernelVersion() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getKernelName",
+            functionName: "getKernelVersion",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -590,9 +617,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getKernelOSVersion() async -> String {
+    func getKernelOSVersion() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getKernelVersion",
+            functionName: "getKernelOSVersion",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -605,9 +632,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getKernelOSRelease() async -> String {
+    func getKernelOSRelease() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getKernelVersion",
+            functionName: "getKernelOSRelease",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -620,9 +647,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getKernelOSType() async -> String {
+    func getKernelOSType() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getKernelVersion",
+            functionName: "getKernelOSType",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -635,7 +662,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getiOSVersion() async -> String {
+    func getiOSVersion() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getiOSVersion",
             requestId: UUID().uuidString,
@@ -647,7 +674,7 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    public func getFrameworkVersion() async -> String {
+    func getFrameworkVersion() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getFrameworkVersion",
             requestId: UUID().uuidString,
@@ -660,9 +687,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    public func getiOSAppVersion() async -> String {
+    func getiOSAppVersion() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getAppVersion",
+            functionName: "getiOSAppVersion",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -676,9 +703,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    public func getAppName() async -> String {
+    func getAppName() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getAppVersion",
+            functionName: "getAppName",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -687,9 +714,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getAppInstallTime() async -> String {
+    func getAppInstallTime() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getAppVersion",
+            functionName: "getAppInstallTime",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -709,9 +736,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    public func getAppUpdateTime() async -> String {
+    func getAppUpdateTime() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getAppVersion",
+            functionName: "getAppUpdateTime",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -735,9 +762,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getAppState() async -> String {
+    func getAppState() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getAppVersion",
+            functionName: "getAppState",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -757,9 +784,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    public func getAppBuildNumber() async -> String {
+    func getAppBuildNumber() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getAppVersion",
+            functionName: "getAppBuildNumber",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -772,9 +799,9 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    public func getFrameworkBuildNumber() async -> String {
+    func getFrameworkBuildNumber() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getAppVersion",
+            functionName: "getFrameworkBuildNumber",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
@@ -783,5 +810,35 @@ public class DeviceSignalsApiImpl : DeviceSignalsApi{
             }
         )
     }
+    
+    
+    func getLatLong() async -> Location {
+        return await Utils.getDeviceSignals(
+            functionName: "getLatLong",
+            requestId: UUID().uuidString,
+            defaultValue: Location(latitude: 0.0, longitude: 0.0),
+            function: {
+                // Check if location permission is granted
+                guard Utils.checkLocationPermission() else {
+                    Utils.showInfologs(tags: "Permission Denied", value: "Location permission not granted")
+                    return Location(latitude: 0.0, longitude: 0.0)
+                }
+                
+                // Use withCheckedContinuation to handle the location updates asynchronously
+                return await withCheckedContinuation { continuation in
+                    DispatchQueue.main.async {
+                        LocationFramework.shared.startUpdatingLocation { location in
+                            let latitude = location.coordinate.latitude
+                            let longitude = location.coordinate.longitude
+                            LocationFramework.shared.stopUpdatingLocation()
+                            // Resume the continuation with the result
+                            continuation.resume(returning: Location(latitude: latitude, longitude: longitude))
+                        }
+                    }
+                }
+            }
+        )
+    }
+    
     
 }

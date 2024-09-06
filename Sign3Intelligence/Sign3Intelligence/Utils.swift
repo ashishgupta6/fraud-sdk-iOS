@@ -6,23 +6,36 @@
 //
 
 import Foundation
+import AppTrackingTransparency
+import CoreLocation
 
 
 struct Utils{
+    
+    private static let locationManager = CLLocationManager()
+    
     
     static func getDeviceSignals<T>(functionName: String, requestId: String, defaultValue: T, function: () async throws -> T) async -> T {
         do {
             return try await function()
         } catch {
             return defaultValue
-        }   
+        }
+    }
+    
+    static func getDeviceSignalsWithoutAsync<T>(functionName: String, requestId: String, defaultValue: T, function: () throws -> T) -> T {
+        do {
+            return try function()
+        } catch {
+            return defaultValue
+        }
     }
     
     static func showInfologs(tags: String, value: String){
         print("\(tags): \(value)")
     }
     
-    static func showzErrorlogs(tags: String, value: String){
+    static func showErrorlogs(tags: String, value: String){
         print("\(tags): \(value)")
     }
     
@@ -47,5 +60,33 @@ struct Utils{
         return dateFormatter.string(from: date)
     }
     
+    static func checkLocationPermission() -> Bool{
+        let status = CLLocationManager.authorizationStatus()
+        switch status {
+        case .notDetermined:
+            // You might want to request permission here
+            return false
+        case .restricted:
+            return false
+        case .denied:
+            return false
+        case .authorizedWhenInUse:
+            return true
+        case .authorizedAlways:
+            return true
+        @unknown default:
+            return false
+        }
+    }
+    
+    static func checkLocationServiceEnabled() -> Bool{
+        if CLLocationManager.locationServicesEnabled() {
+            print("Location services are enabled")
+            return true
+        } else {
+            print("Location services are disabled")
+            return false
+        }
+    }
     
 }

@@ -11,6 +11,7 @@ import Foundation
 struct DisplayAllSignals{
     
     static func displayAllSignals(deviceSignalsApiImpl: DeviceSignalsApiImpl){
+
         DispatchQueue.global().async {
             Task.detached{
                 let deviceId = await deviceSignalsApiImpl.getiOSDeviceId()
@@ -27,7 +28,7 @@ struct DisplayAllSignals{
                 let usedDiskSpace = await deviceSignalsApiImpl.getUsedDiskSpace()
                 let deviceModel = await deviceSignalsApiImpl.getDeviceModel()
                 let deviceName = await deviceSignalsApiImpl.getDeviceName()
-                let wifiMacAddress = await deviceSignalsApiImpl.getWifiMacAddress()
+                let ipAddress = await deviceSignalsApiImpl.getIPAddress()
                 let displayScale = await deviceSignalsApiImpl.getDisplayScale()
                 let displayWidth = await deviceSignalsApiImpl.getDisplayWidth()
                 let displayHeight = await deviceSignalsApiImpl.getDisplayHeight()
@@ -59,8 +60,9 @@ struct DisplayAllSignals{
                 let appState = await deviceSignalsApiImpl.getAppState()
                 let appBuildNumber = await deviceSignalsApiImpl.getAppBuildNumber()
                 let frameworkBuildNumber = await deviceSignalsApiImpl.getFrameworkBuildNumber()
+                let latLong = await deviceSignalsApiImpl.getLatLong()
 
-                Utils.checkThread()
+//                Utils.checkThread()
 
                 DispatchQueue.main.async {
                     Utils.showInfologs(tags: "Device ID", value: deviceId)
@@ -77,7 +79,7 @@ struct DisplayAllSignals{
                     Utils.showInfologs(tags: "Used Disk Space", value: usedDiskSpace)
                     Utils.showInfologs(tags: "Device Model", value: deviceModel)
                     Utils.showInfologs(tags: "Device Name", value: deviceName)
-                    Utils.showInfologs(tags: "Wifi Mac Address", value: wifiMacAddress)
+                    Utils.showInfologs(tags: "IP Address", value: ipAddress)
                     Utils.showInfologs(tags: "Display Scale", value: displayScale.description)
                     Utils.showInfologs(tags: "Display Width", value: displayWidth.description)
                     Utils.showInfologs(tags: "Display Height", value: displayHeight.description)
@@ -109,6 +111,8 @@ struct DisplayAllSignals{
                     Utils.showInfologs(tags: "APP State", value: appState)
                     Utils.showInfologs(tags: "APP Build Number", value: appBuildNumber)
                     Utils.showInfologs(tags: "Framework Build Number", value: frameworkBuildNumber)
+                    Utils.showInfologs(tags: "Latitude", value: latLong.latitude.description)
+                    Utils.showInfologs(tags: "Longitude", value: latLong.longitude.description)
 
                 }
             }
