@@ -17,3 +17,7 @@ xcuserdata/
 # CocoaPods
 Pods/
 Podfile.lock
+
+FraudSDK-iOS.xcodeproj/xcuserdata/*.xcuserdatad/xcschemes/xcschememanagement.plist
+Sign3Intelligence/Sign3Intelligence.xcodeproj/xcuserdata/*.xcuserdatad/xcschemes/xcschememanagement.plist
+
