@@ -12,6 +12,7 @@ DerivedData/
 build/
 *.xcworkspace
 xcuserdata/
+*.xcuserstate
 
 # CocoaPods
 Pods/
