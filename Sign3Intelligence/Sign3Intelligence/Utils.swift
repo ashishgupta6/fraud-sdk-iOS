@@ -56,7 +56,8 @@ struct Utils{
     
     static func dateToString(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy hh:mm aa"
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Kolkata") // IST time zone
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:MM a"
         return dateFormatter.string(from: date)
     }
     

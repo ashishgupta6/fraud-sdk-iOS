@@ -56,5 +56,27 @@ protocol DeviceSignalsApi{
     func getAppBuildNumber() async -> String
     func getFrameworkBuildNumber() async -> String
     func getLatLong() async -> Location
-    
+    func isTelephonySupported() async -> Bool
+    func getCameraList() async -> [String] 
+    func getAbiType() async -> String
+    func getRingtoneSource() async -> String
+    func getAvailableLocales() async -> [String]
+    func getSecurityProvidersData() async -> [String]
+    func getFingerPrintSensorStatus() async -> [String]
+    func getGlesVersion() async -> String
+    func isDevelopmentSettingsEnabled() async -> Bool
+    func getHttpProxy() async -> String
+    func getAccessibilitySettings() async -> [String]
+    func isTouchExplorationEnabled() async -> Bool
+    func getAlarmAlertPath() async -> String
+    func getTime12Or24() async -> String
+    func getFontScale() async -> CGFloat
+    func getTextAutoReplace() async -> Bool
+    func getTextAutoPunctuate() async -> Bool
+    func getBootTime() async -> String
+    func getCurrentBrightness() async -> CGFloat
+    func getSimInfoList() async -> [String: String]
+    func getDefaultBrowser() async -> String
+    func getAudioVolumeCurrent() async -> Float
+    func getCarrierCountry() async -> String
 }

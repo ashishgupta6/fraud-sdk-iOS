@@ -25,6 +25,7 @@ class ViewController: UIViewController {
 //        Utils.checkThread()
         Utils.requestPermissionForIDFA()
         Utils.requestLocationPermission()
+        
        
         let sign3Intelligence = Sign3Intelligence.getInstance()
         sign3Intelligence.getIntelligence()
