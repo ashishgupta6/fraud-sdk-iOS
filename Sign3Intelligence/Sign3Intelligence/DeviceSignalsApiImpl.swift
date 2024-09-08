@@ -11,6 +11,9 @@ import AdSupport
 import CoreTelephony
 import CloudKit
 import AppTrackingTransparency
+import AVFoundation
+import LocalAuthentication
+import CoreMotion
 
 class DeviceSignalsApiImpl : DeviceSignalsApi{
     
@@ -345,9 +348,7 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                return dateFormatter.string(from: Date())
+                return Utils.dateToString(Date())
             }
         )
     }
@@ -840,5 +841,496 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
+    func isTelephonySupported() async -> Bool {
+        return await Utils.getDeviceSignals(
+            functionName: "isTelephonySupported",
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+                let networkInfo = CTTelephonyNetworkInfo()
+                if let carrier = networkInfo.serviceSubscriberCellularProviders?.values.first {
+                    return carrier.carrierName != nil
+                }
+                return false
+            }
+        )
+    }
     
+    func getCameraList() async -> [String] {
+        return await Utils.getDeviceSignals(
+            functionName: "getCameraList",
+            requestId: UUID().uuidString,
+            defaultValue: [],
+            function: {
+                var cameraList: [String] = []
+                
+                // Create a discovery session to find available cameras
+                let devices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInTelephotoCamera, .builtInUltraWideCamera], mediaType: .video, position: .unspecified).devices
+                
+                // Iterate over each device and gather its information
+                for device in devices {
+                    let cameraInfo = "Name: \(device.localizedName), Type: \(device.deviceType)"
+                    cameraList.append(cameraInfo)
+                }
+                
+                return cameraList
+            }
+        )
+    }
+    
+    func getAbiType() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getAbiType",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                var systemInfo = utsname()
+                uname(&systemInfo)
+                
+                let machine = withUnsafePointer(to: &systemInfo.machine) {
+                    $0.withMemoryRebound(to: CChar.self, capacity: 1) {
+                        String(cString: $0)
+                    }
+                }
+                
+                switch machine {
+                case "x86_64":
+                    return "x86_64 (Simulator)"
+                case "i386":
+                    return "i386 (Simulator)"
+                case "arm64":
+                    return "arm64 (Device)"
+                case "armv7":
+                    return "armv7 (Device)"
+                case "armv6":
+                    return "armv6 (Device)"
+                case "armv7s":  // ARMv7s (used in devices like iPhone 5, iPad Mini)
+                    return "armv7s (Device)"
+                case "arm64e":  // ARM64e (used in newer devices like iPhone XS and later)
+                    return "arm64e (Device)"
+                default:
+                    return machine
+                }
+            }
+        )
+    }
+    
+    func getRingtoneSource() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getRingtoneSource",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                let audioSession = AVAudioSession.sharedInstance()
+                let currentRoute = audioSession.currentRoute
+                let outputs = currentRoute.outputs
+                
+                for output in outputs {
+                    if output.portType == .builtInSpeaker {
+                        return "Built-in Speaker"
+                    } else if output.portType == .headphones {
+                        return "Headphones"
+                    } else if output.portType == .headsetMic {
+                        return "Headset Mic"
+                    }
+                }
+                
+                return "Unknown"
+            }
+        )
+    }
+    
+    func getAvailableLocales() async -> [String] {
+        return await Utils.getDeviceSignals(
+            functionName: "getAvailableLocales",
+            requestId: UUID().uuidString,
+            defaultValue: [],
+            function: {
+                return Locale.availableIdentifiers
+            }
+        )
+    }
+    
+    func getSecurityProvidersData() async -> [String] {
+        return await Utils.getDeviceSignals(
+            functionName: "getSecurityProvidersData",
+            requestId: UUID().uuidString,
+            defaultValue: [],
+            function: {
+                let context = LAContext()
+                var error: NSError?
+                
+                var providers = [String]()
+                
+                if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+                    providers.append("Passcode Authentication")
+                }
+                
+                if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                    switch context.biometryType {
+                    case .faceID:
+                        providers.append("Face ID Authentication")
+                    case .touchID:
+                        providers.append("Touch ID Authentication")
+                    default:
+                        break
+                    }
+                }
+                
+                return providers.isEmpty ? ["No security lock is set on this device"] : providers
+            }
+        )
+    }
+    
+    
+    func getFingerPrintSensorStatus() async -> [String] {
+        return await Utils.getDeviceSignals(
+            functionName: "getFingerPrintSensorStatus",
+            requestId: UUID().uuidString,
+            defaultValue: [],
+            function: {
+                let context = LAContext()
+                var error: NSError?
+                var status = [String]()
+                
+                if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                    if context.biometryType == .faceID {
+                        status.append("Face ID available")
+                    }
+                    if context.biometryType == .touchID {
+                        status.append("Touch ID available")
+                    }
+                    
+                    // If both Face ID and Touch ID are available
+                    if status.isEmpty {
+                        status.append("Biometric authentication not available")
+                    }
+                } else {
+                    status.append("Biometric authentication not available")
+                }
+                
+                return status
+            }
+        )
+    }
+    
+    func getGlesVersion() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getGlesVersion",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                let device = MTLCreateSystemDefaultDevice()
+                return device?.name ?? "Unknown"
+            }
+        )
+    }
+    
+    func isDevelopmentSettingsEnabled() async -> Bool {
+        return await Utils.getDeviceSignals(
+            functionName: "isDevelopmentSettingsEnabled",
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+#if DEBUG
+                return true
+#else
+                return false
+#endif
+            }
+        )
+    }
+    
+    func getHttpProxy() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getHttpProxy",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                if let proxySettings = CFNetworkCopySystemProxySettings()?.takeRetainedValue() as? [String: Any],
+                   let httpProxy = proxySettings["HTTPProxy"] as? String {
+                    return "HTTP Proxy: \(httpProxy)"
+                } else {
+                    return "No HTTP Proxy"
+                }
+            }
+        )
+    }
+    
+    func getAccessibilitySettings() async -> [String] {
+        return await Utils.getDeviceSignals(
+            functionName: "getAccessibilitySettings",
+            requestId: UUID().uuidString,
+            defaultValue: [],
+            function: {
+                //  UIKit APIs like UIAccessibility must be accessed on the main thread, but they are being calledoff the main thread in your asynchronous code. UIKit is not thread-safe, so these calls should always be made from the main thread.
+                return await withCheckedContinuation { continuation in
+                    DispatchQueue.main.async {
+                        var settings = [String]()
+                        
+                        if UIAccessibility.isVoiceOverRunning {
+                            settings.append("VoiceOver is running")
+                        }
+                        
+                        if UIAccessibility.isReduceMotionEnabled {
+                            settings.append("Reduce Motion is enabled")
+                        }
+                        
+                        if UIAccessibility.isInvertColorsEnabled {
+                            settings.append("Invert Colors is enabled")
+                        }
+                        
+                        if UIAccessibility.isBoldTextEnabled {
+                            settings.append("Bold Text is enabled")
+                        }
+                        
+                        if UIAccessibility.isReduceTransparencyEnabled {
+                            settings.append("Reduce Transparency is enabled")
+                        }
+                        
+                        if UIAccessibility.isClosedCaptioningEnabled {
+                            settings.append("Closed Captions are enabled")
+                        }
+                        
+                        if UIAccessibility.isSpeakScreenEnabled {
+                            settings.append("Speak Screen is enabled")
+                        }
+                        
+                        if UIAccessibility.isAssistiveTouchRunning {
+                            settings.append("Assistive touch is running")
+                        }
+                        
+                        if #available(iOS 14.0, *) {
+                            if UIAccessibility.buttonShapesEnabled {
+                                settings.append("Button shapes are enabled")
+                            }
+                        }
+                        
+                        if UIAccessibility.isDarkerSystemColorsEnabled {
+                            settings.append("Darker system colors are enabled")
+                        }
+                        
+                        if UIAccessibility.isGrayscaleEnabled {
+                            settings.append("Grayscale is enabled")
+                        }
+                        
+                        if UIAccessibility.isGuidedAccessEnabled {
+                            settings.append("Guided access is enabled")
+                        }
+                        
+                        if UIAccessibility.isMonoAudioEnabled {
+                            settings.append("Mono audio is enabled")
+                        }
+                        
+                        if UIAccessibility.isOnOffSwitchLabelsEnabled {
+                            settings.append("On off switch labels are enabled")
+                        }
+                        
+                        if UIAccessibility.isShakeToUndoEnabled {
+                            settings.append("Shake to undo is enabled")
+                        }
+                        
+                        if UIAccessibility.isSpeakSelectionEnabled {
+                            settings.append("Speak selection is enabled")
+                        }
+                        
+                        if UIAccessibility.isSwitchControlRunning {
+                            settings.append("Switch control is running")
+                        }
+                        
+                        if UIAccessibility.isVideoAutoplayEnabled {
+                            settings.append("Video autoplay is enabled")
+                        }
+                        
+                        continuation.resume(returning: settings.isEmpty ? ["Not found any Accessibility service on this device"] : settings)
+                    }
+                }
+            }
+        )
+    }
+    
+    func isTouchExplorationEnabled() async -> Bool {
+        return await Utils.getDeviceSignals(
+            functionName: "isTouchExplorationEnabled",
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+                return UIAccessibility.isVoiceOverRunning
+            }
+        )
+    }
+    
+    func getAlarmAlertPath() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getAlarmAlertPath",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                if let soundURL = Bundle.main.url(forResource: "alarmSound", withExtension: "mp3") {
+                    return soundURL.path
+                } else {
+                    return "Not found any Alarm alert path"
+                }
+            }
+        )
+    }
+    
+    func getTime12Or24() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getTime12Or24",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                let formatter = DateFormatter()
+                formatter.locale = Locale.current
+                formatter.timeStyle = .short
+                let sampleDate = Date()
+                let formattedDate = formatter.string(from: sampleDate)
+                let is24HourFormat = !formattedDate.contains("AM") && !formattedDate.contains("PM")
+                return is24HourFormat ? "24-hour format" : "12-hour format"
+            }
+        )
+    }
+    
+    func getFontScale() async -> CGFloat {
+        return await Utils.getDeviceSignals(
+            functionName: "getFontScale",
+            requestId: UUID().uuidString,
+            defaultValue: 0.0,
+            function: {
+                let font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+                let scaledFont = UIFontMetrics.default.scaledFont(for: font)
+                return scaledFont.pointSize / UIFont.systemFontSize
+            }
+        )
+    }
+    
+    func getTextAutoReplace() async -> Bool {
+        return await Utils.getDeviceSignals(
+            functionName: "getTextAutoReplace",
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+                let userDefaults = UserDefaults.standard
+                if let autoReplaceSetting = userDefaults.object(forKey: "TextInput.AutoReplace") as? Bool {
+                    return autoReplaceSetting
+                }
+                return false
+            }
+        )
+    }
+    
+    func getTextAutoPunctuate() async -> Bool {
+        return await Utils.getDeviceSignals(
+            functionName: "getTextAutoPunctuate",
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+                let userDefaults = UserDefaults.standard
+                if let autoPunctuateSetting = userDefaults.object(forKey: "TextInput.AutoPunctuate") as? Bool {
+                    return autoPunctuateSetting
+                }
+                return false
+            }
+        )
+    }
+    
+    func getBootTime() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getBootTime",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                var mib: [Int32] = [CTL_KERN, KERN_BOOTTIME]
+                var size = MemoryLayout<timeval>.size
+                var bootTime = timeval()
+                
+                let result = sysctl(&mib, UInt32(mib.count), &bootTime, &size, nil, 0)
+                
+                if result == 0 {
+                    let bootDate = Date(timeIntervalSince1970: TimeInterval(bootTime.tv_sec) + TimeInterval(bootTime.tv_usec) / 1_000_000)
+                    return Utils.dateToString(bootDate)
+                } else {
+                    return "Unknown"
+                }
+            }
+        )
+    }
+    
+    func getCurrentBrightness() async -> CGFloat {
+        return await Utils.getDeviceSignals(
+            functionName: "getCurrentBrightness",
+            requestId: UUID().uuidString,
+            defaultValue: 0.0,
+            function: {
+                return await UIScreen.main.brightness
+            }
+        )
+    }
+    
+    func getSimInfoList() async -> [String : String] {
+        return await Utils.getDeviceSignals(
+            functionName: "getSimInfoList",
+            requestId: UUID().uuidString,
+            defaultValue: ["" : ""],
+            function: {
+                let networkInfo = CTTelephonyNetworkInfo()
+                var simInfo = [String: String]()
+                
+                if let carrier = networkInfo.serviceSubscriberCellularProviders?.values.first {
+                    simInfo["CarrierName"] = carrier.carrierName ?? "Unknown"
+                    simInfo["MobileCountryCode"] = carrier.mobileCountryCode ?? "Unknown"
+                    simInfo["MobileNetworkCode"] = carrier.mobileNetworkCode ?? "Unknown"
+                    simInfo["ISOCode"] = carrier.isoCountryCode ?? "Unknown"
+                    simInfo["AllowsVOIP"] = carrier.allowsVOIP ? "Yes" : "No"
+                }
+                
+                return simInfo
+            }
+        )
+    }
+    
+    func getDefaultBrowser() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getDefaultBrowser",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                if await UIApplication.shared.canOpenURL(URL(string: "googlechrome://")!) {
+                    return "Google Chrome"
+                } else {
+                    return "Safari"
+                }
+            }
+        )
+    }
+    
+    func getAudioVolumeCurrent() async -> Float {
+        return await Utils.getDeviceSignals(
+            functionName: "getAudioVolumeCurrent",
+            requestId: UUID().uuidString,
+            defaultValue: 0.0,
+            function: {
+                let audioSession = AVAudioSession.sharedInstance()
+                let currentVolume = audioSession.outputVolume
+                return currentVolume
+            }
+        )
+    }
+    
+    func getCarrierCountry() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getCarrierCountry",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                let networkInfo = CTTelephonyNetworkInfo()
+                if let carrier = networkInfo.serviceSubscriberCellularProviders?.first?.value {
+                    return carrier.isoCountryCode ?? "Unknown"
+                }
+                return "Unknown"
+            }
+        )
+    }
+
 }

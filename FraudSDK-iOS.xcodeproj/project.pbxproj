@@ -67,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		390688842C8C6EB8000B2433 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		393E76872C804BA300572A77 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		398EB5682C63BB0E002FC9CA /* FraudSDK-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FraudSDK-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		398EB56B2C63BB0E002FC9CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 		397950DB2C7DB4A30043677B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				390688842C8C6EB8000B2433 /* IOKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
