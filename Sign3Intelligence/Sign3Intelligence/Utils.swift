@@ -12,9 +12,6 @@ import CoreLocation
 
 struct Utils{
     
-    private static let locationManager = CLLocationManager()
-    
-    
     static func getDeviceSignals<T>(functionName: String, requestId: String, defaultValue: T, function: () async throws -> T) async -> T {
         do {
             return try await function()
@@ -88,6 +85,25 @@ struct Utils{
             print("Location services are disabled")
             return false
         }
+    }
+    
+    static func encodeObject<T: Encodable>(tag: String, object: T){
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let jsonData = try encoder.encode(object)
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                Utils.showInfologs(tags: tag, value: jsonString)
+            }
+        } catch {
+            print("Failed to encode: \(error)")
+        }
+    }
+    
+    static func getSessionId() -> String{
+        let uuid = UUID().uuidString.replacingOccurrences(of: "-", with: "")
+        let sessionId = "\(uuid.prefix(8))-\(uuid.prefix(12).suffix(4))-\(uuid.prefix(16).suffix(4))-\(uuid.prefix(20).suffix(4))-\(uuid.suffix(12))"
+        return sessionId
     }
     
 }

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		391C2F4E2C7E218500BA2D4D /* Sign3Intelligence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398EB5D72C63C0CE002FC9CA /* Sign3Intelligence.framework */; };
-		391C2F4F2C7E218500BA2D4D /* Sign3Intelligence.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 398EB5D72C63C0CE002FC9CA /* Sign3Intelligence.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		393E76882C804BA300572A77 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E76872C804BA300572A77 /* Utils.swift */; };
 		398EB56C2C63BB0E002FC9CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB56B2C63BB0E002FC9CA /* AppDelegate.swift */; };
 		398EB56E2C63BB0E002FC9CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB56D2C63BB0E002FC9CA /* SceneDelegate.swift */; };
@@ -19,6 +17,8 @@
 		398EB5832C63BB10002FC9CA /* FraudSDK_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5822C63BB10002FC9CA /* FraudSDK_iOSTests.swift */; };
 		398EB58D2C63BB10002FC9CA /* FraudSDK_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB58C2C63BB10002FC9CA /* FraudSDK_iOSUITests.swift */; };
 		398EB58F2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB58E2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift */; };
+		39C775442C8EFC7D0006E042 /* Sign3Intelligence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398EB5D72C63C0CE002FC9CA /* Sign3Intelligence.framework */; };
+		39C775452C8EFC7D0006E042 /* Sign3Intelligence.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 398EB5D72C63C0CE002FC9CA /* Sign3Intelligence.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,13 +53,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		391C2F502C7E218500BA2D4D /* Embed Frameworks */ = {
+		39C775462C8EFC7D0006E042 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				391C2F4F2C7E218500BA2D4D /* Sign3Intelligence.framework in Embed Frameworks */,
+				39C775452C8EFC7D0006E042 /* Sign3Intelligence.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				391C2F4E2C7E218500BA2D4D /* Sign3Intelligence.framework in Frameworks */,
+				39C775442C8EFC7D0006E042 /* Sign3Intelligence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,7 +208,7 @@
 				398EB5642C63BB0E002FC9CA /* Sources */,
 				398EB5652C63BB0E002FC9CA /* Frameworks */,
 				398EB5662C63BB0E002FC9CA /* Resources */,
-				391C2F502C7E218500BA2D4D /* Embed Frameworks */,
+				39C775462C8EFC7D0006E042 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

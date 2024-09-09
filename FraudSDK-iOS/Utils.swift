@@ -60,4 +60,12 @@ class Utils{
         }
     }
     
+    static func showInfologs(tags: String, value: String){
+        print("\(tags): \(value)")
+    }
+    
+    static func showErrorlogs(tags: String, value: String){
+        print("\(tags): \(value)")
+    }
+    
 }

@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         
        
         let sign3Intelligence = Sign3Intelligence.getInstance()
+        Utils.showInfologs(tags: "TAG_SESSION_ID", value: sign3Intelligence.getSessionId())
         sign3Intelligence.getIntelligence()
         
 

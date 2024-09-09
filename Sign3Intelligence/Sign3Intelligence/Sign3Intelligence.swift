@@ -13,7 +13,7 @@ import BackgroundTasks
 public final class Sign3Intelligence {
 
     private static var sdk: Sign3Intelligence?
-    private var sign3IntelligenceInternal: Sign3IntelligenceInternal?
+    private lazy var sign3IntelligenceInternal = Sign3IntelligenceInternal.getInstance()
 
     public static func getInstance() -> Sign3Intelligence {
         if sdk == nil {
@@ -26,10 +26,9 @@ public final class Sign3Intelligence {
         return sdk!
     }
 
-    public func initAsync() {
-        sign3IntelligenceInternal = Sign3IntelligenceInternal.getInstance()
-        sign3IntelligenceInternal?.initAsync()
-        print("Init Async")
+    public func initAsync(options: Options, completion: @escaping (Bool) -> Void) {
+        sign3IntelligenceInternal.initAsync(options, completion)
+        
     }
 
     public func updateOptions() {
@@ -37,12 +36,12 @@ public final class Sign3Intelligence {
     }
 
     public func getIntelligence() {
-        sign3IntelligenceInternal?.getIntelligence()
+        sign3IntelligenceInternal.getIntelligence()
     }
     
 
     public func getSessionId() -> String {
-        return UUID().uuidString
+        return sign3IntelligenceInternal.appSessionId
     }
 }
 

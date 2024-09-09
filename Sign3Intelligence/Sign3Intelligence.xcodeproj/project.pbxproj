@@ -11,11 +11,24 @@
 		393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768D2C809FE700572A77 /* IntelligenceResponse.swift */; };
 		396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */; };
 		397950EA2C7DC73E0043677B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397950E92C7DC73E0043677B /* Utils.swift */; };
+		3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68D2C8E2B3B00EE992E /* Options.swift */; };
+		3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68F2C8E2C3000EE992E /* UserEventType.swift */; };
+		3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B6932C8E2C8100EE992E /* PhoneInputType.swift */; };
+		3984B6962C8E2CD400EE992E /* OtpInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B6952C8E2CD400EE992E /* OtpInputType.swift */; };
+		3984B6982C8E2D3F00EE992E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B6972C8E2D3F00EE992E /* Environment.swift */; };
 		398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */; };
 		398EB5B12C63BC6B002FC9CA /* Sign3Intelligence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398EB5A62C63BC6A002FC9CA /* Sign3Intelligence.framework */; };
 		398EB5B62C63BC6B002FC9CA /* Sign3IntelligenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5B52C63BC6B002FC9CA /* Sign3IntelligenceTests.swift */; };
 		398EB5B72C63BC6B002FC9CA /* Sign3Intelligence.h in Headers */ = {isa = PBXBuildFile; fileRef = 398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB5C12C63BCAF002FC9CA /* DeviceSiganlsApi.swift */; };
+		39C775492C8EFCB20006E042 /* VPNDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775482C8EFCB20006E042 /* VPNDetector.swift */; };
+		39C7754B2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7754A2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift */; };
+		39C7754D2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7754C2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift */; };
+		39C775512C8F13B10006E042 /* SimulatorDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775502C8F13B10006E042 /* SimulatorDetector.swift */; };
+		39C775532C8F2F470006E042 /* BaseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775522C8F2F470006E042 /* BaseKey.swift */; };
+		39C775552C8F2FE90006E042 /* ProdKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */; };
+		39C775572C8F320F0006E042 /* DevKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775562C8F320F0006E042 /* DevKeyProvider.swift */; };
+		39C775592C8F321C0006E042 /* StagingKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775582C8F321C0006E042 /* StagingKeyProvider.swift */; };
 		39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */; };
 		39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */; };
 		39CC8F782C7F63FE00239032 /* DisplayAllSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F772C7F63FE00239032 /* DisplayAllSignals.swift */; };
@@ -38,12 +51,25 @@
 		393E768D2C809FE700572A77 /* IntelligenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponse.swift; sourceTree = "<group>"; };
 		396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsApiImpl.swift; sourceTree = "<group>"; };
 		397950E92C7DC73E0043677B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		3984B68D2C8E2B3B00EE992E /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		3984B68F2C8E2C3000EE992E /* UserEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEventType.swift; sourceTree = "<group>"; };
+		3984B6932C8E2C8100EE992E /* PhoneInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInputType.swift; sourceTree = "<group>"; };
+		3984B6952C8E2CD400EE992E /* OtpInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpInputType.swift; sourceTree = "<group>"; };
+		3984B6972C8E2D3F00EE992E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		398EB5A62C63BC6A002FC9CA /* Sign3Intelligence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Sign3Intelligence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sign3Intelligence.h; sourceTree = "<group>"; };
 		398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Sign3Intelligence.docc; sourceTree = "<group>"; };
 		398EB5B02C63BC6B002FC9CA /* Sign3IntelligenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sign3IntelligenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		398EB5B52C63BC6B002FC9CA /* Sign3IntelligenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceTests.swift; sourceTree = "<group>"; };
 		398EB5C12C63BCAF002FC9CA /* DeviceSiganlsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSiganlsApi.swift; sourceTree = "<group>"; };
+		39C775482C8EFCB20006E042 /* VPNDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNDetector.swift; sourceTree = "<group>"; };
+		39C7754A2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceSdkApi.swift; sourceTree = "<group>"; };
+		39C7754C2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceSdkApiImpl.swift; sourceTree = "<group>"; };
+		39C775502C8F13B10006E042 /* SimulatorDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorDetector.swift; sourceTree = "<group>"; };
+		39C775522C8F2F470006E042 /* BaseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseKey.swift; sourceTree = "<group>"; };
+		39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdKeyProvider.swift; sourceTree = "<group>"; };
+		39C775562C8F320F0006E042 /* DevKeyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevKeyProvider.swift; sourceTree = "<group>"; };
+		39C775582C8F321C0006E042 /* StagingKeyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingKeyProvider.swift; sourceTree = "<group>"; };
 		39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3Intelligence.swift; sourceTree = "<group>"; };
 		39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceInternal.swift; sourceTree = "<group>"; };
 		39CC8F772C7F63FE00239032 /* DisplayAllSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAllSignals.swift; sourceTree = "<group>"; };
@@ -93,8 +119,20 @@
 			children = (
 				397950E92C7DC73E0043677B /* Utils.swift */,
 				39CC8F772C7F63FE00239032 /* DisplayAllSignals.swift */,
+				39C775522C8F2F470006E042 /* BaseKey.swift */,
+				39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */,
+				39C775562C8F320F0006E042 /* DevKeyProvider.swift */,
+				39C775582C8F321C0006E042 /* StagingKeyProvider.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		3984B69E2C8EFB8600EE992E /* LocationDetector */ = {
+			isa = PBXGroup;
+			children = (
+				39E738FF2C888F16002B24C8 /* LocationDetector.swift */,
+			);
+			name = LocationDetector;
 			sourceTree = "<group>";
 		};
 		398EB59C2C63BC6A002FC9CA = {
@@ -118,6 +156,7 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
+				39C7755A2C8F35990006E042 /* Encryption */,
 				39E738FA2C885D01002B24C8 /* Info.plist */,
 				39E738F92C882AB4002B24C8 /* Detectors */,
 				393E768C2C809FC100572A77 /* Model */,
@@ -128,6 +167,11 @@
 				398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */,
 				39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */,
 				39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */,
+				3984B68D2C8E2B3B00EE992E /* Options.swift */,
+				3984B68F2C8E2C3000EE992E /* UserEventType.swift */,
+				3984B6932C8E2C8100EE992E /* PhoneInputType.swift */,
+				3984B6952C8E2CD400EE992E /* OtpInputType.swift */,
+				3984B6972C8E2D3F00EE992E /* Environment.swift */,
 			);
 			path = Sign3Intelligence;
 			sourceTree = "<group>";
@@ -149,10 +193,37 @@
 			name = DeviceSignals;
 			sourceTree = "<group>";
 		};
+		39C775472C8EFC900006E042 /* VPNSpoffer */ = {
+			isa = PBXGroup;
+			children = (
+				39C775482C8EFCB20006E042 /* VPNDetector.swift */,
+			);
+			path = VPNSpoffer;
+			sourceTree = "<group>";
+		};
+		39C7754F2C8F139F0006E042 /* SimulatorDetector */ = {
+			isa = PBXGroup;
+			children = (
+				39C775502C8F13B10006E042 /* SimulatorDetector.swift */,
+			);
+			name = SimulatorDetector;
+			sourceTree = "<group>";
+		};
+		39C7755A2C8F35990006E042 /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Encryption;
+			sourceTree = "<group>";
+		};
 		39E738F92C882AB4002B24C8 /* Detectors */ = {
 			isa = PBXGroup;
 			children = (
-				39E738FF2C888F16002B24C8 /* LocationDetector.swift */,
+				39C7754F2C8F139F0006E042 /* SimulatorDetector */,
+				39C775472C8EFC900006E042 /* VPNSpoffer */,
+				3984B69E2C8EFB8600EE992E /* LocationDetector */,
+				39C7754A2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift */,
+				39C7754C2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift */,
 			);
 			name = Detectors;
 			sourceTree = "<group>";
@@ -267,14 +338,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */,
+				3984B6982C8E2D3F00EE992E /* Environment.swift in Sources */,
 				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
+				3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */,
+				39C775512C8F13B10006E042 /* SimulatorDetector.swift in Sources */,
 				39E738FE2C88826F002B24C8 /* Location.swift in Sources */,
 				39CC8F782C7F63FE00239032 /* DisplayAllSignals.swift in Sources */,
+				3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */,
+				39C7754B2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift in Sources */,
+				39C775552C8F2FE90006E042 /* ProdKeyProvider.swift in Sources */,
+				3984B6962C8E2CD400EE992E /* OtpInputType.swift in Sources */,
 				39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */,
+				39C775592C8F321C0006E042 /* StagingKeyProvider.swift in Sources */,
+				3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */,
 				393E768B2C809C0C00572A77 /* DeviceSignalsViewModel.swift in Sources */,
 				396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */,
 				393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */,
 				39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */,
+				39C775572C8F320F0006E042 /* DevKeyProvider.swift in Sources */,
+				39C775532C8F2F470006E042 /* BaseKey.swift in Sources */,
+				39C775492C8EFCB20006E042 /* VPNDetector.swift in Sources */,
+				39C7754D2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift in Sources */,
 				397950EA2C7DC73E0043677B /* Utils.swift in Sources */,
 				39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */,
 			);
