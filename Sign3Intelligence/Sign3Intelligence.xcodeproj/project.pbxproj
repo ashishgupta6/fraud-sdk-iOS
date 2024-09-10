@@ -32,6 +32,8 @@
 		39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */; };
 		39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */; };
 		39CC8F782C7F63FE00239032 /* DisplayAllSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F772C7F63FE00239032 /* DisplayAllSignals.swift */; };
+		39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E36C292C90839500625BE6 /* SimulatorChecker.m */; };
+		39E36C2C2C90839500625BE6 /* SimulatorChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* SimulatorChecker.h */; };
 		39E738FE2C88826F002B24C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FD2C88826F002B24C8 /* Location.swift */; };
 		39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FF2C888F16002B24C8 /* LocationDetector.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +75,8 @@
 		39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3Intelligence.swift; sourceTree = "<group>"; };
 		39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceInternal.swift; sourceTree = "<group>"; };
 		39CC8F772C7F63FE00239032 /* DisplayAllSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAllSignals.swift; sourceTree = "<group>"; };
+		39E36C292C90839500625BE6 /* SimulatorChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimulatorChecker.m; sourceTree = "<group>"; };
+		39E36C2A2C90839500625BE6 /* SimulatorChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulatorChecker.h; sourceTree = "<group>"; };
 		39E738FA2C885D01002B24C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		39E738FD2C88826F002B24C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		39E738FF2C888F16002B24C8 /* LocationDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetector.swift; sourceTree = "<group>"; };
@@ -204,6 +208,8 @@
 		39C7754F2C8F139F0006E042 /* SimulatorDetector */ = {
 			isa = PBXGroup;
 			children = (
+				39E36C2A2C90839500625BE6 /* SimulatorChecker.h */,
+				39E36C292C90839500625BE6 /* SimulatorChecker.m */,
 				39C775502C8F13B10006E042 /* SimulatorDetector.swift */,
 			);
 			name = SimulatorDetector;
@@ -236,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				398EB5B72C63BC6B002FC9CA /* Sign3Intelligence.h in Headers */,
+				39E36C2C2C90839500625BE6 /* SimulatorChecker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +297,7 @@
 				TargetAttributes = {
 					398EB5A52C63BC6A002FC9CA = {
 						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1540;
 					};
 					398EB5AF2C63BC6B002FC9CA = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -360,6 +368,7 @@
 				39C775492C8EFCB20006E042 /* VPNDetector.swift in Sources */,
 				39C7754D2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift in Sources */,
 				397950EA2C7DC73E0043677B /* Utils.swift in Sources */,
+				39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */,
 				39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,6 +517,7 @@
 		398EB5BB2C63BC6B002FC9CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -538,6 +548,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -546,6 +557,7 @@
 		398EB5BC2C63BC6B002FC9CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
