@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct DisplayAllSignals{
+struct DataCreationService{
     
     static func displayAllSignals(_ deviceSignalsApiImpl: DeviceSignalsApiImpl,_ sign3IntelliegnceSdkApiImpl: Sign3IntelligenceSdkApiImpl){
 

@@ -35,7 +35,7 @@ class Sign3IntelligenceInternal{
     }
     
     func getIntelligence() {
-        DisplayAllSignals.displayAllSignals(deviceSignalsApiImpl, sign3IntelliegnceImpl)
+        DataCreationService.displayAllSignals(deviceSignalsApiImpl, sign3IntelliegnceImpl)
     }
     
     
