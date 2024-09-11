@@ -33,7 +33,7 @@
 		39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */; };
 		39CC8F782C7F63FE00239032 /* DisplayAllSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F772C7F63FE00239032 /* DisplayAllSignals.swift */; };
 		39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E36C292C90839500625BE6 /* SimulatorChecker.m */; };
-		39E36C2C2C90839500625BE6 /* SimulatorChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* SimulatorChecker.h */; };
+		39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */; };
 		39E738FE2C88826F002B24C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FD2C88826F002B24C8 /* Location.swift */; };
 		39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FF2C888F16002B24C8 /* LocationDetector.swift */; };
 /* End PBXBuildFile section */
@@ -76,7 +76,7 @@
 		39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceInternal.swift; sourceTree = "<group>"; };
 		39CC8F772C7F63FE00239032 /* DisplayAllSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAllSignals.swift; sourceTree = "<group>"; };
 		39E36C292C90839500625BE6 /* SimulatorChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimulatorChecker.m; sourceTree = "<group>"; };
-		39E36C2A2C90839500625BE6 /* SimulatorChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulatorChecker.h; sourceTree = "<group>"; };
+		39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sign3PrivateHeader.h; sourceTree = "<group>"; };
 		39E36C3A2C91885D00625BE6 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		39E738FA2C885D01002B24C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		39E738FD2C88826F002B24C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 		39C7754F2C8F139F0006E042 /* SimulatorDetector */ = {
 			isa = PBXGroup;
 			children = (
-				39E36C2A2C90839500625BE6 /* SimulatorChecker.h */,
+				39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */,
 				39E36C292C90839500625BE6 /* SimulatorChecker.m */,
 				39C775502C8F13B10006E042 /* SimulatorDetector.swift */,
 			);
@@ -244,7 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				398EB5B72C63BC6B002FC9CA /* Sign3Intelligence.h in Headers */,
-				39E36C2C2C90839500625BE6 /* SimulatorChecker.h in Headers */,
+				39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
