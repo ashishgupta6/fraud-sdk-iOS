@@ -5,8 +5,6 @@
 // Created by Ashish Gupta on 09/09/24.
 //
 import Foundation
-//#import; "Sign3Intelligence/SimulatorChecker.h"
-
 
 class SimulatorDetector{
     
@@ -41,12 +39,12 @@ class SimulatorDetector{
     
     
     func checkSimulatorFromObjectiveC() -> Bool{
-        let simulatorChecker = SimulatorChecker()
+//        let simulatorChecker = SimulatorChecker()
 //        if simulatorChecker.isSimulator() {
 //            return true
 //        } else {
 //            return false
 //        }
-        return false
+        return true
     }
 }
