@@ -12,6 +12,7 @@
 
 @interface SimulatorChecker : NSObject
 
+- (void)internalOnlyMethod;
 - (BOOL)isSimulator;
 
 @end

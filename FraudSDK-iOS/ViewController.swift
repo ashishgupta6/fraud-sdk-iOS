@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import Sign3Intelligence
 import AppTrackingTransparency
 import AdSupport
+import Sign3Intelligence
 
 class ViewController: UIViewController {
     
@@ -27,6 +27,8 @@ class ViewController: UIViewController {
         Utils.requestLocationPermission()
         
        
+        let simulatorChecker = SimulatorChecker()
+        simulatorChecker.isSimulator()
         let sign3Intelligence = Sign3Intelligence.getInstance()
         Utils.showInfologs(tags: "TAG_SESSION_ID", value: sign3Intelligence.getSessionId())
         sign3Intelligence.getIntelligence()

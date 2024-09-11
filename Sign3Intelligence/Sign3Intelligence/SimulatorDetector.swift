@@ -6,6 +6,7 @@
 //
 import Foundation
 
+
 class SimulatorDetector{
     
     let TAG = "SimulatorDetector"
@@ -39,12 +40,11 @@ class SimulatorDetector{
     
     
     func checkSimulatorFromObjectiveC() -> Bool{
-//        let simulatorChecker = SimulatorChecker()
-//        if simulatorChecker.isSimulator() {
-//            return true
-//        } else {
-//            return false
-//        }
-        return true
+        let simulatorChecker = SimulatorChecker()
+        if simulatorChecker.isSimulator() {
+            return true
+        } else {
+            return false
+        }
     }
 }
