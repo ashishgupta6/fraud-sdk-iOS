@@ -8,12 +8,18 @@
 import Foundation
 
 
-struct DisplayAllSignals{
+struct DataCreationService{
     
-    static func displayAllSignals(deviceSignalsApiImpl: DeviceSignalsApiImpl){
+    static func displayAllSignals(_ deviceSignalsApiImpl: DeviceSignalsApiImpl,_ sign3IntelliegnceSdkApiImpl: Sign3IntelligenceSdkApiImpl){
 
         DispatchQueue.global().async {
             Task.detached{
+                // Detectors
+                let isVpnEnabled = await sign3IntelliegnceSdkApiImpl.isVpnDetected()
+                let isSimulatorDetected = await sign3IntelliegnceSdkApiImpl.isSimulatorDetected()
+                
+                
+                // Signals
                 let deviceId = await deviceSignalsApiImpl.getiOSDeviceId()
                 let cloudId = await deviceSignalsApiImpl.getCloudId()
                 let appId = await deviceSignalsApiImpl.getApplicationId()
@@ -85,8 +91,6 @@ struct DisplayAllSignals{
                 let audioCurrentVolume = await deviceSignalsApiImpl.getAudioVolumeCurrent()
                 let carrierCountry = await deviceSignalsApiImpl.getCarrierCountry()
 
-//                Utils.checkThread()
-
                 DispatchQueue.main.async {
                     Utils.showInfologs(tags: "Device ID", value: deviceId)
                     Utils.showInfologs(tags: "Cloud ID", value: cloudId)
@@ -111,8 +115,8 @@ struct DisplayAllSignals{
                     Utils.showInfologs(tags: "Current Local", value: currentLocal)
                     Utils.showInfologs(tags: "Preferred Language", value: preferredLanguage)
                     Utils.showInfologs(tags: "Sandbox Path", value: sanboxPath)
-                    Utils.showInfologs(tags: "Mobile Country Code", value: mcc)
-                    Utils.showInfologs(tags: "Network Country Code", value: ncc)
+                    Utils.showInfologs(tags: "Mobile Country Code", value: mcc.description)
+                    Utils.showInfologs(tags: "Network Country Code", value: ncc.description)
                     Utils.showInfologs(tags: "Host Name", value: hostName)
                     Utils.showInfologs(tags: "Is iOS App On Mac", value: isiOSAppOnMac.description)
                     Utils.showInfologs(tags: "Orientation", value: orientation)
@@ -159,6 +163,11 @@ struct DisplayAllSignals{
                     Utils.showInfologs(tags: "Default Browser", value: defaultBrowser.description)
                     Utils.showInfologs(tags: "Audio Current Volume", value: audioCurrentVolume.description)
                     Utils.showInfologs(tags: "Carrier Country", value: carrierCountry.description)
+                    
+                    
+                    Utils.showInfologs(tags: "VPN Detector", value: isVpnEnabled.description)
+                    Utils.showInfologs(tags: "Simulator Detector", value: isSimulatorDetected.description)
+
 
                 }
             }

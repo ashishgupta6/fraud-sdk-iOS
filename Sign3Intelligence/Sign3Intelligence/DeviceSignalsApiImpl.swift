@@ -1332,5 +1332,5 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             }
         )
     }
-
+    
 }
