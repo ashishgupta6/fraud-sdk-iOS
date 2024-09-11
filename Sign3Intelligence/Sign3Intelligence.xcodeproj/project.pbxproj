@@ -132,6 +132,14 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		397AF52A2C91DE29004F74D9 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				39E36C3A2C91885D00625BE6 /* module.modulemap */,
+			);
+			name = Module;
+			sourceTree = "<group>";
+		};
 		3984B69E2C8EFB8600EE992E /* LocationDetector */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +169,7 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
-				39C7755A2C8F35990006E042 /* Encryption */,
+				397AF52A2C91DE29004F74D9 /* Module */,
 				39E738FA2C885D01002B24C8 /* Info.plist */,
 				39E738F92C882AB4002B24C8 /* Detectors */,
 				393E768C2C809FC100572A77 /* Model */,
@@ -177,7 +185,6 @@
 				3984B6932C8E2C8100EE992E /* PhoneInputType.swift */,
 				3984B6952C8E2CD400EE992E /* OtpInputType.swift */,
 				3984B6972C8E2D3F00EE992E /* Environment.swift */,
-				39E36C3A2C91885D00625BE6 /* module.modulemap */,
 			);
 			path = Sign3Intelligence;
 			sourceTree = "<group>";
@@ -215,13 +222,6 @@
 				39C775502C8F13B10006E042 /* SimulatorDetector.swift */,
 			);
 			name = SimulatorDetector;
-			sourceTree = "<group>";
-		};
-		39C7755A2C8F35990006E042 /* Encryption */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Encryption;
 			sourceTree = "<group>";
 		};
 		39E738F92C882AB4002B24C8 /* Detectors */ = {
