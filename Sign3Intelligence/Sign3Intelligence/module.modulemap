@@ -3,7 +3,7 @@ framework module Sign3Intelligence {
     export *
     module * { export * }
     
-    module Sign3IntelligencePrivate {
+    explicit module Sign3IntelligencePrivate {
         header "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/Sign3PrivateHeader.h"
         export *
     }

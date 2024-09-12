@@ -142,6 +142,7 @@
 		397AF5342C92036A004F74D9 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */,
 				39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */,
 			);
 			name = Headers;
@@ -184,7 +185,6 @@
 				393E76892C809BFB00572A77 /* ViewModels */,
 				397950E82C7DC6F80043677B /* Utils */,
 				398EB5C02C63BC8A002FC9CA /* DeviceSignals */,
-				398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */,
 				398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */,
 				39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */,
 				39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */,
