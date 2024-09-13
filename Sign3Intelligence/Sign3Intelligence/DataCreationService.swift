@@ -17,6 +17,7 @@ struct DataCreationService{
                 // Detectors
                 let isVpnEnabled = await sign3IntelliegnceSdkApiImpl.isVpnDetected()
                 let isSimulatorDetected = await sign3IntelliegnceSdkApiImpl.isSimulatorDetected()
+                let isJainBrokenDetected = await sign3IntelliegnceSdkApiImpl.isJailBrokenDetected()
                 
                 
                 // Signals
@@ -90,6 +91,8 @@ struct DataCreationService{
                 let defaultBrowser = await deviceSignalsApiImpl.getDefaultBrowser()
                 let audioCurrentVolume = await deviceSignalsApiImpl.getAudioVolumeCurrent()
                 let carrierCountry = await deviceSignalsApiImpl.getCarrierCountry()
+                let checkDebug = await deviceSignalsApiImpl.checkDebug()
+                let checkBuildConfiguration = await deviceSignalsApiImpl.checkBuildConfiguration()
 
                 DispatchQueue.main.async {
                     Utils.showInfologs(tags: "Device ID", value: deviceId)
@@ -111,7 +114,7 @@ struct DataCreationService{
                     Utils.showInfologs(tags: "Display Width", value: displayWidth.description)
                     Utils.showInfologs(tags: "Display Height", value: displayHeight.description)
                     Utils.showInfologs(tags: "Time Zone", value: timeZone)
-                    Utils.showInfologs(tags: "Current Time", value: currentTime)
+                    Utils.showInfologs(tags: "Current Time", value: Utils.dateToString(currentTime))
                     Utils.showInfologs(tags: "Current Local", value: currentLocal)
                     Utils.showInfologs(tags: "Preferred Language", value: preferredLanguage)
                     Utils.showInfologs(tags: "Sandbox Path", value: sanboxPath)
@@ -133,8 +136,8 @@ struct DataCreationService{
                     Utils.showInfologs(tags: "FrameWork Version", value: frameWorkVersion)
                     Utils.showInfologs(tags: "iOS APP Version", value: iOSAppVersion)
                     Utils.showInfologs(tags: "APP Name", value: appName)
-                    Utils.showInfologs(tags: "APP Install Time", value: appInstallTime)
-                    Utils.showInfologs(tags: "APP Update Time", value: appUpdateTime)
+                    Utils.showInfologs(tags: "APP Install Time", value: Utils.dateToString(appInstallTime))
+                    Utils.showInfologs(tags: "APP Update Time", value: Utils.dateToString(appUpdateTime))
                     Utils.showInfologs(tags: "APP State", value: appState)
                     Utils.showInfologs(tags: "APP Build Number", value: appBuildNumber)
                     Utils.showInfologs(tags: "Framework Build Number", value: frameworkBuildNumber)
@@ -157,16 +160,19 @@ struct DataCreationService{
                     Utils.showInfologs(tags: "Font Scale", value: fontScale.description)
                     Utils.showInfologs(tags: "TextAutoReplace", value: textAutoReplace.description)
                     Utils.showInfologs(tags: "TextAutoPunctuate", value: textAutoPunctuate.description)
-                    Utils.showInfologs(tags: "Boot Time", value: bootTime.description)
+                    Utils.showInfologs(tags: "Boot Time", value: Utils.dateToString(bootTime))
                     Utils.showInfologs(tags: "Current Brightness", value: currentBrightness.description)
                     Utils.showInfologs(tags: "Sim Info List", value: simInfoList.description)
                     Utils.showInfologs(tags: "Default Browser", value: defaultBrowser.description)
                     Utils.showInfologs(tags: "Audio Current Volume", value: audioCurrentVolume.description)
                     Utils.showInfologs(tags: "Carrier Country", value: carrierCountry.description)
+                    Utils.showInfologs(tags: "Debug", value: checkDebug.description)
+                    Utils.showInfologs(tags: "Build Configuration", value: checkBuildConfiguration.description)
                     
                     
                     Utils.showInfologs(tags: "VPN Detector", value: isVpnEnabled.description)
                     Utils.showInfologs(tags: "Simulator Detector", value: isSimulatorDetected.description)
+                    Utils.showInfologs(tags: "JainBroken Detector", value: isJainBrokenDetected.description)
 
 
                 }

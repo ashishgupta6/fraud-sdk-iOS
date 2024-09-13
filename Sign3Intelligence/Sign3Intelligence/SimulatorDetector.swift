@@ -5,7 +5,6 @@
 // Created by Ashish Gupta on 09/09/24.
 //
 import Foundation
-import Sign3Intelligence.Sign3IntelligencePrivate
 
 class SimulatorDetector{
     

@@ -8,8 +8,9 @@
 import Foundation
 
 class Sign3IntelligenceSdkApiImpl: Sign3IntelligenceSdkApi{
-    lazy var vpnDetector: VPNDetector = VPNDetector()
-    lazy var simulatorDetector: SimulatorDetector = SimulatorDetector()
+    lazy var vpnDetector = VPNDetector()
+    lazy var simulatorDetector = SimulatorDetector()
+    lazy var jainBrokenDetector = JailBrokenDetector()
 
     
     func isVpnDetected() async -> Bool {
@@ -18,6 +19,10 @@ class Sign3IntelligenceSdkApiImpl: Sign3IntelligenceSdkApi{
     
     func isSimulatorDetected() async -> Bool {
         return await simulatorDetector.isSimulatorDetected()
+    }
+    
+    func isJailBrokenDetected() async -> Bool {
+        return await jainBrokenDetector.isJailBrokenDetected()
     }
     
 }
