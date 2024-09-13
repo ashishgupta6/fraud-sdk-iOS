@@ -342,13 +342,13 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getCurrentTime() async -> String {
+    func getCurrentTime() async -> CLong {
         return await Utils.getDeviceSignals(
             functionName: "getCurrentTime",
             requestId: UUID().uuidString,
-            defaultValue: "Unknown",
+            defaultValue: 0,
             function: {
-                return Utils.dateToString(Date())
+                return Utils.dateToUnixTimestamp(Date())
             }
         )
     }
@@ -715,33 +715,33 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getAppInstallTime() async -> String {
+    func getAppInstallTime() async -> CLong {
         return await Utils.getDeviceSignals(
             functionName: "getAppInstallTime",
             requestId: UUID().uuidString,
-            defaultValue: "Unknown",
+            defaultValue: 0,
             function: {
                 let userDefaults = UserDefaults.standard
                 let installDateKey = "AppInstallDate"
                 
                 if let installDate = userDefaults.object(forKey: installDateKey) as? Date {
-                    return Utils.dateToString(installDate)
+                    return Utils.dateToUnixTimestamp(installDate)
                 } else {
                     // If it's the first time launching the app, save the current date as the install date
                     let installDate = Date()
                     userDefaults.set(installDate, forKey: installDateKey)
-                    return Utils.dateToString(installDate)
+                    return Utils.dateToUnixTimestamp(installDate)
                 }
             }
         )
     }
     
     
-    func getAppUpdateTime() async -> String {
+    func getAppUpdateTime() async -> CLong {
         return await Utils.getDeviceSignals(
             functionName: "getAppUpdateTime",
             requestId: UUID().uuidString,
-            defaultValue: "Unknown",
+            defaultValue: 0,
             function: {
                 let userDefaults = UserDefaults.standard
                 let updateDateKey = "AppUpdateDate"
@@ -750,14 +750,14 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
                 if let storedVersion = userDefaults.string(forKey: currentVersionKey),
                    let storedUpdateDate = userDefaults.object(forKey: updateDateKey) as? Date,
                    storedVersion == Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-                    return Utils.dateToString(storedUpdateDate)
+                    return Utils.dateToUnixTimestamp(storedUpdateDate)
                 } else {
                     // The app has been updated, save the current date as the update date
                     let updateDate = Date()
                     let currentVersion = await getiOSAppVersion()
                     userDefaults.set(updateDate, forKey: updateDateKey)
                     userDefaults.set(currentVersion, forKey: currentVersionKey)
-                    return Utils.dateToString(updateDate)
+                    return Utils.dateToUnixTimestamp(updateDate)
                 }
             }
         )
@@ -832,6 +832,7 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
                             let latitude = location.coordinate.latitude
                             let longitude = location.coordinate.longitude
                             LocationFramework.shared.stopUpdatingLocation()
+                            
                             // Resume the continuation with the result
                             continuation.resume(returning: Location(latitude: latitude, longitude: longitude))
                         }
@@ -1235,11 +1236,11 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getBootTime() async -> String {
+    func getBootTime() async -> CLong {
         return await Utils.getDeviceSignals(
             functionName: "getBootTime",
             requestId: UUID().uuidString,
-            defaultValue: "Unknown",
+            defaultValue: 0,
             function: {
                 var mib: [Int32] = [CTL_KERN, KERN_BOOTTIME]
                 var size = MemoryLayout<timeval>.size
@@ -1249,9 +1250,9 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
                 
                 if result == 0 {
                     let bootDate = Date(timeIntervalSince1970: TimeInterval(bootTime.tv_sec) + TimeInterval(bootTime.tv_usec) / 1_000_000)
-                    return Utils.dateToString(bootDate)
+                    return Utils.dateToUnixTimestamp(bootDate)
                 } else {
-                    return "Unknown"
+                    return 0
                 }
             }
         )
@@ -1332,5 +1333,59 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             }
         )
     }
+    
+    
+    func checkDebug() async -> Bool {
+        return await Utils.getDeviceSignals(
+            functionName: "getCarrierCountry",
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+                var debug = false
+                
+                // Define the kinfo_proc structure in Swift
+                var info = kinfo_proc()
+                var size = MemoryLayout<kinfo_proc>.size
+                
+                // Define the sysctl MIB array
+                let mib: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, Int32(getpid())]
+                
+                // Call sysctl
+                let status = mib.withUnsafeBufferPointer { mibPointer -> Int32 in
+                    // Convert mibPointer to UnsafeMutablePointer
+                    let mibMutablePointer = UnsafeMutablePointer<Int32>(mutating: mibPointer.baseAddress!)
+                    // Pass size as UnsafeMutablePointer
+                    return withUnsafeMutablePointer(to: &size) { sizePointer in
+                        sysctl(mibMutablePointer, UInt32(mibPointer.count), &info, sizePointer, nil, 0)
+                    }
+                }
+                
+                // Check if sysctl call was successful
+                if status == 0 {
+                    debug = (info.kp_proc.p_flag & P_TRACED) != 0
+                } else {
+                    // Handle the case where sysctl fails
+                    print("sysctl call failed with status \(status)")
+                }
+                
+                // Check isatty
+                if !debug {
+                    debug = isatty(STDOUT_FILENO) != 0
+                }
+                
+                return debug
+            }
+        )
+    }
+    
+    func checkBuildConfiguration() async -> String {
+#if DEBUG
+        return "Debug"
+#else
+        return "Release"
+#endif
+    }
+    
+    
     
 }

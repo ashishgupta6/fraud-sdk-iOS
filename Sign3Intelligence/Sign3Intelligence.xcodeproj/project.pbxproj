@@ -11,6 +11,9 @@
 		393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768D2C809FE700572A77 /* IntelligenceResponse.swift */; };
 		396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */; };
 		397950EA2C7DC73E0043677B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397950E92C7DC73E0043677B /* Utils.swift */; };
+		397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */; };
+		397AF53B2C92FA6F004F74D9 /* JailBrokenChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */; };
+		397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5412C9329A9004F74D9 /* AppTampering.swift */; };
 		3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68D2C8E2B3B00EE992E /* Options.swift */; };
 		3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68F2C8E2C3000EE992E /* UserEventType.swift */; };
 		3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B6932C8E2C8100EE992E /* PhoneInputType.swift */; };
@@ -53,6 +56,9 @@
 		393E768D2C809FE700572A77 /* IntelligenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponse.swift; sourceTree = "<group>"; };
 		396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsApiImpl.swift; sourceTree = "<group>"; };
 		397950E92C7DC73E0043677B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBrokenDetector.swift; sourceTree = "<group>"; };
+		397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JailBrokenChecker.m; sourceTree = "<group>"; };
+		397AF5412C9329A9004F74D9 /* AppTampering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTampering.swift; sourceTree = "<group>"; };
 		3984B68D2C8E2B3B00EE992E /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		3984B68F2C8E2C3000EE992E /* UserEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEventType.swift; sourceTree = "<group>"; };
 		3984B6932C8E2C8100EE992E /* PhoneInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInputType.swift; sourceTree = "<group>"; };
@@ -148,6 +154,23 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
+		397AF5372C92F0A3004F74D9 /* JailBroken */ = {
+			isa = PBXGroup;
+			children = (
+				397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */,
+				397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */,
+			);
+			path = JailBroken;
+			sourceTree = "<group>";
+		};
+		397AF5402C93299A004F74D9 /* AppTampering */ = {
+			isa = PBXGroup;
+			children = (
+				397AF5412C9329A9004F74D9 /* AppTampering.swift */,
+			);
+			name = AppTampering;
+			sourceTree = "<group>";
+		};
 		3984B69E2C8EFB8600EE992E /* LocationDetector */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +257,8 @@
 		39E738F92C882AB4002B24C8 /* Detectors */ = {
 			isa = PBXGroup;
 			children = (
+				397AF5402C93299A004F74D9 /* AppTampering */,
+				397AF5372C92F0A3004F74D9 /* JailBroken */,
 				39CC8F772C7F63FE00239032 /* DataCreationService.swift */,
 				39C7754F2C8F139F0006E042 /* SimulatorDetector */,
 				39C775472C8EFC900006E042 /* VPNSpoffer */,
@@ -364,6 +389,7 @@
 				39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */,
 				3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */,
 				39C7754B2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift in Sources */,
+				397AF53B2C92FA6F004F74D9 /* JailBrokenChecker.m in Sources */,
 				39C775552C8F2FE90006E042 /* ProdKeyProvider.swift in Sources */,
 				3984B6962C8E2CD400EE992E /* OtpInputType.swift in Sources */,
 				39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */,
@@ -373,11 +399,13 @@
 				396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */,
 				393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */,
 				39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */,
+				397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */,
 				39C775572C8F320F0006E042 /* DevKeyProvider.swift in Sources */,
 				39C775532C8F2F470006E042 /* BaseKey.swift in Sources */,
 				39C775492C8EFCB20006E042 /* VPNDetector.swift in Sources */,
 				39C7754D2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift in Sources */,
 				397950EA2C7DC73E0043677B /* Utils.swift in Sources */,
+				397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */,
 				39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */,
 				39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */,
 			);
@@ -549,7 +577,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				MODULEMAP_FILE = "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -590,7 +618,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				MODULEMAP_FILE = "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";

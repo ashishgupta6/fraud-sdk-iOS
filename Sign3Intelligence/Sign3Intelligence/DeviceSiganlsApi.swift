@@ -28,7 +28,7 @@ protocol DeviceSignalsApi{
     func getDisplayHeight() async -> CGFloat
     func getDisplayScale() async -> CGFloat
     func getTimeZone() async -> String
-    func getCurrentTime() async -> String
+    func getCurrentTime() async -> CLong
     func getCurrentLocal() async -> String
     func getPreferredLanguage() async -> String
     func getSandboxPath() async -> String
@@ -50,8 +50,8 @@ protocol DeviceSignalsApi{
     func getFrameworkVersion() async -> String
     func getiOSAppVersion() async -> String
     func getAppName() async -> String
-    func getAppInstallTime() async -> String
-    func getAppUpdateTime() async -> String
+    func getAppInstallTime() async -> CLong
+    func getAppUpdateTime() async -> CLong
     func getAppState() async -> String
     func getAppBuildNumber() async -> String
     func getFrameworkBuildNumber() async -> String
@@ -73,10 +73,12 @@ protocol DeviceSignalsApi{
     func getFontScale() async -> CGFloat
     func getTextAutoReplace() async -> Bool
     func getTextAutoPunctuate() async -> Bool
-    func getBootTime() async -> String
+    func getBootTime() async -> CLong
     func getCurrentBrightness() async -> CGFloat
     func getSimInfoList() async -> [String: String]
     func getDefaultBrowser() async -> String
     func getAudioVolumeCurrent() async -> Float
     func getCarrierCountry() async -> String
+    func checkDebug() async -> Bool
+    func checkBuildConfiguration() async -> String
 }

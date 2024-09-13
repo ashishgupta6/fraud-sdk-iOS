@@ -68,4 +68,11 @@ class Utils{
         print("\(tags): \(value)")
     }
     
+    static func dateToString(_ timeStamp: CLong) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy hh:mm a"
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Kolkata") // IST time zone
+        return dateFormatter.string(from: date)
+    }
 }

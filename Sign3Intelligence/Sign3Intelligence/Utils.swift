@@ -51,11 +51,16 @@ struct Utils{
         return formatter.string(fromByteCount: bytes)
     }
     
-    static func dateToString(_ date: Date) -> String {
+    static func dateToString(_ timeStamp: CLong) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(timeStamp))
         let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy hh:mm a"
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Kolkata") // IST time zone
-        dateFormatter.dateFormat = "dd-MM-yyyy HH:MM a"
         return dateFormatter.string(from: date)
+    }
+    
+    static func dateToUnixTimestamp(_ date: Date) -> CLong {
+        return CLong(date.timeIntervalSince1970)
     }
     
     static func checkLocationPermission() -> Bool{

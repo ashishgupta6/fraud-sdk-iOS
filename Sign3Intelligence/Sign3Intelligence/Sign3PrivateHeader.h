@@ -16,4 +16,10 @@
 
 @end
 
+@interface JailBrokenChecker : NSObject
+
+- (BOOL)isJailBroken;
+
+@end
+
 #endif /* SimulatorChecker_h */
