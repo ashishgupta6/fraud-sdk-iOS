@@ -11,4 +11,5 @@ protocol Sign3IntelligenceSdkApi{
     func isVpnDetected() async -> Bool
     func isSimulatorDetected() async -> Bool
     func isJailBrokenDetected() async -> Bool
+    func isMockLocation() async -> Bool
 }

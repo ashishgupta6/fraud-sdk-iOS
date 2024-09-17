@@ -14,6 +14,7 @@ import AppTrackingTransparency
 import AVFoundation
 import LocalAuthentication
 import CoreMotion
+import DeviceCheck
 
 class DeviceSignalsApiImpl : DeviceSignalsApi{
     
@@ -28,6 +29,22 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
                 guard let id = await UIDevice.current.identifierForVendor?.uuidString else {
                     return "Unable to get device ID"
                 }
+                
+                let curDevice = DCDevice.current
+                if curDevice.isSupported {
+                    curDevice.generateToken(completionHandler: { (data, error) in
+                        if let data = data {
+                            // You will get a device-specific token here
+                            let deviceToken = data.base64EncodedString()
+                            print("Device token: \(deviceToken)")
+                        } else if let error = error {
+                            print("Error: \(error.localizedDescription)")
+                        }
+                    })
+                }
+                
+                
+                
                 return id
             }
         )
@@ -813,16 +830,16 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    func getLatLong() async -> Location {
+    func getLocation() async -> Location {
         return await Utils.getDeviceSignals(
             functionName: "getLatLong",
             requestId: UUID().uuidString,
-            defaultValue: Location(latitude: 0.0, longitude: 0.0),
+            defaultValue: Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 0),
             function: {
                 // Check if location permission is granted
                 guard Utils.checkLocationPermission() else {
                     Utils.showInfologs(tags: "Permission Denied", value: "Location permission not granted")
-                    return Location(latitude: 0.0, longitude: 0.0)
+                    return Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 0)
                 }
                 
                 // Use withCheckedContinuation to handle the location updates asynchronously
@@ -831,10 +848,12 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
                         LocationFramework.shared.startUpdatingLocation { location in
                             let latitude = location.coordinate.latitude
                             let longitude = location.coordinate.longitude
+                            let altitude = location.altitude
+                            let timeStamp = location.timestamp
                             LocationFramework.shared.stopUpdatingLocation()
                             
                             // Resume the continuation with the result
-                            continuation.resume(returning: Location(latitude: latitude, longitude: longitude))
+                            continuation.resume(returning: Location(latitude: latitude, longitude: longitude, altitude: altitude, timeStamp: Utils.dateToUnixTimestamp(timeStamp)))
                         }
                     }
                 }

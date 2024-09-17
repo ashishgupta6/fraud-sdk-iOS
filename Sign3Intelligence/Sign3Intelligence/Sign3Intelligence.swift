@@ -11,7 +11,6 @@ import os.log
 import BackgroundTasks
 
 public final class Sign3Intelligence {
-
     private static var sdk: Sign3Intelligence?
     private lazy var sign3IntelligenceInternal = Sign3IntelligenceInternal.getInstance()
 
@@ -28,20 +27,18 @@ public final class Sign3Intelligence {
 
     public func initAsync(options: Options, completion: @escaping (Bool) -> Void) {
         sign3IntelligenceInternal.initAsync(options, completion)
-        
     }
 
-    public func updateOptions() {
-
+    public func updateOptions(updateOption: UpdateOption) {
+        sign3IntelligenceInternal.updateOption(updateOption)
     }
 
     public func getIntelligence() {
         sign3IntelligenceInternal.getIntelligence()
     }
     
-
     public func getSessionId() -> String {
-        return sign3IntelligenceInternal.appSessionId
+        return sign3IntelligenceInternal.options?.sessionId ?? ""
     }
 }
 

@@ -10,6 +10,8 @@ import Foundation
 
 struct DataCreationService{
     
+    
+    
     static func displayAllSignals(_ deviceSignalsApiImpl: DeviceSignalsApiImpl,_ sign3IntelliegnceSdkApiImpl: Sign3IntelligenceSdkApiImpl){
 
         DispatchQueue.global().async {
@@ -18,6 +20,7 @@ struct DataCreationService{
                 let isVpnEnabled = await sign3IntelliegnceSdkApiImpl.isVpnDetected()
                 let isSimulatorDetected = await sign3IntelliegnceSdkApiImpl.isSimulatorDetected()
                 let isJainBrokenDetected = await sign3IntelliegnceSdkApiImpl.isJailBrokenDetected()
+                let locationSpoffer = await sign3IntelliegnceSdkApiImpl.isMockLocation()
                 
                 
                 // Signals
@@ -67,7 +70,7 @@ struct DataCreationService{
                 let appState = await deviceSignalsApiImpl.getAppState()
                 let appBuildNumber = await deviceSignalsApiImpl.getAppBuildNumber()
                 let frameworkBuildNumber = await deviceSignalsApiImpl.getFrameworkBuildNumber()
-                let latLong = await deviceSignalsApiImpl.getLatLong()
+                let location = await deviceSignalsApiImpl.getLocation()
                 let isTelephonySupported = await deviceSignalsApiImpl.isTelephonySupported()
                 let cameraList = await deviceSignalsApiImpl.getCameraList()
                 let abiType = await deviceSignalsApiImpl.getAbiType()
@@ -141,8 +144,10 @@ struct DataCreationService{
                     Utils.showInfologs(tags: "APP State", value: appState)
                     Utils.showInfologs(tags: "APP Build Number", value: appBuildNumber)
                     Utils.showInfologs(tags: "Framework Build Number", value: frameworkBuildNumber)
-                    Utils.showInfologs(tags: "Latitude", value: latLong.latitude.description)
-                    Utils.showInfologs(tags: "Longitude", value: latLong.longitude.description)
+                    Utils.showInfologs(tags: "Latitude", value: location.latitude.description)
+                    Utils.showInfologs(tags: "Longitude", value: location.longitude.description)
+                    Utils.showInfologs(tags: "Altitude", value: location.altitude.description)
+                    Utils.showInfologs(tags: "TimeStamp", value: location.timeStamp.description)
                     Utils.showInfologs(tags: "Telephony Supported", value: isTelephonySupported.description)
                     Utils.showInfologs(tags: "Camera List", value: cameraList.description)
                     Utils.showInfologs(tags: "Abi Type", value: abiType.description)
@@ -173,6 +178,7 @@ struct DataCreationService{
                     Utils.showInfologs(tags: "VPN Detector", value: isVpnEnabled.description)
                     Utils.showInfologs(tags: "Simulator Detector", value: isSimulatorDetected.description)
                     Utils.showInfologs(tags: "JainBroken Detector", value: isJainBrokenDetected.description)
+                    Utils.showInfologs(tags: "Location Spoffer", value: locationSpoffer.description)
 
 
                 }
