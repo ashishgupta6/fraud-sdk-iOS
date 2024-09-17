@@ -10,9 +10,13 @@ import Foundation
 class Location {
     var latitude: Double
     var longitude: Double
+    var altitude: Double
+    var timeStamp: CLong
 
-    init(latitude: Double, longitude: Double) {
+    init(latitude: Double, longitude: Double, altitude: Double, timeStamp: CLong) {
         self.latitude = latitude
         self.longitude = longitude
+        self.altitude = altitude
+        self.timeStamp = timeStamp
     }
 }

@@ -55,7 +55,7 @@ protocol DeviceSignalsApi{
     func getAppState() async -> String
     func getAppBuildNumber() async -> String
     func getFrameworkBuildNumber() async -> String
-    func getLatLong() async -> Location
+    func getLocation() async -> Location
     func isTelephonySupported() async -> Bool
     func getCameraList() async -> [String] 
     func getAbiType() async -> String

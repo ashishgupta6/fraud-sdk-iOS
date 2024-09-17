@@ -20,18 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .setClientId("test_tenant")
             .setClientSecret("secret-295OzNJj9L3nVUWQq56ACCN6f6zUiYGQlN8G7256")
             .setEnvironment(Environment.PRE)
-            .setPhoneNumber("1234567890")
-            .setUserId("user123")
-            .setMerchantId("merchant456")
-            .setUserEventType(UserEventType.SIGNUP)
-            .setOtpInputType(OtpInputType.AUTO_FILLED)
-            .setPhoneInputType(PhoneInputType.MANUAL)
-            .setAdditionalAttributes(
-                ["SIGN_UP_TIMESTAMP": String(Date().timeIntervalSince1970 * 1000),
-                 "SIGNUP_METHOD": "PASSWORD",
-                 "REFERRED_BY": "UserID",
-                 "PREFERRED_LANGUAGE": "English"
-                ])
             .build()
         
         Sign3Intelligence.getInstance().initAsync(options: options){isInitialize in

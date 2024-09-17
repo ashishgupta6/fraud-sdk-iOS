@@ -1,18 +1,13 @@
 //
-//  Options.swift
+//  UpdateOption.swift
 //  Sign3Intelligence
 //
-//  Created by Ashish Gupta on 09/09/24.
+//  Created by Ashish Gupta on 15/09/24.
 //
 
 import Foundation
 
-
-public class Options: Codable{
-    private(set) var clientId: String
-    private(set) var clientSecret: String
-    private(set) var sessionId: String?
-    private(set) var environment: Environment
+public class UpdateOption{
     private(set) var phoneNumber: String?
     private(set) var phoneInputType: PhoneInputType?
     private(set) var otpInputType: OtpInputType?
@@ -22,10 +17,6 @@ public class Options: Codable{
     private(set) var additionalAttributes: [String: String]
     
     private init(
-        clientId: String,
-        clientSecret: String,
-        sessionId: String?,
-        environment: Environment,
         phoneNumber: String?,
         phoneInputType: PhoneInputType?,
         otpInputType: OtpInputType?,
@@ -34,10 +25,6 @@ public class Options: Codable{
         merchantId: String?,
         additionalAttributes: [String: String]
     ) {
-        self.clientId = clientId
-        self.clientSecret = clientSecret
-        self.sessionId = sessionId
-        self.environment = environment
         self.phoneNumber = phoneNumber
         self.phoneInputType = phoneInputType
         self.otpInputType = otpInputType
@@ -47,12 +34,7 @@ public class Options: Codable{
         self.additionalAttributes = additionalAttributes
     }
     
-    
     public class Builder {
-        private var clientId: String?
-        private var clientSecret: String?
-        private var sessionId: String?
-        private var environment: Environment = Environment.PROD
         private var phoneNumber: String?
         private var phoneInputType: PhoneInputType?
         private var otpInputType: OtpInputType?
@@ -63,26 +45,6 @@ public class Options: Codable{
         
         // Explicitly make the initializer public
         public init() {}
-        
-        public func setClientId(_ clientId: String) -> Builder {
-            self.clientId = clientId
-            return self
-        }
-        
-        public func setClientSecret(_ clientSecret: String) -> Builder {
-            self.clientSecret = clientSecret
-            return self
-        }
-        
-        func setSessionId(_ sessionId: String?) -> Builder {
-            self.sessionId = sessionId
-            return self
-        }
-        
-        public func setEnvironment(_ environment: Environment) -> Builder {
-            self.environment = environment
-            return self
-        }
         
         public func setPhoneNumber(_ phoneNumber: String?) -> Builder {
             self.phoneNumber = phoneNumber
@@ -119,12 +81,8 @@ public class Options: Codable{
             return self
         }
         
-        public func build() -> Options {
-            return Options(
-                clientId: clientId ?? "",
-                clientSecret: clientSecret ?? "",
-                sessionId: sessionId,
-                environment: environment,
+        public func build() -> UpdateOption {
+            return UpdateOption(
                 phoneNumber: phoneNumber,
                 phoneInputType: phoneInputType,
                 otpInputType: otpInputType,
@@ -134,20 +92,5 @@ public class Options: Codable{
                 additionalAttributes: additionalAttributes
             )
         }
-    }
-    
-    public func toBuilder() -> Builder {
-        return Builder()
-            .setClientId(clientId)
-            .setClientSecret(clientSecret)
-            .setSessionId(sessionId)
-            .setEnvironment(environment)
-            .setPhoneNumber(phoneNumber)
-            .setPhoneInputType(phoneInputType)
-            .setOtpInputType(otpInputType)
-            .setUserId(userId)
-            .setUserEventType(userEventType)
-            .setMerchantId(merchantId)
-            .setAdditionalAttributes(additionalAttributes)
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		390D71F02C961AF30090147D /* UpdateOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D71EF2C961AF30090147D /* UpdateOption.swift */; };
+		390D71F32C962B040090147D /* CryptoGCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D71F22C962B040090147D /* CryptoGCM.swift */; };
 		393E768B2C809C0C00572A77 /* DeviceSignalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768A2C809C0C00572A77 /* DeviceSignalsViewModel.swift */; };
 		393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768D2C809FE700572A77 /* IntelligenceResponse.swift */; };
 		396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */; };
@@ -39,6 +41,8 @@
 		39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */; };
 		39E738FE2C88826F002B24C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FD2C88826F002B24C8 /* Location.swift */; };
 		39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FF2C888F16002B24C8 /* LocationDetector.swift */; };
+		39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */; };
+		39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		390D71EF2C961AF30090147D /* UpdateOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOption.swift; sourceTree = "<group>"; };
+		390D71F22C962B040090147D /* CryptoGCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoGCM.swift; sourceTree = "<group>"; };
 		393E768A2C809C0C00572A77 /* DeviceSignalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsViewModel.swift; sourceTree = "<group>"; };
 		393E768D2C809FE700572A77 /* IntelligenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponse.swift; sourceTree = "<group>"; };
 		396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsApiImpl.swift; sourceTree = "<group>"; };
@@ -87,6 +93,8 @@
 		39E738FA2C885D01002B24C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		39E738FD2C88826F002B24C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		39E738FF2C888F16002B24C8 /* LocationDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetector.swift; sourceTree = "<group>"; };
+		39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSpoffer.swift; sourceTree = "<group>"; };
+		39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +116,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		390D71F12C962AF20090147D /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				390D71F22C962B040090147D /* CryptoGCM.swift */,
+			);
+			path = Encryption;
+			sourceTree = "<group>";
+		};
 		393E76892C809BFB00572A77 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +149,7 @@
 				39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */,
 				39C775562C8F320F0006E042 /* DevKeyProvider.swift */,
 				39C775582C8F321C0006E042 /* StagingKeyProvider.swift */,
+				39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -200,6 +217,7 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
+				390D71F12C962AF20090147D /* Encryption */,
 				397AF5342C92036A004F74D9 /* Headers */,
 				397AF52A2C91DE29004F74D9 /* Module */,
 				39E738FA2C885D01002B24C8 /* Info.plist */,
@@ -216,6 +234,7 @@
 				3984B6932C8E2C8100EE992E /* PhoneInputType.swift */,
 				3984B6952C8E2CD400EE992E /* OtpInputType.swift */,
 				3984B6972C8E2D3F00EE992E /* Environment.swift */,
+				390D71EF2C961AF30090147D /* UpdateOption.swift */,
 			);
 			path = Sign3Intelligence;
 			sourceTree = "<group>";
@@ -257,6 +276,7 @@
 		39E738F92C882AB4002B24C8 /* Detectors */ = {
 			isa = PBXGroup;
 			children = (
+				39F2999B2C995FAC00D896F2 /* LocationSpoffer */,
 				397AF5402C93299A004F74D9 /* AppTampering */,
 				397AF5372C92F0A3004F74D9 /* JailBroken */,
 				39CC8F772C7F63FE00239032 /* DataCreationService.swift */,
@@ -267,6 +287,14 @@
 				39C7754C2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift */,
 			);
 			name = Detectors;
+			sourceTree = "<group>";
+		};
+		39F2999B2C995FAC00D896F2 /* LocationSpoffer */ = {
+			isa = PBXGroup;
+			children = (
+				39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */,
+			);
+			path = LocationSpoffer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,6 +414,9 @@
 				3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */,
 				39C775512C8F13B10006E042 /* SimulatorDetector.swift in Sources */,
 				39E738FE2C88826F002B24C8 /* Location.swift in Sources */,
+				39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */,
+				39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */,
+				390D71F02C961AF30090147D /* UpdateOption.swift in Sources */,
 				39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */,
 				3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */,
 				39C7754B2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift in Sources */,
@@ -397,6 +428,7 @@
 				3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */,
 				393E768B2C809C0C00572A77 /* DeviceSignalsViewModel.swift in Sources */,
 				396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */,
+				390D71F32C962B040090147D /* CryptoGCM.swift in Sources */,
 				393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */,
 				39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */,
 				397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */,
