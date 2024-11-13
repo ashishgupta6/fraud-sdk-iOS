@@ -1,5 +1,6 @@
 framework module Sign3Intelligence {
     umbrella header "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/Sign3Intelligence.h"
+    header "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/Sign3PublicHeader.h"
     export *
     module * { export * }
     
@@ -7,4 +8,5 @@ framework module Sign3Intelligence {
         header "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/Sign3PrivateHeader.h"
         export *
     }
+    
 }

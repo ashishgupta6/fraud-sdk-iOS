@@ -15,6 +15,7 @@ import AVFoundation
 import LocalAuthentication
 import CoreMotion
 import DeviceCheck
+import Network
 
 class DeviceSignalsApiImpl : DeviceSignalsApi{
     
@@ -30,18 +31,18 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
                     return "Unable to get device ID"
                 }
                 
-                let curDevice = DCDevice.current
-                if curDevice.isSupported {
-                    curDevice.generateToken(completionHandler: { (data, error) in
-                        if let data = data {
-                            // You will get a device-specific token here
-                            let deviceToken = data.base64EncodedString()
-                            print("Device token: \(deviceToken)")
-                        } else if let error = error {
-                            print("Error: \(error.localizedDescription)")
-                        }
-                    })
-                }
+                //                let curDevice = DCDevice.current
+                //                if curDevice.isSupported {
+                //                    curDevice.generateToken(completionHandler: { (data, error) in
+                //                        if let data = data {
+                //                            // You will get a device-specific token here
+                //                            let deviceToken = data.base64EncodedString()
+                //                            print("Device token: \(deviceToken)")
+                //                        } else if let error = error {
+                //                            print("Error: \(error.localizedDescription)")
+                //                        }
+                //                    })
+                //                }
                 
                 
                 
@@ -151,22 +152,22 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     private func fetchBatteryStatus() async -> String {
-        // Perform the UIDevice.current access and mutation on the main actor
-        return await MainActor.run {
-            let device = UIDevice.current
+        let device = await UIDevice.current
+        await MainActor.run {
+            // Perform the device.isBatteryMonitoringEnabled change on the main actor
             device.isBatteryMonitoringEnabled = true
-            switch device.batteryState {
-            case .unknown:
-                return "Battery state is unknown"
-            case .unplugged:
-                return "Unplugged"
-            case .charging:
-                return "Charging"
-            case .full:
-                return "Full"
-            @unknown default:
-                return "Unknown battery state"
-            }
+        }
+        switch await device.batteryState {
+        case .unknown:
+            return "Battery state is unknown"
+        case .unplugged:
+            return "Unplugged"
+        case .charging:
+            return "Charging"
+        case .full:
+            return "Full"
+        @unknown default:
+            return "Unknown battery state"
         }
     }
     
@@ -182,12 +183,14 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     func fetchBatteryLevel() async -> Float {
-        // Perform the UIDevice.current access and mutation on the main actor
-        return await MainActor.run {
-            let device = UIDevice.current
+        let device = await UIDevice.current
+        
+        await MainActor.run {
+            // Perform the device.isBatteryMonitoringEnabled change on the main actor
             device.isBatteryMonitoringEnabled = true
-            return device.batteryLevel
         }
+        return await device.batteryLevel
+        
     }
     
     func getCpuCount() async -> Int {
@@ -196,7 +199,7 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: 0,
             function: {
-                return ProcessInfo.processInfo.activeProcessorCount
+                return ProcessInfo.processInfo.processorCount
             }
         )
     }
@@ -545,11 +548,34 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                let networkInfo = CTTelephonyNetworkInfo()
-                if let carrier = networkInfo.serviceCurrentRadioAccessTechnology?.first?.value {
-                    return carrier
+                return await withCheckedContinuation { continuation in
+                    let monitor = NWPathMonitor()
+                    let queue = DispatchQueue(label: "NetworkMonitor")
+                    
+                    monitor.pathUpdateHandler = { path in
+                        var networkType = "Unknown"
+                        if path.status == .satisfied {
+                            if path.usesInterfaceType(.wifi) {
+                                networkType = "Wifi"
+                            } else if path.usesInterfaceType(.cellular) {
+                                networkType = "Cellular"
+                            } else if path.usesInterfaceType(.wiredEthernet) {
+                                networkType = "Ethernet"
+                            } else if path.usesInterfaceType(.loopback) {
+                                networkType = "Loopback interface"
+                            } else if path.usesInterfaceType(.other) {
+                                networkType = "Connected via other network interface (possibly VPN)"
+                            }
+                        } else {
+                            networkType = "Unknown"
+                        }
+                        monitor.cancel()
+                        continuation.resume(returning: networkType)
+                    }
+                    
+                    monitor.start(queue: queue)
                 }
-                return "Unknown"
+                
             }
         )
     }
@@ -1069,7 +1095,7 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             function: {
                 if let proxySettings = CFNetworkCopySystemProxySettings()?.takeRetainedValue() as? [String: Any],
                    let httpProxy = proxySettings["HTTPProxy"] as? String {
-                    return "HTTP Proxy: \(httpProxy)"
+                    return "HTTP Proxy Found: \(httpProxy)"
                 } else {
                     return "No HTTP Proxy"
                 }
@@ -1356,7 +1382,7 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
     
     func checkDebug() async -> Bool {
         return await Utils.getDeviceSignals(
-            functionName: "getCarrierCountry",
+            functionName: "checkDebug",
             requestId: UUID().uuidString,
             defaultValue: false,
             function: {
@@ -1398,13 +1424,125 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     func checkBuildConfiguration() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "checkBuildConfiguration",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
 #if DEBUG
-        return "Debug"
+                return "Debug"
 #else
-        return "Release"
+                return "Release"
 #endif
+            }
+        )
+        
     }
     
+    func getCPUType() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getCPUType",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                var cpuType: cpu_type_t = 0
+                var size = MemoryLayout<cpu_type_t>.size
+                sysctlbyname("hw.cputype", &cpuType, &size, nil, 0)
+                
+                switch cpuType {
+                case CPU_TYPE_ARM:
+                    return "ARM CPU"
+                case CPU_TYPE_ARM64:
+                    return "ARM64 CPU"
+                case CPU_TYPE_X86:
+                    return "x86 CPU"
+                case CPU_TYPE_X86_64:
+                    return "x86_64 CPU"
+                default:
+                    return "Unknown CPU"
+                }
+            }
+        )
+    }
+    
+    
+    func hasProximitySensor() async -> Bool {
+        return await Utils.getDeviceSignals(
+            functionName: "hasProximitySensor",
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+                let device = await UIDevice.current
+                return await device.isProximityMonitoringEnabled
+            }
+        )
+    }
+    
+    
+    func getLocalizedModel() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getLocalizedModel",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                return await UIDevice.current.localizedModel
+            }
+        )
+    }
+    
+    
+    func getSystemName() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getSystemName",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                return await UIDevice.current.systemName
+            }
+        )
+    }
+    
+    func getMacAddress() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getMacAddress",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                let deviceSignalsApiImplObjC = DeviceSignalsApiImplObjC()
+                return deviceSignalsApiImplObjC.getMacAddress()
+            }
+        )
+    }
+    
+    
+    func getIPhoneBluetoothMacAddress() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getIPhoneBluetoothMacAddress",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                let deviceSignalsApiImplObjC = DeviceSignalsApiImplObjC()
+                return deviceSignalsApiImplObjC.getIPhoneBluetoothMacAddress()
+            }
+        )
+    }
+    
+    func getIPadBluetoothMacAddress() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getIPadBluetoothMacAddress",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+//                Utils.showInfologs(tags: "TAG_UUID", value: DeviceSignalsApiImplObjC().getDeviceUUID())
+                let deviceSignalsApiImplObjC = DeviceSignalsApiImplObjC()
+                return deviceSignalsApiImplObjC.getIPadBluetoothMacAddress()
+            }
+        )
+    }
+    
+    func getSerialNumber() async -> String {
+        return ""
+    }
     
     
 }

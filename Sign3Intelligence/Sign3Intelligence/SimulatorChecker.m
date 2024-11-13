@@ -7,8 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Sign3PrivateHeader.h"
-#import <UIKit/UIKit.h>
-#include <mach-o/dyld.h>
+
 
 @implementation SimulatorChecker
 

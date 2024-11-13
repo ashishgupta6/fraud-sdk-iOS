@@ -96,6 +96,13 @@ struct DataCreationService{
                 let carrierCountry = await deviceSignalsApiImpl.getCarrierCountry()
                 let checkDebug = await deviceSignalsApiImpl.checkDebug()
                 let checkBuildConfiguration = await deviceSignalsApiImpl.checkBuildConfiguration()
+                let cpuType = await deviceSignalsApiImpl.getCPUType()
+                let proximitySensor = await deviceSignalsApiImpl.hasProximitySensor()
+                let localizedModel = await deviceSignalsApiImpl.getLocalizedModel()
+                let systemName = await deviceSignalsApiImpl.getSystemName()
+                let macAddress = await deviceSignalsApiImpl.getMacAddress()
+                let iPhoneBluetoothMacAddress = await deviceSignalsApiImpl.getIPhoneBluetoothMacAddress()
+                let iPadBluetoothMacAddress = await deviceSignalsApiImpl.getIPadBluetoothMacAddress()
 
                 DispatchQueue.main.async {
                     Utils.showInfologs(tags: "Device ID", value: deviceId)
@@ -173,14 +180,18 @@ struct DataCreationService{
                     Utils.showInfologs(tags: "Carrier Country", value: carrierCountry.description)
                     Utils.showInfologs(tags: "Debug", value: checkDebug.description)
                     Utils.showInfologs(tags: "Build Configuration", value: checkBuildConfiguration.description)
-                    
+                    Utils.showInfologs(tags: "CPU Type", value: cpuType.description)
+                    Utils.showInfologs(tags: "Proximity Sensor", value: proximitySensor.description)
+                    Utils.showInfologs(tags: "Localized Model", value: localizedModel.description)
+                    Utils.showInfologs(tags: "System Name", value: systemName.description)
+                    Utils.showInfologs(tags: "MAC Address", value: macAddress.description)
+                    Utils.showInfologs(tags: "iPhone Bluetooth Mac Address", value: iPhoneBluetoothMacAddress.description)
+                    Utils.showInfologs(tags: "iPad Bluetooth Mac Address", value: iPadBluetoothMacAddress.description)
                     
                     Utils.showInfologs(tags: "VPN Detector", value: isVpnEnabled.description)
                     Utils.showInfologs(tags: "Simulator Detector", value: isSimulatorDetected.description)
                     Utils.showInfologs(tags: "JainBroken Detector", value: isJainBrokenDetected.description)
                     Utils.showInfologs(tags: "Location Spoffer", value: locationSpoffer.description)
-
-
                 }
             }
         }

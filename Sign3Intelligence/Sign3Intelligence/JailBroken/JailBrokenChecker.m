@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Sign3PrivateHeader.h"
-#import <sys/stat.h>
-
 
 @implementation JailBrokenChecker
 

@@ -43,6 +43,8 @@
 		39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FF2C888F16002B24C8 /* LocationDetector.swift */; };
 		39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */; };
 		39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */; };
+		39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */; };
+		39F299A32C9C3EDE00D896F2 /* Sign3PublicHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,8 @@
 		39E738FF2C888F16002B24C8 /* LocationDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetector.swift; sourceTree = "<group>"; };
 		39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSpoffer.swift; sourceTree = "<group>"; };
 		39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSignalsFromObjectiveC.m; sourceTree = "<group>"; };
+		39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sign3PublicHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,7 @@
 			children = (
 				398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */,
 				39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */,
+				39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 			children = (
 				398EB5C12C63BCAF002FC9CA /* DeviceSiganlsApi.swift */,
 				396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */,
+				39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */,
 			);
 			name = DeviceSignals;
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				398EB5B72C63BC6B002FC9CA /* Sign3Intelligence.h in Headers */,
+				39F299A32C9C3EDE00D896F2 /* Sign3PublicHeader.h in Headers */,
 				39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,6 +438,7 @@
 				390D71F32C962B040090147D /* CryptoGCM.swift in Sources */,
 				393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */,
 				39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */,
+				39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */,
 				397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */,
 				39C775572C8F320F0006E042 /* DevKeyProvider.swift in Sources */,
 				39C775532C8F2F470006E042 /* BaseKey.swift in Sources */,

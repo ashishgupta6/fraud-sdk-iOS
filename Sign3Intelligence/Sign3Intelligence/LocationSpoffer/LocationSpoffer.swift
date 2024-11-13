@@ -41,8 +41,8 @@ class LocationSpoffer {
                                     LocationFramework.shared.stopUpdatingLocation()
                                     continuation.resume(returning: false)
                                 }
+                                // Only for testing purpose
 //                                self.handleLocationForBelowiOS15(location: location, continuation: continuation)
-                                
                             } else{
                                 // Handle iOS versions below 15
                                 self.handleLocationForBelowiOS15(location: location, continuation: continuation)
@@ -67,19 +67,12 @@ class LocationSpoffer {
     
     private func handleLocationForBelowiOS15(location: CLLocation, continuation: CheckedContinuation<Bool, Never>) {
         guard let savedLocation = Sign3IntelligenceInternal.sdk?.userDefaultsManager.getLocation() else {
-//             No previously saved location found, assuming it's the first time fetching the location and saving it
+//          No previously saved location found, assuming it's the first time fetching the location and saving it
             Sign3IntelligenceInternal.sdk?.userDefaultsManager.saveLocation(Location(
                 latitude: location.coordinate.latitude,
                 longitude: location.coordinate.longitude,
                 altitude: location.altitude,
                 timeStamp: Utils.dateToUnixTimestamp(location.timestamp)))
-            
-            // Only for testing purpose
-//            Sign3IntelligenceInternal.sdk?.userDefaultsManager.saveLocation(Location(
-//                latitude: 19.0821775,
-//                longitude: 72.716374,
-//                altitude: 265.03831481933594,
-//                timeStamp: 1726599056))
             
             LocationFramework.shared.stopUpdatingLocation()
             continuation.resume(returning: false)
@@ -100,29 +93,24 @@ class LocationSpoffer {
                 longitude: location.coordinate.longitude,
                 altitude: location.altitude,
                 timeStamp: Utils.dateToUnixTimestamp(location.timestamp)))
-            
-            // Only for testing purpose
-//            Sign3IntelligenceInternal.sdk?.userDefaultsManager.saveLocation(Location(
-//                latitude: 19.0821775,
-//                longitude: 72.716374,
-//                altitude: 265.03831481933594,
-//                timeStamp: 1726599056))
         }
         LocationFramework.shared.stopUpdatingLocation()
         continuation.resume(returning: isSpoofed)
     }
     
-    func isLocationSpoofedForBelowiOS15(_ newLocation: Location, _ oldLocation: Location) -> Bool {
+    func isLocationSpoofedForBelowiOS15(_ currentLocation: Location, _ savedLocation: Location) -> Bool {
         let distanceThreshold: Double = 15000 // 15 KM threshold
-        let timeThreshold: Double = 60 * 30  // 30 Minutes threshold
         
-        let currentLocation = CLLocation(latitude: newLocation.latitude, longitude: newLocation.longitude)
-        let previousLocation = CLLocation(latitude: oldLocation.latitude, longitude: oldLocation.longitude)
-        let timeDifference = Double(newLocation.timeStamp - oldLocation.timeStamp)
+        if savedLocation.latitude == 0.0 && savedLocation.longitude == 0.0 && savedLocation.altitude == 0.0 && savedLocation.timeStamp == 0{
+            return false
+        }
+        
+        let currentLocation = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+        let previousLocation = CLLocation(latitude: savedLocation.latitude, longitude: savedLocation.longitude)
         
         let distance = currentLocation.distance(from: previousLocation)
         
-        if distance > distanceThreshold && timeDifference < timeThreshold {
+        if distance > distanceThreshold{
             return true // Possibly spoofed
         }
         
