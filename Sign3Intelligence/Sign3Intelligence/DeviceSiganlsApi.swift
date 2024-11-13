@@ -81,4 +81,12 @@ protocol DeviceSignalsApi{
     func getCarrierCountry() async -> String
     func checkDebug() async -> Bool
     func checkBuildConfiguration() async -> String
+    func getCPUType() async -> String
+    func hasProximitySensor() async -> Bool
+    func getLocalizedModel() async -> String
+    func getSystemName() async -> String
+    func getMacAddress() async -> String
+    func getIPhoneBluetoothMacAddress() async -> String
+    func getIPadBluetoothMacAddress() async -> String
+    func getSerialNumber() async -> String
 }
