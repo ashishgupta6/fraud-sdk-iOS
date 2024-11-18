@@ -13,9 +13,10 @@ class CryptoGCM {
     public static let AES_KEY_SIZE = 256
     public static let GCM_IV_LENGTH = 16
     public static let GCM_TAG_LENGTH = 16
-    public static let ALGORITHM = "AES.GCM"
+    public static let ALGORITHM = "AES/GCM/NoPadding"
+    public static let GET_IV_HEADER = "TENANT-ID"
     private static var key: SymmetricKey?
-
+    
     enum CryptoGCMError: Error {
         case keyNotInitialized
         case invalidBase64String
@@ -35,20 +36,23 @@ class CryptoGCM {
         return iv
     }
 
-    static func getKeyFromPassword(password: String, salt: String, keySize: Int = kCCKeySizeAES256) throws -> Data {
+    static func getKeyFromPassword(password: String, salt: String) throws -> Data {
         let passwordData = password.data(using: .utf8)!
         let saltData = salt.data(using: .utf8)!
         
-        var derivedKeyData = Data(repeating: 0, count: keySize)
+        var derivedKeyData = Data(repeating: 0, count: AES_KEY_SIZE)
         let status = derivedKeyData.withUnsafeMutableBytes { derivedKeyBytes in
             saltData.withUnsafeBytes { saltBytes in
                 CCKeyDerivationPBKDF(
                     CCPBKDFAlgorithm(kCCPBKDF2),
-                    password, passwordData.count,
-                    saltBytes.baseAddress!.assumingMemoryBound(to: UInt8.self), saltData.count,
+                    password,
+                    passwordData.count,
+                    saltBytes.baseAddress!.assumingMemoryBound(to: UInt8.self),
+                    saltData.count,
                     CCPseudoRandomAlgorithm(kCCPRFHmacAlgSHA1),
                     65536,
-                    derivedKeyBytes.baseAddress!.assumingMemoryBound(to: UInt8.self), keySize
+                    derivedKeyBytes.baseAddress!.assumingMemoryBound(to: UInt8.self),
+                    AES_KEY_SIZE
                 )
             }
         }

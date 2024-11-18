@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let options = Options.Builder()
             .setClientId("test_tenant")
             .setClientSecret("secret-295OzNJj9L3nVUWQq56ACCN6f6zUiYGQlN8G7256")
-            .setEnvironment(Environment.PRE)
+            .setEnvironment(Environment.DEV)
             .build()
         
         Sign3Intelligence.getInstance().initAsync(options: options){isInitialize in

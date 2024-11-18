@@ -30,7 +30,6 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
                 guard let id = await UIDevice.current.identifierForVendor?.uuidString else {
                     return "Unable to get device ID"
                 }
-                
                 //                let curDevice = DCDevice.current
                 //                if curDevice.isSupported {
                 //                    curDevice.generateToken(completionHandler: { (data, error) in
@@ -43,8 +42,6 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
                 //                        }
                 //                    })
                 //                }
-                
-                
                 
                 return id
             }
@@ -115,16 +112,13 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                //You need an paid Apple Developer account to access iCloud services, including CloudKit, in your app. Here’s what’s required:
-                //                let container = CKContainer.default()
-                //                do {
-                //                    let recordID = try await container.userRecordID()
-                //                    return recordID.recordName
-                //                }catch {
-                //                    print("Error fetching iCloud ID: \(error.localizedDescription)")
-                //                    return "Cloud ID is not available"
-                //                }
-                return "Cloud ID is not available"
+                let container = CKContainer.default()
+                do {
+                    let recordID = try await container.userRecordID()
+                    return recordID.recordName
+                }catch {
+                    return error.localizedDescription
+                }
             }
         )
     }
@@ -1201,7 +1195,7 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: false,
             function: {
-                return UIAccessibility.isVoiceOverRunning
+                return await UIAccessibility.isVoiceOverRunning
             }
         )
     }
@@ -1533,7 +1527,7 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-//                Utils.showInfologs(tags: "TAG_UUID", value: DeviceSignalsApiImplObjC().getDeviceUUID())
+                //                Utils.showInfologs(tags: "TAG_UUID", value: DeviceSignalsApiImplObjC().getDeviceUUID())
                 let deviceSignalsApiImplObjC = DeviceSignalsApiImplObjC()
                 return deviceSignalsApiImplObjC.getIPadBluetoothMacAddress()
             }
