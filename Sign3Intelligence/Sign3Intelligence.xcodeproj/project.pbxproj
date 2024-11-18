@@ -11,6 +11,8 @@
 		390D71F32C962B040090147D /* CryptoGCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D71F22C962B040090147D /* CryptoGCM.swift */; };
 		393E768B2C809C0C00572A77 /* DeviceSignalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768A2C809C0C00572A77 /* DeviceSignalsViewModel.swift */; };
 		393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768D2C809FE700572A77 /* IntelligenceResponse.swift */; };
+		39577E6C2CE4AE5700DCD69F /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6B2CE4AE5700DCD69F /* Api.swift */; };
+		39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */; };
 		396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */; };
 		397950EA2C7DC73E0043677B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397950E92C7DC73E0043677B /* Utils.swift */; };
 		397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */; };
@@ -62,6 +64,8 @@
 		390D71F22C962B040090147D /* CryptoGCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoGCM.swift; sourceTree = "<group>"; };
 		393E768A2C809C0C00572A77 /* DeviceSignalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsViewModel.swift; sourceTree = "<group>"; };
 		393E768D2C809FE700572A77 /* IntelligenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponse.swift; sourceTree = "<group>"; };
+		39577E6B2CE4AE5700DCD69F /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProvider.swift; sourceTree = "<group>"; };
 		396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsApiImpl.swift; sourceTree = "<group>"; };
 		397950E92C7DC73E0043677B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBrokenDetector.swift; sourceTree = "<group>"; };
@@ -145,6 +149,23 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		39577E682CE4AE2C00DCD69F /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				39577E6A2CE4AE4B00DCD69F /* Sign3 */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		39577E6A2CE4AE4B00DCD69F /* Sign3 */ = {
+			isa = PBXGroup;
+			children = (
+				39577E6B2CE4AE5700DCD69F /* Api.swift */,
+				39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */,
+			);
+			path = Sign3;
+			sourceTree = "<group>";
+		};
 		397950E82C7DC6F80043677B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +243,7 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
+				39577E682CE4AE2C00DCD69F /* Repository */,
 				390D71F12C962AF20090147D /* Encryption */,
 				397AF5342C92036A004F74D9 /* Headers */,
 				397AF52A2C91DE29004F74D9 /* Module */,
@@ -363,7 +385,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					398EB5A52C63BC6A002FC9CA = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -420,6 +442,7 @@
 				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
 				3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */,
 				39C775512C8F13B10006E042 /* SimulatorDetector.swift in Sources */,
+				39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */,
 				39E738FE2C88826F002B24C8 /* Location.swift in Sources */,
 				39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */,
 				39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */,
@@ -437,6 +460,7 @@
 				396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */,
 				390D71F32C962B040090147D /* CryptoGCM.swift in Sources */,
 				393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */,
+				39577E6C2CE4AE5700DCD69F /* Api.swift in Sources */,
 				39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */,
 				39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */,
 				397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */,
@@ -602,7 +626,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7UQKCCQ6J4;
+				DEVELOPMENT_TEAM = A8YD7RNP82;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -617,11 +641,11 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.0.0;
 				MODULEMAP_FILE = "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.Sign3Intelligence;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.sign3Intelligence;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -643,7 +667,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7UQKCCQ6J4;
+				DEVELOPMENT_TEAM = A8YD7RNP82;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -658,11 +682,11 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.0.0;
 				MODULEMAP_FILE = "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.Sign3Intelligence;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.sign3Intelligence;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -678,7 +702,6 @@
 		398EB5BE2C63BC6B002FC9CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -694,7 +717,6 @@
 		398EB5BF2C63BC6B002FC9CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

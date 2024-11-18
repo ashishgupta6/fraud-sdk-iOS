@@ -159,12 +159,19 @@ class Sign3IntelligenceInternal{
     }
     
     func startMandatoryCalls() {
-        do{
-            // Doing API calls
-            
-        }catch{
-            Utils.showErrorlogs(tags: "TAG_mandatoryCallsFailed", value: error.localizedDescription)
-        }
+//        do{
+//            // Doing API calls
+//            Api.shared.getConfig{result in
+//                switch result {
+//                case .success(let response):
+//                    print("Config response:", response)
+//                case .failure(let error):
+//                    print("Error:", error.localizedDescription)
+//                }
+////            }
+//        }catch{
+//            Utils.showErrorlogs(tags: "TAG_mandatoryCallsFailed", value: error.localizedDescription)
+//        }
     }
     
     
