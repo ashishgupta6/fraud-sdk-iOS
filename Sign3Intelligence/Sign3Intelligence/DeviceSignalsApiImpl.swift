@@ -30,18 +30,18 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
                 guard let id = await UIDevice.current.identifierForVendor?.uuidString else {
                     return "Unable to get device ID"
                 }
-                //                let curDevice = DCDevice.current
-                //                if curDevice.isSupported {
-                //                    curDevice.generateToken(completionHandler: { (data, error) in
-                //                        if let data = data {
-                //                            // You will get a device-specific token here
-                //                            let deviceToken = data.base64EncodedString()
-                //                            print("Device token: \(deviceToken)")
-                //                        } else if let error = error {
-                //                            print("Error: \(error.localizedDescription)")
-                //                        }
-                //                    })
-                //                }
+//                let curDevice = DCDevice.current
+//                if curDevice.isSupported {
+//                    curDevice.generateToken(completionHandler: { (data, error) in
+//                        if let data = data {
+//                            // You will get a device-specific token here
+//                            let deviceToken = data.base64EncodedString()
+//                            print("Device token: \(deviceToken)")
+//                        } else if let error = error {
+//                            print("Error: \(error.localizedDescription)")
+//                        }
+//                    })
+//                }
                 
                 return id
             }
@@ -101,7 +101,7 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                UUID().uuidString
+                return UUID().uuidString
             }
         )
     }
@@ -140,7 +140,7 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                await fetchBatteryStatus()
+                return await fetchBatteryStatus()
             }
         )
     }
@@ -1374,7 +1374,7 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    func checkDebug() async -> Bool {
+    func isDebuggerEnabled() async -> Bool {
         return await Utils.getDeviceSignals(
             functionName: "checkDebug",
             requestId: UUID().uuidString,

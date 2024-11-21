@@ -53,7 +53,6 @@ struct Api{
             
             // Log response status and headers
             print("Response Status: \(httpResponse.statusCode)")
-            Utils.checkThread()
             
             // Extract the IV from headers
             guard let ivBase64 = httpResponse.value(forHTTPHeaderField: CryptoGCM.GET_IV_HEADER),
