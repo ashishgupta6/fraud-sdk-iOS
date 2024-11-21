@@ -13,6 +13,7 @@
 		393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768D2C809FE700572A77 /* IntelligenceResponse.swift */; };
 		39577E6C2CE4AE5700DCD69F /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6B2CE4AE5700DCD69F /* Api.swift */; };
 		39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */; };
+		39577E782CEE0A5F00DCD69F /* ProxyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */; };
 		396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */; };
 		397950EA2C7DC73E0043677B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397950E92C7DC73E0043677B /* Utils.swift */; };
 		397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */; };
@@ -66,6 +67,7 @@
 		393E768D2C809FE700572A77 /* IntelligenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponse.swift; sourceTree = "<group>"; };
 		39577E6B2CE4AE5700DCD69F /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProvider.swift; sourceTree = "<group>"; };
+		39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyDetector.swift; sourceTree = "<group>"; };
 		396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsApiImpl.swift; sourceTree = "<group>"; };
 		397950E92C7DC73E0043677B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBrokenDetector.swift; sourceTree = "<group>"; };
@@ -164,6 +166,14 @@
 				39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */,
 			);
 			path = Sign3;
+			sourceTree = "<group>";
+		};
+		39577E762CEE0A1F00DCD69F /* Proxy */ = {
+			isa = PBXGroup;
+			children = (
+				39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */,
+			);
+			path = Proxy;
 			sourceTree = "<group>";
 		};
 		397950E82C7DC6F80043677B /* Utils */ = {
@@ -304,6 +314,7 @@
 		39E738F92C882AB4002B24C8 /* Detectors */ = {
 			isa = PBXGroup;
 			children = (
+				39577E762CEE0A1F00DCD69F /* Proxy */,
 				39F2999B2C995FAC00D896F2 /* LocationSpoffer */,
 				397AF5402C93299A004F74D9 /* AppTampering */,
 				397AF5372C92F0A3004F74D9 /* JailBroken */,
@@ -447,6 +458,7 @@
 				39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */,
 				39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */,
 				390D71F02C961AF30090147D /* UpdateOption.swift in Sources */,
+				39577E782CEE0A5F00DCD69F /* ProxyDetector.swift in Sources */,
 				39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */,
 				3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */,
 				39C7754B2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift in Sources */,

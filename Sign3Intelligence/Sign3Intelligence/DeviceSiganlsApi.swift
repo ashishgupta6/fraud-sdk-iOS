@@ -79,7 +79,7 @@ protocol DeviceSignalsApi{
     func getDefaultBrowser() async -> String
     func getAudioVolumeCurrent() async -> Float
     func getCarrierCountry() async -> String
-    func checkDebug() async -> Bool
+    func isDebuggerEnabled() async -> Bool
     func checkBuildConfiguration() async -> String
     func getCPUType() async -> String
     func hasProximitySensor() async -> Bool

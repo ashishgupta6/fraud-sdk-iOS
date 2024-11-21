@@ -9,8 +9,6 @@ import Foundation
 
 class Sign3IntelligenceInternal{
     static var sdk: Sign3IntelligenceInternal?
-    lazy var deviceSignalsApiImpl = DeviceSignalsApiImpl()
-    lazy var sign3IntelliegnceImpl = Sign3IntelligenceSdkApiImpl()
     lazy var deviceSignalsViewModel = DeviceSignalsViewModel(deviceSignalsApi: DeviceSignalsApiImpl())
     lazy var userDefaultsManager = UserDefaultsManager()
     var options: Options?
@@ -20,8 +18,8 @@ class Sign3IntelligenceInternal{
     }
     lazy var appSessionId: String = Utils.getSessionId()
     var keyProvider: BaseKey?
-
-
+    
+    
     
     static func getInstance() -> Sign3IntelligenceInternal {
         if sdk == nil {
@@ -93,7 +91,7 @@ class Sign3IntelligenceInternal{
     }
     
     func getIntelligence() {
-        DataCreationService.displayAllSignals(deviceSignalsApiImpl, sign3IntelliegnceImpl)
+        DataCreationService.displayAllSignals()
     }
     
     func initAsync(_ options: Options,_ completion: @escaping (Bool) -> Void) {
@@ -125,15 +123,15 @@ class Sign3IntelligenceInternal{
         self.options = options
         self.options = options.toBuilder().setSessionId(appSessionId).build()
         keyProvider = updateKeyProvider(options)
-//        Utils.encodeObject(tag: "TAG_OPTIONS", object: options)
-//        Utils.showInfologs(tags: "TAG_BASE_URL", value: keyProvider?.baseUrl ?? "demo")
+        //        Utils.encodeObject(tag: "TAG_OPTIONS", object: options)
+        //        Utils.showInfologs(tags: "TAG_BASE_URL", value: keyProvider?.baseUrl ?? "demo")
         do{
             try CryptoGCM.initialize(options.clientSecret, options.clientId)
             isSuccess = true
         }catch{
             isSuccess = false
             Utils.showErrorlogs(tags: "TAG_cryptoFailed", value: error.localizedDescription)
-
+            
         }
         return isSuccess
     }
@@ -159,18 +157,14 @@ class Sign3IntelligenceInternal{
     }
     
     func startMandatoryCalls() {
-//        do{
-//            // Doing API calls
-//            Api.shared.getConfig{result in
-//                switch result {
-//                case .success(let response):
-//                    print("Config response:", response)
-//                case .failure(let error):
-//                    print("Error:", error.localizedDescription)
-//                }
-////            }
-//        }catch{
-//            Utils.showErrorlogs(tags: "TAG_mandatoryCallsFailed", value: error.localizedDescription)
+//        // Doing API calls
+//        Api.shared.getConfig{result in
+//            switch result {
+//            case .success(let response):
+//                print("Config response:", response)
+//            case .failure(let error):
+//                print("Error:", error.localizedDescription)
+//            }
 //        }
     }
     
