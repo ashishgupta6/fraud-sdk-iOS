@@ -12,7 +12,7 @@ import CommonCrypto
 internal class AppTampering{
     
     internal let TAG = "AppTampering"
-
+    
     init(deviceSignalsApi: DeviceSignalsApi){
         self.devideSignalsApi = deviceSignalsApi
     }
@@ -38,10 +38,9 @@ internal class AppTampering{
         /// Check Build Configuration
         case checkBuildConfiguration
     }
-            
+    
     internal func isAppTampered(_ checks: [AppTamperingCheck]) async -> Bool {
         var isAppTampering = false;
-    
         for check in checks {
             switch check {
             case .bundleID(let exceptedBundleID):
@@ -66,7 +65,7 @@ internal class AppTampering{
                 }
             }
         }
-    
+        
         return (isAppTampering);
     }
     
@@ -106,7 +105,7 @@ internal class AppTampering{
 }
 
 internal extension Data {
-  fileprivate func hexEncodedString() -> String {
-    return map { String(format: "%02hhx", $0) }.joined()
-  }
+    fileprivate func hexEncodedString() -> String {
+        return map { String(format: "%02hhx", $0) }.joined()
+    }
 }

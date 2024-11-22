@@ -10,7 +10,7 @@ import Foundation
 internal class ProxyDetector {
     
     internal let TAG = "ProxyDetector"
-
+    
     internal func detectProxy(considerVPNConnectionAsProxy: Bool = false) async -> Bool {
         guard let unmanagedSettings = CFNetworkCopySystemProxySettings() else {
             return false

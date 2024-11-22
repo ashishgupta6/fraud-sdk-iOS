@@ -151,15 +151,15 @@ internal class Sign3IntelligenceInternal{
     }
     
     internal func startMandatoryCalls() {
-//        // Doing API calls
-//        Api.shared.getConfig{result in
-//            switch result {
-//            case .success(let response):
-//                print("Config response:", response)
-//            case .failure(let error):
-//                print("Error:", error.localizedDescription)
-//            }
-//        }
+        //        // Doing API calls
+        //        Api.shared.getConfig{result in
+        //            switch result {
+        //            case .success(let response):
+        //                print("Config response:", response)
+        //            case .failure(let error):
+        //                print("Error:", error.localizedDescription)
+        //            }
+        //        }
     }
     
     
