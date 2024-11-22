@@ -41,6 +41,7 @@ internal class AppTampering{
     
     internal func isAppTampered(_ checks: [AppTamperingCheck]) async -> Bool {
         var isAppTampering = false;
+        
         for check in checks {
             switch check {
             case .bundleID(let exceptedBundleID):
@@ -83,6 +84,7 @@ internal class AppTampering{
         ) else {
             return false
         }
+        
         
         let url = URL(fileURLWithPath: path)
         

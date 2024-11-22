@@ -9,6 +9,7 @@ import Foundation
 
 
 internal struct DataCreationService{
+    
     private static let deviceSignalsApi: DeviceSignalsApi = {
         return DeviceSignalsApiImpl()
     }()
