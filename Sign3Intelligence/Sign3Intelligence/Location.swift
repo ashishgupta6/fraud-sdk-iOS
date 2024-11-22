@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Location {
+internal class Location {
     var latitude: Double
     var longitude: Double
     var altitude: Double

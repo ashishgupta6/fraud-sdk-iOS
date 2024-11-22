@@ -10,7 +10,7 @@ import Foundation
 
 import Foundation
 
-class UserDefaultsManager {
+internal class UserDefaultsManager {
     
     private enum UserDefaultsKeys: String {
         case latitude
@@ -19,46 +19,46 @@ class UserDefaultsManager {
         case timeStamp
     }
     
-    func saveLatitude(_ latitude: Double) {
+    internal func saveLatitude(_ latitude: Double) {
         UserDefaults.standard.set(latitude, forKey: UserDefaultsKeys.latitude.rawValue)
     }
     
-    func saveLongitude(_ longitude: Double) {
+    internal func saveLongitude(_ longitude: Double) {
         UserDefaults.standard.set(longitude, forKey: UserDefaultsKeys.longitude.rawValue)
     }
     
-    func saveAltitude(_ altitude: Double) {
+    internal func saveAltitude(_ altitude: Double) {
         UserDefaults.standard.set(altitude, forKey: UserDefaultsKeys.altitude.rawValue)
     }
     
-    func saveTimeStamp(_ timeStamp: CLong) {
+    internal func saveTimeStamp(_ timeStamp: CLong) {
         UserDefaults.standard.set(timeStamp, forKey: UserDefaultsKeys.timeStamp.rawValue)
     }
     
-    func getLatitude() -> Double? {
+    internal func getLatitude() -> Double? {
         return UserDefaults.standard.double(forKey: UserDefaultsKeys.latitude.rawValue)
     }
     
-    func getLongitude() -> Double? {
+    internal func getLongitude() -> Double? {
         return UserDefaults.standard.double(forKey: UserDefaultsKeys.longitude.rawValue)
     }
     
-    func getAltitude() -> Double? {
+    internal func getAltitude() -> Double? {
         return UserDefaults.standard.double(forKey: UserDefaultsKeys.altitude.rawValue)
     }
     
-    func getTimeStamp() -> CLong? {
+    internal func getTimeStamp() -> CLong? {
         return CLong(UserDefaults.standard.integer(forKey: UserDefaultsKeys.timeStamp.rawValue))
     }
     
-    func saveLocation(_ location: Location) {
+    internal func saveLocation(_ location: Location) {
         saveLatitude(location.latitude)
         saveLongitude(location.longitude)
         saveAltitude(location.altitude)
         saveTimeStamp(location.timeStamp)
     }
     
-    func getLocation() -> Location? {
+    internal func getLocation() -> Location? {
         guard let latitude = getLatitude(),
               let longitude = getLongitude(),
               let altitude = getAltitude(),
@@ -70,7 +70,7 @@ class UserDefaultsManager {
         return Location(latitude: latitude, longitude: longitude, altitude: altitude, timeStamp: timeStamp)
     }
     
-    func removeLocation() {
+    internal func removeLocation() {
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.latitude.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.longitude.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.altitude.rawValue)

@@ -9,7 +9,7 @@ import Foundation
 
 class StagingKeyProvider: BaseKey{
     
-    override var baseUrl: String {
+    internal override var baseUrl: String {
         return "https://intelligence-staging.sign3.in/"
     }
 }

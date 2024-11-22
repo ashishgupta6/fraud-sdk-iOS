@@ -6,11 +6,11 @@
 //
 import Foundation
 
-class SimulatorDetector{
+internal class SimulatorDetector{
     
-    let TAG = "SimulatorDetector"
+    internal let TAG = "SimulatorDetector"
     
-    func isSimulatorDetected() async -> Bool{
+    internal func isSimulatorDetected() async -> Bool{
         return await Utils.getDeviceSignals(
             functionName: TAG,
             requestId: UUID().uuidString,
@@ -29,7 +29,7 @@ class SimulatorDetector{
     }
     
     
-    func checkSimulator() -> Bool{
+    private func checkSimulator() -> Bool{
 #if targetEnvironment(simulator)
         return true
 #else
@@ -38,7 +38,7 @@ class SimulatorDetector{
     }
     
     
-    func checkSimulatorFromObjectiveC() -> Bool{
+    private func checkSimulatorFromObjectiveC() -> Bool{
         let simulatorChecker = SimulatorChecker()
         if simulatorChecker.isSimulator() {
             return true

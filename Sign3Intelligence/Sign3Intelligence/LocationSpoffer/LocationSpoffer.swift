@@ -9,11 +9,11 @@ import Foundation
 import CoreLocation
 
 
-class LocationSpoffer {
+internal class LocationSpoffer {
     
-    let TAG = "LocationSpoffer"
+    internal let TAG = "LocationSpoffer"
     
-    func isMockLocation() async -> Bool{
+    internal func isMockLocation() async -> Bool{
         return await Utils.getDeviceSignals(
             functionName: TAG,
             requestId: UUID().uuidString,
@@ -98,7 +98,7 @@ class LocationSpoffer {
         continuation.resume(returning: isSpoofed)
     }
     
-    func isLocationSpoofedForBelowiOS15(_ currentLocation: Location, _ savedLocation: Location) -> Bool {
+    private func isLocationSpoofedForBelowiOS15(_ currentLocation: Location, _ savedLocation: Location) -> Bool {
         let distanceThreshold: Double = 15000 // 15 KM threshold
         
         if savedLocation.latitude == 0.0 && savedLocation.longitude == 0.0 && savedLocation.altitude == 0.0 && savedLocation.timeStamp == 0{

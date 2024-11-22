@@ -7,21 +7,15 @@
 
 import Foundation
 
-class Sign3IntelligenceInternal{
-    static var sdk: Sign3IntelligenceInternal?
-    lazy var deviceSignalsViewModel = DeviceSignalsViewModel(deviceSignalsApi: DeviceSignalsApiImpl())
-    lazy var userDefaultsManager = UserDefaultsManager()
-    var options: Options?
-    var isReady: Bool = false
-    public func getDeviceSignalsViewModel() -> DeviceSignalsViewModel? {
-        return deviceSignalsViewModel
-    }
-    lazy var appSessionId: String = Utils.getSessionId()
-    var keyProvider: BaseKey?
+internal class Sign3IntelligenceInternal{
+    internal static var sdk: Sign3IntelligenceInternal?
+    internal lazy var userDefaultsManager = UserDefaultsManager()
+    internal var options: Options?
+    internal var isReady: Bool = false
+    internal lazy var appSessionId: String = Utils.getSessionId()
+    internal var keyProvider: BaseKey?
     
-    
-    
-    static func getInstance() -> Sign3IntelligenceInternal {
+    internal static func getInstance() -> Sign3IntelligenceInternal {
         if sdk == nil {
             synchronized(Sign3IntelligenceInternal.self) {
                 if sdk == nil {
@@ -32,7 +26,7 @@ class Sign3IntelligenceInternal{
         return sdk!
     }
     
-    func updateOption(_ updateOption: UpdateOption) {
+    internal func updateOption(_ updateOption: UpdateOption) {
         do {
             guard let options = self.options else {
                 throw NSError(domain: "SDKError", code: 0, userInfo: [NSLocalizedDescriptionKey: "init must be called before using the sdk"])
@@ -90,11 +84,11 @@ class Sign3IntelligenceInternal{
         }
     }
     
-    func getIntelligence() {
+    internal func getIntelligence() {
         DataCreationService.displayAllSignals()
     }
     
-    func initAsync(_ options: Options,_ completion: @escaping (Bool) -> Void) {
+    internal func initAsync(_ options: Options,_ completion: @escaping (Bool) -> Void) {
         DispatchQueue.global().async{
             let result = self.initialize(options: options)
             DispatchQueue.main.async {
@@ -103,7 +97,7 @@ class Sign3IntelligenceInternal{
         }
     }
     
-    func initialize(options: Options) -> Bool{
+    internal func initialize(options: Options) -> Bool{
         synchronized(Sign3IntelligenceInternal.self){
             if !isReady{
                 do{
@@ -118,7 +112,7 @@ class Sign3IntelligenceInternal{
         return isReady
     }
     
-    func initMandatoryParams(_ options: Options) throws -> Bool{
+    internal func initMandatoryParams(_ options: Options) throws -> Bool{
         var isSuccess = false
         self.options = options
         self.options = options.toBuilder().setSessionId(appSessionId).build()
@@ -136,7 +130,7 @@ class Sign3IntelligenceInternal{
         return isSuccess
     }
     
-    func updateKeyProvider(_ options: Options) -> BaseKey{
+    internal func updateKeyProvider(_ options: Options) -> BaseKey{
         switch options.environment{
         case .DEV:
             return DevKeyProvider()
@@ -148,7 +142,7 @@ class Sign3IntelligenceInternal{
         }
     }
     
-    func initMandatoryParamsAsync() {
+    internal func initMandatoryParamsAsync() {
         DispatchQueue.global().async {
             if (self.isReady){
                 self.startMandatoryCalls()
@@ -156,16 +150,16 @@ class Sign3IntelligenceInternal{
         }
     }
     
-    func startMandatoryCalls() {
-//        // Doing API calls
-//        Api.shared.getConfig{result in
-//            switch result {
-//            case .success(let response):
-//                print("Config response:", response)
-//            case .failure(let error):
-//                print("Error:", error.localizedDescription)
-//            }
-//        }
+    internal func startMandatoryCalls() {
+        //        // Doing API calls
+        //        Api.shared.getConfig{result in
+        //            switch result {
+        //            case .success(let response):
+        //                print("Config response:", response)
+        //            case .failure(let error):
+        //                print("Error:", error.localizedDescription)
+        //            }
+        //        }
     }
     
     

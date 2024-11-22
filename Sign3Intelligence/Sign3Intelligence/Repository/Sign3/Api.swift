@@ -8,8 +8,8 @@
 import Foundation
 import CryptoKit
 
-struct Api{
-    static let shared = Api()
+internal struct Api{
+    internal static let shared = Api()
     private let baseUrl: String?
     private let clientId: String
     private let clientSecret: String
@@ -23,7 +23,7 @@ struct Api{
         self.headerProvider = HeaderProvider(clientId: clientId, clientSecret: clientSecret)
     }
     
-    func getConfig(completion: @escaping (Result<String, Error>) -> Void) {
+    internal func getConfig(completion: @escaping (Result<String, Error>) -> Void) {
         guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v1/device/config") else {
             print("Error: Invalid or missing base URL.")
             completion(.failure(NSError(domain: "URLError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid or missing base URL."])))

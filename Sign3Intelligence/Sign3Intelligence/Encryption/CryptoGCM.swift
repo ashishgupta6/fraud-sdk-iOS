@@ -9,7 +9,7 @@ import Foundation
 import CryptoKit
 import CommonCrypto
 
-class CryptoGCM {
+internal class CryptoGCM {
     public static let AES_KEY_SIZE = 256
     public static let GCM_IV_LENGTH = 16
     public static let GCM_TAG_LENGTH = 16
@@ -17,18 +17,18 @@ class CryptoGCM {
     public static let GET_IV_HEADER = "TENANT-ID"
     private static var key: SymmetricKey?
     
-    enum CryptoGCMError: Error {
+    private enum CryptoGCMError: Error {
         case keyNotInitialized
         case invalidBase64String
         case invalidUTF8Data
     }
 
-    static func initialize(_ password: String, _ salt: String) throws {
+    internal static func initialize(_ password: String, _ salt: String) throws {
         let keyData = try getKeyFromPassword(password: password, salt: salt)
         key = SymmetricKey(data: keyData)
     }
 
-    static func getIvHeader() -> Data {
+    internal static func getIvHeader() -> Data {
         var iv = Data(count: GCM_IV_LENGTH)
         _ = iv.withUnsafeMutableBytes {
             SecRandomCopyBytes(kSecRandomDefault, GCM_IV_LENGTH, $0.baseAddress!)
@@ -36,7 +36,7 @@ class CryptoGCM {
         return iv
     }
 
-    static func getKeyFromPassword(password: String, salt: String) throws -> Data {
+    private static func getKeyFromPassword(password: String, salt: String) throws -> Data {
         let passwordData = password.data(using: .utf8)!
         let saltData = salt.data(using: .utf8)!
         
@@ -64,14 +64,14 @@ class CryptoGCM {
         return derivedKeyData
     }
 
-    static func encrypt(_ inputString: String, _ IV: Data) throws -> String {
+    internal static func encrypt(_ inputString: String, _ IV: Data) throws -> String {
         guard let key = key else { throw CryptoGCMError.keyNotInitialized }
         let inputData = Data(inputString.utf8)
         let sealedBox = try AES.GCM.seal(inputData, using: key, nonce: AES.GCM.Nonce(data: IV))
         return sealedBox.combined!.base64EncodedString()
     }
 
-    static func decrypt(_ encryptedString: String, _ IV: Data) throws -> String {
+    internal static func decrypt(_ encryptedString: String, _ IV: Data) throws -> String {
         guard let key = key else { throw CryptoGCMError.keyNotInitialized }
         guard let cipherData = Data(base64Encoded: encryptedString) else { throw CryptoGCMError.invalidBase64String }
         

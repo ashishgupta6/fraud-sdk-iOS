@@ -17,7 +17,7 @@ import CoreMotion
 import DeviceCheck
 import Network
 
-class DeviceSignalsApiImpl : DeviceSignalsApi{
+internal class DeviceSignalsApiImpl : DeviceSignalsApi{
     
     init() {}
     
@@ -79,20 +79,6 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
         } else {
             return true // As there is no tracking authorization in earlier versions
         }
-    }
-    
-    func getIDFV() async -> String {
-        return await Utils.getDeviceSignals(
-            functionName: "getIDFV",
-            requestId: UUID().uuidString,
-            defaultValue: "Unknown",
-            function: {
-                guard let idfv = await UIDevice.current.identifierForVendor?.uuidString else {
-                    return "Unable to get IDFV"
-                }
-                return idfv
-            }
-        )
     }
     
     func getUUID() async -> String {
@@ -274,9 +260,9 @@ class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getIPAddress() async -> String {
+    func getWifiIPAddress() async -> String {
         return await Utils.getDeviceSignals(
-            functionName: "getWifiMacAddress",
+            functionName: "getWifiIPAddress",
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
