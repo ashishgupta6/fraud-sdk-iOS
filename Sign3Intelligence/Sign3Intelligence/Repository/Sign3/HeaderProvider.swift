@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HeaderProvider{
+internal class HeaderProvider{
     private let clientId: String
     private let clientSecret: String
     
@@ -16,7 +16,7 @@ class HeaderProvider{
         self.clientSecret = clientSecret
     }
     
-    func getCommonHeaders() -> [String: String] {
+    internal func getCommonHeaders() -> [String: String] {
         return [
             "Content-Type": "text/plain",
             "Authorization": "Basic \(getCredentials())",
@@ -37,7 +37,7 @@ class HeaderProvider{
     }
     
     
-    func getFrameworkVersion() -> String {
+    private func getFrameworkVersion() -> String {
         return Utils.getDeviceSignalsWithoutAsync(
             functionName: "getFrameworkVersion",
             requestId: UUID().uuidString,
@@ -50,7 +50,7 @@ class HeaderProvider{
     }
     
     
-    func getiOSAppVersion() -> String {
+    private func getiOSAppVersion() -> String {
         return Utils.getDeviceSignalsWithoutAsync(
             functionName: "getiOSAppVersion",
             requestId: UUID().uuidString,
@@ -65,7 +65,7 @@ class HeaderProvider{
         )
     }
     
-    func getAppBuildNumber() -> String {
+    private func getAppBuildNumber() -> String {
         return Utils.getDeviceSignalsWithoutAsync(
             functionName: "getAppBuildNumber",
             requestId: UUID().uuidString,
@@ -80,7 +80,7 @@ class HeaderProvider{
         )
     }
     
-    func getFrameworkBuildNumber() -> String {
+    private func getFrameworkBuildNumber() -> String {
         return Utils.getDeviceSignalsWithoutAsync(
             functionName: "getFrameworkBuildNumber",
             requestId: UUID().uuidString,

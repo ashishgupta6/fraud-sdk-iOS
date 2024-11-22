@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Sign3IntelligenceSdkApi{
+internal protocol Sign3IntelligenceSdkApi{
     func isVpnDetected() async -> Bool
     func isSimulatorDetected() async -> Bool
     func isJailBrokenDetected() async -> Bool

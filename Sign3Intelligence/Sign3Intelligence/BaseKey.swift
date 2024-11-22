@@ -8,10 +8,10 @@
 import Foundation
 
 
-class BaseKey {
+internal class BaseKey {
     
     // Abstract Method
-    var baseUrl: String{
+    internal var baseUrl: String{
         fatalError("Abstract class can not be instantiated!")
     }
     

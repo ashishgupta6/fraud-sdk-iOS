@@ -9,8 +9,10 @@ import Foundation
 import MachO
 import CommonCrypto
 
-class AppTampering{
+internal class AppTampering{
     
+    internal let TAG = "AppTampering"
+
     init(deviceSignalsApi: DeviceSignalsApi){
         self.devideSignalsApi = deviceSignalsApi
     }
@@ -37,7 +39,7 @@ class AppTampering{
         case checkBuildConfiguration
     }
             
-    func isAppTampered(_ checks: [AppTamperingCheck]) async -> Bool {
+    internal func isAppTampered(_ checks: [AppTamperingCheck]) async -> Bool {
         var isAppTampering = false;
     
         for check in checks {
@@ -93,7 +95,6 @@ class AppTampering{
                     _ = CC_SHA256($0.baseAddress, CC_LONG(data.count), &hash)
                 }
                 
-                print("Hex Encoded String: \(Data(hash).hexEncodedString())")
                 if Data(hash).hexEncodedString() != expectedSha256Value {
                     return true
                 }
@@ -104,7 +105,7 @@ class AppTampering{
     }
 }
 
-extension Data {
+internal extension Data {
   fileprivate func hexEncodedString() -> String {
     return map { String(format: "%02hhx", $0) }.joined()
   }

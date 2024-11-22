@@ -10,9 +10,9 @@ import AppTrackingTransparency
 import CoreLocation
 
 
-struct Utils{
+internal struct Utils{
     
-    static func getDeviceSignals<T>(functionName: String, requestId: String, defaultValue: T, function: () async throws -> T) async -> T {
+    internal static func getDeviceSignals<T>(functionName: String, requestId: String, defaultValue: T, function: () async throws -> T) async -> T {
         do {
             return try await function()
         } catch {
@@ -20,7 +20,7 @@ struct Utils{
         }
     }
     
-    static func getDeviceSignalsWithoutAsync<T>(functionName: String, requestId: String, defaultValue: T, function: () throws -> T) -> T {
+    internal static func getDeviceSignalsWithoutAsync<T>(functionName: String, requestId: String, defaultValue: T, function: () throws -> T) -> T {
         do {
             return try function()
         } catch {
@@ -28,15 +28,15 @@ struct Utils{
         }
     }
     
-    static func showInfologs(tags: String, value: String){
+    internal static func showInfologs(tags: String, value: String){
         print("\(tags): \(value)")
     }
     
-    static func showErrorlogs(tags: String, value: String){
+    internal static func showErrorlogs(tags: String, value: String){
         print("\(tags): \(value)")
     }
     
-    static func checkThread(){
+    internal static func checkThread(){
         let thread = Thread.current
         let threadId = thread.value(forKeyPath: "private.seqNum") as? Int ?? 0
         
@@ -44,14 +44,14 @@ struct Utils{
         print("Is Main Thread: \(thread.isMainThread)")
     }
     
-    static func formatBytes(_ bytes: Int64) -> String {
+    internal static func formatBytes(_ bytes: Int64) -> String {
         let formatter = ByteCountFormatter()
         formatter.allowedUnits = [.useGB, .useMB]
         formatter.countStyle = .file
         return formatter.string(fromByteCount: bytes)
     }
     
-    static func dateToString(_ timeStamp: CLong) -> String {
+    internal static func dateToString(_ timeStamp: CLong) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(timeStamp))
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy hh:mm a"
@@ -59,11 +59,11 @@ struct Utils{
         return dateFormatter.string(from: date)
     }
     
-    static func dateToUnixTimestamp(_ date: Date) -> CLong {
+    internal static func dateToUnixTimestamp(_ date: Date) -> CLong {
         return CLong(date.timeIntervalSince1970)
     }
     
-    static func checkLocationPermission() -> Bool{
+    internal static func checkLocationPermission() -> Bool{
         let status = CLLocationManager.authorizationStatus()
         switch status {
         case .notDetermined:
@@ -82,7 +82,7 @@ struct Utils{
         }
     }
     
-    static func checkLocationServiceEnabled() -> Bool{
+    internal static func checkLocationServiceEnabled() -> Bool{
         if CLLocationManager.locationServicesEnabled() {
             print("Location services are enabled")
             return true
@@ -92,7 +92,7 @@ struct Utils{
         }
     }
     
-    static func encodeObject<T: Encodable>(tag: String, object: T){
+    internal static func encodeObject<T: Encodable>(tag: String, object: T){
         do {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
@@ -105,7 +105,7 @@ struct Utils{
         }
     }
     
-    static func getSessionId() -> String{
+    internal static func getSessionId() -> String{
         let uuid = UUID().uuidString.replacingOccurrences(of: "-", with: "")
         let sessionId = "\(uuid.prefix(8))-\(uuid.prefix(12).suffix(4))-\(uuid.prefix(16).suffix(4))-\(uuid.prefix(20).suffix(4))-\(uuid.suffix(12))"
         return sessionId

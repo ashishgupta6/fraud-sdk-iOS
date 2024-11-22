@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		390D71F02C961AF30090147D /* UpdateOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D71EF2C961AF30090147D /* UpdateOption.swift */; };
 		390D71F32C962B040090147D /* CryptoGCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D71F22C962B040090147D /* CryptoGCM.swift */; };
-		393E768B2C809C0C00572A77 /* DeviceSignalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768A2C809C0C00572A77 /* DeviceSignalsViewModel.swift */; };
 		393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768D2C809FE700572A77 /* IntelligenceResponse.swift */; };
 		39577E6C2CE4AE5700DCD69F /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6B2CE4AE5700DCD69F /* Api.swift */; };
 		39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */; };
@@ -63,7 +62,6 @@
 /* Begin PBXFileReference section */
 		390D71EF2C961AF30090147D /* UpdateOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOption.swift; sourceTree = "<group>"; };
 		390D71F22C962B040090147D /* CryptoGCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoGCM.swift; sourceTree = "<group>"; };
-		393E768A2C809C0C00572A77 /* DeviceSignalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsViewModel.swift; sourceTree = "<group>"; };
 		393E768D2C809FE700572A77 /* IntelligenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponse.swift; sourceTree = "<group>"; };
 		39577E6B2CE4AE5700DCD69F /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProvider.swift; sourceTree = "<group>"; };
@@ -132,14 +130,6 @@
 				390D71F22C962B040090147D /* CryptoGCM.swift */,
 			);
 			path = Encryption;
-			sourceTree = "<group>";
-		};
-		393E76892C809BFB00572A77 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				393E768A2C809C0C00572A77 /* DeviceSignalsViewModel.swift */,
-			);
-			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		393E768C2C809FC100572A77 /* Model */ = {
@@ -260,7 +250,6 @@
 				39E738FA2C885D01002B24C8 /* Info.plist */,
 				39E738F92C882AB4002B24C8 /* Detectors */,
 				393E768C2C809FC100572A77 /* Model */,
-				393E76892C809BFB00572A77 /* ViewModels */,
 				397950E82C7DC6F80043677B /* Utils */,
 				398EB5C02C63BC8A002FC9CA /* DeviceSignals */,
 				398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */,
@@ -468,7 +457,6 @@
 				39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */,
 				39C775592C8F321C0006E042 /* StagingKeyProvider.swift in Sources */,
 				3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */,
-				393E768B2C809C0C00572A77 /* DeviceSignalsViewModel.swift in Sources */,
 				396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */,
 				390D71F32C962B040090147D /* CryptoGCM.swift in Sources */,
 				393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */,

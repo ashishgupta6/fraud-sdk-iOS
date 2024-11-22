@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct DataCreationService{
+internal struct DataCreationService{
     private static let deviceSignalsApi: DeviceSignalsApi = {
         return DeviceSignalsApiImpl()
     }()
@@ -17,7 +17,7 @@ struct DataCreationService{
         return Sign3IntelligenceSdkApiImpl(deviceSignalsApi: deviceSignalsApi)
     }()
     
-    static func displayAllSignals(){
+    internal static func displayAllSignals(){
         
         DispatchQueue.global().async {
             Task.detached{
@@ -35,7 +35,6 @@ struct DataCreationService{
                 let cloudId = await deviceSignalsApi.getCloudId()
                 let appId = await deviceSignalsApi.getApplicationId()
                 let idfa = await deviceSignalsApi.getIDFA()
-                let idfv = await deviceSignalsApi.getIDFV()
                 let uuid = await deviceSignalsApi.getUUID()
                 let batteryStatus = await deviceSignalsApi.getBatteryStatus()
                 let batteryLavel = await deviceSignalsApi.getBatteryLevel()
@@ -45,7 +44,7 @@ struct DataCreationService{
                 let usedDiskSpace = await deviceSignalsApi.getUsedDiskSpace()
                 let deviceModel = await deviceSignalsApi.getDeviceModel()
                 let deviceName = await deviceSignalsApi.getDeviceName()
-                let ipAddress = await deviceSignalsApi.getIPAddress()
+                let ipAddress = await deviceSignalsApi.getWifiIPAddress()
                 let displayScale = await deviceSignalsApi.getDisplayScale()
                 let displayWidth = await deviceSignalsApi.getDisplayWidth()
                 let displayHeight = await deviceSignalsApi.getDisplayHeight()
@@ -116,7 +115,6 @@ struct DataCreationService{
                     Utils.showInfologs(tags: "Cloud ID", value: cloudId)
                     Utils.showInfologs(tags: "Application ID", value: appId)
                     Utils.showInfologs(tags: "IDFA", value: idfa)
-                    Utils.showInfologs(tags: "IDFV", value: idfv)
                     Utils.showInfologs(tags: "UUID", value: uuid)
                     Utils.showInfologs(tags: "Battery Status", value: batteryStatus)
                     Utils.showInfologs(tags: "Battery Level", value: String(batteryLavel))
@@ -126,7 +124,7 @@ struct DataCreationService{
                     Utils.showInfologs(tags: "Used Disk Space", value: usedDiskSpace)
                     Utils.showInfologs(tags: "Device Model", value: deviceModel)
                     Utils.showInfologs(tags: "Device Name", value: deviceName)
-                    Utils.showInfologs(tags: "IP Address", value: ipAddress)
+                    Utils.showInfologs(tags: "Wifi IP Address", value: ipAddress)
                     Utils.showInfologs(tags: "Display Scale", value: displayScale.description)
                     Utils.showInfologs(tags: "Display Width", value: displayWidth.description)
                     Utils.showInfologs(tags: "Display Height", value: displayHeight.description)

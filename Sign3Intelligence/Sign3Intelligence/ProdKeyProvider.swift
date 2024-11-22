@@ -7,9 +7,9 @@
 
 import Foundation
 
-class ProdKeyProvider : BaseKey{
+internal class ProdKeyProvider : BaseKey{
     
-    override var baseUrl: String {
+    internal override var baseUrl: String {
         return "https://intelligence.sign3.in/"
     }
 }

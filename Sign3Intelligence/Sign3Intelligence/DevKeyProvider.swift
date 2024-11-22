@@ -10,7 +10,7 @@ import Foundation
 
 class DevKeyProvider: BaseKey{
     
-    override var baseUrl: String {
+    internal override var baseUrl: String {
         return "https://intelligence-dev.sign3.in/"
     }
 }

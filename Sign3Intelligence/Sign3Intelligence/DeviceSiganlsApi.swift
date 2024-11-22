@@ -7,11 +7,10 @@
 
 import Foundation
 
-protocol DeviceSignalsApi{
+internal protocol DeviceSignalsApi{
     
     func getiOSDeviceId() async -> String
     func getIDFA() async -> String
-    func getIDFV() async -> String
     func getUUID() async -> String
     func getCloudId() async -> String
     func getApplicationId() async -> String
@@ -23,7 +22,7 @@ protocol DeviceSignalsApi{
     func getUsedDiskSpace() async -> String
     func getDeviceModel() async -> String
     func getDeviceName() async -> String
-    func getIPAddress() async -> String
+    func getWifiIPAddress() async -> String
     func getDisplayWidth() async -> CGFloat
     func getDisplayHeight() async -> CGFloat
     func getDisplayScale() async -> CGFloat
