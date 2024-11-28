@@ -10,6 +10,8 @@
 		390D71F02C961AF30090147D /* UpdateOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D71EF2C961AF30090147D /* UpdateOption.swift */; };
 		390D71F32C962B040090147D /* CryptoGCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D71F22C962B040090147D /* CryptoGCM.swift */; };
 		393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768D2C809FE700572A77 /* IntelligenceResponse.swift */; };
+		395273732CF8A74000193923 /* DeviceCheckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395273722CF8A74000193923 /* DeviceCheckValidator.swift */; };
+		395273752CF8A75800193923 /* AuthKey.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 395273742CF8A75800193923 /* AuthKey.p8 */; };
 		39577E6C2CE4AE5700DCD69F /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6B2CE4AE5700DCD69F /* Api.swift */; };
 		39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */; };
 		39577E782CEE0A5F00DCD69F /* ProxyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */; };
@@ -69,6 +71,8 @@
 		390D71EF2C961AF30090147D /* UpdateOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOption.swift; sourceTree = "<group>"; };
 		390D71F22C962B040090147D /* CryptoGCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoGCM.swift; sourceTree = "<group>"; };
 		393E768D2C809FE700572A77 /* IntelligenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponse.swift; sourceTree = "<group>"; };
+		395273722CF8A74000193923 /* DeviceCheckValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCheckValidator.swift; sourceTree = "<group>"; };
+		395273742CF8A75800193923 /* AuthKey.p8 */ = {isa = PBXFileReference; lastKnownFileType = text; path = AuthKey.p8; sourceTree = "<group>"; };
 		39577E6B2CE4AE5700DCD69F /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProvider.swift; sourceTree = "<group>"; };
 		39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyDetector.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 		39577E6A2CE4AE4B00DCD69F /* Sign3 */ = {
 			isa = PBXGroup;
 			children = (
+				395273722CF8A74000193923 /* DeviceCheckValidator.swift */,
 				39577E6B2CE4AE5700DCD69F /* Api.swift */,
 				39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */,
 			);
@@ -283,6 +288,7 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
+				395273742CF8A75800193923 /* AuthKey.p8 */,
 				39577E682CE4AE2C00DCD69F /* Repository */,
 				390D71F12C962AF20090147D /* Encryption */,
 				397AF5342C92036A004F74D9 /* Headers */,
@@ -462,6 +468,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				395273752CF8A75800193923 /* AuthKey.p8 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */,
+				395273732CF8A74000193923 /* DeviceCheckValidator.swift in Sources */,
 				3984B6982C8E2D3F00EE992E /* Environment.swift in Sources */,
 				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
 				3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */,
