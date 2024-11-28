@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class LocationDetector: NSObject, CLLocationManagerDelegate {
+internal class LocationDetector: NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     private var onLocationUpdate: ((CLLocation) -> Void)?
     
@@ -38,6 +38,6 @@ class LocationDetector: NSObject, CLLocationManagerDelegate {
     
 }
 
-class LocationFramework {
+internal class LocationFramework {
     public static let shared = LocationDetector()
 }

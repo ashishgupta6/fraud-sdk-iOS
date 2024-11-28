@@ -14,4 +14,6 @@ internal protocol Sign3IntelligenceSdkApi{
     func isMockLocation() async -> Bool
     func isAppTampered() async -> Bool
     func isProxyDetected() async -> Bool
+    func isHookingDetected() async -> Bool
+    func isScreenBeingMirrored() async -> Bool
 }

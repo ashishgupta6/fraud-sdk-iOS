@@ -29,6 +29,8 @@ internal struct DataCreationService{
                 let locationSpoffer = await sign3IntelliegnceSdkApiImpl.isMockLocation()
                 let appTampering = await sign3IntelliegnceSdkApiImpl.isAppTampered()
                 let proxyDetector = await sign3IntelliegnceSdkApiImpl.isProxyDetected()
+                let hookingDetector = await sign3IntelliegnceSdkApiImpl.isHookingDetected()
+                let mirroredScreen = await sign3IntelliegnceSdkApiImpl.isScreenBeingMirrored()
                 
                 
                 // Signals
@@ -200,6 +202,8 @@ internal struct DataCreationService{
                     Utils.showInfologs(tags: "Location Spoffer", value: locationSpoffer.description)
                     Utils.showInfologs(tags: "App Tampering", value: appTampering.description)
                     Utils.showInfologs(tags: "Proxy Detector", value: proxyDetector.description)
+                    Utils.showInfologs(tags: "Hooking Detector", value: hookingDetector.description)
+                    Utils.showInfologs(tags: "Mirrored Screen", value: mirroredScreen.description)
                 }
             }
         }

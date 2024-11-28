@@ -8,7 +8,7 @@ import Foundation
 
 internal class SimulatorDetector{
     
-    internal let TAG = "SimulatorDetector"
+    private let TAG = "SimulatorDetector"
     
     internal func isSimulatorDetected() async -> Bool{
         return await Utils.getDeviceSignals(

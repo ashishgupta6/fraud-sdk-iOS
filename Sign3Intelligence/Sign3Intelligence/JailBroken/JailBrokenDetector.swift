@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-class JailBrokenDetector{
+internal class JailBrokenDetector{
     
-    let TAG = "JailBrokenDetector"
+    private let TAG = "JailBrokenDetector"
     
-    func isJailBrokenDetected() async -> Bool{
+    internal func isJailBrokenDetected() async -> Bool{
         return await Utils.getDeviceSignals(
             functionName: TAG,
             requestId: UUID().uuidString,
@@ -32,7 +32,7 @@ class JailBrokenDetector{
         )
     }
     
-    func checkJainBroken() async -> Bool{
+    private func checkJainBroken() async -> Bool{
         let fileManager = FileManager.default
         let paths = [
             "/Applications/Cydia.app",
@@ -77,7 +77,7 @@ class JailBrokenDetector{
     }
     
     
-    func checkJainBrokenFromObjectiveC()  -> Bool{
+    private func checkJainBrokenFromObjectiveC()  -> Bool{
         let jailBrokenChecker = JailBrokenChecker()
         return jailBrokenChecker.isJailBroken()
     }
