@@ -8,7 +8,7 @@
 import Foundation
 
 internal class Sign3IntelligenceSdkApiImpl: Sign3IntelligenceSdkApi{
-    
+   
     init(deviceSignalsApi: DeviceSignalsApi){
         self.deviceSignalsApi = deviceSignalsApi
     }
@@ -21,6 +21,8 @@ internal class Sign3IntelligenceSdkApiImpl: Sign3IntelligenceSdkApi{
     private lazy var locationSpoffer = LocationSpoffer()
     private lazy var appTampering = AppTampering(deviceSignalsApi: deviceSignalsApi)
     private lazy var proxyDetector = ProxyDetector()
+    private lazy var hookingDetector = HookingDetector(deviceSignalsApi: deviceSignalsApi)
+    private lazy var remoteAccessDetector = RemoteAccessDetector()
     
     internal func isVpnDetected() async -> Bool {
         return await vpnDetector.isVpnEnabled()
@@ -51,5 +53,21 @@ internal class Sign3IntelligenceSdkApiImpl: Sign3IntelligenceSdkApi{
     internal func isProxyDetected() async -> Bool {
         return await proxyDetector.detectProxy()
     }
+    
+    internal func isHookingDetected() async -> Bool {
+        return await hookingDetector.detectHook([
+//            HookingDetector.HookingDetectorCheck.isJailBroken,
+//            HookingDetector.HookingDetectorCheck.isDebuggerEnabled,
+            HookingDetector.HookingDetectorCheck.isReverseEngineeringToolsDetected,
+            HookingDetector.HookingDetectorCheck.amIMSHooked,
+            HookingDetector.HookingDetectorCheck.isFridaDetected
+        ])
+    }
+    
+    func isScreenBeingMirrored() async -> Bool {
+        return await remoteAccessDetector.isScreenBeingMirrored()
+    }
+    
+    
     
 }

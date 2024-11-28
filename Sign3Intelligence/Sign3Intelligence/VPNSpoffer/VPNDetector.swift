@@ -9,7 +9,7 @@ import Foundation
 
 internal class VPNDetector{
     
-    internal let TAG = "VpnDetector"
+    private let TAG = "VpnDetector"
     
     internal func isVpnEnabled() async -> Bool{
         return await Utils.getDeviceSignals(

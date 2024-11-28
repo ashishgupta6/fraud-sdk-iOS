@@ -11,7 +11,7 @@ import CommonCrypto
 
 internal class AppTampering{
     
-    internal let TAG = "AppTampering"
+    private let TAG = "AppTampering"
     
     init(deviceSignalsApi: DeviceSignalsApi){
         self.devideSignalsApi = deviceSignalsApi
@@ -19,7 +19,7 @@ internal class AppTampering{
     
     private let devideSignalsApi: DeviceSignalsApi
     private let jailBrokenDetector = JailBrokenDetector()
-    public enum AppTamperingCheck {
+    internal enum AppTamperingCheck {
         
         /// Compare current bundleID with a specified bundleID.
         case bundleID(String)
@@ -40,34 +40,40 @@ internal class AppTampering{
     }
     
     internal func isAppTampered(_ checks: [AppTamperingCheck]) async -> Bool {
-        var isAppTampering = false;
-        
-        for check in checks {
-            switch check {
-            case .bundleID(let exceptedBundleID):
-                if checkBundleID(exceptedBundleID) {
-                    isAppTampering = true
+        return await Utils.getDeviceSignals(
+            functionName: TAG,
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+                var isAppTampering = false;
+                
+                for check in checks {
+                    switch check {
+                    case .bundleID(let exceptedBundleID):
+                        if checkBundleID(exceptedBundleID) {
+                            isAppTampering = true
+                        }
+                    case .isMobileProvisionModified(let expectedSha256Value):
+                        if isMobileProvisionModified(expectedSha256Value.lowercased()) {
+                            isAppTampering = true
+                        }
+                    case .isJailBroken:
+                        if await jailBrokenDetector.isJailBrokenDetected() {
+                            isAppTampering = true
+                        }
+                    case .isDebuggerEnabled:
+                        if await devideSignalsApi.isDebuggerEnabled() {
+                            isAppTampering = true
+                        }
+                    case .checkBuildConfiguration:
+                        if await devideSignalsApi.checkBuildConfiguration() == "Debug" {
+                            isAppTampering = true
+                        }
+                    }
                 }
-            case .isMobileProvisionModified(let expectedSha256Value):
-                if isMobileProvisionModified(expectedSha256Value.lowercased()) {
-                    isAppTampering = true
-                }
-            case .isJailBroken:
-                if await jailBrokenDetector.isJailBrokenDetected() {
-                    isAppTampering = true
-                }
-            case .isDebuggerEnabled:
-                if await devideSignalsApi.isDebuggerEnabled() {
-                    isAppTampering = true
-                }
-            case .checkBuildConfiguration:
-                if await devideSignalsApi.checkBuildConfiguration() == "Debug" {
-                    isAppTampering = true
-                }
-            }
-        }
-        
-        return (isAppTampering);
+                
+                return (isAppTampering);
+            })
     }
     
     private func checkBundleID(_ expectedBundleID: String) -> Bool {

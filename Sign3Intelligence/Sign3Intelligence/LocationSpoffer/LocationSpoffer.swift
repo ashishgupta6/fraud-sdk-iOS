@@ -11,7 +11,7 @@ import CoreLocation
 
 internal class LocationSpoffer {
     
-    internal let TAG = "LocationSpoffer"
+    private let TAG = "LocationSpoffer"
     
     internal func isMockLocation() async -> Bool{
         return await Utils.getDeviceSignals(

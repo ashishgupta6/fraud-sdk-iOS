@@ -14,10 +14,13 @@
 		39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */; };
 		39577E782CEE0A5F00DCD69F /* ProxyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */; };
 		396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */; };
+		396681362CF710AA00DF3306 /* RemoteAccessDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396681352CF710AA00DF3306 /* RemoteAccessDetector.swift */; };
+		3966813A2CF730A300DF3306 /* FridaChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396681392CF730A300DF3306 /* FridaChecker.swift */; };
 		397950EA2C7DC73E0043677B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397950E92C7DC73E0043677B /* Utils.swift */; };
 		397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */; };
 		397AF53B2C92FA6F004F74D9 /* JailBrokenChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */; };
 		397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5412C9329A9004F74D9 /* AppTampering.swift */; };
+		397CD2B52CF091ED00A0E398 /* HookingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397CD2B42CF091ED00A0E398 /* HookingDetector.swift */; };
 		3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68D2C8E2B3B00EE992E /* Options.swift */; };
 		3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68F2C8E2C3000EE992E /* UserEventType.swift */; };
 		3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B6932C8E2C8100EE992E /* PhoneInputType.swift */; };
@@ -41,6 +44,9 @@
 		39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F772C7F63FE00239032 /* DataCreationService.swift */; };
 		39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E36C292C90839500625BE6 /* SimulatorChecker.m */; };
 		39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */; };
+		39E6BF5E2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF5D2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift */; };
+		39E6BF602CF60B9A0086203C /* HookingDetectorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF5F2CF60B9A0086203C /* HookingDetectorConst.swift */; };
+		39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF612CF60FFB0086203C /* MSHookChecker.swift */; };
 		39E738FE2C88826F002B24C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FD2C88826F002B24C8 /* Location.swift */; };
 		39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FF2C888F16002B24C8 /* LocationDetector.swift */; };
 		39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */; };
@@ -67,10 +73,13 @@
 		39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProvider.swift; sourceTree = "<group>"; };
 		39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyDetector.swift; sourceTree = "<group>"; };
 		396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsApiImpl.swift; sourceTree = "<group>"; };
+		396681352CF710AA00DF3306 /* RemoteAccessDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAccessDetector.swift; sourceTree = "<group>"; };
+		396681392CF730A300DF3306 /* FridaChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridaChecker.swift; sourceTree = "<group>"; };
 		397950E92C7DC73E0043677B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBrokenDetector.swift; sourceTree = "<group>"; };
 		397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JailBrokenChecker.m; sourceTree = "<group>"; };
 		397AF5412C9329A9004F74D9 /* AppTampering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTampering.swift; sourceTree = "<group>"; };
+		397CD2B42CF091ED00A0E398 /* HookingDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookingDetector.swift; sourceTree = "<group>"; };
 		3984B68D2C8E2B3B00EE992E /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		3984B68F2C8E2C3000EE992E /* UserEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEventType.swift; sourceTree = "<group>"; };
 		3984B6932C8E2C8100EE992E /* PhoneInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInputType.swift; sourceTree = "<group>"; };
@@ -96,6 +105,9 @@
 		39E36C292C90839500625BE6 /* SimulatorChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimulatorChecker.m; sourceTree = "<group>"; };
 		39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sign3PrivateHeader.h; sourceTree = "<group>"; };
 		39E36C3A2C91885D00625BE6 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		39E6BF5D2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseEngineeringToolsChecker.swift; sourceTree = "<group>"; };
+		39E6BF5F2CF60B9A0086203C /* HookingDetectorConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookingDetectorConst.swift; sourceTree = "<group>"; };
+		39E6BF612CF60FFB0086203C /* MSHookChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSHookChecker.swift; sourceTree = "<group>"; };
 		39E738FA2C885D01002B24C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		39E738FD2C88826F002B24C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		39E738FF2C888F16002B24C8 /* LocationDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetector.swift; sourceTree = "<group>"; };
@@ -166,6 +178,24 @@
 			path = Proxy;
 			sourceTree = "<group>";
 		};
+		396681342CF7109B00DF3306 /* RemoteAccess */ = {
+			isa = PBXGroup;
+			children = (
+				396681352CF710AA00DF3306 /* RemoteAccessDetector.swift */,
+			);
+			path = RemoteAccess;
+			sourceTree = "<group>";
+		};
+		396681372CF72DC000DF3306 /* HookingTools */ = {
+			isa = PBXGroup;
+			children = (
+				39E6BF5D2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift */,
+				39E6BF612CF60FFB0086203C /* MSHookChecker.swift */,
+				396681392CF730A300DF3306 /* FridaChecker.swift */,
+			);
+			path = HookingTools;
+			sourceTree = "<group>";
+		};
 		397950E82C7DC6F80043677B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +242,16 @@
 				397AF5412C9329A9004F74D9 /* AppTampering.swift */,
 			);
 			name = AppTampering;
+			sourceTree = "<group>";
+		};
+		397CD2B32CF091D200A0E398 /* Hooking */ = {
+			isa = PBXGroup;
+			children = (
+				396681372CF72DC000DF3306 /* HookingTools */,
+				397CD2B42CF091ED00A0E398 /* HookingDetector.swift */,
+				39E6BF5F2CF60B9A0086203C /* HookingDetectorConst.swift */,
+			);
+			path = Hooking;
 			sourceTree = "<group>";
 		};
 		3984B69E2C8EFB8600EE992E /* LocationDetector */ = {
@@ -303,6 +343,8 @@
 		39E738F92C882AB4002B24C8 /* Detectors */ = {
 			isa = PBXGroup;
 			children = (
+				396681342CF7109B00DF3306 /* RemoteAccess */,
+				397CD2B32CF091D200A0E398 /* Hooking */,
 				39577E762CEE0A1F00DCD69F /* Proxy */,
 				39F2999B2C995FAC00D896F2 /* LocationSpoffer */,
 				397AF5402C93299A004F74D9 /* AppTampering */,
@@ -442,18 +484,23 @@
 				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
 				3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */,
 				39C775512C8F13B10006E042 /* SimulatorDetector.swift in Sources */,
+				396681362CF710AA00DF3306 /* RemoteAccessDetector.swift in Sources */,
 				39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */,
 				39E738FE2C88826F002B24C8 /* Location.swift in Sources */,
 				39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */,
 				39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */,
+				39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */,
+				397CD2B52CF091ED00A0E398 /* HookingDetector.swift in Sources */,
 				390D71F02C961AF30090147D /* UpdateOption.swift in Sources */,
 				39577E782CEE0A5F00DCD69F /* ProxyDetector.swift in Sources */,
 				39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */,
+				39E6BF602CF60B9A0086203C /* HookingDetectorConst.swift in Sources */,
 				3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */,
 				39C7754B2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift in Sources */,
 				397AF53B2C92FA6F004F74D9 /* JailBrokenChecker.m in Sources */,
 				39C775552C8F2FE90006E042 /* ProdKeyProvider.swift in Sources */,
 				3984B6962C8E2CD400EE992E /* OtpInputType.swift in Sources */,
+				3966813A2CF730A300DF3306 /* FridaChecker.swift in Sources */,
 				39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */,
 				39C775592C8F321C0006E042 /* StagingKeyProvider.swift in Sources */,
 				3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */,
@@ -466,6 +513,7 @@
 				397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */,
 				39C775572C8F320F0006E042 /* DevKeyProvider.swift in Sources */,
 				39C775532C8F2F470006E042 /* BaseKey.swift in Sources */,
+				39E6BF5E2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift in Sources */,
 				39C775492C8EFCB20006E042 /* VPNDetector.swift in Sources */,
 				39C7754D2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift in Sources */,
 				397950EA2C7DC73E0043677B /* Utils.swift in Sources */,
