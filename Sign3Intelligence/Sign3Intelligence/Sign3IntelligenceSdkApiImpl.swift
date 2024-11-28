@@ -8,7 +8,6 @@
 import Foundation
 
 internal class Sign3IntelligenceSdkApiImpl: Sign3IntelligenceSdkApi{
-   
     init(deviceSignalsApi: DeviceSignalsApi){
         self.deviceSignalsApi = deviceSignalsApi
     }
