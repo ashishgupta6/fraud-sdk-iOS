@@ -84,10 +84,24 @@ internal class Sign3IntelligenceInternal{
         }
     }
     
-    internal func getIntelligence() {
-        DataCreationService.displayAllSignals()
+    internal func getIntelligence(completion: @escaping ([String: Any]) -> Void) {
+        var intelligenceData: [String: Any] = [:]
+        
+        DispatchQueue.global().async {
+            Task.detached {
+                // Fetching data from the displayAllSignals method
+                let data = await DataCreationService.displayAllSignals()
+                
+                // Merge the data into the intelligenceData dictionary
+                intelligenceData.merge(data) { (_, new) in new }
+                
+                // Call the completion handler on the main thread after the data is collected
+                DispatchQueue.main.async {
+                    completion(intelligenceData)
+                }
+            }
+        }
     }
-    
     internal func initAsync(_ options: Options,_ completion: @escaping (Bool) -> Void) {
         DispatchQueue.global().async{
             let result = self.initialize(options: options)
