@@ -560,18 +560,13 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getSystemUptime() async -> String {
+    func getSystemUptime() async -> CLong {
         return await Utils.getDeviceSignals(
             functionName: "getSystemUptime",
             requestId: UUID().uuidString,
-            defaultValue: "Unknown",
+            defaultValue: 0,
             function: {
-                let uptime = ProcessInfo.processInfo.systemUptime
-                let timeInterval = TimeInterval(uptime)
-                let formatter = DateComponentsFormatter()
-                formatter.unitsStyle = .full
-                formatter.allowedUnits = [.day, .hour, .minute, .second]
-                return formatter.string(from: timeInterval) ?? "Unknown"
+                return CLong(ProcessInfo.processInfo.systemUptime)
             }
         )
     }

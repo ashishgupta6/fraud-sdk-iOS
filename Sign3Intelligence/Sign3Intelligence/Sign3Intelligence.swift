@@ -33,8 +33,11 @@ public final class Sign3Intelligence {
         sign3IntelligenceInternal.updateOption(updateOption)
     }
 
-    public func getIntelligence() {
-        sign3IntelligenceInternal.getIntelligence()
+    public func getIntelligence(completion: @escaping ([String: Any]) -> Void) {
+        sign3IntelligenceInternal.getIntelligence { intelligenceData in
+            // Call the completion handler with the received intelligence data
+            completion(intelligenceData)
+        }
     }
     
     public func getSessionId() -> String {
