@@ -9,7 +9,8 @@ import Foundation
 
 internal class ReverseEngineeringToolsChecker {
     private let TAG = "ReverseEngineeringToolsChecker"
-
+    private let simulatorDetector = SimulatorDetector()
+    
     private enum FailedCheck: CaseIterable {
         case existenceOfSuspiciousFiles
         case dyld
@@ -17,32 +18,48 @@ internal class ReverseEngineeringToolsChecker {
         case pSelectFlag
     }
     
-    internal static func isReverseEngineeringToolsBeingUsed() -> Bool {
+    internal func isReverseEngineeringToolsBeingUsed() -> Bool {
         return performChecks()
     }
     
-    private static func performChecks() -> Bool {
+    private func performChecks() -> Bool {
         var result = false
         
         for check in FailedCheck.allCases {
             switch check {
             case .existenceOfSuspiciousFiles:
-                result = checkSuspiciousFilePath()
+                if checkSuspiciousFilePath() {
+                    result = true
+                }
             case .dyld:
-                result = checkDYLD()
+                if checkDYLD() {
+                    result = true
+                }
             case .openedPorts:
-                result = checkOpenedPorts()
+                if checkOpenedPorts() {
+                    result = true
+                }
             case .pSelectFlag:
-                result = checkPSelectFlag()
+                if checkPSelectFlag() {
+                    result = true
+                }
             }
         }
         
         return result
     }
     
-    private static func checkDYLD() -> Bool {
+    private func checkDYLD() -> Bool {
         for index in 0..<_dyld_image_count() {
             let imageName = String(cString: _dyld_get_image_name(index))
+            
+            // These files can give false positive in the emulator
+            if !simulatorDetector.isSimulatorDetectedWithoutAsync() {
+                HookingDetectorConst.suspiciousLibraries += [
+                    "Flex",
+                ]
+                
+            }
             
             // The fastest case insensitive contains check.
             for library in HookingDetectorConst.suspiciousLibraries where imageName.localizedCaseInsensitiveContains(library) {
@@ -53,7 +70,21 @@ internal class ReverseEngineeringToolsChecker {
         return false
     }
     
-    private static func checkSuspiciousFilePath() -> Bool {
+    private func checkSuspiciousFilePath() -> Bool {
+        // These files can give false positive in the emulator
+        if !simulatorDetector.isSimulatorDetectedWithoutAsync() {
+            HookingDetectorConst.suspiciousPaths += [
+                "/bin/bash",
+                "/usr/sbin/sshd",
+                "/usr/libexec/ssh-keysign",
+                "/bin/sh",
+                "/etc/ssh/sshd_config",
+                "/usr/libexec/sftp-server",
+                "/usr/bin/ssh" ,
+            ]
+            
+        }
+        
         for path in HookingDetectorConst.suspiciousPaths where FileManager.default.fileExists(atPath: path) {
             return true
         }
@@ -61,7 +92,7 @@ internal class ReverseEngineeringToolsChecker {
         return false
     }
     
-    private static func checkOpenedPorts() -> Bool {
+    private func checkOpenedPorts() -> Bool {
         for port in HookingDetectorConst.ports where canOpenLocalConnection(port: port) {
             return true
         }
@@ -69,7 +100,7 @@ internal class ReverseEngineeringToolsChecker {
         return false
     }
     
-    private static func canOpenLocalConnection(port: Int) -> Bool {
+    private func canOpenLocalConnection(port: Int) -> Bool {
         func swapBytesIfNeeded(port: in_port_t) -> in_port_t {
             let littleEndian = Int(OSHostByteOrder()) == OSLittleEndian
             return littleEndian ? _OSSwapInt16(port) : port
@@ -97,8 +128,8 @@ internal class ReverseEngineeringToolsChecker {
         
         return false
     }
-
-    private static func checkPSelectFlag() -> Bool {
+    
+    private func checkPSelectFlag() -> Bool {
         var kinfo = kinfo_proc()
         var mib: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]
         var size = MemoryLayout<kinfo_proc>.stride
@@ -114,8 +145,8 @@ internal class ReverseEngineeringToolsChecker {
         
         return false
     }
-
-
-
-
+    
+    
+    
+    
 }

@@ -39,41 +39,53 @@ internal class AppTampering{
         case checkBuildConfiguration
     }
     
-    internal func isAppTampered(_ checks: [AppTamperingCheck]) async -> Bool {
+    internal func isAppTampered() async -> Bool {
         return await Utils.getDeviceSignals(
             functionName: TAG,
             requestId: UUID().uuidString,
             defaultValue: false,
             function: {
-                var isAppTampering = false;
-                
-                for check in checks {
-                    switch check {
-                    case .bundleID(let exceptedBundleID):
-                        if checkBundleID(exceptedBundleID) {
-                            isAppTampering = true
-                        }
-                    case .isMobileProvisionModified(let expectedSha256Value):
-                        if isMobileProvisionModified(expectedSha256Value.lowercased()) {
-                            isAppTampering = true
-                        }
-                    case .isJailBroken:
-                        if await jailBrokenDetector.isJailBrokenDetected() {
-                            isAppTampering = true
-                        }
-                    case .isDebuggerEnabled:
-                        if await devideSignalsApi.isDebuggerEnabled() {
-                            isAppTampering = true
-                        }
-                    case .checkBuildConfiguration:
-                        if await devideSignalsApi.checkBuildConfiguration() == "Debug" {
-                            isAppTampering = true
-                        }
-                    }
-                }
-                
-                return (isAppTampering);
+                await amITampered(
+                    [
+                        AppTampering.AppTamperingCheck.bundleID("com.sign3labs.fraudsdk.FraudSDK"),
+//                        AppTampering.AppTamperingCheck.isDebuggerEnabled,
+//                        AppTampering.AppTamperingCheck.isJailBroken,
+                        AppTampering.AppTamperingCheck.checkBuildConfiguration,
+                        AppTampering.AppTamperingCheck.isMobileProvisionModified("13c287086eff1f58f9c8192e383b75a978047cbd32407c33bb872c614ac4d1b4")
+                    ]
+                )
             })
+    }
+    
+    private func amITampered(_ checks: [AppTamperingCheck]) async -> Bool {
+        var isAppTampering = false;
+        
+        for check in checks {
+            switch check {
+            case .bundleID(let exceptedBundleID):
+                if checkBundleID(exceptedBundleID) {
+                    isAppTampering = true
+                }
+            case .isMobileProvisionModified(let expectedSha256Value):
+                if isMobileProvisionModified(expectedSha256Value.lowercased()) {
+                    isAppTampering = true
+                }
+            case .isJailBroken:
+                if await jailBrokenDetector.isJailBrokenDetected() {
+                    isAppTampering = true
+                }
+            case .isDebuggerEnabled:
+                if await devideSignalsApi.isDebuggerEnabled() {
+                    isAppTampering = true
+                }
+            case .checkBuildConfiguration:
+                if await devideSignalsApi.checkBuildConfiguration() == "Debug" {
+                    isAppTampering = true
+                }
+            }
+        }
+        
+        return (isAppTampering);
     }
     
     private func checkBundleID(_ expectedBundleID: String) -> Bool {

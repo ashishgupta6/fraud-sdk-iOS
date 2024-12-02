@@ -23,6 +23,30 @@ internal class SimulatorDetector{
                 if (!simulatorFlag){
                     simulatorFlag = checkSimulatorFromObjectiveC()
                 }
+                if (!simulatorFlag){
+                    simulatorFlag = checkRuntime()
+                }
+                return simulatorFlag
+            }
+        )
+    }
+    
+    internal func isSimulatorDetectedWithoutAsync() -> Bool{
+        return Utils.getDeviceSignalsWithoutAsync(
+            functionName: TAG,
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+                var simulatorFlag = false
+                if (!simulatorFlag){
+                    simulatorFlag = checkSimulator()
+                }
+                if (!simulatorFlag){
+                    simulatorFlag = checkSimulatorFromObjectiveC()
+                }
+                if (!simulatorFlag){
+                    simulatorFlag = checkRuntime()
+                }
                 return simulatorFlag
             }
         )
@@ -45,5 +69,9 @@ internal class SimulatorDetector{
         } else {
             return false
         }
+    }
+    
+    private func checkRuntime() -> Bool {
+      return ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] != nil
     }
 }
