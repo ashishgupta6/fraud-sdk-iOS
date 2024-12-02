@@ -10,6 +10,8 @@
 		390D71F02C961AF30090147D /* UpdateOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D71EF2C961AF30090147D /* UpdateOption.swift */; };
 		390D71F32C962B040090147D /* CryptoGCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D71F22C962B040090147D /* CryptoGCM.swift */; };
 		393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768D2C809FE700572A77 /* IntelligenceResponse.swift */; };
+		395273772CFD994400193923 /* JailBrokenDetectorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395273762CFD994400193923 /* JailBrokenDetectorConst.swift */; };
+		395273792CFDAC0E00193923 /* FileChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395273782CFDAC0E00193923 /* FileChecker.swift */; };
 		39577E6C2CE4AE5700DCD69F /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6B2CE4AE5700DCD69F /* Api.swift */; };
 		39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */; };
 		39577E782CEE0A5F00DCD69F /* ProxyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */; };
@@ -69,6 +71,8 @@
 		390D71EF2C961AF30090147D /* UpdateOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOption.swift; sourceTree = "<group>"; };
 		390D71F22C962B040090147D /* CryptoGCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoGCM.swift; sourceTree = "<group>"; };
 		393E768D2C809FE700572A77 /* IntelligenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponse.swift; sourceTree = "<group>"; };
+		395273762CFD994400193923 /* JailBrokenDetectorConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBrokenDetectorConst.swift; sourceTree = "<group>"; };
+		395273782CFDAC0E00193923 /* FileChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileChecker.swift; sourceTree = "<group>"; };
 		39577E6B2CE4AE5700DCD69F /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProvider.swift; sourceTree = "<group>"; };
 		39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyDetector.swift; sourceTree = "<group>"; };
@@ -230,8 +234,10 @@
 		397AF5372C92F0A3004F74D9 /* JailBroken */ = {
 			isa = PBXGroup;
 			children = (
+				395273782CFDAC0E00193923 /* FileChecker.swift */,
 				397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */,
 				397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */,
+				395273762CFD994400193923 /* JailBrokenDetectorConst.swift */,
 			);
 			path = JailBroken;
 			sourceTree = "<group>";
@@ -479,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				395273772CFD994400193923 /* JailBrokenDetectorConst.swift in Sources */,
 				398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */,
 				3984B6982C8E2D3F00EE992E /* Environment.swift in Sources */,
 				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
@@ -520,6 +527,7 @@
 				397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */,
 				39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */,
 				39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */,
+				395273792CFDAC0E00193923 /* FileChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

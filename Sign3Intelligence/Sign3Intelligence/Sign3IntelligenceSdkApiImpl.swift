@@ -40,13 +40,7 @@ internal class Sign3IntelligenceSdkApiImpl: Sign3IntelligenceSdkApi{
     }
     
     internal func isAppTampered() async -> Bool {
-        return await appTampering.isAppTampered([
-            AppTampering.AppTamperingCheck.bundleID("com.sign3labs.fraudsdk.FraudSDK"),
-            AppTampering.AppTamperingCheck.isDebuggerEnabled,
-            AppTampering.AppTamperingCheck.isJailBroken,
-            AppTampering.AppTamperingCheck.checkBuildConfiguration,
-            AppTampering.AppTamperingCheck.isMobileProvisionModified("13c287086eff1f58f9c8192e383b75a978047cbd32407c33bb872c614ac4d1b4")
-        ])
+        return await appTampering.isAppTampered()
     }
     
     internal func isProxyDetected() async -> Bool {
@@ -54,13 +48,7 @@ internal class Sign3IntelligenceSdkApiImpl: Sign3IntelligenceSdkApi{
     }
     
     internal func isHookingDetected() async -> Bool {
-        return await hookingDetector.detectHook([
-//            HookingDetector.HookingDetectorCheck.isJailBroken,
-//            HookingDetector.HookingDetectorCheck.isDebuggerEnabled,
-            HookingDetector.HookingDetectorCheck.isReverseEngineeringToolsDetected,
-            HookingDetector.HookingDetectorCheck.amIMSHooked,
-            HookingDetector.HookingDetectorCheck.isFridaDetected
-        ])
+        return await hookingDetector.detectHook()
     }
     
     func isScreenBeingMirrored() async -> Bool {

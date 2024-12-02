@@ -9,7 +9,8 @@ import Foundation
 
 internal struct HookingDetectorConst {
     
-    internal static let suspiciousLibraries: Set<String> = [
+    /// Reverse Engineering
+    internal static var suspiciousLibraries = [
         // Frida-related libraries
         "FridaGadget",
         "frida",
@@ -53,7 +54,6 @@ internal struct HookingDetectorConst {
         
         // Other generic tampering tools
         "CoreHook",
-        "Flex",
         "FlexLoader",
         "inject",
         "injection",
@@ -66,7 +66,7 @@ internal struct HookingDetectorConst {
         "Interpose"
     ]
     
-    internal static let suspiciousPaths = [
+    internal static var suspiciousPaths = [
         // Frida-related
         "/usr/sbin/frida-server",
         "/usr/local/bin/frida",
@@ -86,13 +86,9 @@ internal struct HookingDetectorConst {
         "/Applications/Sileo.app",
         "/Applications/Zebra.app",
         "/Applications/Filza.app",
-        "/bin/bash",
-        "/bin/sh",
-        "/usr/sbin/sshd",
         "/etc/apt",
         "/private/var/lib/apt",
-        "/usr/bin/ssh",
-        
+
         // SSL Pinning Bypass
         "/Library/MobileSubstrate/DynamicLibraries/SSLKillSwitch.dylib",
         "/Library/MobileSubstrate/DynamicLibraries/SSLKillSwitch2.dylib",
@@ -102,7 +98,6 @@ internal struct HookingDetectorConst {
         "/usr/local/bin/cycript",
         "/usr/bin/debugserver",
         "/private/var/db/stash",
-        "/usr/bin/ssh",
         
         // Reverse engineering tools
         "/Applications/Flex.app",
@@ -117,7 +112,6 @@ internal struct HookingDetectorConst {
         // Other generic tampering tools
         "/var/cache/apt",
         "/private/var/lib/cydia",
-        "/usr/libexec/sftp-server",
         "/System/Library/LaunchDaemons/com.saurik.Cydia.Startup.plist",
         "/usr/libexec/cydia/",
         "/private/etc/dpkg/origins/debian"
@@ -129,4 +123,28 @@ internal struct HookingDetectorConst {
         22, // OpenSSH
         44 // checkra1n
     ]
+    
+    /// Frida
+    internal static let suspiciousFridaPaths = [
+        "/usr/sbin/frida-server",
+        "/usr/local/bin/frida",
+        "/usr/local/bin/frida-server",
+        "/usr/lib/frida",
+        "/usr/lib/frida-gadget.dylib",
+        "/usr/bin/frida",
+        "/Applications/Frida.app"
+    ]
+    
+    internal static let fridaPorts = [
+        27042,
+    ]
+    
+    internal static let suspiciousFridaLibraries = [
+        "FridaGadget",
+        "frida",
+        "frida-agent",
+        "libfrida",
+        "FridaServer"
+    ]
+
 }

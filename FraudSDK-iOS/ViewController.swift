@@ -34,7 +34,6 @@ class ViewController: UIViewController {
         Utils.showInfologs(tags: "TAG_SESSION_ID", value: sign3Intelligence.getSessionId())
         sign3Intelligence.getIntelligence()
         
-        
 //        Sign3Intelligence.getInstance().updateOptions(updateOption:  UpdateOption.Builder()
 //            .setPhoneNumber("1234567890")
 //            .setUserId("12345")
