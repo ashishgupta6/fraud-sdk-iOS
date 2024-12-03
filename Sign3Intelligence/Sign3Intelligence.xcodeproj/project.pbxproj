@@ -45,7 +45,7 @@
 		39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */; };
 		39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F772C7F63FE00239032 /* DataCreationService.swift */; };
 		39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E36C292C90839500625BE6 /* SimulatorChecker.m */; };
-		39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */; };
+		39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		39E6BF5E2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF5D2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift */; };
 		39E6BF602CF60B9A0086203C /* HookingDetectorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF5F2CF60B9A0086203C /* HookingDetectorConst.swift */; };
 		39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF612CF60FFB0086203C /* MSHookChecker.swift */; };
@@ -698,7 +698,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				MODULEMAP_FILE = "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/module.modulemap";
+				MODULEMAP_FILE = "${PROJECT_DIR}/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.sign3Intelligence;
@@ -739,7 +739,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				MODULEMAP_FILE = "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/module.modulemap";
+				MODULEMAP_FILE = "${PROJECT_DIR}/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.sign3Intelligence;
