@@ -92,7 +92,7 @@ class ViewController: UIViewController {
                let jsonString = String(data: jsonData, encoding: .utf8) {
                 DispatchQueue.main.async {
                     self.textView.text = jsonString
-                    print(jsonString)
+                    //print(jsonString)
                 }
             }
         }

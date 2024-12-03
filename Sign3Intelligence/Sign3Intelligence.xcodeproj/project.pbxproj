@@ -57,6 +57,7 @@
 		39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */; };
 		39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */; };
 		39F299A32C9C3EDE00D896F2 /* Sign3PublicHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		79E86C8D2CFF409A00A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C8C2CFF409600A66FF5 /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSignalsFromObjectiveC.m; sourceTree = "<group>"; };
 		39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sign3PublicHeader.h; sourceTree = "<group>"; };
+		79E86C8C2CFF409600A66FF5 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 		397950E82C7DC6F80043677B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				79E86C8C2CFF409600A66FF5 /* Log.swift */,
 				397950E92C7DC73E0043677B /* Utils.swift */,
 				39C775522C8F2F470006E042 /* BaseKey.swift */,
 				39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */,
@@ -494,6 +497,7 @@
 			files = (
 				395273772CFD994400193923 /* JailBrokenDetectorConst.swift in Sources */,
 				398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */,
+				79E86C8D2CFF409A00A66FF5 /* Log.swift in Sources */,
 				395273732CF8A74000193923 /* DeviceCheckValidator.swift in Sources */,
 				3984B6982C8E2D3F00EE992E /* Environment.swift in Sources */,
 				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
