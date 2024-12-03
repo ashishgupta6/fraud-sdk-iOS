@@ -1,0 +1,28 @@
+# User-specific Xcode settings
+FraudSDK-iOS.xcodeproj/xcshareddata/
+Sign3Intelligence/Sign3Intelligence.xcodeproj/xcshareddata/
+FraudSDK-iOS.xcodeproj/project.pbxproj
+Sign3Intelligence/Sign3Intelligence.xcodeproj/project.pbxproj
+
+
+# macOS system files
+.DS_Store
+Sign3Intelligence/Sign3Intelligence/.DS_Store
+
+
+# Xcode specific
+DerivedData/
+build/
+
+FraudSDK-iOS.xcodeproj/xcuserdata/
+Sign3Intelligence/Sign3Intelligence.xcodeproj/xcuserdata/
+
+FraudSDK-iOS.xcodeproj/project.xcworkspace/xcuserdata/
+FraudSDK-iOS.xcodeproj/project.xcworkspace/xcuserdata/ashishgupta.xcuserdatad/UserInterfaceState.xcuserstate
+
+FraudSDK-iOS.xcodeproj/xcuserdata/ashishgupta.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+FraudSDK-iOS.xcodeproj/xcuserdata/*.xcuserdatad/xcschemes/xcschememanagement.plist
+Sign3Intelligence/Sign3Intelligence.xcodeproj/xcuserdata/*.xcuserdatad/xcschemes/xcschememanagement.plist
+
+
+

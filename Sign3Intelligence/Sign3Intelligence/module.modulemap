@@ -1,0 +1,12 @@
+framework module Sign3Intelligence {
+    umbrella header "/Users/sreyans01/XcodeProjects/fraud-sdk-iOS/Sign3Intelligence/Sign3Intelligence/Sign3Intelligence.h"
+    header "/Users/sreyans01/XcodeProjects/fraud-sdk-iOS/Sign3Intelligence/Sign3Intelligence/Sign3PublicHeader.h"
+    export *
+    module * { export * }
+    
+    module Sign3IntelligencePrivate {
+        header "/Users/sreyans01/XcodeProjects/fraud-sdk-iOS/Sign3Intelligence/Sign3Intelligence/Sign3PrivateHeader.h"
+        export *
+    }
+    
+}
