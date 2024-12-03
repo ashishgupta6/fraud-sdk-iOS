@@ -19,6 +19,7 @@
 		398EB58F2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398EB58E2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift */; };
 		39C775442C8EFC7D0006E042 /* Sign3Intelligence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398EB5D72C63C0CE002FC9CA /* Sign3Intelligence.framework */; };
 		39C775452C8EFC7D0006E042 /* Sign3Intelligence.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 398EB5D72C63C0CE002FC9CA /* Sign3Intelligence.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		79E86C8F2CFF48B000A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C8E2CFF48B000A66FF5 /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		398EB58C2C63BB10002FC9CA /* FraudSDK_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FraudSDK_iOSUITests.swift; sourceTree = "<group>"; };
 		398EB58E2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FraudSDK_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		398EB5D12C63C0CE002FC9CA /* Sign3Intelligence.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sign3Intelligence.xcodeproj; path = Sign3Intelligence/Sign3Intelligence.xcodeproj; sourceTree = "<group>"; };
+		79E86C8E2CFF48B000A66FF5 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 		393E76842C804B9900572A77 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				79E86C8E2CFF48B000A66FF5 /* Log.swift */,
 				393E76872C804BA300572A77 /* Utils.swift */,
 			);
 			name = Utils;
@@ -357,6 +360,7 @@
 			files = (
 				398EB5702C63BB0E002FC9CA /* ViewController.swift in Sources */,
 				398EB56C2C63BB0E002FC9CA /* AppDelegate.swift in Sources */,
+				79E86C8F2CFF48B000A66FF5 /* Log.swift in Sources */,
 				398EB56E2C63BB0E002FC9CA /* SceneDelegate.swift in Sources */,
 				393E76882C804BA300572A77 /* Utils.swift in Sources */,
 			);

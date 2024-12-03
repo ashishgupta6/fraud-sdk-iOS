@@ -1,3 +1,11 @@
+//
+//  Log.swift
+//  FraudSDK-iOS
+//
+//  Created by Sreyans Bohara on 03/12/24.
+//
+
+
 import Foundation
 import os
 
