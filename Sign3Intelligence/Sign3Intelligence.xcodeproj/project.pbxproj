@@ -12,6 +12,8 @@
 		393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E768D2C809FE700572A77 /* IntelligenceResponse.swift */; };
 		395273732CF8A74000193923 /* DeviceCheckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395273722CF8A74000193923 /* DeviceCheckValidator.swift */; };
 		395273752CF8A75800193923 /* AuthKey.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 395273742CF8A75800193923 /* AuthKey.p8 */; };
+		395273772CFD994400193923 /* JailBrokenDetectorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395273762CFD994400193923 /* JailBrokenDetectorConst.swift */; };
+		395273792CFDAC0E00193923 /* FileChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395273782CFDAC0E00193923 /* FileChecker.swift */; };
 		39577E6C2CE4AE5700DCD69F /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6B2CE4AE5700DCD69F /* Api.swift */; };
 		39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */; };
 		39577E782CEE0A5F00DCD69F /* ProxyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */; };
@@ -45,7 +47,7 @@
 		39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */; };
 		39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F772C7F63FE00239032 /* DataCreationService.swift */; };
 		39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E36C292C90839500625BE6 /* SimulatorChecker.m */; };
-		39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */; };
+		39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		39E6BF5E2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF5D2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift */; };
 		39E6BF602CF60B9A0086203C /* HookingDetectorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF5F2CF60B9A0086203C /* HookingDetectorConst.swift */; };
 		39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF612CF60FFB0086203C /* MSHookChecker.swift */; };
@@ -73,6 +75,8 @@
 		393E768D2C809FE700572A77 /* IntelligenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponse.swift; sourceTree = "<group>"; };
 		395273722CF8A74000193923 /* DeviceCheckValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCheckValidator.swift; sourceTree = "<group>"; };
 		395273742CF8A75800193923 /* AuthKey.p8 */ = {isa = PBXFileReference; lastKnownFileType = text; path = AuthKey.p8; sourceTree = "<group>"; };
+		395273762CFD994400193923 /* JailBrokenDetectorConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBrokenDetectorConst.swift; sourceTree = "<group>"; };
+		395273782CFDAC0E00193923 /* FileChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileChecker.swift; sourceTree = "<group>"; };
 		39577E6B2CE4AE5700DCD69F /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		39577E6D2CE4AEC000DCD69F /* HeaderProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProvider.swift; sourceTree = "<group>"; };
 		39577E772CEE0A5F00DCD69F /* ProxyDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyDetector.swift; sourceTree = "<group>"; };
@@ -235,8 +239,10 @@
 		397AF5372C92F0A3004F74D9 /* JailBroken */ = {
 			isa = PBXGroup;
 			children = (
+				395273782CFDAC0E00193923 /* FileChecker.swift */,
 				397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */,
 				397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */,
+				395273762CFD994400193923 /* JailBrokenDetectorConst.swift */,
 			);
 			path = JailBroken;
 			sourceTree = "<group>";
@@ -486,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				395273772CFD994400193923 /* JailBrokenDetectorConst.swift in Sources */,
 				398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */,
 				395273732CF8A74000193923 /* DeviceCheckValidator.swift in Sources */,
 				3984B6982C8E2D3F00EE992E /* Environment.swift in Sources */,
@@ -528,6 +535,7 @@
 				397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */,
 				39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */,
 				39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */,
+				395273792CFDAC0E00193923 /* FileChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,7 +706,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				MODULEMAP_FILE = "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/module.modulemap";
+				MODULEMAP_FILE = "${PROJECT_DIR}/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.sign3Intelligence;
@@ -739,7 +747,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				MODULEMAP_FILE = "/Users/ashishgupta/iOSProjects/FraudSDK-iOS/Sign3Intelligence/Sign3Intelligence/module.modulemap";
+				MODULEMAP_FILE = "${PROJECT_DIR}/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.sign3Intelligence;

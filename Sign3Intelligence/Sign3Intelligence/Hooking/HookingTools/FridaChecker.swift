@@ -19,41 +19,58 @@ internal class FridaChecker {
     
     
     private static func isFridaRunning() -> Bool{
-        let port = NWEndpoint.Port(integerLiteral: 27042)
-        let connection = NWConnection(host: "127.0.0.1", port: port, using: .tcp)
-        
-        var isFridaDetected = false
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        connection.stateUpdateHandler = { state in
-            if state == .ready {
-                isFridaDetected = true
-            }
-            semaphore.signal()
+        for port in HookingDetectorConst.fridaPorts where canOpenLocalConnection(port: port) {
+            return true
         }
         
-        connection.start(queue: .global())
-        _ = semaphore.wait(timeout: .now() + 1)
-        connection.cancel()
-        
-        return isFridaDetected
+        return false
     }
     
-    private static func hasFridaLibraries() -> Bool{
-        let count = _dyld_image_count()
-        for i in 0..<count {
-            if let name = _dyld_get_image_name(i) {
-                let libraryName = String(cString: name)
-                if libraryName.contains("frida") || libraryName.contains("gadget") {
-                    return true
-                }
+    private static func canOpenLocalConnection(port: Int) -> Bool {
+        func swapBytesIfNeeded(port: in_port_t) -> in_port_t {
+            let littleEndian = Int(OSHostByteOrder()) == OSLittleEndian
+            return littleEndian ? _OSSwapInt16(port) : port
+        }
+        
+        var serverAddress = sockaddr_in()
+        serverAddress.sin_family = sa_family_t(AF_INET)
+        serverAddress.sin_addr.s_addr = inet_addr("127.0.0.1")
+        serverAddress.sin_port = swapBytesIfNeeded(port: in_port_t(port))
+        let sock = socket(AF_INET, SOCK_STREAM, 0)
+        
+        let result = withUnsafePointer(to: &serverAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                connect(sock, $0, socklen_t(MemoryLayout<sockaddr_in>.stride))
             }
         }
+        
+        defer {
+            close(sock)
+        }
+        
+        if result != -1 {
+            return true // Port is opened
+        }
+        
+        return false
+    }
+    
+    
+    private static func hasFridaLibraries() -> Bool{
+        for index in 0..<_dyld_image_count() {
+            let imageName = String(cString: _dyld_get_image_name(index))
+            
+            // The fastest case insensitive contains check.
+            for library in HookingDetectorConst.suspiciousFridaLibraries where imageName.localizedCaseInsensitiveContains(library) {
+                return true
+            }
+        }
+        
         return false
     }
     
     private static func detectFridaFiles() -> Bool{
-        for path in HookingDetectorConst.suspiciousPaths {
+        for path in HookingDetectorConst.suspiciousFridaPaths {
             if FileManager.default.fileExists(atPath: path) {
                 return true
             }

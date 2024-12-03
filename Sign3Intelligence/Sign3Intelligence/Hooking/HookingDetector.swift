@@ -26,51 +26,62 @@ internal class HookingDetector{
         case isFridaDetected
     }
     
-    internal func detectHook(_ checks: [HookingDetectorCheck]) async -> Bool{
+    internal func detectHook() async -> Bool{
         return await Utils.getDeviceSignals(
             functionName: TAG,
             requestId: UUID().uuidString,
             defaultValue: false,
             function: {
-                var detectHook = false
-
-                func getSwiftFunctionAddr(_ function: @escaping FunctionType) -> UnsafeMutableRawPointer {
-                    return unsafeBitCast(function, to: UnsafeMutableRawPointer.self)
-                }
-                
-                func msHookReturnFalse(takes: Int) -> Bool {
-                    return false
-                }
-                
-                let funcAddr = getSwiftFunctionAddr(msHookReturnFalse)
-                
-                for check in checks {
-                    switch check {
-                    case .isJailBroken:
-                        if (await jailBrokenDetector.isJailBrokenDetected()){
-                            detectHook = true
-                        }
-                    case .isDebuggerEnabled:
-                        if (await devideSignalsApi.isDebuggerEnabled()){
-                            detectHook = true
-                        }
-                    case .isReverseEngineeringToolsDetected:
-                        if (ReverseEngineeringToolsChecker.isReverseEngineeringToolsBeingUsed()){
-                            detectHook = true
-                        }
-                    case .amIMSHooked:
-                        if (MSHookChecker.amIMSHooked(funcAddr)){
-                            detectHook = true
-                        }
-                    case .isFridaDetected:
-                        if (FridaChecker.isFridaDetected()){
-                            detectHook = true
-                        }
-                    }
-                }
-                
-                return detectHook
+                await amIHooked([
+                    HookingDetector.HookingDetectorCheck.isJailBroken,
+                    HookingDetector.HookingDetectorCheck.isDebuggerEnabled,
+                    HookingDetector.HookingDetectorCheck.isReverseEngineeringToolsDetected,
+                    HookingDetector.HookingDetectorCheck.amIMSHooked,
+                    HookingDetector.HookingDetectorCheck.isFridaDetected
+                ])
             })
+    }
+    
+    
+    private func amIHooked(_ checks: [HookingDetectorCheck]) async -> Bool{
+        var detectHook = false
+        
+        func getSwiftFunctionAddr(_ function: @escaping FunctionType) -> UnsafeMutableRawPointer {
+            return unsafeBitCast(function, to: UnsafeMutableRawPointer.self)
+        }
+        
+        func msHookReturnFalse(takes: Int) -> Bool {
+            return false
+        }
+        
+        let funcAddr = getSwiftFunctionAddr(msHookReturnFalse)
+        
+        for check in checks {
+            switch check {
+            case .isJailBroken:
+                if (await jailBrokenDetector.isJailBrokenDetected()){
+                    detectHook = true
+                }
+            case .isDebuggerEnabled:
+                if (await devideSignalsApi.isDebuggerEnabled()){
+                    detectHook = true
+                }
+            case .isReverseEngineeringToolsDetected:
+                if (ReverseEngineeringToolsChecker().isReverseEngineeringToolsBeingUsed()){
+                    detectHook = true
+                }
+            case .amIMSHooked:
+                if (MSHookChecker.amIMSHooked(funcAddr)){
+                    detectHook = true
+                }
+            case .isFridaDetected:
+                if (FridaChecker.isFridaDetected()){
+                    detectHook = true
+                }
+            }
+        }
+        
+        return detectHook
     }
     
     

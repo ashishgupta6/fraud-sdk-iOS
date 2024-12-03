@@ -38,7 +38,7 @@ internal protocol DeviceSignalsApi{
     func getOrientation() async -> String
     func getCarrierName() async -> String
     func getNetworkType() async -> String
-    func getSystemUptime() async -> String
+    func getSystemUptime() async -> CLong
     func getRAMUsage() async -> String
     func getTotalRAMSize() async -> String
     func getKernelVersion() async -> String
