@@ -36,33 +36,64 @@ internal class CryptoGCM {
         return iv
     }
 
+    
     private static func getKeyFromPassword(password: String, salt: String) throws -> Data {
         
-        //let passwordData = password.data(using: .utf8)!
+        
+        let passwordData = password.data(using: .utf8)!
         let saltData = salt.data(using: .utf8)!
         
-        var derivedKeyData = Data(repeating: 0, count: AES_KEY_SIZE / 8)
-        let status = derivedKeyData.withUnsafeMutableBytes { derivedKeyBytes in
+        var derivedKey = Data(count: Int(AES_KEY_SIZE / 8))
+        derivedKey.withUnsafeMutableBytes { derivedKeyBytes in
             saltData.withUnsafeBytes { saltBytes in
-                CCKeyDerivationPBKDF(
+                guard let saltBaseAddress = saltBytes.baseAddress,
+                      let derivedBaseAddress = derivedKeyBytes.baseAddress else {
+                    Log.e("EEEEEEEE", "Invalid Buffer Pointers")
+                    return
+                }
+
+                let result = CCKeyDerivationPBKDF(
                     CCPBKDFAlgorithm(kCCPBKDF2),
                     password,
                     password.utf8.count,
-                    saltBytes.baseAddress!.assumingMemoryBound(to: UInt8.self),
+                    saltBaseAddress.assumingMemoryBound(to: UInt8.self),
                     saltData.count,
                     CCPseudoRandomAlgorithm(kCCPRFHmacAlgSHA1),
                     65536,
-                    derivedKeyBytes.baseAddress!.assumingMemoryBound(to: UInt8.self),
+                    derivedBaseAddress.assumingMemoryBound(to: UInt8.self),
                     AES_KEY_SIZE
                 )
+
+                if result != kCCSuccess {
+                    Log.e("EEEEEEEE", "Key derivation failed with error code: \(result)")
+//                    print("Key derivation failed with error code: \(result)")
+                }
             }
         }
+
         
-        if status != kCCSuccess {
-            throw NSError(domain: "KeyDerivationError", code: Int(status), userInfo: nil)
-        }
+//        var derivedKeyData = Data(repeating: 0, count: AES_KEY_SIZE / 8)
+//        let status = derivedKeyData.withUnsafeMutableBytes { derivedKeyBytes in
+//            saltData.withUnsafeBytes { saltBytes in
+//                CCKeyDerivationPBKDF(
+//                    CCPBKDFAlgorithm(kCCPBKDF2),
+//                    password,
+//                    passwordData.count,
+//                    saltBytes.baseAddress!.assumingMemoryBound(to: UInt8.self),
+//                    saltData.count,
+//                    CCPseudoRandomAlgorithm(kCCPRFHmacAlgSHA1),
+//                    65536,
+//                    derivedKeyBytes.baseAddress!.assumingMemoryBound(to: UInt8.self),
+//                    AES_KEY_SIZE
+//                )
+//            }
+//        }
         
-        return derivedKeyData
+//        if status != kCCSuccess {
+//            throw NSError(domain: "KeyDerivationError", code: Int(status), userInfo: nil)
+//        }
+        
+        return derivedKey
     }
 
     internal static func encrypt(_ inputString: String, _ IV: Data) throws -> String {

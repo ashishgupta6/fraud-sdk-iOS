@@ -26,7 +26,7 @@ public final class Sign3Intelligence {
     }
 
     public func initAsync(options: Options, completion: @escaping (Bool) -> Void) {
-        //sign3IntelligenceInternal.initAsync(options, completion)
+        sign3IntelligenceInternal.initAsync(options, completion)
     }
 
     public func updateOptions(updateOption: UpdateOption) {
