@@ -23,7 +23,28 @@ internal struct Api{
         self.headerProvider = HeaderProvider(clientId: clientId, clientSecret: clientSecret)
     }
     
+    internal func checkEncryption() -> Bool {
+        
+        DispatchQueue.main.async(execute: {
+            do {
+                var stringToEncrypt = "Hello World!"
+                let iv = CryptoGCM.getIvHeader()
+                Log.e("RRRRRRR"," encryption started")
+                let encryptedString = try CryptoGCM.encrypt(stringToEncrypt, iv)
+                Log.e("RRRRRRR","encrypted string \(encryptedString)")
+                let decryptedString = try CryptoGCM.decrypt(encryptedString, iv)
+                Log.e("RRRRRRR","\(encryptedString) \(decryptedString)")
+                //return stringToEncrypt == decryptedString
+            } catch {
+                //return false
+            }
+        })
+        return false
+    
+    }
+    
     internal func getConfig(completion: @escaping (Result<String, Error>) -> Void) {
+        Log.e("KKKKKKKK", "\(checkEncryption())")
         guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v1/device/config") else {
             print("Error: Invalid or missing base URL.")
             completion(.failure(NSError(domain: "URLError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid or missing base URL."])))
@@ -71,6 +92,7 @@ internal struct Api{
                 CryptoGCM.decrypt(responseData.base64EncodedString(), iv)
                 completion(.success(decryptedString))
             } catch {
+                Log.e("KKKKKKK","\(error)")
                 completion(.failure(error))
             }
         }.resume()

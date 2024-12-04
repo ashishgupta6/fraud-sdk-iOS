@@ -55,6 +55,7 @@
 		39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */; };
 		39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */; };
 		39F299A32C9C3EDE00D896F2 /* Sign3PublicHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C922CFF4B8300A66FF5 /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSignalsFromObjectiveC.m; sourceTree = "<group>"; };
 		39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sign3PublicHeader.h; sourceTree = "<group>"; };
+		79E86C922CFF4B8300A66FF5 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 				39C775562C8F320F0006E042 /* DevKeyProvider.swift */,
 				39C775582C8F321C0006E042 /* StagingKeyProvider.swift */,
 				39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */,
+				79E86C922CFF4B8300A66FF5 /* Log.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 			files = (
 				395273772CFD994400193923 /* JailBrokenDetectorConst.swift in Sources */,
 				398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */,
+				79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */,
 				3984B6982C8E2D3F00EE992E /* Environment.swift in Sources */,
 				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
 				3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */,
