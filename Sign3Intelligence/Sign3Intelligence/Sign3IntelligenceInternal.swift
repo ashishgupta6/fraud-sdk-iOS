@@ -86,6 +86,7 @@ internal class Sign3IntelligenceInternal{
     
     internal func getIntelligence(completion: @escaping ([String: Any]) -> Void) {
         var intelligenceData: [String: Any] = [:]
+        checkEncryption()
         
         DispatchQueue.global().async {
             Task.detached {
@@ -124,6 +125,23 @@ internal class Sign3IntelligenceInternal{
             
         }
         return isReady
+    }
+    
+    internal func checkEncryption() -> Bool {
+        
+        do {
+            var stringToEncrypt = "Hello World!"
+            let iv = CryptoGCM.getIvHeader()
+            Log.e("RRRRRRR"," encryption started")
+            let encryptedString = try CryptoGCM.encrypt(stringToEncrypt, iv)
+            Log.e("RRRRRRR","encrypted string \(encryptedString)")
+            let decryptedString = try CryptoGCM.decrypt(encryptedString, iv)
+            Log.e("RRRRRRR","\(stringToEncrypt) \(decryptedString)")
+            return stringToEncrypt == decryptedString
+        } catch {
+            return false
+        }
+    
     }
     
     internal func initMandatoryParams(_ options: Options) throws -> Bool{
@@ -166,14 +184,14 @@ internal class Sign3IntelligenceInternal{
     
     internal func startMandatoryCalls() {
                 // Doing API calls
-                Api.shared.getConfig{result in
-                    switch result {
-                    case .success(let response):
-                        print("Config response:", response)
-                    case .failure(let error):
-                        print("Error:", error.localizedDescription)
-                    }
-                }
+//                Api.shared.getConfig{result in
+//                    switch result {
+//                    case .success(let response):
+//                        print("Config response:", response)
+//                    case .failure(let error):
+//                        print("Error:", error.localizedDescription)
+//                    }
+//                }
     }
     
     
