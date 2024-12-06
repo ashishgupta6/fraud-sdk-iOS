@@ -66,7 +66,7 @@ class CryptoGCM {
         return keyData
     }
 
-    static func encrypt(_ inputString: String, _ IV: Data) -> String? {
+    static func encrypt2(_ inputString: String, _ IV: Data) -> String? {
         do {
             let key = key
             let inputData = Data(inputString.utf8)
@@ -81,16 +81,50 @@ class CryptoGCM {
         }
     }
 
-    static func decrypt(_ encryptedString: String?, _ IV: Data) throws -> String {
+    static func encrypt(_ plaintext: String, _ IV: Data) throws -> String {
+        // Ensure the encryption key is initialized
+        guard let key = key else { throw CryptoGCMError.keyNotInitialized }
+        
+        // Convert the plaintext into Data
+        guard let plaintextData = plaintext.data(using: .utf8) else {
+            throw NSError(domain: "EncryptionError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid plaintext string"])
+        }
+        
+        // Ensure the IV is the correct size
+        guard IV.count == 12 else {
+            throw NSError(domain: "EncryptionError", code: -1, userInfo: [NSLocalizedDescriptionKey: "IV must be 12 bytes for AES-GCM"])
+        }
+        
+        // Create a Nonce from the IV
+        let nonce = try AES.GCM.Nonce(data: IV)
+        
+        // Encrypt the data
+        let sealedBox = try AES.GCM.seal(plaintextData, using: key, nonce: nonce)
+        
+        // Combine ciphertext and tag
+        let combinedData = sealedBox.ciphertext + sealedBox.tag
+        
+        // Return the Base64-encoded string
+        return combinedData.base64EncodedString()
+    }
+
+
+    static func decrypt(_ encryptedString: String?, _ IV: Data) throws -> String? {
         guard let key = key else { throw CryptoGCMError.keyNotInitialized }
         guard let combinedData = Data(base64Encoded: encryptedString ?? "") else {
             throw NSError(domain: "DecryptionError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid base64 string"])
         }
+        let nonce = try AES.GCM.Nonce(data: IV)
+        let ciphertext = combinedData.dropLast(GCM_TAG_LENGTH)
+        let tag = combinedData.suffix(GCM_TAG_LENGTH)
         
-        let sealedBox = try AES.GCM.SealedBox(combined: combinedData)
+        
+        let sealedBox = try AES.GCM.SealedBox(nonce: nonce, ciphertext: ciphertext, tag: tag)
         let decryptedData = try AES.GCM.open(sealedBox, using: key)
-        return String(data: decryptedData, encoding: .utf8)!
+        return String(data: decryptedData, encoding: .utf8)
     }
+    
+    
 }
 
 

@@ -92,7 +92,7 @@ internal struct Api{
             do {
                 let decryptedString = try
                 CryptoGCM.decrypt(responseData.base64EncodedString(), iv)
-                completion(.success(decryptedString))
+                completion(.success(decryptedString ?? ""))
             } catch {
                 Log.e("KKKKKKK","\(error)")
                 completion(.failure(error))
