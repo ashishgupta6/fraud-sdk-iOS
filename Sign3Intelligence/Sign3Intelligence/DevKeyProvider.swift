@@ -11,6 +11,7 @@ import Foundation
 class DevKeyProvider: BaseKey{
     
     internal override var baseUrl: String {
-        return "https://intelligence-dev.sign3.in/"
+        return "http://172.16.48.219:25000/"
+        //return "https://intelligence-dev.sign3.in/"
     }
 }

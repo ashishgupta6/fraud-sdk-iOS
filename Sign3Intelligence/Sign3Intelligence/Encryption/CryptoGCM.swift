@@ -21,7 +21,10 @@ class CryptoGCM {
     public static let GCM_IV_LENGTH = 12
     public static let GCM_TAG_LENGTH = 16
     public static let ALGORITHM = "AES/GCM/NoPadding"
-    public static let GET_IV_HEADER = "tenant-id"
+    public static let GET_IV_HEADER2 = "tenant-id"
+    public static let GET_IV_HEADER = "tenant-id".uppercased()
+    public static let GET_SECRET_KEY_ENCODED = "GET_SECRET_KEY_ENCODED";
+    public static let GET_SECRET_KEY_ENCODED2 = "GET_SECRET_KEY_ENCODED".lowercased();
     private static var key: SymmetricKey?
     
 
@@ -122,6 +125,49 @@ class CryptoGCM {
         let sealedBox = try AES.GCM.SealedBox(nonce: nonce, ciphertext: ciphertext, tag: tag)
         let decryptedData = try AES.GCM.open(sealedBox, using: key)
         return String(data: decryptedData, encoding: .utf8)
+    }
+    
+    static func decrypt(_ keyData: Data, _ encryptedString: Data, _ IV: Data) throws -> String? {
+        //guard let key = key else { throw CryptoGCMError.keyNotInitialized }
+        let combinedData = encryptedString
+        let key = SymmetricKey(data: keyData)
+        let nonce = try AES.GCM.Nonce(data: IV)
+        let ciphertext = combinedData.dropLast(GCM_TAG_LENGTH)
+        let tag = combinedData.suffix(GCM_TAG_LENGTH)
+        
+        
+        let sealedBox = try AES.GCM.SealedBox(nonce: nonce, ciphertext: ciphertext, tag: tag)
+        let decryptedData = try AES.GCM.open(sealedBox, using: SymmetricKey(data: key))
+        return String(data: decryptedData, encoding: .utf8)
+    }
+
+    static func decryptAESGCM(ciphertextBase64: String, keyBase64: String, nonceBase64: String) -> String? {
+        // Decode Base64 inputs
+        guard let keyData = Data(base64Encoded: keyBase64),
+              let nonceData = Data(base64Encoded: nonceBase64),
+              let ciphertextData = Data(base64Encoded: ciphertextBase64) else {
+            print("Failed to decode Base64 inputs")
+            return nil
+        }
+
+        // Create SymmetricKey and AES.GCM.Nonce
+        let key = SymmetricKey(data: keyData)
+        guard let nonce = try? AES.GCM.Nonce(data: nonceData) else {
+            print("Invalid nonce")
+            return nil
+        }
+
+        do {
+            // Create SealedBox from ciphertext and tag
+            let sealedBox = try AES.GCM.SealedBox(nonce: nonce, ciphertext: ciphertextData.dropLast(16), tag: ciphertextData.suffix(16))
+
+            // Decrypt data
+            let plaintextData = try AES.GCM.open(sealedBox, using: key)
+            return String(data: plaintextData, encoding: .utf8)
+        } catch {
+            print("Decryption failed: \(error)")
+            return nil
+        }
     }
     
     

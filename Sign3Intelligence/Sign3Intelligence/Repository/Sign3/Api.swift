@@ -68,9 +68,17 @@ internal struct Api{
                     return
                 }
                 print("TAG_IV: \(receivedIv.base64EncodedString()), \(receivedIv)")
+                
+                guard let base64KeyEncoded = httpResponse.allHeaderFields[CryptoGCM.GET_SECRET_KEY_ENCODED] as? String,
+                      let receivedKey = Data(base64Encoded: base64KeyEncoded) else {
+                    print("TAG_Error: Failed to retrieve or decode the key from headers")
+                    completion(.failure(NSError(domain: "KeyError", code: -1, userInfo: [NSLocalizedDescriptionKey: "TAG_Failed to retrieve or decode the key from headers."])))
+                    return
+                }
 
                 // Decrypt the response data using AES-GCM
-                let decryptedData = try CryptoGCM.decrypt(responseData.base64EncodedString(), receivedIv);
+//                let decryptedData = try CryptoGCM.decrypt(receivedKey ,Data(base64Encoded: responseData.base64EncodedString())!, receivedIv);
+                let decryptedData = try CryptoGCM.decryptAESGCM(ciphertextBase64: String(data: responseData, encoding: .utf8) ?? "", keyBase64: base64KeyEncoded ?? "", nonceBase64: base64Iv ?? "");
                 print("TAG_Response: \(decryptedData)")
             } catch {
                 print("TAG_Decryption Error: \(error.localizedDescription)")
