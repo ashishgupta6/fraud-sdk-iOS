@@ -86,7 +86,7 @@ internal class Sign3IntelligenceInternal{
     
     internal func getIntelligence(completion: @escaping ([String: Any]) -> Void) {
         var intelligenceData: [String: Any] = [:]
-        checkEncryption()
+//        checkEncryption()
         
         DispatchQueue.global().async {
             Task.detached {
@@ -183,15 +183,15 @@ internal class Sign3IntelligenceInternal{
     }
     
     internal func startMandatoryCalls() {
-                // Doing API calls
-//                Api.shared.getConfig{result in
-//                    switch result {
-//                    case .success(let response):
-//                        print("Config response:", response)
-//                    case .failure(let error):
-//                        print("Error:", error.localizedDescription)
-//                    }
-//                }
+//        Doing API calls
+        Api.shared.getConfig{result in
+            switch result {
+            case .success(let response):
+                print("Config response:", response)
+            case .failure(let error):
+                print("Error:", error.localizedDescription)
+            }
+        }
     }
     
     

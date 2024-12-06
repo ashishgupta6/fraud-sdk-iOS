@@ -21,7 +21,7 @@ class CryptoGCM {
     public static let GCM_IV_LENGTH = 12
     public static let GCM_TAG_LENGTH = 16
     public static let ALGORITHM = "AES/GCM/NoPadding"
-    public static let GET_IV_HEADER = "TENANT-ID"
+    public static let GET_IV_HEADER = "tenant-id"
     private static var key: SymmetricKey?
     
 

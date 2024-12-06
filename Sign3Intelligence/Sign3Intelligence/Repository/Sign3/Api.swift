@@ -22,31 +22,9 @@ internal struct Api{
         self.clientSecret = Sign3IntelligenceInternal.sdk?.options?.clientSecret ?? ""
         self.headerProvider = HeaderProvider(clientId: clientId, clientSecret: clientSecret)
     }
-    
-    internal func checkEncryption() -> Bool {
-        
-        do {
-            var stringToEncrypt = "Hello World!"
-            let iv = CryptoGCM.getIvHeader()
-            Log.e("RRRRRRR"," encryption started")
-            let encryptedString = try CryptoGCM.encrypt(stringToEncrypt, iv)
-            Log.e("RRRRRRR","encrypted string \(encryptedString)")
-            let decryptedString = try CryptoGCM.decrypt(encryptedString, iv)
-            Log.e("RRRRRRR","\(encryptedString) \(decryptedString)")
-            return stringToEncrypt == decryptedString
-        } catch {
-            return false
-        }
-        return false
-    
-    }
+
     
     internal func getConfig(completion: @escaping (Result<String, Error>) -> Void) {
-        do {
-            try Log.e("KKKKKKKK", "\(checkEncryption())")
-        } catch {
-            
-        }
         guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v1/device/config") else {
             print("Error: Invalid or missing base URL.")
             completion(.failure(NSError(domain: "URLError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid or missing base URL."])))
@@ -60,7 +38,6 @@ internal struct Api{
             request.setValue(value, forHTTPHeaderField: key)
         }
         
-        
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Request Error: \(error.localizedDescription)")
@@ -73,32 +50,35 @@ internal struct Api{
                 completion(.failure(NSError(domain: "ResponseError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing or invalid response."])))
                 return
             }
-            
-            // Log response status and headers
-            print("Response Status: \(httpResponse.statusCode)")
-            
-            // Extract the IV from headers
-            guard let ivBase64 = httpResponse.value(forHTTPHeaderField: CryptoGCM.GET_IV_HEADER),
-                  let iv = Data(base64Encoded: ivBase64) else {
-                let error = NSError(domain: "DecryptionError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing or invalid IV header."]);
-                completion(.failure(error))
-                return
-            }
-            
-            // Log the IV for verification
-            print("IV: \(iv.base64EncodedString())")
-            
-            // Attempt decryption
+
             do {
-                let decryptedString = try
-                CryptoGCM.decrypt(responseData.base64EncodedString(), iv)
-                completion(.success(decryptedString ?? ""))
+//                var stringToEncrypt = "Hello Ashishbdjhs!"
+//                let iv = CryptoGCM.getIvHeader()
+//                Log.e("RRRRRRR"," encryption started")
+//                let encryptedString = try CryptoGCM.encrypt(stringToEncrypt, iv)
+//                Log.e("RRRRRRR","encrypted string \(encryptedString)")
+//                let decryptedString = try CryptoGCM.decrypt(encryptedString, iv)
+//                Log.e("RRRRRRR","\(stringToEncrypt) \(decryptedString)")
+        
+                // Attempt to retrieve and decode the IV from the headers
+                guard let base64Iv = httpResponse.allHeaderFields[CryptoGCM.GET_IV_HEADER] as? String,
+                      let receivedIv = Data(base64Encoded: base64Iv) else {
+                    print("TAG_Error: Failed to retrieve or decode the IV from headers")
+                    completion(.failure(NSError(domain: "IVError", code: -1, userInfo: [NSLocalizedDescriptionKey: "TAG_Failed to retrieve or decode the IV from headers."])))
+                    return
+                }
+                print("TAG_IV: \(receivedIv.base64EncodedString()), \(receivedIv)")
+
+                // Decrypt the response data using AES-GCM
+                let decryptedData = try CryptoGCM.decrypt(responseData.base64EncodedString(), receivedIv);
+                print("TAG_Response: \(decryptedData)")
             } catch {
-                Log.e("KKKKKKK","\(error)")
+                print("TAG_Decryption Error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
+            
         }.resume()
     }
-    
+
     
 }
