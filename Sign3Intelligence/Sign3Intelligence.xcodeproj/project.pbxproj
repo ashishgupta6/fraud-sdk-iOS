@@ -51,6 +51,9 @@
 		39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF612CF60FFB0086203C /* MSHookChecker.swift */; };
 		39E738FE2C88826F002B24C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FD2C88826F002B24C8 /* Location.swift */; };
 		39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FF2C888F16002B24C8 /* LocationDetector.swift */; };
+		39ED49012D0776C600584401 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49002D0776C600584401 /* ConfigManager.swift */; };
+		39ED49032D0776FD00584401 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49022D0776FD00584401 /* Config.swift */; };
+		39ED49052D07786000584401 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49042D07786000584401 /* Resource.swift */; };
 		39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */; };
 		39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */; };
 		39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */; };
@@ -116,6 +119,9 @@
 		39E738FA2C885D01002B24C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		39E738FD2C88826F002B24C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		39E738FF2C888F16002B24C8 /* LocationDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetector.swift; sourceTree = "<group>"; };
+		39ED49002D0776C600584401 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
+		39ED49022D0776FD00584401 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		39ED49042D07786000584401 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSpoffer.swift; sourceTree = "<group>"; };
 		39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSignalsFromObjectiveC.m; sourceTree = "<group>"; };
@@ -155,6 +161,7 @@
 			children = (
 				393E768D2C809FE700572A77 /* IntelligenceResponse.swift */,
 				39E738FD2C88826F002B24C8 /* Location.swift */,
+				39ED49022D0776FD00584401 /* Config.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -212,6 +219,8 @@
 				39C775582C8F321C0006E042 /* StagingKeyProvider.swift */,
 				39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */,
 				79E86C922CFF4B8300A66FF5 /* Log.swift */,
+				39ED49002D0776C600584401 /* ConfigManager.swift */,
+				39ED49042D07786000584401 /* Resource.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -507,10 +516,12 @@
 				39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */,
 				39E6BF602CF60B9A0086203C /* HookingDetectorConst.swift in Sources */,
 				3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */,
+				39ED49052D07786000584401 /* Resource.swift in Sources */,
 				39C7754B2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift in Sources */,
 				397AF53B2C92FA6F004F74D9 /* JailBrokenChecker.m in Sources */,
 				39C775552C8F2FE90006E042 /* ProdKeyProvider.swift in Sources */,
 				3984B6962C8E2CD400EE992E /* OtpInputType.swift in Sources */,
+				39ED49012D0776C600584401 /* ConfigManager.swift in Sources */,
 				3966813A2CF730A300DF3306 /* FridaChecker.swift in Sources */,
 				39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */,
 				39C775592C8F321C0006E042 /* StagingKeyProvider.swift in Sources */,
@@ -528,6 +539,7 @@
 				39C775492C8EFCB20006E042 /* VPNDetector.swift in Sources */,
 				39C7754D2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift in Sources */,
 				397950EA2C7DC73E0043677B /* Utils.swift in Sources */,
+				39ED49032D0776FD00584401 /* Config.swift in Sources */,
 				397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */,
 				39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */,
 				39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */,
