@@ -52,16 +52,15 @@ internal struct Api{
             
             do {
                 // Attempt to retrieve and decode the IV from the headers
-                guard let base64Iv = httpResponse.allHeaderFields[CryptoGCM.GET_IV_HEADER2] as? String,
+                guard let base64Iv = httpResponse.allHeaderFields[CryptoGCM.GET_IV_HEADER] as? String,
                       let _ = Data(base64Encoded: base64Iv) else {
                     completion(.error("Failed to retrieve or decode the IV from headers.", data: Config.getDefault()))
                     return
                 }
                 
                 // Decrypt the response
-                guard let decryptedString = try CryptoGCM.decryptAESGCM(
+                guard let decryptedString = try CryptoGCM.decrypt(
                     ciphertextBase64: String(data: responseData, encoding: .utf8) ?? "",
-                    keyBase64: base64Iv,
                     nonceBase64: base64Iv
                 ) else {
                     completion(.error("Decryption failed.", data: Config.getDefault()))
