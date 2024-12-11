@@ -7,6 +7,7 @@
 
 import Foundation
 import CryptoKit
+import Compression
 
 internal struct Api{
     internal static let shared = Api()
@@ -119,65 +120,94 @@ internal struct Api{
     internal func getScore(_ dataRequest: DataRequest, _ sign3Intelligence: Sign3IntelligenceInternal, _ source: String, listener: IntelligenceResponseListener) {
         do {
             let jsonData = try JSONEncoder().encode(dataRequest)
-//            let iv = CryptoGCM.getIvHeader()
+            let payloadJson = Utils.convertToJson(dataRequest)
+            let byteArray = jsonData.base64EncodedString()
+//            let byteArray = gzip(payloadJson)
+            
+//            Log.i("PATLOADJSON",payloadJson)
+            Log.i("PATLOADJSON2",jsonData.description)
+            
             guard let jsonString = String(data: jsonData, encoding: .utf8) else {
                 let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Failed to convert request data to JSON string")
                 listener.onError(error: errorObj)
                 return
             }
             
-            guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v3/userInsights?cstate=true") else {
+            let iv = CryptoGCM.getIvHeader()
+            
+            guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v3/userInsights?cstate=false") else {
                 let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Invalid or missing base URL")
                 listener.onError(error: errorObj)
                 return
             }
-            
+//            let rawBody: String
+//            do {
+//                rawBody = try CryptoGCM.encrypt(byteArray, iv)
+//            } catch {
+//                let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Encryption failed: \(error.localizedDescription)")
+//                listener.onError(error: errorObj)
+//                return
+//            }
+
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("tenant-id", forHTTPHeaderField: CryptoGCM.GET_IV_HEADER)
-            request.httpBody = jsonString.data(using: .utf8)
+            request.addValue(iv.base64EncodedString(), forHTTPHeaderField: CryptoGCM.GET_IV_HEADER)
+//            request.httpBody = rawBody.data(using: .utf8)
+            request.httpBody = jsonData
             headerProvider.getCommonHeaders().forEach { key, value in
                 request.setValue(value, forHTTPHeaderField: key)
             }
             
-//            URLSession.shared.dataTask(with: request) { data, response, error in
-//                if let error = error {
-//                    let errorMessage = "Network error: \(error.localizedDescription)"
-//                    let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: errorMessage)
-//                    listener.onError(error: errorObj)
-//                    return
-//                }
-//                
-//                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-//                    let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Invalid response format")
-//                    listener.onError(error: errorObj)
-//                    return
-//                }
-//                
-//            }.resume()
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    let errorMessage = "Network error: \(error.localizedDescription)"
+                    let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: errorMessage)
+                    listener.onError(error: errorObj)
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                    let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Invalid response format")
+                    listener.onError(error: errorObj)
+                    return
+                }
+                
+                // Parse the response and pass the IntelligenceResponse object to the listener
+                if let responseData = data {
+                    do {
+                        let intelligenceResponse = try JSONDecoder().decode(IntelligenceResponse.self, from: responseData)
+                        listener.onSuccess(response: intelligenceResponse)
+                    } catch {
+                        let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Failed to decode response data: \(error.localizedDescription)")
+                        listener.onError(error: errorObj)
+                    }
+                } else {
+                    let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Failed to parse response data.")
+                    listener.onError(error: errorObj)
+                }
+            }.resume()
             
-            
-            /// For testing purpose
-            let intelligenceResponse = IntelligenceResponse(
-                deviceId: dataRequest.deviceParams.iOSDataRequest.iOSDeviceID,
-                requestId: dataRequest.requestId,
-                issimulatorDetected: dataRequest.deviceParams.iOSDataRequest.simulator,
-                isJailbroken: dataRequest.deviceParams.iOSDataRequest.jailBroken,
-                isVpnEnabled: dataRequest.deviceParams.iOSDataRequest.isVpn,
-                isGeoSpoofed: dataRequest.deviceParams.iOSDataRequest.isGeoSpoofed,
-                isAppTamperedL: dataRequest.deviceParams.iOSDataRequest.isAppTampering,
-                isHooked: dataRequest.deviceParams.iOSDataRequest.hooking,
-                isProxyDetected: dataRequest.deviceParams.iOSDataRequest.proxy,
-                isMirroredScreenDetected: dataRequest.deviceParams.iOSDataRequest.mirroredScreen
-            )
-            listener.onSuccess(response: intelligenceResponse)
+//            /// For testing purpose
+//            let intelligenceResponse = IntelligenceResponse(
+//                deviceId: dataRequest.deviceParams.iOSDataRequest.iOSDeviceID,
+//                requestId: dataRequest.requestId,
+//                issimulatorDetected: dataRequest.deviceParams.iOSDataRequest.simulator,
+//                isJailbroken: dataRequest.deviceParams.iOSDataRequest.jailBroken,
+//                isVpnEnabled: dataRequest.deviceParams.iOSDataRequest.isVpn,
+//                isGeoSpoofed: dataRequest.deviceParams.iOSDataRequest.isGeoSpoofed,
+//                isAppTamperedL: dataRequest.deviceParams.iOSDataRequest.isAppTampering,
+//                isHooked: dataRequest.deviceParams.iOSDataRequest.hooking,
+//                isProxyDetected: dataRequest.deviceParams.iOSDataRequest.proxy,
+//                isMirroredScreenDetected: dataRequest.deviceParams.iOSDataRequest.mirroredScreen
+//            )
+//            listener.onSuccess(response: intelligenceResponse)
         }catch{
             let errorMessage = "Failed to encode request data: \(error.localizedDescription)"
             let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: errorMessage)
             listener.onError(error: errorObj)
         }
     }
-    
+
     
 }
