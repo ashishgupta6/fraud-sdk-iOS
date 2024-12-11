@@ -89,6 +89,7 @@ class ViewController: UIViewController {
         Utils.requestPermissionForIDFA()
         Utils.requestLocationPermission()
         
+        label1.text = "Session Id: \(sign3Intelligence.getSessionId())"
         sign3Intelligence.getIntelligence(listener: listener)
         
     }

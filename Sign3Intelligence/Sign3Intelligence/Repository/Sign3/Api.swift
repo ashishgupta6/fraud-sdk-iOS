@@ -116,98 +116,120 @@ internal struct Api{
             completion(.error(error.localizedDescription))
         }
     }
-    
-    internal func getScore(_ dataRequest: DataRequest, _ sign3Intelligence: Sign3IntelligenceInternal, _ source: String, listener: IntelligenceResponseListener) {
+
+    internal func getScore(_ dataRequest: DataRequest, _ sign3Intelligence: Sign3IntelligenceInternal, _ source: String, completion: @escaping (Resource<IntelligenceResponse>) -> Void) {
         do {
+            // Testing purpose (commented out for now)
+            // let exampleString = "Ashish Gupta"
+            // Log.i("Before Zip", exampleString)
+            // let inputData = try JSONEncoder().encode(exampleString)
+            // let data = gzip(inputData, COMPRESSION_STREAM_ENCODE)
+            // Log.i("Compressed Data", data?.base64EncodedString() ?? "demo")
+            // guard let compressedData = Data(base64Encoded: data?.base64EncodedString() ?? "") else { return Resource.error("") }
+            // let unzip = gzip(compressedData, COMPRESSION_STREAM_DECODE)
+            // let decompressedString = unzip.flatMap { String(data: $0, encoding: .utf8) }
+            // Log.i("After Zip", decompressedString ?? "demo")
+
             let jsonData = try JSONEncoder().encode(dataRequest)
-            let payloadJson = Utils.convertToJson(dataRequest)
-            let byteArray = jsonData.base64EncodedString()
-//            let byteArray = gzip(payloadJson)
-            
-//            Log.i("PATLOADJSON",payloadJson)
-            Log.i("PATLOADJSON2",jsonData.description)
-            
-            guard let jsonString = String(data: jsonData, encoding: .utf8) else {
-                let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Failed to convert request data to JSON string")
-                listener.onError(error: errorObj)
+            let byteArray = gzip(jsonData, COMPRESSION_STREAM_ENCODE)
+            guard String(data: jsonData, encoding: .utf8) != nil else {
+                completion(Resource.error("Failed to convert request data to JSON string"))
                 return
             }
-            
+
             let iv = CryptoGCM.getIvHeader()
-            
-            guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v3/userInsights?cstate=false") else {
-                let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Invalid or missing base URL")
-                listener.onError(error: errorObj)
+
+            guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v3/userInsights?cstate=true") else {
+                completion(Resource.error("Invalid or missing base URL"))
                 return
             }
-//            let rawBody: String
-//            do {
-//                rawBody = try CryptoGCM.encrypt(byteArray, iv)
-//            } catch {
-//                let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Encryption failed: \(error.localizedDescription)")
-//                listener.onError(error: errorObj)
-//                return
-//            }
+
+            let rawBody: String
+            do {
+                rawBody = try CryptoGCM.encrypt(byteArray?.base64EncodedString() ?? "", iv)
+            } catch {
+                completion(Resource.error("Encryption failed: \(error.localizedDescription)"))
+                return
+            }
 
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue(iv.base64EncodedString(), forHTTPHeaderField: CryptoGCM.GET_IV_HEADER)
-//            request.httpBody = rawBody.data(using: .utf8)
-            request.httpBody = jsonData
+            request.httpBody = rawBody.data(using: .utf8)
             headerProvider.getCommonHeaders().forEach { key, value in
                 request.setValue(value, forHTTPHeaderField: key)
             }
-            
+
+            // Make network request
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     let errorMessage = "Network error: \(error.localizedDescription)"
-                    let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: errorMessage)
-                    listener.onError(error: errorObj)
+                    completion(Resource.error(errorMessage))
                     return
                 }
-                
+
                 guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                    let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Invalid response format")
-                    listener.onError(error: errorObj)
+                    completion(Resource.error("Invalid response format"))
                     return
                 }
-                
-                // Parse the response and pass the IntelligenceResponse object to the listener
+
+                // Parse the response and pass the IntelligenceResponse object to the completion handler
                 if let responseData = data {
                     do {
                         let intelligenceResponse = try JSONDecoder().decode(IntelligenceResponse.self, from: responseData)
-                        listener.onSuccess(response: intelligenceResponse)
+                        completion(Resource.success(intelligenceResponse))
                     } catch {
-                        let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Failed to decode response data: \(error.localizedDescription)")
-                        listener.onError(error: errorObj)
+                        completion(Resource.error("Failed to decode response data: \(error.localizedDescription)"))
                     }
                 } else {
-                    let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Failed to parse response data.")
-                    listener.onError(error: errorObj)
+                    completion(Resource.error("Failed to parse response data."))
                 }
             }.resume()
-            
-//            /// For testing purpose
-//            let intelligenceResponse = IntelligenceResponse(
-//                deviceId: dataRequest.deviceParams.iOSDataRequest.iOSDeviceID,
-//                requestId: dataRequest.requestId,
-//                issimulatorDetected: dataRequest.deviceParams.iOSDataRequest.simulator,
-//                isJailbroken: dataRequest.deviceParams.iOSDataRequest.jailBroken,
-//                isVpnEnabled: dataRequest.deviceParams.iOSDataRequest.isVpn,
-//                isGeoSpoofed: dataRequest.deviceParams.iOSDataRequest.isGeoSpoofed,
-//                isAppTamperedL: dataRequest.deviceParams.iOSDataRequest.isAppTampering,
-//                isHooked: dataRequest.deviceParams.iOSDataRequest.hooking,
-//                isProxyDetected: dataRequest.deviceParams.iOSDataRequest.proxy,
-//                isMirroredScreenDetected: dataRequest.deviceParams.iOSDataRequest.mirroredScreen
-//            )
-//            listener.onSuccess(response: intelligenceResponse)
-        }catch{
+        } catch {
             let errorMessage = "Failed to encode request data: \(error.localizedDescription)"
-            let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: errorMessage)
-            listener.onError(error: errorObj)
+            completion(Resource.error(errorMessage))
         }
     }
 
     
+    private func gzip(_ data: Data, _ operation: compression_stream_operation) -> Data? {
+        let streamPointer = UnsafeMutablePointer<compression_stream>.allocate(capacity: 1)
+        defer { streamPointer.deallocate() }
+
+        var stream = streamPointer.pointee
+        var status = compression_stream_init(&stream, operation, Algorithm.zlib.rawValue)
+        guard status == COMPRESSION_STATUS_OK else { return nil }
+
+        defer { compression_stream_destroy(&stream) }
+
+        let bufferSize = 64 * 1024
+        let destinationPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+        defer { destinationPointer.deallocate() }
+
+        var outputData = Data()
+        data.withUnsafeBytes { (sourcePointer: UnsafeRawBufferPointer) in
+            guard let sourceBaseAddress = sourcePointer.baseAddress else { return }
+
+            stream.src_ptr = sourceBaseAddress.assumingMemoryBound(to: UInt8.self)
+            stream.src_size = data.count
+
+            repeat {
+                stream.dst_ptr = destinationPointer
+                stream.dst_size = bufferSize
+
+                status = compression_stream_process(&stream, Int32(COMPRESSION_STREAM_FINALIZE.rawValue))
+
+                switch status {
+                case COMPRESSION_STATUS_OK, COMPRESSION_STATUS_END:
+                    let outputSize = bufferSize - stream.dst_size
+                    outputData.append(destinationPointer, count: outputSize)
+                default:
+                    return
+                }
+            } while status == COMPRESSION_STATUS_OK
+        }
+
+        return status == COMPRESSION_STATUS_END ? outputData : nil
+    }
 }

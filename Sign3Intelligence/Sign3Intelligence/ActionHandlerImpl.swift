@@ -23,7 +23,7 @@ internal struct ActionHandlerImpl {
         let requestId = Utils.getRequestID()
         Log.i("REQUEST_ID",requestId)
         Log.i("SESSION_ID",sessionId)
-
+        
         var dataCreationService = sign3Intelligence.dataCreationService
         let source = "GET"
         
@@ -53,7 +53,7 @@ internal struct ActionHandlerImpl {
         }
         
         let clientParams = Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence)
-
+        
         Log.i("ClientParams", Utils.convertToJson(clientParams))
         
         let dataRequest = DataRequest(
@@ -63,12 +63,21 @@ internal struct ActionHandlerImpl {
             clientParams: clientParams
         )
         
-        Api.shared.getScore(
-            dataRequest,
-            sign3Intelligence,
-            source,
-            listener: listener
-        )
+        Api.shared.getScore(dataRequest, sign3Intelligence, source) { result in
+            switch result.status {
+            case .success:
+                if let responseData = result.data {
+                    Log.i("IntelligenceResponse:", Utils.convertToJson(responseData))
+                    listener.onSuccess(response: responseData)
+                }
+            case .error:
+                let intelligenceError = IntelligenceError( requestId: requestId, errorMessage: "Sign3 Server Error")
+                listener.onError(error: intelligenceError)
+                Log.i("IntelligenceError:", result.message ?? "demo")
+            case .loading: break
+                /// Do something
+            }
+        }
     }
 }
 
