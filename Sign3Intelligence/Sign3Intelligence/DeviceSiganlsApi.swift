@@ -11,7 +11,6 @@ internal protocol DeviceSignalsApi{
     
     func getiOSDeviceId() async -> String
     func getIDFA() async -> String
-    func getUUID() async -> String
     func getCloudId() async -> String
     func getApplicationId() async -> String
     func getBatteryStatus() async -> String
@@ -23,9 +22,9 @@ internal protocol DeviceSignalsApi{
     func getDeviceModel() async -> String
     func getDeviceName() async -> String
     func getWifiIPAddress() async -> String
-    func getDisplayWidth() async -> CGFloat
-    func getDisplayHeight() async -> CGFloat
-    func getDisplayScale() async -> CGFloat
+    func getDisplayWidth() async -> Float
+    func getDisplayHeight() async -> Float
+    func getDisplayScale() async -> Float
     func getTimeZone() async -> String
     func getCurrentTime() async -> CLong
     func getCurrentLocal() async -> String
@@ -69,11 +68,11 @@ internal protocol DeviceSignalsApi{
     func isTouchExplorationEnabled() async -> Bool
     func getAlarmAlertPath() async -> String
     func getTime12Or24() async -> String
-    func getFontScale() async -> CGFloat
+    func getFontScale() async -> Float
     func getTextAutoReplace() async -> Bool
     func getTextAutoPunctuate() async -> Bool
     func getBootTime() async -> CLong
-    func getCurrentBrightness() async -> CGFloat
+    func getCurrentBrightness() async -> Float
     func getSimInfoList() async -> [String: String]
     func getDefaultBrowser() async -> String
     func getAudioVolumeCurrent() async -> Float

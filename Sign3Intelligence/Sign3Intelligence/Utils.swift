@@ -28,14 +28,6 @@ internal struct Utils{
         }
     }
     
-    internal static func showInfologs(tags: String, value: String){
-        print("\(tags): \(value)")
-    }
-    
-    internal static func showErrorlogs(tags: String, value: String){
-        print("\(tags): \(value)")
-    }
-    
     internal static func checkThread(){
         let thread = Thread.current
         let threadId = thread.value(forKeyPath: "private.seqNum") as? Int ?? 0
@@ -92,23 +84,57 @@ internal struct Utils{
         }
     }
     
-    internal static func encodeObject<T: Encodable>(tag: String, object: T){
-        do {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            let jsonData = try encoder.encode(object)
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                Utils.showInfologs(tags: tag, value: jsonString)
-            }
-        } catch {
-            print("Failed to encode: \(error)")
-        }
-    }
-    
     internal static func getSessionId() -> String{
         let uuid = UUID().uuidString.replacingOccurrences(of: "-", with: "")
         let sessionId = "\(uuid.prefix(8))-\(uuid.prefix(12).suffix(4))-\(uuid.prefix(16).suffix(4))-\(uuid.prefix(20).suffix(4))-\(uuid.suffix(12))"
         return sessionId
     }
     
+    internal static func pushEventMetric(_ eventMetric: EventMetric){
+        Sign3IntelligenceInternal.sdk?.pushEventMetric(eventMetric)
+    }
+    
+    internal static func getRequestID() -> String {
+        let uuid = UUID().uuidString.replacingOccurrences(of: "-", with: "")
+        let sessionId = "\(uuid.prefix(8))-\(uuid.prefix(12).suffix(4))-\(uuid.prefix(16).suffix(4))-\(uuid.prefix(20).suffix(4))-\(uuid.suffix(from: uuid.index(uuid.startIndex, offsetBy: 20)))"
+        return sessionId
+    }
+    
+    internal static func getClientParams(
+        source: String,
+        sign3Intelligence: Sign3IntelligenceInternal
+    ) -> ClientParams{
+        guard let options = sign3Intelligence.options else {
+            Log.e("getClientParams", "Option is nil")
+            return ClientParams.empty()
+        }
+        
+        if (sign3Intelligence.updateOptionCheck){
+            sign3Intelligence.updateOptionCheck = false
+            return ClientParams.fromOptions(options)
+        }
+        
+        switch source.first {
+        case "I":
+            return ClientParams.fromOptionsInit(options)
+        default:
+            return ClientParams.fromOptionsCron(options)
+        }
+    }
+    
+    internal static func convertToJson<T: Encodable>(_ object: T) -> String {
+        do {
+            let jsonData = try JSONEncoder().encode(object)
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                return jsonString
+            } else {
+                Log.e("ConvertToJson", "Failed to convert JSON data to string")
+                return ""
+            }
+        } catch {
+            Log.e("ConvertToJson", "Failed to convert object to JSON: \(error)")
+            return ""
+        }
+    }
+
 }

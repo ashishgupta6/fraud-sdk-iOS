@@ -59,7 +59,7 @@ internal struct Api{
                 }
                 
                 // Decrypt the response
-                guard let decryptedString = try CryptoGCM.decrypt(
+                guard let decryptedString = CryptoGCM.decrypt(
                     ciphertextBase64: String(data: responseData, encoding: .utf8) ?? "",
                     nonceBase64: base64Iv
                 ) else {
@@ -76,4 +76,108 @@ internal struct Api{
             }
         }.resume()
     }
+    
+    internal func pushEventMetric(_ eventMetric: EventMetric, completion: @escaping (Resource<String>) -> Void) {
+        do {
+            let jsonData = try JSONEncoder().encode(eventMetric)
+            guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+                return
+            }
+            
+            guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v1/analytics") else {
+                completion(.error("Invalid or missing base URL."))
+                return
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsonString.data(using: .utf8)
+            // Add headers to the request
+            headerProvider.getCommonHeaders().forEach { key, value in
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    completion(.error(error.localizedDescription))
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                    let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 500
+                    completion(.error("HTTP Error: \(statusCode)"))
+                    return
+                }
+                
+                completion(.success(jsonString))
+            }.resume()
+        }catch{
+            completion(.error(error.localizedDescription))
+        }
+    }
+    
+    internal func getScore(_ dataRequest: DataRequest, _ sign3Intelligence: Sign3IntelligenceInternal, _ source: String, listener: IntelligenceResponseListener) {
+        do {
+            let jsonData = try JSONEncoder().encode(dataRequest)
+//            let iv = CryptoGCM.getIvHeader()
+            guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+                let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Failed to convert request data to JSON string")
+                listener.onError(error: errorObj)
+                return
+            }
+            
+            guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v3/userInsights?cstate=true") else {
+                let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Invalid or missing base URL")
+                listener.onError(error: errorObj)
+                return
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("tenant-id", forHTTPHeaderField: CryptoGCM.GET_IV_HEADER)
+            request.httpBody = jsonString.data(using: .utf8)
+            headerProvider.getCommonHeaders().forEach { key, value in
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+            
+//            URLSession.shared.dataTask(with: request) { data, response, error in
+//                if let error = error {
+//                    let errorMessage = "Network error: \(error.localizedDescription)"
+//                    let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: errorMessage)
+//                    listener.onError(error: errorObj)
+//                    return
+//                }
+//                
+//                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+//                    let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: "Invalid response format")
+//                    listener.onError(error: errorObj)
+//                    return
+//                }
+//                
+//            }.resume()
+            
+            
+            /// For testing purpose
+            let intelligenceResponse = IntelligenceResponse(
+                deviceId: dataRequest.deviceParams.iOSDataRequest.iOSDeviceID,
+                requestId: dataRequest.requestId,
+                issimulatorDetected: dataRequest.deviceParams.iOSDataRequest.simulator,
+                isJailbroken: dataRequest.deviceParams.iOSDataRequest.jailBroken,
+                isVpnEnabled: dataRequest.deviceParams.iOSDataRequest.isVpn,
+                isGeoSpoofed: dataRequest.deviceParams.iOSDataRequest.isGeoSpoofed,
+                isAppTamperedL: dataRequest.deviceParams.iOSDataRequest.isAppTampering,
+                isHooked: dataRequest.deviceParams.iOSDataRequest.hooking,
+                isProxyDetected: dataRequest.deviceParams.iOSDataRequest.proxy,
+                isMirroredScreenDetected: dataRequest.deviceParams.iOSDataRequest.mirroredScreen
+            )
+            listener.onSuccess(response: intelligenceResponse)
+        }catch{
+            let errorMessage = "Failed to encode request data: \(error.localizedDescription)"
+            let errorObj = IntelligenceError(requestId: dataRequest.requestId, errorMessage: errorMessage)
+            listener.onError(error: errorObj)
+        }
+    }
+    
+    
 }

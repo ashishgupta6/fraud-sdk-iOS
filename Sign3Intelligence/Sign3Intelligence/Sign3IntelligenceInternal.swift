@@ -12,9 +12,12 @@ internal class Sign3IntelligenceInternal{
     internal lazy var userDefaultsManager = UserDefaultsManager()
     internal var options: Options?
     internal var isReady: Bool = false
-    internal lazy var appSessionId: String = Utils.getSessionId()
+    internal let appSessionId: String = Utils.getSessionId()
     internal var keyProvider: BaseKey?
-    
+    internal lazy var actionHandlerImpl = ActionHandlerImpl(sign3Intelligence: self)
+    internal lazy var dataCreationService = DataCreationService()
+    internal var deviceParam: DeviceParams?
+    internal var updateOptionCheck: Bool = false
     internal static func getInstance() -> Sign3IntelligenceInternal {
         if sdk == nil {
             synchronized(Sign3IntelligenceInternal.self) {
@@ -77,31 +80,20 @@ internal class Sign3IntelligenceInternal{
                 .setMerchantId(merchantId)
                 .setAdditionalAttributes(additionalAttributes)
                 .build()
-            
-            Utils.encodeObject(tag: "TAG_UPDATED_OPTIONS", object: self.options)
+            updateOptionCheck = true
         }catch{
-            Utils.showErrorlogs(tags: "TAG_UPDATED_OPTIONS", value: error.localizedDescription)
+            updateOptionCheck = false
         }
     }
     
-    internal func getIntelligence(completion: @escaping ([String: Any]) -> Void) {
-        var intelligenceData: [String: Any] = [:]
-        
+    internal func getIntelligence(listener: IntelligenceResponseListener) {
         DispatchQueue.global().async {
             Task.detached {
-                // Fetching data from the displayAllSignals method
-                let data = await DataCreationService.displayAllSignals()
-                
-                // Merge the data into the intelligenceData dictionary
-                intelligenceData.merge(data) { (_, new) in new }
-                
-                // Call the completion handler on the main thread after the data is collected
-                DispatchQueue.main.async {
-                    completion(intelligenceData)
-                }
+                await self.actionHandlerImpl.handle(listener: listener)
             }
         }
     }
+    
     internal func initAsync(_ options: Options,_ completion: @escaping (Bool) -> Void) {
         DispatchQueue.global().async{
             let result = self.initialize(options: options)
@@ -118,7 +110,7 @@ internal class Sign3IntelligenceInternal{
                     isReady = try initMandatoryParams(options)
                     initMandatoryParamsAsync()
                 }catch{
-                    Utils.showErrorlogs(tags: "TAG_SdkInit:", value: error.localizedDescription)
+                    Log.e("SdkInit:", error.localizedDescription)
                 }
             }
             
@@ -131,15 +123,12 @@ internal class Sign3IntelligenceInternal{
         self.options = options
         self.options = options.toBuilder().setSessionId(appSessionId).build()
         keyProvider = updateKeyProvider(options)
-        //        Utils.encodeObject(tag: "TAG_OPTIONS", object: options)
-        //        Utils.showInfologs(tags: "TAG_BASE_URL", value: keyProvider?.baseUrl ?? "demo")
         do{
             try CryptoGCM.initialize(options.clientSecret, options.clientId)
             isSuccess = true
         }catch{
             isSuccess = false
-            Utils.showErrorlogs(tags: "TAG_cryptoFailed", value: error.localizedDescription)
-            
+            Log.e("cryptoFailed:", error.localizedDescription)
         }
         return isSuccess
     }
@@ -165,8 +154,23 @@ internal class Sign3IntelligenceInternal{
     }
     
     internal func startMandatoryCalls() {
-        /// Init Config 
+        /// Init Config
         ConfigManager.initConfig()
+    }
+    
+    internal func pushEventMetric(_ eventMetric: EventMetric){
+        Api.shared.pushEventMetric(eventMetric){resource in
+            switch resource.status{
+            case .success:
+                Log.i("pushEvent: ", "\(String(describing: resource.data))")
+                break
+            case .error:
+                Log.e("pushEvent: ", "\(String(describing: resource.message))")
+                break
+            case .loading:
+                Log.i("pushEvent: ", "\(String(describing: resource.message))")
+            }
+        }
     }
 }
 

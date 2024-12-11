@@ -66,7 +66,7 @@ internal class UserDefaultsManager {
             return nil
         }
         let location = "Latitude: \(latitude), Longitude: \(longitude), Altitude: \(altitude), Timestamp: \(timeStamp)"
-        Utils.showInfologs(tags: "TAG_SAVED_LOCATION", value: location)
+        Log.i("SAVED_LOCATION",location)
         return Location(latitude: latitude, longitude: longitude, altitude: altitude, timeStamp: timeStamp)
     }
     

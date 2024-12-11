@@ -21,7 +21,7 @@ internal class LocationSpoffer {
             function: {
                 // Check if location permission is granted
                 guard Utils.checkLocationPermission() else {
-                    Utils.showInfologs(tags: "Permission Denied", value: "Location permission not granted")
+                    Log.e("Permission Denied","Location permission not granted")
                     return false
                 }
                 

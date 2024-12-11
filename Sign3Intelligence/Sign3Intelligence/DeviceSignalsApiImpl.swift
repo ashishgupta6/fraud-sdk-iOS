@@ -81,17 +81,6 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         }
     }
     
-    func getUUID() async -> String {
-        return await Utils.getDeviceSignals(
-            functionName: "getUUID",
-            requestId: UUID().uuidString,
-            defaultValue: "Unknown",
-            function: {
-                return UUID().uuidString
-            }
-        )
-    }
-    
     func getCloudId() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getCloudId",
@@ -298,35 +287,35 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getDisplayScale() async -> CGFloat {
+    func getDisplayScale() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getDisplayScale",
             requestId: UUID().uuidString,
             defaultValue: 1.0,
             function: {
-                return await UIScreen.main.scale
+                return await Float(UIScreen.main.scale)
             }
         )
     }
     
-    func getDisplayWidth() async -> CGFloat {
+    func getDisplayWidth() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getDisplayWidth",
             requestId: UUID().uuidString,
             defaultValue: 0.0,
             function: {
-                return await UIScreen.main.bounds.size.height
+                return await Float(UIScreen.main.bounds.size.height)
             }
         )
     }
     
-    func getDisplayHeight() async -> CGFloat {
+    func getDisplayHeight() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getDisplayHeight",
             requestId: UUID().uuidString,
             defaultValue: 0.0,
             function: {
-                return await UIScreen.main.bounds.size.width
+                return await Float(UIScreen.main.bounds.size.width)
             }
         )
     }
@@ -839,7 +828,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
             function: {
                 // Check if location permission is granted
                 guard Utils.checkLocationPermission() else {
-                    Utils.showInfologs(tags: "Permission Denied", value: "Location permission not granted")
+                    Log.e("Permission Denied", "Location permission not granted")
                     return Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 0)
                 }
                 
@@ -1213,7 +1202,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getFontScale() async -> CGFloat {
+    func getFontScale() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getFontScale",
             requestId: UUID().uuidString,
@@ -1221,7 +1210,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
             function: {
                 let font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
                 let scaledFont = UIFontMetrics.default.scaledFont(for: font)
-                return scaledFont.pointSize / UIFont.systemFontSize
+                return Float(scaledFont.pointSize / UIFont.systemFontSize)
             }
         )
     }
@@ -1278,13 +1267,13 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getCurrentBrightness() async -> CGFloat {
+    func getCurrentBrightness() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getCurrentBrightness",
             requestId: UUID().uuidString,
             defaultValue: 0.0,
             function: {
-                return await UIScreen.main.brightness
+                return await Float(UIScreen.main.brightness)
             }
         )
     }

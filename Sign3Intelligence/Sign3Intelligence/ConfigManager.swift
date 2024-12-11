@@ -78,13 +78,13 @@ internal struct ConfigManager {
             case .success:
                 if let configResponse = resource.data {
                     self.config = configResponse
-                    Log.i("TAG_Response: ", "\(String(describing: self.config))")
+                    Log.i("getConfig: ", "\(Utils.convertToJson(config))")
                 }
             case .error:
-                Log.i("TAG_Error: ", "\(resource.message ?? "Unknown error")")
+                Log.e("getConfig: ", "\(resource.message ?? "Unknown error")")
                 self.config = Config.getDefault()
             case .loading:
-                Log.i("TAG_Config: ", "Loading Config")
+                Log.i("getConfig: ", "Loading Config")
             }
         }
     }

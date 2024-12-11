@@ -11,8 +11,10 @@ import AdSupport
 import Sign3Intelligence
 
 class ViewController: UIViewController {
-    let sign3Intelligence = Sign3Intelligence.getInstance()
+    static var shared: ViewController?
     
+    let sign3Intelligence = Sign3Intelligence.getInstance()
+    let listener = Sign3()
     
     private let textView: UITextView = {
         let textView = UITextView()
@@ -37,11 +39,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set the shared reference
+        ViewController.shared = self
         let titleLabel = UILabel()
         titleLabel.text = "Sign3 SDK"
         titleLabel.textColor = .white  // Set the text color
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-//        titleLabel.sizeToFit()
+        //        titleLabel.sizeToFit()
         navigationItem.titleView = titleLabel
         
         // Change the background color of the navigation bar
@@ -85,51 +89,69 @@ class ViewController: UIViewController {
         Utils.requestPermissionForIDFA()
         Utils.requestLocationPermission()
         
+        sign3Intelligence.getIntelligence(listener: listener)
         
-        label1.text = "Session Id: \(sign3Intelligence.getSessionId())"
-        sign3Intelligence.getIntelligence{intelligenceData in
-            if let jsonData = try? JSONSerialization.data(withJSONObject: intelligenceData, options: .prettyPrinted),
-               let jsonString = String(data: jsonData, encoding: .utf8) {
+    }
+    
+    class Sign3: IntelligenceResponseListener{
+        
+        func onSuccess(response: IntelligenceResponse) {
+            if let jsonString = response.toJson() {
                 DispatchQueue.main.async {
-                    self.textView.text = jsonString
-                    print(jsonString)
+                    ViewController.shared?.textView.text = jsonString
                 }
             }
         }
         
-        //        Sign3Intelligence.getInstance().updateOptions(updateOption:  UpdateOption.Builder()
-        //            .setPhoneNumber("1234567890")
-        //            .setUserId("12345")
-        //            .setPhoneInputType(PhoneInputType.GOOGLE_HINT)
-        //            .setOtpInputType(OtpInputType.AUTO_FILLED)
-        //            .setUserEventType(UserEventType.TRANSACTION)
-        //            .setMerchantId("1234567890")
-        //            .setAdditionalAttributes(
-        //                ["SIGN_UP_TIMESTAMP": String(Date().timeIntervalSince1970 * 1000),
-        //                 "SIGNUP_METHOD": "PASSWORD",
-        //                 "REFERRED_BY": "UserID",
-        //                 "PREFERRED_LANGUAGE": "English"
-        //                ]
-        //            ).build())
+        func onError(error: IntelligenceError) {
+            print("TAG_INTELLIGENCE_ERROR: \(error.errorMessage), \(error.requestId)")
+        }
     }
     
     // Action for the first button
     @objc func button1Tapped() {
         label1.text = "Session Id: \(sign3Intelligence.getSessionId())"
-        sign3Intelligence.getIntelligence{intelligenceData in
-            if let jsonData = try? JSONSerialization.data(withJSONObject: intelligenceData, options: .prettyPrinted),
-               let jsonString = String(data: jsonData, encoding: .utf8) {
-                DispatchQueue.main.async {
-                    self.textView.text = jsonString
-                    print(jsonString)
-                }
-            }
-        }
+        sign3Intelligence.getIntelligence(listener: listener)
     }
     
     // Action for the second button
     @objc func button2Tapped() {
-        print("Update Option")
+        Sign3Intelligence.getInstance().updateOptions(updateOption:  UpdateOption.Builder()
+            .setPhoneNumber("1234567890")
+            .setUserId("12345")
+            .setPhoneInputType(PhoneInputType.GOOGLE_HINT)
+            .setOtpInputType(OtpInputType.AUTO_FILLED)
+            .setUserEventType(UserEventType.TRANSACTION)
+            .setMerchantId("1234567890")
+            .setAdditionalAttributes(
+                ["SIGN_UP_TIMESTAMP": String(Date().timeIntervalSince1970 * 1000),
+                 "SIGNUP_METHOD": "PASSWORD",
+                 "REFERRED_BY": "UserID",
+                 "PREFERRED_LANGUAGE": "English"
+                ]
+            ).build())
+    }
+}
+
+extension IntelligenceResponse {
+    func toJson() -> String? {
+        let dictionary: [String: Any] = [
+            "deviceId": self.deviceId,
+            "requestId": self.requestId,
+            "issimulatorDetected": self.issimulatorDetected,
+            "isJailbroken": self.isJailbroken,
+            "isVpnEnabled": self.isVpnEnabled,
+            "isGeoSpoofed": self.isGeoSpoofed,
+            "isAppTamperedL": self.isAppTamperedL,
+            "isHooked": self.isHooked,
+            "isProxyDetected": self.isProxyDetected,
+            "isMirroredScreenDetected": self.isMirroredScreenDetected
+        ]
+        
+        if let jsonData = try? JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted) {
+            return String(data: jsonData, encoding: .utf8)
+        }
+        return nil
     }
 }
 

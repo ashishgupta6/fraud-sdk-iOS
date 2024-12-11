@@ -33,7 +33,7 @@ internal class LocationDetector: NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        Utils.showErrorlogs(tags: "Location Failed", value: error.localizedDescription)
+        Log.e("Location Failed", error.localizedDescription)
     }
     
 }

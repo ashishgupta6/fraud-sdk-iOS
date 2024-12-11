@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 internal struct Config: Codable {
     let continuousIntegrationConfig: ContinuousIntegrationConfig
     let knownDangerousAppsPackages: [String]?

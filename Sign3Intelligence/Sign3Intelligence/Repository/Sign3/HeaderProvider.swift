@@ -27,7 +27,7 @@ internal class HeaderProvider{
             "app-version-name": getiOSAppVersion(),
             "sdk-version-code": getFrameworkBuildNumber(),
             "sdk-version-name": getFrameworkVersion(),
-            "client-ts-millis": "\(Date().timeIntervalSince1970 * 1000)"
+            "client-ts-millis": "\(Date().timeIntervalSince1970 * 1000)",
         ]
     }
     

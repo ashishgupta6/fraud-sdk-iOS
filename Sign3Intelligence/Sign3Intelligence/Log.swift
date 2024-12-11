@@ -36,11 +36,11 @@ struct Log {
             let logger = Logger(subsystem: subsystem, category: tag)
             switch type {
             case "DEBUG":
-                logger.debug("🟡 \(message, privacy: .public) 🟡")
+                logger.debug("🟡 TAG_\(tag) \(message, privacy: .public) 🟡")
             case "ERROR":
-                logger.error("🔴 \(message, privacy: .public) 🔴")
+                logger.error("🔴 TAG_\(tag) \(message, privacy: .public) 🔴")
             case "INFO":
-                logger.info("⚪️ \(message, privacy: .public) ⚪️")
+                logger.info("⚪️ TAG_\(tag) \(message, privacy: .public) ⚪️")
             default:
                 break
             }
