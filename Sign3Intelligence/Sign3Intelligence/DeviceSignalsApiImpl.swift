@@ -174,52 +174,55 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    func getFreeDiskSpace() async -> String {
+    func getFreeDiskSpace() async -> CLong {
         return await Utils.getDeviceSignals(
             functionName: "getFreeDiskSpace",
             requestId: UUID().uuidString,
-            defaultValue: "Unknown",
-            function: {
-                if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
-                   let totalSpace = attributes[.systemSize] as? Int64 {
-                    return ByteCountFormatter.string(fromByteCount: totalSpace, countStyle: .file)
-                } else {
-                    return "Unable to retrieve total disk space"
-                }
-            }
-        )
-    }
-    
-    func getTotalDiskSpace() async -> String {
-        return await Utils.getDeviceSignals(
-            functionName: "getTotalDiskSpace",
-            requestId: UUID().uuidString,
-            defaultValue: "Unknown",
+            defaultValue: -1,
             function: {
                 if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
                    let freeSpace = attributes[.systemFreeSize] as? Int64 {
-                    return ByteCountFormatter.string(fromByteCount: freeSpace, countStyle: .file)
+                    return CLong(freeSpace)
+//                    return ByteCountFormatter.string(fromByteCount: freeSpace, countStyle: .file)
                 } else {
-                    return "Unable to retrieve free disk space"
+                    return -1
                 }
             }
         )
     }
     
-    func getUsedDiskSpace() async -> String {
+    func getTotalDiskSpace() async -> CLong {
+        return await Utils.getDeviceSignals(
+            functionName: "getTotalDiskSpace",
+            requestId: UUID().uuidString,
+            defaultValue: -1,
+            function: {
+                if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
+                   let totalSpace = attributes[.systemSize] as? Int64 {
+                    return CLong(totalSpace)
+//                   return ByteCountFormatter.string(fromByteCount: totalSpace, countStyle: .file)
+                } else {
+                    return -1
+                }
+            }
+        )
+    }
+    
+    func getUsedDiskSpace() async -> CLong {
         return await Utils.getDeviceSignals(
             functionName: "getUsedDiskSpace",
             requestId: UUID().uuidString,
-            defaultValue: "Unknown",
+            defaultValue: -1,
             function: {
                 let fileManager = FileManager.default
                 let attributes = try fileManager.attributesOfFileSystem(forPath: NSHomeDirectory())
                 if let totalSpace = attributes[.systemSize] as? NSNumber,
                    let freeSpace = attributes[.systemFreeSize] as? NSNumber {
                     let usedSpace = totalSpace.int64Value - freeSpace.int64Value
-                    return ByteCountFormatter.string(fromByteCount: usedSpace, countStyle: .file)
+                    return CLong(usedSpace)
+//                    return ByteCountFormatter.string(fromByteCount: usedSpace, countStyle: .file)
                 } else {
-                    return "Unable to retrieve used disk space"
+                    return -1
                 }
                 
             }

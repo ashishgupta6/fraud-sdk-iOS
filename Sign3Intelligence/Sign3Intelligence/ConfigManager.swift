@@ -7,10 +7,10 @@
 
 import Foundation
 
-internal struct ConfigManager {
-    static let shared = ConfigManager()
+
+internal class ConfigManager {
     
-    private static var config: Config?
+    static var config: Config?
     
     static var isCronEnabled: Bool {
         guard let continuousIntegrationConfig = config?.continuousIntegrationConfig else { return false }

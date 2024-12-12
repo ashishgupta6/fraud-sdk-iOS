@@ -1,5 +1,5 @@
 //
-//  AndroidNetworkData.swift
+//  iOSNetworkData.swift
 //  Sign3Intelligence
 //
 //  Created by Ashish Gupta on 10/12/24.

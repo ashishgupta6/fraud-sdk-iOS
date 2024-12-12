@@ -38,7 +38,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Set the shared reference
         ViewController.shared = self
         let titleLabel = UILabel()
@@ -91,7 +90,6 @@ class ViewController: UIViewController {
         
         label1.text = "Session Id: \(sign3Intelligence.getSessionId())"
         sign3Intelligence.getIntelligence(listener: listener)
-        
     }
     
     class Sign3: IntelligenceResponseListener{
@@ -136,7 +134,7 @@ class ViewController: UIViewController {
 
 extension IntelligenceResponse {
     func toJson() -> String? {
-        let dictionary: [String: Any] = [
+        var dictionary: [String: Any] = [
             "deviceId": self.deviceId,
             "requestId": self.requestId,
             "issimulatorDetected": self.issimulatorDetected,
@@ -146,12 +144,23 @@ extension IntelligenceResponse {
             "isAppTamperedL": self.isAppTamperedL,
             "isHooked": self.isHooked,
             "isProxyDetected": self.isProxyDetected,
-            "isMirroredScreenDetected": self.isMirroredScreenDetected
+            "isMirroredScreenDetected": self.isMirroredScreenDetected,
         ]
         
+        // Include `gpsLocation` only if it's not nil
+        if let gpsLocation = self.gpsLocation {
+            dictionary["gpsLocation"] = [
+                "latitude": gpsLocation.latitude,
+                "longitude": gpsLocation.longitude,
+                "altitude": gpsLocation.altitude
+            ]
+        }
+        
+        // Convert to JSON
         if let jsonData = try? JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted) {
             return String(data: jsonData, encoding: .utf8)
         }
+        
         return nil
     }
 }

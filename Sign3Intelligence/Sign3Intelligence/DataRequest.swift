@@ -11,7 +11,7 @@ internal struct DataRequest: Codable {
     let requestId: String
     let sessionId: String
     let deviceParams: DeviceParams
-    let clientParams: ClientParams
+    var clientParams: ClientParams
     
     enum CodingKeys: String, CodingKey {
         case requestId = "a"

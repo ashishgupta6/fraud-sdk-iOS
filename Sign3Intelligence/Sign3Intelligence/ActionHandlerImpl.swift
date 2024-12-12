@@ -21,8 +21,6 @@ internal struct ActionHandlerImpl {
     func handle(listener: IntelligenceResponseListener) async {
         let sessionId = sign3Intelligence.appSessionId
         let requestId = Utils.getRequestID()
-        Log.i("REQUEST_ID",requestId)
-        Log.i("SESSION_ID",sessionId)
         
         var dataCreationService = sign3Intelligence.dataCreationService
         let source = "GET"
@@ -36,7 +34,7 @@ internal struct ActionHandlerImpl {
                 }
             }
         }catch {
-            Log.i("ActionHandler", error.localizedDescription)
+            listener.onError(error: IntelligenceError(requestId: requestId, errorMessage: error.localizedDescription))
         }
         
         let deviceParams: DeviceParams
@@ -52,28 +50,51 @@ internal struct ActionHandlerImpl {
             }
         }
         
-        let clientParams = Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence)
+        guard let options = sign3Intelligence.options else {
+            Log.e("getClientParams", "Option is nil")
+            return
+        }
+        let clientParams = ClientParams.fromOptions(options)
         
-        Log.i("ClientParams", Utils.convertToJson(clientParams))
+        let deviceParamsHash = DataHashUtil.generateHash(deviceParams, sign3Intelligence)
+        Log.i("New Hash_:", deviceParamsHash.description)
         
-        let dataRequest = DataRequest(
+        
+        var dataRequest = DataRequest(
             requestId: requestId,
             sessionId: sessionId,
             deviceParams: deviceParams,
             clientParams: clientParams
         )
         
-        Api.shared.getScore(dataRequest, sign3Intelligence, source) { result in
+        Api.shared.getScore(&dataRequest, sign3Intelligence, source) { result in
             switch result.status {
             case .success:
                 if let responseData = result.data {
-                    Log.i("IntelligenceResponse:", Utils.convertToJson(responseData))
+                    Log.i("Get Score:", Utils.convertToJson(responseData))
+                    Utils.updateData(
+                        response: responseData,
+                        sign3Intelligence: self.sign3Intelligence,
+                        deviceParams: deviceParams,
+                        deviceParamsHash: deviceParamsHash,
+                        clientParams: clientParams
+                    )
                     listener.onSuccess(response: responseData)
                 }
             case .error:
                 let intelligenceError = IntelligenceError( requestId: requestId, errorMessage: "Sign3 Server Error")
                 listener.onError(error: intelligenceError)
-                Log.i("IntelligenceError:", result.message ?? "demo")
+                Log.i("Get Score:", result.message ?? "demo")
+                Utils.pushEventMetric(
+                    EventMetric(
+                        timeRequiredInMs: Int64(Date().timeIntervalSince1970) * 1000,
+                        status: false,
+                        source: source,
+                        errorMessage: result.message,
+                        requestId: requestId,
+                        eventName: String(describing: ActionContextEvent.ERROR)
+                    )
+                )
             case .loading: break
                 /// Do something
             }

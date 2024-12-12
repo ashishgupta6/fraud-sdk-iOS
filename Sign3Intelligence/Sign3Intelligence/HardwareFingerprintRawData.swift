@@ -11,9 +11,9 @@ internal struct HardwareFingerprintRawData: Codable {
     let batteryState: String
     let batteryLevel: Float
     let cpuCount: Int
-    let usedDiskSpace: String
-    let freeDiskSpace: String
-    let totalDiskSpace: String
+    let usedDiskSpace: CLong
+    let freeDiskSpace: CLong
+    let totalDiskSpace: CLong
     let deviceModel: String
     let deviceName: String
     let wifiIPAddress: String

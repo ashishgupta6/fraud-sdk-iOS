@@ -16,6 +16,7 @@ public struct IntelligenceResponse: Codable {
     public let isHooked: Bool
     public let isProxyDetected: Bool
     public let isMirroredScreenDetected: Bool
+    public var gpsLocation: GPSLocation?
 
     enum CodingKeys: String, CodingKey {
         case deviceId = "deviceId"
@@ -28,6 +29,7 @@ public struct IntelligenceResponse: Codable {
         case isHooked = "isHooked"
         case isProxyDetected = "isProxyDetected"
         case isMirroredScreenDetected = "isMirroredScreenDetected"
+        case gpsLocation = "gpsLocation"
         
     }
 }

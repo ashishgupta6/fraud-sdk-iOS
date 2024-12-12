@@ -136,5 +136,22 @@ internal struct Utils{
             return ""
         }
     }
-
+    
+    internal static func updateData(
+        response: IntelligenceResponse,
+        sign3Intelligence: Sign3IntelligenceInternal,
+        deviceParams: DeviceParams,
+        deviceParamsHash: Int,
+        clientParams: ClientParams
+    ) {
+        sign3Intelligence.currentIntelligence = response
+        sign3Intelligence.currentIntelligence?.gpsLocation = deviceParams.iOSDataRequest.gpsLocation
+        sign3Intelligence.payloadHash = deviceParamsHash
+        sign3Intelligence.deviceParam = deviceParams
+        sign3Intelligence.availableMemory = deviceParams.deviceIdRawData.hardwareFingerprintRawData.freeDiskSpace
+        sign3Intelligence.sentClientParams = clientParams
+        sign3Intelligence.totalMemory = deviceParams.deviceIdRawData.hardwareFingerprintRawData.totalDiskSpace
+        sign3Intelligence.locationThresholdReached = false
+        sign3Intelligence.memoryThresholdReached = false
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  AndroidDataRequest.swift
+//  iOSDataRequest.swift
 //  Sign3Intelligence
 //
 //  Created by Ashish Gupta on 10/12/24.
@@ -20,6 +20,7 @@ internal struct iOSDataRequest: Codable {
     let hooking: Bool
     let proxy: Bool
     let mirroredScreen: Bool
+    let gpsLocation: GPSLocation
     
     enum CodingKeys: String, CodingKey {
         case iOSDeviceID = "a"
@@ -34,5 +35,6 @@ internal struct iOSDataRequest: Codable {
         case hooking = "j"
         case proxy = "k"
         case mirroredScreen = "l"
+        case gpsLocation = "m"
     }
 }

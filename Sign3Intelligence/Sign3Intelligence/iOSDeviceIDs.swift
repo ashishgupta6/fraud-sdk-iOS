@@ -1,5 +1,5 @@
 //
-//  AndroidDeviceIDs.swift
+//  iOSDeviceIDs.swift
 //  Sign3Intelligence
 //
 //  Created by Ashish Gupta on 10/12/24.
@@ -8,7 +8,7 @@
 import Foundation
 
 
-internal struct AndroidDeviceIDs: Codable {
+internal struct iOSDeviceIDs: Codable {
     let iOSDeviceId: String
     let cloudId: String
     let applicationId: String

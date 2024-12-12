@@ -16,9 +16,9 @@ internal protocol DeviceSignalsApi{
     func getBatteryStatus() async -> String
     func getBatteryLevel() async -> Float
     func getCpuCount() async -> Int
-    func getTotalDiskSpace() async -> String
-    func getFreeDiskSpace() async -> String
-    func getUsedDiskSpace() async -> String
+    func getTotalDiskSpace() async -> CLong
+    func getFreeDiskSpace() async -> CLong
+    func getUsedDiskSpace() async -> CLong
     func getDeviceModel() async -> String
     func getDeviceName() async -> String
     func getWifiIPAddress() async -> String

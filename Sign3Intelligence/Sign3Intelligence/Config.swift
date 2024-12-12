@@ -22,7 +22,7 @@ internal struct Config: Codable {
 
     // Coding keys for JSON mapping
     enum CodingKeys: String, CodingKey {
-        case continuousIntegrationConfig
+        case continuousIntegrationConfig = "continuousIntegrationConfig"
         case knownDangerousAppsPackages = "knownDangerousAppsPackages"
         case knownRootCloakingPackages = "knownRootCloakingPackages"
         case remoteAppPackage = "remoteAppPackage"
@@ -42,11 +42,11 @@ internal struct Config: Codable {
             knownRootCloakingPackages: [],
             remoteAppPackage: [],
             hashKeyList: [
-                "isRooted", "isHooking", "isVpn", "isProxy", "isGeoSpoofed", "isEmulator",
-                "androidId", "isAppTampering", "isCloned", "isMirroredScreen", "latitude",
-                "longitude", "availableMemory", "simInfoList"
+                "isJailbroken", "isHooking", "isVpn", "isProxy", "isGeoSpoofed", "isSimulator",
+                "isMirroredScreen", "isAppTampering", "availableMemory", "totalMemory", "latitude",
+                "longitude"
             ],
-            mixPanelKey: Bundle.main.object(forInfoDictionaryKey: "MIXPANEL_KEY") as? String,
+            mixPanelKey: "",
             fetchSignals: true,
             latLongThreshold: 1000.0, // 1 KM
             memoryThreshold: 3221225472, // 3 GB
@@ -67,7 +67,7 @@ struct ContinuousIntegrationConfig: Codable {
 
     // Coding keys for JSON mapping
     enum CodingKeys: String, CodingKey {
-        case enabled
+        case enabled = "enabled"
         case cronEnabled = "cronEnabled"
         case cronIntervalInSecs = "cronIntervalInSecs"
         case appResumeEnabled = "appResumeEnabled"

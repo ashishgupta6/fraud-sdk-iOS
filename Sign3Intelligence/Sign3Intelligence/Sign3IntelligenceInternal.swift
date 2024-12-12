@@ -15,9 +15,19 @@ internal class Sign3IntelligenceInternal{
     internal let appSessionId: String = Utils.getSessionId()
     internal var keyProvider: BaseKey?
     internal lazy var actionHandlerImpl = ActionHandlerImpl(sign3Intelligence: self)
+    internal lazy var actionHandlerContinuousIntegrationImpl = ActionHandlerContinuousIntegrationImpl(sign3Intelligence: self)
     internal lazy var dataCreationService = DataCreationService()
     internal var deviceParam: DeviceParams?
     internal var updateOptionCheck: Bool = false
+    private var cronTrigger: CronTrigger? = nil
+    internal var availableMemory: CLong? = nil
+    internal var totalMemory: CLong? = nil
+    internal var memoryThresholdReached: Bool = false
+    internal var locationThresholdReached: Bool = false
+    internal var currentIntelligence: IntelligenceResponse? = nil
+    internal var sentClientParams : ClientParams = ClientParams.empty()
+    internal var payloadHash: Int = -1
+    
     internal static func getInstance() -> Sign3IntelligenceInternal {
         if sdk == nil {
             synchronized(Sign3IntelligenceInternal.self) {
@@ -86,16 +96,8 @@ internal class Sign3IntelligenceInternal{
         }
     }
     
-    internal func getIntelligence(listener: IntelligenceResponseListener) {
-        DispatchQueue.global().async {
-            Task.detached {
-                await self.actionHandlerImpl.handle(listener: listener)
-            }
-        }
-    }
-    
     internal func initAsync(_ options: Options,_ completion: @escaping (Bool) -> Void) {
-        DispatchQueue.global().async{
+        DispatchQueue.global(qos: .userInitiated).async{
             let result = self.initialize(options: options)
             DispatchQueue.main.async {
                 completion(result)
@@ -111,6 +113,16 @@ internal class Sign3IntelligenceInternal{
                     initMandatoryParamsAsync()
                 }catch{
                     Log.e("SdkInit:", error.localizedDescription)
+                    Utils.pushEventMetric(
+                        EventMetric(
+                            timeRequiredInMs: Int64(Date().timeIntervalSince1970) * 1000,
+                            status: false,
+                            source: String(describing: ActionContextSource.INIT),
+                            errorMessage: error.localizedDescription,
+                            requestId: "",
+                            eventName: String(describing: ActionContextEvent.CONFIG)
+                        )
+                    )
                 }
             }
             
@@ -145,17 +157,45 @@ internal class Sign3IntelligenceInternal{
         }
     }
     
-    internal func initMandatoryParamsAsync() {
-        DispatchQueue.global().async {
-            if (self.isReady){
-                self.startMandatoryCalls()
+    /// userInteractive: For UI-critical tasks like animations or instant touch feedback. Too high priority for your framework—avoid using it.
+    /// userInitiated: For user-triggered tasks requiring immediate results. Best for your framework if signal collection needs to be fast.
+    /// default: Standard priority for generic tasks. Suitable but not optimized for your framework's requirements.
+    /// utility: For long-running tasks with lower urgency, energy-efficient. Good for background data collection but not ideal for immediate results.
+    /// background: For non-urgent tasks invisible to the user, low priority. Too slow for your framework's needs.
+    /// unspecified: Leaves priority to the system; unpredictable. Not recommended for important tasks.
+    
+    internal func getIntelligence(listener: IntelligenceResponseListener) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            Task {
+                await self.actionHandlerImpl.handle(listener: listener)
             }
         }
     }
     
-    internal func startMandatoryCalls() {
+    internal func initMandatoryParamsAsync() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            Task{
+                if (self.isReady){
+                    await self.startMandatoryCalls()
+                }
+            }
+        }
+    }
+    
+    internal func startMandatoryCalls() async {
         /// Init Config
         ConfigManager.initConfig()
+        
+        /// Cron Start
+        if ConfigManager.isCronEnabled {
+            cronTrigger = CronTrigger.init(actionHandlerContinuousIntegrationImpl: actionHandlerContinuousIntegrationImpl)
+            cronTrigger?.initTrigger()
+        }
+        
+        /// Call On Start
+        if ConfigManager.callOnStart {
+            await actionHandlerContinuousIntegrationImpl.handle(source: ActionContextSource.INIT)
+        }
     }
     
     internal func pushEventMetric(_ eventMetric: EventMetric){

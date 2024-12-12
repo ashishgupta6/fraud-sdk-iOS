@@ -16,7 +16,6 @@ internal struct DataCreationService{
     }()
     
     internal mutating func getDeviceParams() async -> DeviceParams{
-        // Detectors
         let isVpnEnabled = await sign3IntelliegnceSdkApiImpl.isVpnDetected()
         let isSimulatorDetected = await sign3IntelliegnceSdkApiImpl.isSimulatorDetected()
         let isJainBrokenDetected = await sign3IntelliegnceSdkApiImpl.isJailBrokenDetected()
@@ -119,10 +118,15 @@ internal struct DataCreationService{
             isAppTampering: appTampering,
             hooking: hookingDetector,
             proxy: proxyDetector,
-            mirroredScreen: mirroredScreen
+            mirroredScreen: mirroredScreen,
+            gpsLocation: GPSLocation(
+                latitude: location.latitude,
+                longitude: location.longitude,
+                altitude: location.altitude
+            )
         )
         
-        let androidDeviceIDs = AndroidDeviceIDs(
+        let iOSDeviceIDs = iOSDeviceIDs(
             iOSDeviceId: deviceId,
             cloudId: cloudId,
             applicationId: appId,
@@ -217,7 +221,7 @@ internal struct DataCreationService{
         let deviceParams = DeviceParams(
             iOSDataRequest: iOSDataRequest,
             deviceIdRawData: iOSDeviceRawData(
-                androidDeviceIDs: androidDeviceIDs,
+                iOSDeviceIDs: iOSDeviceIDs,
                 deviceStateRawData: deviceStateRawData,
                 hardwareFingerprintRawData: hardwareFingerprintRawData,
                 installedAppsRawData: installedAppsRawData,
