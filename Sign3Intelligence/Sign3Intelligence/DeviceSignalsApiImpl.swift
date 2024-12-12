@@ -30,18 +30,18 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                 guard let id = await UIDevice.current.identifierForVendor?.uuidString else {
                     return "Unable to get device ID"
                 }
-//                let curDevice = DCDevice.current
-//                if curDevice.isSupported {
-//                    curDevice.generateToken(completionHandler: { (data, error) in
-//                        if let data = data {
-//                            // You will get a device-specific token here
-//                            let deviceToken = data.base64EncodedString()
-//                            print("Device token: \(deviceToken)")
-//                        } else if let error = error {
-//                            print("Error: \(error.localizedDescription)")
-//                        }
-//                    })
-//                }
+                //                let curDevice = DCDevice.current
+                //                if curDevice.isSupported {
+                //                    curDevice.generateToken(completionHandler: { (data, error) in
+                //                        if let data = data {
+                //                            // You will get a device-specific token here
+                //                            let deviceToken = data.base64EncodedString()
+                //                            print("Device token: \(deviceToken)")
+                //                        } else if let error = error {
+                //                            print("Error: \(error.localizedDescription)")
+                //                        }
+                //                    })
+                //                }
                 
                 return id
             }
@@ -183,7 +183,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                 if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
                    let freeSpace = attributes[.systemFreeSize] as? Int64 {
                     return CLong(freeSpace)
-//                    return ByteCountFormatter.string(fromByteCount: freeSpace, countStyle: .file)
+                    //                    return ByteCountFormatter.string(fromByteCount: freeSpace, countStyle: .file)
                 } else {
                     return -1
                 }
@@ -200,7 +200,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                 if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
                    let totalSpace = attributes[.systemSize] as? Int64 {
                     return CLong(totalSpace)
-//                   return ByteCountFormatter.string(fromByteCount: totalSpace, countStyle: .file)
+                    //                   return ByteCountFormatter.string(fromByteCount: totalSpace, countStyle: .file)
                 } else {
                     return -1
                 }
@@ -220,7 +220,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                    let freeSpace = attributes[.systemFreeSize] as? NSNumber {
                     let usedSpace = totalSpace.int64Value - freeSpace.int64Value
                     return CLong(usedSpace)
-//                    return ByteCountFormatter.string(fromByteCount: usedSpace, countStyle: .file)
+                    //                    return ByteCountFormatter.string(fromByteCount: usedSpace, countStyle: .file)
                 } else {
                     return -1
                 }
@@ -837,15 +837,21 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                 
                 // Use withCheckedContinuation to handle the location updates asynchronously
                 return await withCheckedContinuation { continuation in
+                    var hasResumed = false
                     DispatchQueue.main.async {
                         LocationFramework.shared.startUpdatingLocation { location in
+                            guard !hasResumed else {
+                                return  // Do nothing if the continuation has already been resumed
+                            }
+                            
                             let latitude = location.coordinate.latitude
                             let longitude = location.coordinate.longitude
                             let altitude = location.altitude
                             let timeStamp = location.timestamp
                             LocationFramework.shared.stopUpdatingLocation()
                             
-                            // Resume the continuation with the result
+                            // Mark continuation as resumed and return the result
+                            hasResumed = true
                             continuation.resume(returning: Location(latitude: latitude, longitude: longitude, altitude: altitude, timeStamp: Utils.dateToUnixTimestamp(timeStamp)))
                         }
                     }
