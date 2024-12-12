@@ -137,14 +137,14 @@ extension IntelligenceResponse {
         var dictionary: [String: Any] = [
             "deviceId": self.deviceId,
             "requestId": self.requestId,
-            "issimulatorDetected": self.issimulatorDetected,
-            "isJailbroken": self.isJailbroken,
-            "isVpnEnabled": self.isVpnEnabled,
-            "isGeoSpoofed": self.isGeoSpoofed,
-            "isAppTamperedL": self.isAppTamperedL,
-            "isHooked": self.isHooked,
-            "isProxyDetected": self.isProxyDetected,
-            "isMirroredScreenDetected": self.isMirroredScreenDetected,
+            "simulator": self.simulator,
+            "jailbroken": self.jailbroken,
+            "vpn": self.vpn,
+            "geoSpoofed": self.geoSpoofed,
+            "appTampering": self.appTampering,
+            "hooking": self.hooking,
+            "proxy": self.proxy,
+            "mirroredScreen": self.mirroredScreen,
         ]
         
         // Include `gpsLocation` only if it's not nil
