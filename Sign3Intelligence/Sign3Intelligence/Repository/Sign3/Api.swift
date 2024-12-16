@@ -57,7 +57,7 @@ internal struct Api{
             
             do {
                 // Attempt to retrieve and decode the IV from the headers
-                guard let base64Iv = httpResponse.allHeaderFields[CryptoGCM.GET_IV_HEADER] as? String,
+                guard let base64Iv = httpResponse.allHeaderFields[CryptoGCM.GET_IV_HEADER.uppercased()] as? String,
                       let _ = Data(base64Encoded: base64Iv) else {
                     completion(.error("Failed to retrieve or decode the IV from headers.", data: Config.getDefault()))
                     Log.i("After: ", "After API Hit: ")  // Log here if IV decoding fails
@@ -128,6 +128,20 @@ internal struct Api{
             completion(.error(error.localizedDescription))
         }
     }
+    internal func convertToJson<T: Encodable>(_ object: T) -> String {
+        do {
+          let jsonData = try JSONEncoder().encode(object)
+          if let jsonString = String(data: jsonData, encoding: .utf8) {
+            return jsonString
+          } else {
+            Log.e("ConvertToJson", "Failed to convert JSON data to string")
+            return ""
+          }
+        } catch {
+          Log.e("ConvertToJson", "Failed to convert object to JSON: \(error)")
+          return ""
+        }
+      }
 
     internal func getScore(_ dataRequest: inout DataRequest, _ sign3Intelligence: Sign3IntelligenceInternal, _ source: String, completion: @escaping (Resource<IntelligenceResponse>) -> Void) {
         do {
@@ -144,8 +158,15 @@ internal struct Api{
             dataRequest.clientParams = Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence)
             Log.i("ClientParams:", Utils.convertToJson(dataRequest.clientParams))
             
+            let actualData = dataRequest
+            Log.e("KKKKKKKK", convertToJson(actualData))
             let jsonData = try JSONEncoder().encode(dataRequest)
-            let byteArray = gzip(jsonData, COMPRESSION_STREAM_ENCODE)
+//            let byteArray = gzip(jsonData, COMPRESSION_STREAM_ENCODE)
+            let byteArray = zlibCompress(data: jsonData)
+            //let decodedCompressedJson = try JSONDecoder().decode(DataRequest.self, from: byteArray ?? Data())
+            let decompressed = zlibDecompress(data: byteArray!)
+            let decodedJsonData = try JSONDecoder().decode(DataRequest.self, from: decompressed!)
+            let convertedData: [UInt8] = [UInt8](byteArray!)
             guard String(data: jsonData, encoding: .utf8) != nil else {
                 completion(Resource.error("Failed to convert request data to JSON string"))
                 return
@@ -160,16 +181,18 @@ internal struct Api{
 
             let rawBody: String
             do {
+                let beforeEncrypt = byteArray?.base64EncodedString()
                 rawBody = try CryptoGCM.encrypt(byteArray?.base64EncodedString() ?? "", iv)
             } catch {
                 completion(Resource.error("Encryption failed: \(error.localizedDescription)"))
                 return
             }
 
+            let base64Iv = iv.base64EncodedString()
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue(iv.base64EncodedString(), forHTTPHeaderField: CryptoGCM.GET_IV_HEADER)
+            request.addValue(iv.base64EncodedString(), forHTTPHeaderField: CryptoGCM.GET_IV_HEADER.uppercased())
             request.httpBody = rawBody.data(using: .utf8)
             headerProvider.getCommonHeaders().forEach { key, value in
                 request.setValue(value, forHTTPHeaderField: key)
@@ -310,6 +333,48 @@ internal struct Api{
             completion(Resource.error(errorMessage))
         }
     }
+    
+    func zlibCompress(data: Data) -> Data? {
+        let str = String(data: data, encoding: .utf8)!
+        let destinationBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: data.count)
+        defer { destinationBuffer.deallocate() }
+        
+        let compressedSize = data.withUnsafeBytes { (sourcePointer: UnsafeRawBufferPointer) -> Int in
+            guard let sourceBaseAddress = sourcePointer.baseAddress else { return 0 }
+            return compression_encode_buffer(
+                destinationBuffer,
+                data.count,
+                sourceBaseAddress.bindMemory(to: UInt8.self, capacity: data.count),
+                data.count,
+                nil,
+                COMPRESSION_ZLIB
+            )
+        }
+        
+        guard compressedSize > 0 else { return nil }
+        let str2 = Data(bytes: destinationBuffer, count: compressedSize).base64EncodedString()
+        return Data(bytes: destinationBuffer, count: compressedSize)
+    }
+    
+    func zlibDecompress(data: Data) -> Data? {
+        let destinationBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: data.count * 4) // Allocate a larger buffer
+        defer { destinationBuffer.deallocate() }
+        
+        let decompressedSize = data.withUnsafeBytes { (sourcePointer: UnsafeRawBufferPointer) -> Int in
+            guard let sourceBaseAddress = sourcePointer.baseAddress else { return 0 }
+            return compression_decode_buffer(
+                destinationBuffer,
+                data.count * 4,
+                sourceBaseAddress.bindMemory(to: UInt8.self, capacity: data.count),
+                data.count,
+                nil,
+                COMPRESSION_ZLIB
+            )
+        }
+        
+        guard decompressedSize > 0 else { return nil }
+        return Data(bytes: destinationBuffer, count: decompressedSize)
+    }
 
     
     private func gzip(_ data: Data, _ operation: compression_stream_operation) -> Data? {
@@ -351,4 +416,6 @@ internal struct Api{
 
         return status == COMPRESSION_STATUS_END ? outputData : nil
     }
+    
+    
 }
