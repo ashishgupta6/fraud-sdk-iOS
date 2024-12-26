@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("App Delegate")
         // Override point for customization after application launch.
         let options = Options.Builder()
-            .setClientId("test_tenant")
-            .setClientSecret("secret-295OzNJj9L3nVUWQq56ACCN6f6zUiYGQlN8G7256")
+            .setClientId("test_tenant_ios")
+            .setClientSecret("secret-0ba302d5-6001-4462-a130-c413f87b689b")
             .setEnvironment(Environment.DEV)
             .build()
         

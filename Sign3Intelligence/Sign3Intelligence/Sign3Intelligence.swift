@@ -9,6 +9,7 @@ import Foundation
 
 import os.log
 import BackgroundTasks
+import DeviceCheck
 
 public final class Sign3Intelligence {
     private static var sdk: Sign3Intelligence?
@@ -34,6 +35,7 @@ public final class Sign3Intelligence {
     }
 
     public func getIntelligence(listener: IntelligenceResponseListener) {
+        generateDeviceToken()
         sign3IntelligenceInternal.getIntelligence(listener: listener)
     }
     
@@ -47,4 +49,19 @@ private func synchronized(_ lock: Any, _ closure: () -> Void) {
     closure()
     objc_sync_exit(lock)
 }
+
+func generateDeviceToken() {
+    let currentDevice = DCDevice.current
+    if currentDevice.isSupported {
+        currentDevice.generateToken(completionHandler: { (data, error) in
+            if let tokenData = data {
+                let base64TokenString = tokenData.base64EncodedString()
+                print("Token: \(tokenData)")
+            } else {
+                print("Error: \(error?.localizedDescription ?? "")")
+            }
+        })
+    }
+}
+
 
