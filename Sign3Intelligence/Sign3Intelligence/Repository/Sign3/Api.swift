@@ -8,7 +8,6 @@
 import Foundation
 import CryptoKit
 import Compression
-import Mixpanel
 
 internal struct Api{
     internal static let shared = Api()

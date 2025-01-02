@@ -58,6 +58,8 @@
 		39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF612CF60FFB0086203C /* MSHookChecker.swift */; };
 		39E738FE2C88826F002B24C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FD2C88826F002B24C8 /* Location.swift */; };
 		39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FF2C888F16002B24C8 /* LocationDetector.swift */; };
+		39EB9FF12D26C38700A93D27 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39EB9FF02D26C38700A93D27 /* Realm */; };
+		39EB9FF32D26C38700A93D27 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39EB9FF22D26C38700A93D27 /* RealmSwift */; };
 		39ED49012D0776C600584401 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49002D0776C600584401 /* ConfigManager.swift */; };
 		39ED49032D0776FD00584401 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49022D0776FD00584401 /* Config.swift */; };
 		39ED49052D07786000584401 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49042D07786000584401 /* Resource.swift */; };
@@ -184,6 +186,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39EB9FF32D26C38700A93D27 /* RealmSwift in Frameworks */,
+				39EB9FF12D26C38700A93D27 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,6 +959,19 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		39EB9FF02D26C38700A93D27 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79EA04A72D26BB0100DF873D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		39EB9FF22D26C38700A93D27 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79EA04A72D26BB0100DF873D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 398EB59D2C63BC6A002FC9CA /* Project object */;
 }

@@ -27,6 +27,7 @@ internal class Sign3IntelligenceInternal{
     internal var currentIntelligence: IntelligenceResponse? = nil
     internal var sentClientParams : ClientParams = ClientParams.empty()
     internal var payloadHash: Int = -1
+//    internal var mixpanel: MixpanelInstance? = nil
     
     internal static func getInstance() -> Sign3IntelligenceInternal {
         if sdk == nil {
