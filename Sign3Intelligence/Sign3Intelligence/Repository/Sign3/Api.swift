@@ -8,6 +8,7 @@
 import Foundation
 import CryptoKit
 import Compression
+import Mixpanel
 
 internal struct Api{
     internal static let shared = Api()
@@ -21,6 +22,78 @@ internal struct Api{
         self.clientId = Sign3IntelligenceInternal.sdk?.options?.clientId ?? ""
         self.clientSecret = Sign3IntelligenceInternal.sdk?.options?.clientSecret ?? ""
         self.headerProvider = HeaderProvider(clientId: clientId, clientSecret: clientSecret)
+    }
+    
+    internal func queryDeviceCheck(deviceToken: String ,completion: @escaping (Resource<String>) -> Void) {
+        guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v1/queryBits") else {
+            completion(.error("Invalid or missing base URL.", data: ""))
+            return
+        }
+        // Create a semaphore with an initial count of 0, which will block the thread
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        do {
+            var request = URLRequest(url: url)
+            let iv = CryptoGCM.getIvHeader()
+            request.httpMethod = "POST"
+            request.addValue(iv.base64EncodedString(), forHTTPHeaderField: CryptoGCM.GET_IV_HEADER)
+            request.httpBody = try CryptoGCM.encrypt(deviceToken, iv).data(using: .utf8)
+            
+            // Add headers to the request
+            headerProvider.getCommonHeaders().forEach { key, value in
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+            // Make the network request
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    completion(.error(error.localizedDescription, data: ""))
+                    Log.i("After: ", "After API Hit: ")  // This will log after the error is handled
+                    semaphore.signal()  // Signal that the API call is complete
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse,
+                      let responseData = data else {
+                    completion(.error("Missing or invalid response.", data: ""))
+                    Log.i("After: ", "After API Hit: \(String(data: data!, encoding: .utf8))")  // Log here for invalid response
+                    semaphore.signal()  // Signal that the API call is complete
+                    return
+                }
+                
+                
+//                // Attempt to retrieve and decode the IV from the headers
+//                guard let base64Iv = httpResponse.allHeaderFields[CryptoGCM.GET_IV_HEADER] as? String,
+//                      let _ = Data(base64Encoded: base64Iv) else {
+//                    completion(.error("Failed to retrieve or decode the IV from headers.", data: ""))
+//                    Log.i("After: ", "After API Hit: ")  // Log here if IV decoding fails
+//                    semaphore.signal()  // Signal that the API call is complete
+//                    return
+//                }
+//                
+//                // Decrypt the response
+//                guard let decryptedString = CryptoGCM.decrypt(
+//                    ciphertextBase64: String(data: responseData, encoding: .utf8) ?? "",
+//                    nonceBase64: base64Iv
+//                ) else {
+//                    completion(.error("Decryption failed.", data: ""))
+//                    Log.i("After: ", "After API Hit: ")  // Log here if decryption fails
+//                    semaphore.signal()  // Signal that the API call is complete
+//                    return
+//                }
+//                
+//                // Parse the decrypted JSON into the Config object
+//                let jsonData = Data(decryptedString.utf8)
+                completion(.success(String(data: data!, encoding: .utf8)))
+                semaphore.signal()  // Signal that the API call is complete
+                
+            }.resume() // Start the network request
+        } catch {
+            completion(.error(error.localizedDescription, data: ""))
+            semaphore.signal()  // Signal that the API call is complete
+        }
+        
+        // Block the current thread until the semaphore is signaled
+        semaphore.wait()
     }
     
     internal func getConfig(completion: @escaping (Resource<Config>) -> Void) {
@@ -57,7 +130,7 @@ internal struct Api{
             
             do {
                 // Attempt to retrieve and decode the IV from the headers
-                guard let base64Iv = httpResponse.allHeaderFields[CryptoGCM.GET_IV_HEADER.uppercased()] as? String,
+                guard let base64Iv = httpResponse.allHeaderFields[CryptoGCM.GET_IV_HEADER] as? String,
                       let _ = Data(base64Encoded: base64Iv) else {
                     completion(.error("Failed to retrieve or decode the IV from headers.", data: Config.getDefault()))
                     Log.i("After: ", "After API Hit: ")  // Log here if IV decoding fails
@@ -162,11 +235,11 @@ internal struct Api{
             Log.e("KKKKKKKK", convertToJson(actualData))
             let jsonData = try JSONEncoder().encode(dataRequest)
 //            let byteArray = gzip(jsonData, COMPRESSION_STREAM_ENCODE)
-            let byteArray = zlibCompress(data: jsonData)
+            let byteArray = zipString(jsonData)
             //let decodedCompressedJson = try JSONDecoder().decode(DataRequest.self, from: byteArray ?? Data())
-            let decompressed = zlibDecompress(data: byteArray!)
-            let decodedJsonData = try JSONDecoder().decode(DataRequest.self, from: decompressed!)
-            let convertedData: [UInt8] = [UInt8](byteArray!)
+//            let decompressed = zlibDecompress(data: byteArray!)
+//            let decodedJsonData = try JSONDecoder().decode(DataRequest.self, from: decompressed!)
+//            let convertedData: [UInt8] = [UInt8](byteArray!)
             guard String(data: jsonData, encoding: .utf8) != nil else {
                 completion(Resource.error("Failed to convert request data to JSON string"))
                 return
@@ -181,8 +254,8 @@ internal struct Api{
 
             let rawBody: String
             do {
-                let beforeEncrypt = byteArray?.base64EncodedString()
-                rawBody = try CryptoGCM.encrypt(byteArray?.base64EncodedString() ?? "", iv)
+                let beforeEncrypt = byteArray
+                rawBody = try CryptoGCM.encrypt(byteArray ?? "", iv)
             } catch {
                 completion(Resource.error("Encryption failed: \(error.localizedDescription)"))
                 return
@@ -252,7 +325,6 @@ internal struct Api{
         do {
             dataRequest.clientParams = Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence)
             Log.i("ClientParams:", Utils.convertToJson(dataRequest.clientParams))
-            
             let jsonData = try JSONEncoder().encode(dataRequest)
             let byteArray = gzip(jsonData, COMPRESSION_STREAM_ENCODE)
             guard String(data: jsonData, encoding: .utf8) != nil else {
@@ -332,6 +404,44 @@ internal struct Api{
             let errorMessage = "Failed to encode request data: \(error.localizedDescription)"
             completion(Resource.error(errorMessage))
         }
+    }
+    
+    func zipString(_ data: Data) -> String? {
+//        guard let data = string.data(using: .utf8) else {
+//            return nil
+//        }
+        
+        let pageSize = 4096
+        let destinationBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: pageSize)
+        defer { destinationBuffer.deallocate() }
+        
+        let algorithm = COMPRESSION_ZLIB
+        
+        let compressedData = NSMutableData()
+        
+        let sourceData = Array(data)
+        var sourceIndex = 0
+        
+        while sourceIndex < sourceData.count {
+            let count = compression_encode_buffer(
+                destinationBuffer,
+                pageSize,
+                sourceData.withUnsafeBufferPointer { $0.baseAddress! + sourceIndex },
+                Swift.min(pageSize, sourceData.count - sourceIndex),
+                nil,
+                algorithm
+            )
+            
+            if count == 0 {
+                return nil
+            }
+            
+            compressedData.append(destinationBuffer, length: count)
+            sourceIndex += pageSize
+        }
+        
+        // Convert compressed data to base64 string for safe transport
+        return compressedData.base64EncodedString()
     }
     
     func zlibCompress(data: Data) -> Data? {

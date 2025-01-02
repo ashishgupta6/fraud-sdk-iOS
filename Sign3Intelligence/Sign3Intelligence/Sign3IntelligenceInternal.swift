@@ -149,7 +149,7 @@ internal class Sign3IntelligenceInternal{
         switch options.environment{
         case .DEV:
             return DevKeyProvider()
-        case .PRE:
+        case .STAGING:
             return StagingKeyProvider()
         case .PROD:
             return ProdKeyProvider()

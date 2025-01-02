@@ -8,7 +8,7 @@
 import Foundation
 
 public enum Environment:String, Codable{
-    case PROD
     case DEV
-    case PRE
+    case STAGING
+    case PROD
 }
