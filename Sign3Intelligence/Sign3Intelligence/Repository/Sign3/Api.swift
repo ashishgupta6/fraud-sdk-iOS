@@ -313,6 +313,11 @@ internal struct Api{
                     altitude: dataRequest.deviceParams.networkData.networkLocation.altitude
                 )
             )
+            /// Get Response from RealmDataStorage
+            sign3Intelligence.realmDataStorage.fetchIntelligenceFromRealm{ response in
+                Log.i("Response From DB", Utils.convertToJson(response))
+            }
+            
             completion(Resource.success(intelligenceResponse))
         } catch {
             let errorMessage = "Failed to encode request data: \(error.localizedDescription)"
@@ -398,6 +403,9 @@ internal struct Api{
                     altitude: dataRequest.deviceParams.networkData.networkLocation.altitude
                 )
             )
+            /// Store Response in RealmDataStorage
+            sign3Intelligence.realmDataStorage.saveIntelligenceResponseToRealm(dataRequest, sign3Intelligence, intelligenceResponse)
+            
             completion(Resource.success(intelligenceResponse))
         } catch {
             let errorMessage = "Failed to encode request data: \(error.localizedDescription)"

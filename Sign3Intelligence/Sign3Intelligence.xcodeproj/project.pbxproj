@@ -59,6 +59,8 @@
 		39E738FE2C88826F002B24C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FD2C88826F002B24C8 /* Location.swift */; };
 		39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FF2C888F16002B24C8 /* LocationDetector.swift */; };
 		39EB9FF52D26C76C00A93D27 /* SdkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF42D26C76C00A93D27 /* SdkError.swift */; };
+		39EB9FFA2D26D8B600A93D27 /* RealmDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */; };
+		39EB9FFB2D26D8B600A93D27 /* IntelligenceResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF62D26D8B600A93D27 /* IntelligenceResponseObject.swift */; };
 		39ED49012D0776C600584401 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49002D0776C600584401 /* ConfigManager.swift */; };
 		39ED49032D0776FD00584401 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49022D0776FD00584401 /* Config.swift */; };
 		39ED49052D07786000584401 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49042D07786000584401 /* Resource.swift */; };
@@ -155,6 +157,8 @@
 		39E738FD2C88826F002B24C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		39E738FF2C888F16002B24C8 /* LocationDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetector.swift; sourceTree = "<group>"; };
 		39EB9FF42D26C76C00A93D27 /* SdkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdkError.swift; sourceTree = "<group>"; };
+		39EB9FF62D26D8B600A93D27 /* IntelligenceResponseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponseObject.swift; sourceTree = "<group>"; };
+		39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataStorage.swift; sourceTree = "<group>"; };
 		39ED49002D0776C600584401 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		39ED49022D0776FD00584401 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		39ED49042D07786000584401 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
@@ -376,6 +380,7 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
+				39EB9FF92D26D8B600A93D27 /* RealmDB */,
 				39577E682CE4AE2C00DCD69F /* Repository */,
 				390D71F12C962AF20090147D /* Encryption */,
 				397AF5342C92036A004F74D9 /* Headers */,
@@ -457,6 +462,23 @@
 				39C7754C2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift */,
 			);
 			name = Detectors;
+			sourceTree = "<group>";
+		};
+		39EB9FF72D26D8B600A93D27 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				39EB9FF62D26D8B600A93D27 /* IntelligenceResponseObject.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		39EB9FF92D26D8B600A93D27 /* RealmDB */ = {
+			isa = PBXGroup;
+			children = (
+				39EB9FF72D26D8B600A93D27 /* Model */,
+				39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */,
+			);
+			path = RealmDB;
 			sourceTree = "<group>";
 		};
 		39F2999B2C995FAC00D896F2 /* LocationSpoffer */ = {
@@ -612,6 +634,8 @@
 				39ED49142D0841FD00584401 /* NetworkLocation.swift in Sources */,
 				39ED491E2D0844A500584401 /* HardwareFingerprintRawData.swift in Sources */,
 				39ED49092D083C6000584401 /* DataRequest.swift in Sources */,
+				39EB9FFA2D26D8B600A93D27 /* RealmDataStorage.swift in Sources */,
+				39EB9FFB2D26D8B600A93D27 /* IntelligenceResponseObject.swift in Sources */,
 				39ED49162D08424800584401 /* iOSDeviceRawData.swift in Sources */,
 				390D71F02C961AF30090147D /* UpdateOption.swift in Sources */,
 				39577E782CEE0A5F00DCD69F /* ProxyDetector.swift in Sources */,
