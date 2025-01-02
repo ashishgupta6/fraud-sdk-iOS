@@ -84,6 +84,8 @@
 		797C73F32D12C8AF00C4B821 /* DeviceCheckData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */; };
 		79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C922CFF4B8300A66FF5 /* Log.swift */; };
 		79EA04A52D26A88F00DF873D /* KeychainHelper 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04A42D26A88F00DF873D /* KeychainHelper 2.swift */; };
+		79EA04AA2D26C50F00DF873D /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 79EA04A92D26C50F00DF873D /* Mixpanel */; };
+		79EA04AC2D26C58E00DF873D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 79EA04AB2D26C58E00DF873D /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +186,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79EA04AC2D26C58E00DF873D /* RealmSwift in Frameworks */,
+				79EA04AA2D26C50F00DF873D /* Mixpanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,6 +959,19 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		79EA04A92D26C50F00DF873D /* Mixpanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79EA04A62D26BA5200DF873D /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
+		};
+		79EA04AB2D26C58E00DF873D /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79EA04A72D26BB0100DF873D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 398EB59D2C63BC6A002FC9CA /* Project object */;
 }
