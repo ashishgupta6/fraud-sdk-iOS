@@ -540,6 +540,10 @@
 				Base,
 			);
 			mainGroup = 398EB59C2C63BC6A002FC9CA;
+			packageReferences = (
+				79EA04A62D26BA5200DF873D /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
+				79EA04A72D26BB0100DF873D /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 398EB5A72C63BC6A002FC9CA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -932,6 +936,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		79EA04A62D26BA5200DF873D /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 4.3.0;
+			};
+		};
+		79EA04A72D26BB0100DF873D /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 20.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 398EB59D2C63BC6A002FC9CA /* Project object */;
 }
