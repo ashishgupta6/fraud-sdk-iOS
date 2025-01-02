@@ -230,8 +230,6 @@ internal struct Api{
             dataRequest.clientParams = Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence)
             Log.i("ClientParams:", Utils.convertToJson(dataRequest.clientParams))
             
-            let actualData = dataRequest
-            Log.e("KKKKKKKK", convertToJson(actualData))
             let jsonData = try JSONEncoder().encode(dataRequest)
 //            let byteArray = gzip(jsonData, COMPRESSION_STREAM_ENCODE)
             let byteArray = zipString(jsonData)
@@ -317,7 +315,7 @@ internal struct Api{
             sign3Intelligence.realmDataStorage.fetchIntelligenceFromRealm{ response in
                 Log.i("Response From DB", Utils.convertToJson(response))
             }
-            
+            Log.i("Payload Json", Utils.convertToJson(dataRequest))
             completion(Resource.success(intelligenceResponse))
         } catch {
             let errorMessage = "Failed to encode request data: \(error.localizedDescription)"

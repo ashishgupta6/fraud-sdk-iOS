@@ -57,31 +57,20 @@ internal struct Utils{
         return CLong(date.timeIntervalSince1970)
     }
     
-    internal static func checkLocationPermission() -> Bool{
+    internal static func hasForegroundLocationPermission() -> Bool{
         let status = CLLocationManager.authorizationStatus()
-        switch status {
-        case .notDetermined:
-            // You might want to request permission here
-            return false
-        case .restricted:
-            return false
-        case .denied:
-            return false
-        case .authorizedWhenInUse:
-            return true
-        case .authorizedAlways:
-            return true
-        @unknown default:
-            return false
-        }
+        return status == .authorizedWhenInUse || status == .authorizedAlways
+    }
+    
+    internal static func hasBackgroundLocationPermission() -> Bool {
+        let status = CLLocationManager.authorizationStatus()
+        return status == .authorizedAlways
     }
     
     internal static func checkLocationServiceEnabled() -> Bool{
         if CLLocationManager.locationServicesEnabled() {
-            print("Location services are enabled")
             return true
         } else {
-            print("Location services are disabled")
             return false
         }
     }

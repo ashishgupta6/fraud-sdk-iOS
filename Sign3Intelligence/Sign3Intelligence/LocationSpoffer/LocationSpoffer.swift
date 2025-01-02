@@ -19,15 +19,24 @@ internal class LocationSpoffer {
             requestId: UUID().uuidString,
             defaultValue: false,
             function: {
-                // Check if location permission is granted
-                guard Utils.checkLocationPermission() else {
-                    Log.e("Permission Denied","Location permission not granted")
-                    return false
+                /// Check if location permission is granted
+                if await UIApplication.shared.applicationState == .background {
+                    guard Utils.hasBackgroundLocationPermission() else {
+                        Log.e("Permission Denied", "Background Location permission not granted")
+                        return false
+                    }
+                } else {
+                    guard Utils.hasForegroundLocationPermission() else {
+                        Log.e("Permission Denied", "Foreground Location permission not granted")
+                        return false
+                    }
                 }
                 
                 return await withCheckedContinuation { continuation in
                     DispatchQueue.main.async {
+                        var hasResumed = false
                         LocationFramework.shared.startUpdatingLocation { location in
+                            if hasResumed { return }
                             if #available(iOS 15.0, *) {
                                 let isLocationSimulated = location.sourceInformation?.isSimulatedBySoftware ?? false
                                 let isProducedByAccess = location.sourceInformation?.isProducedByAccessory ?? false
@@ -35,18 +44,30 @@ internal class LocationSpoffer {
                                 let info = CLLocationSourceInformation(softwareSimulationState: isLocationSimulated, andExternalAccessoryState: isProducedByAccess)
                                 
                                 if info.isSimulatedBySoftware == true || info.isProducedByAccessory == true{
+                                    hasResumed = true
                                     LocationFramework.shared.stopUpdatingLocation()
                                     continuation.resume(returning: true)
+                                    return
                                 } else {
+                                    hasResumed = true
                                     LocationFramework.shared.stopUpdatingLocation()
                                     continuation.resume(returning: false)
+                                    return
                                 }
-                                // Only for testing purpose
-//                                self.handleLocationForBelowiOS15(location: location, continuation: continuation)
                             } else{
-                                // Handle iOS versions below 15
+                                /// Handle iOS versions below 15
                                 self.handleLocationForBelowiOS15(location: location, continuation: continuation)
+                                return
                             }
+            
+                        }
+                        
+                        /// This code executes when the app goes into the background. It waits for 10 seconds to get the current location, if not obtained, it defaults to `false`.
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                            /// Prevent duplicate resumes
+                            guard !hasResumed else { return }
+                            hasResumed = true
+                            continuation.resume(returning: false)
                         }
                     }
                 }

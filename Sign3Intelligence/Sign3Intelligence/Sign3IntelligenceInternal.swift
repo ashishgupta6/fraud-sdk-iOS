@@ -202,10 +202,6 @@ internal class Sign3IntelligenceInternal{
         if ConfigManager.callOnStart {
             await actionHandlerContinuousIntegrationImpl.handle(source: ActionContextSource.INIT)
         }
-
-        //For testing
-        Utils.pushSdkError(SdkError(name: "Testing", exceptionMsg: "Only for testing purpose", requestId: "67326542426772"))
-
     }
     
     internal func pushEventMetric(_ eventMetric: EventMetric){

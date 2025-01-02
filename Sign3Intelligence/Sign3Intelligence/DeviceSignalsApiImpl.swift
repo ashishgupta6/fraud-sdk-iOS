@@ -829,36 +829,83 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 0),
             function: {
-                // Check if location permission is granted
-                guard Utils.checkLocationPermission() else {
-                    Log.e("Permission Denied", "Location permission not granted")
-                    return Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 0)
+                /// Check if location permission is granted
+                if await UIApplication.shared.applicationState == .background {
+                    guard Utils.hasBackgroundLocationPermission() else {
+                        Log.e("Permission Denied", "Background Location permission not granted")
+                        return Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 1)
+                    }
+                } else {
+                    guard Utils.hasForegroundLocationPermission() else {
+                        Log.e("Permission Denied", "Foreground Location permission not granted")
+                        return Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 2)
+                    }
                 }
                 
-                // Use withCheckedContinuation to handle the location updates asynchronously
-                return await withCheckedContinuation { continuation in
-                    var hasResumed = false
-                    DispatchQueue.main.async {
-                        LocationFramework.shared.startUpdatingLocation { location in
-                            guard !hasResumed else {
-                                return  // Do nothing if the continuation has already been resumed
-                            }
-                            
-                            let latitude = location.coordinate.latitude
-                            let longitude = location.coordinate.longitude
-                            let altitude = location.altitude
-                            let timeStamp = location.timestamp
-                            LocationFramework.shared.stopUpdatingLocation()
-                            
-                            // Mark continuation as resumed and return the result
-                            hasResumed = true
-                            continuation.resume(returning: Location(latitude: latitude, longitude: longitude, altitude: altitude, timeStamp: Utils.dateToUnixTimestamp(timeStamp)))
-                        }
-                    }
+                do {
+                    let location = try await getUpdatedLocation()
+                    let latitude = location.latitude
+                    let longitude = location.longitude
+                    let altitude = location.altitude
+                    let timeStamp = location.timeStamp
+                    
+                    return Location(
+                        latitude: latitude,
+                        longitude: longitude,
+                        altitude: altitude,
+                        timeStamp: timeStamp
+                    )
+                } catch {
+                    Log.e("Location Error", "Failed to fetch location: \(error.localizedDescription)")
+                    return Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 3)
                 }
             }
         )
     }
+    
+    private func getUpdatedLocation() async throws -> Location {
+        return await withCheckedContinuation { continuation in
+            DispatchQueue.main.async {
+                var hasResumed = false
+                let defaultLocation = Location(
+                    latitude: 0.0,
+                    longitude: 0.0,
+                    altitude: 0.0,
+                    timeStamp: 4)
+                
+                /// Getting current location
+                LocationFramework.shared.startUpdatingLocation { location in
+                    /// Prevent duplicate resumes
+                    guard !hasResumed else { return }
+                    
+                    let latitude = location.coordinate.latitude
+                    let longitude = location.coordinate.longitude
+                    let altitude = location.altitude
+                    let timeStamp = location.timestamp
+                    LocationFramework.shared.stopUpdatingLocation()
+                    
+                    /// Mark continuation as resumed and return the result
+                    hasResumed = true
+                    continuation.resume(returning: Location(
+                        latitude: latitude,
+                        longitude: longitude,
+                        altitude: altitude,
+                        timeStamp: Utils.dateToUnixTimestamp(timeStamp)
+                    ))
+                    return
+                }
+                
+                /// This code executes when the app goes into the background. It waits for 10 seconds to get the current location, if the location is not obtained, it returns the default location.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                    /// Prevent duplicate resumes
+                    guard !hasResumed else { return }
+                    hasResumed = true
+                    continuation.resume(returning: defaultLocation)
+                }
+            }
+        }
+    }
+
     
     func isTelephonySupported() async -> Bool {
         return await Utils.getDeviceSignals(
