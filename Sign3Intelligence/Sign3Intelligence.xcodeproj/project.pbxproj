@@ -83,6 +83,7 @@
 		39F299A32C9C3EDE00D896F2 /* Sign3PublicHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		797C73F32D12C8AF00C4B821 /* DeviceCheckData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */; };
 		79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C922CFF4B8300A66FF5 /* Log.swift */; };
+		79EA04A52D26A88F00DF873D /* KeychainHelper 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04A42D26A88F00DF873D /* KeychainHelper 2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +176,7 @@
 		39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sign3PublicHeader.h; sourceTree = "<group>"; };
 		797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCheckData.swift; sourceTree = "<group>"; };
 		79E86C922CFF4B8300A66FF5 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		79EA04A42D26A88F00DF873D /* KeychainHelper 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainHelper 2.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +279,7 @@
 		397950E82C7DC6F80043677B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				79EA04A42D26A88F00DF873D /* KeychainHelper 2.swift */,
 				397950E92C7DC73E0043677B /* Utils.swift */,
 				39C775522C8F2F470006E042 /* BaseKey.swift */,
 				39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */,
@@ -616,6 +619,7 @@
 				39C775592C8F321C0006E042 /* StagingKeyProvider.swift in Sources */,
 				3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */,
 				39ED492E2D0856C600584401 /* ActionHandlerImpl.swift in Sources */,
+				79EA04A52D26A88F00DF873D /* KeychainHelper 2.swift in Sources */,
 				39ED490E2D083E4A00584401 /* DeviceParam.swift in Sources */,
 				396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */,
 				390D71F32C962B040090147D /* CryptoGCM.swift in Sources */,
