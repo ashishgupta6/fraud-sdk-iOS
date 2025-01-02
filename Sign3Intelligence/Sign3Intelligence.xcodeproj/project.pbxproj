@@ -58,6 +58,7 @@
 		39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF612CF60FFB0086203C /* MSHookChecker.swift */; };
 		39E738FE2C88826F002B24C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FD2C88826F002B24C8 /* Location.swift */; };
 		39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FF2C888F16002B24C8 /* LocationDetector.swift */; };
+		39EB9FF52D26C76C00A93D27 /* SdkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF42D26C76C00A93D27 /* SdkError.swift */; };
 		39ED49012D0776C600584401 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49002D0776C600584401 /* ConfigManager.swift */; };
 		39ED49032D0776FD00584401 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49022D0776FD00584401 /* Config.swift */; };
 		39ED49052D07786000584401 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49042D07786000584401 /* Resource.swift */; };
@@ -153,6 +154,7 @@
 		39E738FA2C885D01002B24C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		39E738FD2C88826F002B24C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		39E738FF2C888F16002B24C8 /* LocationDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetector.swift; sourceTree = "<group>"; };
+		39EB9FF42D26C76C00A93D27 /* SdkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdkError.swift; sourceTree = "<group>"; };
 		39ED49002D0776C600584401 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		39ED49022D0776FD00584401 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		39ED49042D07786000584401 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 		393E768C2C809FC100572A77 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				39EB9FF42D26C76C00A93D27 /* SdkError.swift */,
 				797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */,
 				39ED492B2D08567200584401 /* IntelligenceError.swift */,
 				393E768D2C809FE700572A77 /* IntelligenceResponse.swift */,
@@ -592,6 +595,7 @@
 				3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */,
 				39E164722D0B0274001A7C53 /* GPSLocation.swift in Sources */,
 				39C775512C8F13B10006E042 /* SimulatorDetector.swift in Sources */,
+				39EB9FF52D26C76C00A93D27 /* SdkError.swift in Sources */,
 				39ED491C2D0843E900584401 /* InstalledAppsRawData.swift in Sources */,
 				396681362CF710AA00DF3306 /* RemoteAccessDetector.swift in Sources */,
 				39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */,

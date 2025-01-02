@@ -95,6 +95,7 @@ internal struct ActionHandlerImpl {
                         eventName: String(describing: ActionContextEvent.ERROR)
                     )
                 )
+                Utils.pushSdkError(SdkError(name: "Get Score", exceptionMsg: result.message ?? "", requestId: requestId))
             case .loading: break
                 /// Do something
             }

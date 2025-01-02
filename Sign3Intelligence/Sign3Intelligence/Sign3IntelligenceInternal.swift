@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Mixpanel
 
 internal class Sign3IntelligenceInternal{
     internal static var sdk: Sign3IntelligenceInternal?
@@ -27,6 +28,7 @@ internal class Sign3IntelligenceInternal{
     internal var currentIntelligence: IntelligenceResponse? = nil
     internal var sentClientParams : ClientParams = ClientParams.empty()
     internal var payloadHash: Int = -1
+    internal var mixpanel: MixpanelInstance? = nil
     
     internal static func getInstance() -> Sign3IntelligenceInternal {
         if sdk == nil {
@@ -186,6 +188,9 @@ internal class Sign3IntelligenceInternal{
         /// Init Config
         ConfigManager.initConfig()
         
+        /// Init Mixpanel
+        initMixpanel()
+        
         /// Cron Start
         if ConfigManager.isCronEnabled {
             cronTrigger = CronTrigger.init(actionHandlerContinuousIntegrationImpl: actionHandlerContinuousIntegrationImpl)
@@ -196,6 +201,10 @@ internal class Sign3IntelligenceInternal{
         if ConfigManager.callOnStart {
             await actionHandlerContinuousIntegrationImpl.handle(source: ActionContextSource.INIT)
         }
+
+        //For testing
+        Utils.pushSdkError(SdkError(name: "Testing", exceptionMsg: "Only for testing purpose", requestId: "67326542426772"))
+
     }
     
     internal func pushEventMetric(_ eventMetric: EventMetric){
@@ -211,6 +220,19 @@ internal class Sign3IntelligenceInternal{
                 Log.i("pushEvent: ", "\(String(describing: resource.message))")
             }
         }
+    }
+    
+    private func initMixpanel() {
+        mixpanel = Mixpanel.initialize(token: ConfigManager.mixPanelKey, trackAutomaticEvents: false)
+    }
+    
+    internal func pushSdkError(_ sdkError: SdkError) {
+        guard let mixpanelInstance = mixpanel else {
+            Log.i("pushSdkError", "Mixpanel Instance is nil")
+            return
+        }
+        let properties = Utils.createProperties(sdkError)
+        mixpanelInstance.track(event: sdkError.eventName, properties: properties)
     }
 }
 

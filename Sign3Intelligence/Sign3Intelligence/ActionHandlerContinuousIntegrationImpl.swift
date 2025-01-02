@@ -85,6 +85,7 @@ internal class ActionHandlerContinuousIntegrationImpl {
                             eventName: String(describing: ActionContextEvent.ERROR)
                         )
                     )
+                    Utils.pushSdkError(SdkError(name: "Ingestion", exceptionMsg: result.message ?? "", requestId: requestId))
                 case .loading: break
                     /// Do something
                 }

@@ -16,6 +16,7 @@ internal struct Utils{
         do {
             return try await function()
         } catch {
+            pushSdkError(SdkError(name: functionName, exceptionMsg: error.localizedDescription, requestId: requestId))
             return defaultValue
         }
     }
@@ -24,6 +25,7 @@ internal struct Utils{
         do {
             return try function()
         } catch {
+            pushSdkError(SdkError(name: functionName, exceptionMsg: error.localizedDescription, requestId: requestId))
             return defaultValue
         }
     }
@@ -92,6 +94,26 @@ internal struct Utils{
     
     internal static func pushEventMetric(_ eventMetric: EventMetric){
         Sign3IntelligenceInternal.sdk?.pushEventMetric(eventMetric)
+    }
+    
+    internal static func pushSdkError(_ sdkError: SdkError){
+        Sign3IntelligenceInternal.sdk?.pushSdkError(sdkError)
+    }
+    
+    internal static func createProperties(_ sdkError: SdkError) -> [String: String] {
+        var properties: [String: String] = [:]
+        
+        properties["eventName"] = sdkError.eventName
+        properties["name"] = sdkError.name
+        properties["exceptionMsg"] = sdkError.exceptionMsg
+        properties["requestId"] = sdkError.requestId ?? "unknown"
+        properties["createdAtInMillis"] = "\(sdkError.createdAtInMillis)"
+        properties["clientId"] = sdkError.clientId
+        properties["sessionId"] = sdkError.sessionId
+        properties["frameworkVersionName"] = sdkError.frameworkVersionName
+        properties["frameworkVersionCode"] = sdkError.frameworkVersionCode
+        
+        return properties
     }
     
     internal static func getRequestID() -> String {
