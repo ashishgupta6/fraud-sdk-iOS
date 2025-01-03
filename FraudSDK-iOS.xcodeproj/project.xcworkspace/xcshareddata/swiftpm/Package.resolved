@@ -1,5 +1,5 @@
 {
-  "originHash" : "eba5c6a7b8137e3319389381be0c9c31e877ddace6c947ecd7dffb1615b7be11",
+  "originHash" : "652a3e5623b2e6c8c6e0e0b946c185247190377f8f46737da6c1d9062f42423e",
   "pins" : [
     {
       "identity" : "mixpanel-swift",
@@ -8,24 +8,6 @@
       "state" : {
         "revision" : "48d6668ceaaefc338f94e2b084c3cf77b90182f8",
         "version" : "4.3.0"
-      }
-    },
-    {
-      "identity" : "realm-core",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-core.git",
-      "state" : {
-        "revision" : "15493076ad9fef22c16cc64cbfbf9e5b65c385f9",
-        "version" : "20.1.0"
-      }
-    },
-    {
-      "identity" : "realm-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-swift.git",
-      "state" : {
-        "revision" : "bae6c4be7df169fdb047d0ad63f902c1e2665e83",
-        "version" : "20.0.1"
       }
     }
   ],

@@ -312,7 +312,12 @@ internal struct Api{
                 )
             )
             /// Get Response from RealmDataStorage
-            sign3Intelligence.realmDataStorage.fetchIntelligenceFromRealm{ response in
+//            sign3Intelligence.realmDataStorage.fetchIntelligenceFromRealm{ response in
+//                Log.i("Response From DB", Utils.convertToJson(response))
+//            }
+            
+            /// Get Response from UserDefault
+            sign3Intelligence.userDefaultsManager.fetchIntelligenceFromUserDefaults { response in
                 Log.i("Response From DB", Utils.convertToJson(response))
             }
             Log.i("Payload Json", Utils.convertToJson(dataRequest))
@@ -402,8 +407,11 @@ internal struct Api{
                 )
             )
             /// Store Response in RealmDataStorage
-            sign3Intelligence.realmDataStorage.saveIntelligenceResponseToRealm(dataRequest, sign3Intelligence, intelligenceResponse)
+//            sign3Intelligence.realmDataStorage.saveIntelligenceResponseToRealm(dataRequest, sign3Intelligence, intelligenceResponse)
             
+            /// Store Response in UserDefault
+            sign3Intelligence.userDefaultsManager.saveIntelligenceResponseToUserDefaults(dataRequest, sign3Intelligence, intelligenceResponse)
+    
             completion(Resource.success(intelligenceResponse))
         } catch {
             let errorMessage = "Failed to encode request data: \(error.localizedDescription)"
