@@ -182,4 +182,10 @@ internal class MSHookChecker {
         }
     }
 }
+#else
+internal class MSHookChecker {
+    static func amIMSHooked(_ functionAddr: UnsafeMutableRawPointer) -> Bool {
+        return false
+    }
+}
 #endif
