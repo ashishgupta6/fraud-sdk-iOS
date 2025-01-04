@@ -85,7 +85,6 @@
 		79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C922CFF4B8300A66FF5 /* Log.swift */; };
 		79EA04A52D26A88F00DF873D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04A42D26A88F00DF873D /* KeychainHelper.swift */; };
 		79EA04AA2D26C50F00DF873D /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 79EA04A92D26C50F00DF873D /* Mixpanel */; };
-		79EA04AC2D26C58E00DF873D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 79EA04AB2D26C58E00DF873D /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,7 +185,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79EA04AC2D26C58E00DF873D /* RealmSwift in Frameworks */,
 				79EA04AA2D26C50F00DF873D /* Mixpanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,7 +544,6 @@
 			mainGroup = 398EB59C2C63BC6A002FC9CA;
 			packageReferences = (
 				79EA04A62D26BA5200DF873D /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
-				79EA04A72D26BB0100DF873D /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 398EB5A72C63BC6A002FC9CA /* Products */;
 			projectDirPath = "";
@@ -950,14 +947,6 @@
 				version = 4.3.0;
 			};
 		};
-		79EA04A72D26BB0100DF873D /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				kind = exactVersion;
-				version = 20.0.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -965,11 +954,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 79EA04A62D26BA5200DF873D /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
 			productName = Mixpanel;
-		};
-		79EA04AB2D26C58E00DF873D /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 79EA04A72D26BB0100DF873D /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
