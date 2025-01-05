@@ -24,7 +24,7 @@ internal struct DataCreationService{
         let proxyDetector = await sign3IntelliegnceSdkApiImpl.isProxyDetected()
         let hookingDetector = await sign3IntelliegnceSdkApiImpl.isHookingDetected()
         let mirroredScreen = await sign3IntelliegnceSdkApiImpl.isScreenBeingMirrored()
-        
+        let appCloned = await sign3IntelliegnceSdkApiImpl.isCloned()
         
         // Signals
         let deviceId = await deviceSignalsApi.getiOSDeviceId()
@@ -123,7 +123,8 @@ internal struct DataCreationService{
                 latitude: location.latitude,
                 longitude: location.longitude,
                 altitude: location.altitude
-            )
+            ),
+            cloned: appCloned
         )
         
         let iOSDeviceIDs = iOSDeviceIDs(

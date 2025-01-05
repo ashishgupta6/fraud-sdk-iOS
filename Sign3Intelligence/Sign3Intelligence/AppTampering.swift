@@ -48,8 +48,8 @@ internal class AppTampering{
                 await amITampered(
                     [
                         AppTampering.AppTamperingCheck.bundleID("com.sign3labs.fraudsdk.FraudSDK"),
-//                        AppTampering.AppTamperingCheck.isDebuggerEnabled,
-//                        AppTampering.AppTamperingCheck.isJailBroken,
+                        AppTampering.AppTamperingCheck.isDebuggerEnabled,
+                        AppTampering.AppTamperingCheck.isJailBroken,
                         AppTampering.AppTamperingCheck.checkBuildConfiguration,
                         AppTampering.AppTamperingCheck.isMobileProvisionModified("13c287086eff1f58f9c8192e383b75a978047cbd32407c33bb872c614ac4d1b4")
                     ]

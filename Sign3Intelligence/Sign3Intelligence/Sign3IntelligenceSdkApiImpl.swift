@@ -22,6 +22,7 @@ internal class Sign3IntelligenceSdkApiImpl: Sign3IntelligenceSdkApi{
     private lazy var proxyDetector = ProxyDetector()
     private lazy var hookingDetector = HookingDetector(deviceSignalsApi: deviceSignalsApi)
     private lazy var remoteAccessDetector = RemoteAccessDetector()
+    private lazy var cloneAppDetector =  ClonedDetector()
     
     internal func isVpnDetected() async -> Bool {
         return await vpnDetector.isVpnEnabled()
@@ -55,6 +56,8 @@ internal class Sign3IntelligenceSdkApiImpl: Sign3IntelligenceSdkApi{
         return await remoteAccessDetector.isScreenBeingMirrored()
     }
     
-    
+    func isCloned() async -> Bool {
+        return await cloneAppDetector.isClonedApp()
+    }
     
 }

@@ -61,6 +61,7 @@
 		39EB9FF52D26C76C00A93D27 /* SdkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF42D26C76C00A93D27 /* SdkError.swift */; };
 		39EB9FFA2D26D8B600A93D27 /* RealmDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */; };
 		39EB9FFB2D26D8B600A93D27 /* IntelligenceResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF62D26D8B600A93D27 /* IntelligenceResponseObject.swift */; };
+		39EBA13F2D2ACB3500A93D27 /* ClonedDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA13D2D2ACB3500A93D27 /* ClonedDetector.swift */; };
 		39ED49012D0776C600584401 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49002D0776C600584401 /* ConfigManager.swift */; };
 		39ED49032D0776FD00584401 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49022D0776FD00584401 /* Config.swift */; };
 		39ED49052D07786000584401 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49042D07786000584401 /* Resource.swift */; };
@@ -158,6 +159,7 @@
 		39EB9FF42D26C76C00A93D27 /* SdkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdkError.swift; sourceTree = "<group>"; };
 		39EB9FF62D26D8B600A93D27 /* IntelligenceResponseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponseObject.swift; sourceTree = "<group>"; };
 		39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataStorage.swift; sourceTree = "<group>"; };
+		39EBA13D2D2ACB3500A93D27 /* ClonedDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClonedDetector.swift; sourceTree = "<group>"; };
 		39ED49002D0776C600584401 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		39ED49022D0776FD00584401 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		39ED49042D07786000584401 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 		39E738F92C882AB4002B24C8 /* Detectors */ = {
 			isa = PBXGroup;
 			children = (
+				39EBA13E2D2ACB3500A93D27 /* Cloned */,
 				396681342CF7109B00DF3306 /* RemoteAccess */,
 				397CD2B32CF091D200A0E398 /* Hooking */,
 				39577E762CEE0A1F00DCD69F /* Proxy */,
@@ -477,6 +480,14 @@
 				39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */,
 			);
 			path = RealmDB;
+			sourceTree = "<group>";
+		};
+		39EBA13E2D2ACB3500A93D27 /* Cloned */ = {
+			isa = PBXGroup;
+			children = (
+				39EBA13D2D2ACB3500A93D27 /* ClonedDetector.swift */,
+			);
+			path = Cloned;
 			sourceTree = "<group>";
 		};
 		39F2999B2C995FAC00D896F2 /* LocationSpoffer */ = {
@@ -648,6 +659,7 @@
 				3984B6962C8E2CD400EE992E /* OtpInputType.swift in Sources */,
 				39ED49012D0776C600584401 /* ConfigManager.swift in Sources */,
 				3966813A2CF730A300DF3306 /* FridaChecker.swift in Sources */,
+				39EBA13F2D2ACB3500A93D27 /* ClonedDetector.swift in Sources */,
 				39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */,
 				39C775592C8F321C0006E042 /* StagingKeyProvider.swift in Sources */,
 				3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */,
