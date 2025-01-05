@@ -8,6 +8,7 @@
 import Foundation
 import AppTrackingTransparency
 import CoreLocation
+import zlib
 
 
 internal struct Utils{
@@ -164,5 +165,65 @@ internal struct Utils{
         sign3Intelligence.totalMemory = deviceParams.deviceIdRawData.hardwareFingerprintRawData.totalDiskSpace
         sign3Intelligence.locationThresholdReached = false
         sign3Intelligence.memoryThresholdReached = false
+    }
+    
+    internal static func gzip(_ data: Data) throws -> Data {
+        guard !data.isEmpty else {
+            return Data()
+        }
+
+        var stream = z_stream()
+        var status: Int32
+
+        // Initialize the zlib stream for Gzip compression with default settings
+        status = deflateInit2_(
+            &stream,
+            Z_DEFAULT_COMPRESSION, // Default compression level
+            Z_DEFLATED,
+            MAX_WBITS + 16,        // Default window size for Gzip
+            MAX_MEM_LEVEL,
+            Z_DEFAULT_STRATEGY,
+            ZLIB_VERSION,
+            Int32(MemoryLayout<z_stream>.size)
+        )
+
+        guard status == Z_OK else {
+            throw NSError(domain: "GzipError", code: Int(status), userInfo: ["message": String(cString: stream.msg)])
+        }
+
+        var compressedData = Data(capacity: 64 * 1024) // Initial buffer size
+        var statusDeflate: Int32 = Z_OK
+        
+        repeat {
+            // Expand buffer if needed
+            if Int(stream.total_out) >= compressedData.count {
+                compressedData.count += 64 * 1024
+            }
+            var cData = compressedData
+            data.withUnsafeBytes { inputPointer in
+                stream.next_in = UnsafeMutablePointer<Bytef>(
+                    mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!
+                ).advanced(by: Int(stream.total_in))
+                stream.avail_in = uInt(data.count) - uInt(stream.total_in)
+
+            
+                cData.withUnsafeMutableBytes { outputPointer in
+                    stream.next_out = outputPointer.bindMemory(to: Bytef.self).baseAddress!
+                        .advanced(by: Int(stream.total_out))
+                    stream.avail_out = uInt(compressedData.count) - uInt(stream.total_out)
+
+                    statusDeflate = deflate(&stream, Z_FINISH)
+                }
+            }
+            compressedData = cData
+
+        } while stream.avail_out == 0 && statusDeflate == Z_OK
+
+        guard deflateEnd(&stream) == Z_OK, statusDeflate == Z_STREAM_END else {
+            throw NSError(domain: "GzipError", code: Int(statusDeflate), userInfo: ["message": String(cString: stream.msg)])
+        }
+
+        compressedData.count = Int(stream.total_out)
+        return compressedData
     }
 }

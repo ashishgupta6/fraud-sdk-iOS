@@ -8,6 +8,13 @@
 import Foundation
 import CryptoKit
 import Compression
+import struct Foundation.Data
+
+#if os(Linux)
+    import zlibLinux
+#else
+    import zlib
+#endif
 
 internal struct Api{
     internal static let shared = Api()
@@ -232,7 +239,9 @@ internal struct Api{
             
             let jsonData = try JSONEncoder().encode(dataRequest)
 //            let byteArray = gzip(jsonData, COMPRESSION_STREAM_ENCODE)
-            let byteArray = zipString(jsonData)
+            let y = try Utils.gzip(jsonData)
+            let yBase64Encoded = y.base64EncodedString()
+            let byteArray = try Utils.gzip(jsonData)
             //let decodedCompressedJson = try JSONDecoder().decode(DataRequest.self, from: byteArray ?? Data())
 //            let decompressed = zlibDecompress(data: byteArray!)
 //            let decodedJsonData = try JSONDecoder().decode(DataRequest.self, from: decompressed!)
@@ -252,7 +261,7 @@ internal struct Api{
             let rawBody: String
             do {
                 let beforeEncrypt = byteArray
-                rawBody = try CryptoGCM.encrypt(byteArray ?? "", iv)
+                rawBody = try CryptoGCM.encrypt(byteArray.base64EncodedString(), iv)
             } catch {
                 completion(Resource.error("Encryption failed: \(error.localizedDescription)"))
                 return
@@ -333,7 +342,7 @@ internal struct Api{
             dataRequest.clientParams = Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence)
             Log.i("ClientParams:", Utils.convertToJson(dataRequest.clientParams))
             let jsonData = try JSONEncoder().encode(dataRequest)
-            let byteArray = gzip(jsonData, COMPRESSION_STREAM_ENCODE)
+            let byteArray = try Utils.gzip(jsonData)
             guard String(data: jsonData, encoding: .utf8) != nil else {
                 completion(Resource.error("Failed to convert request data to JSON string"))
                 return
@@ -348,7 +357,7 @@ internal struct Api{
 
             let rawBody: String
             do {
-                rawBody = try CryptoGCM.encrypt(byteArray?.base64EncodedString() ?? "", iv)
+                rawBody = try CryptoGCM.encrypt(byteArray.base64EncodedString(), iv)
             } catch {
                 completion(Resource.error("Encryption failed: \(error.localizedDescription)"))
                 return
@@ -418,127 +427,5 @@ internal struct Api{
             completion(Resource.error(errorMessage))
         }
     }
-    
-    func zipString(_ data: Data) -> String? {
-//        guard let data = string.data(using: .utf8) else {
-//            return nil
-//        }
-        
-        let pageSize = 4096
-        let destinationBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: pageSize)
-        defer { destinationBuffer.deallocate() }
-        
-        let algorithm = COMPRESSION_ZLIB
-        
-        let compressedData = NSMutableData()
-        
-        let sourceData = Array(data)
-        var sourceIndex = 0
-        
-        while sourceIndex < sourceData.count {
-            let count = compression_encode_buffer(
-                destinationBuffer,
-                pageSize,
-                sourceData.withUnsafeBufferPointer { $0.baseAddress! + sourceIndex },
-                Swift.min(pageSize, sourceData.count - sourceIndex),
-                nil,
-                algorithm
-            )
-            
-            if count == 0 {
-                return nil
-            }
-            
-            compressedData.append(destinationBuffer, length: count)
-            sourceIndex += pageSize
-        }
-        
-        // Convert compressed data to base64 string for safe transport
-        return compressedData.base64EncodedString()
-    }
-    
-    func zlibCompress(data: Data) -> Data? {
-        let str = String(data: data, encoding: .utf8)!
-        let destinationBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: data.count)
-        defer { destinationBuffer.deallocate() }
-        
-        let compressedSize = data.withUnsafeBytes { (sourcePointer: UnsafeRawBufferPointer) -> Int in
-            guard let sourceBaseAddress = sourcePointer.baseAddress else { return 0 }
-            return compression_encode_buffer(
-                destinationBuffer,
-                data.count,
-                sourceBaseAddress.bindMemory(to: UInt8.self, capacity: data.count),
-                data.count,
-                nil,
-                COMPRESSION_ZLIB
-            )
-        }
-        
-        guard compressedSize > 0 else { return nil }
-        let str2 = Data(bytes: destinationBuffer, count: compressedSize).base64EncodedString()
-        return Data(bytes: destinationBuffer, count: compressedSize)
-    }
-    
-    func zlibDecompress(data: Data) -> Data? {
-        let destinationBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: data.count * 4) // Allocate a larger buffer
-        defer { destinationBuffer.deallocate() }
-        
-        let decompressedSize = data.withUnsafeBytes { (sourcePointer: UnsafeRawBufferPointer) -> Int in
-            guard let sourceBaseAddress = sourcePointer.baseAddress else { return 0 }
-            return compression_decode_buffer(
-                destinationBuffer,
-                data.count * 4,
-                sourceBaseAddress.bindMemory(to: UInt8.self, capacity: data.count),
-                data.count,
-                nil,
-                COMPRESSION_ZLIB
-            )
-        }
-        
-        guard decompressedSize > 0 else { return nil }
-        return Data(bytes: destinationBuffer, count: decompressedSize)
-    }
-
-    
-    private func gzip(_ data: Data, _ operation: compression_stream_operation) -> Data? {
-        let streamPointer = UnsafeMutablePointer<compression_stream>.allocate(capacity: 1)
-        defer { streamPointer.deallocate() }
-
-        var stream = streamPointer.pointee
-        var status = compression_stream_init(&stream, operation, Algorithm.zlib.rawValue)
-        guard status == COMPRESSION_STATUS_OK else { return nil }
-
-        defer { compression_stream_destroy(&stream) }
-
-        let bufferSize = 64 * 1024
-        let destinationPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
-        defer { destinationPointer.deallocate() }
-
-        var outputData = Data()
-        data.withUnsafeBytes { (sourcePointer: UnsafeRawBufferPointer) in
-            guard let sourceBaseAddress = sourcePointer.baseAddress else { return }
-
-            stream.src_ptr = sourceBaseAddress.assumingMemoryBound(to: UInt8.self)
-            stream.src_size = data.count
-
-            repeat {
-                stream.dst_ptr = destinationPointer
-                stream.dst_size = bufferSize
-
-                status = compression_stream_process(&stream, Int32(COMPRESSION_STREAM_FINALIZE.rawValue))
-
-                switch status {
-                case COMPRESSION_STATUS_OK, COMPRESSION_STATUS_END:
-                    let outputSize = bufferSize - stream.dst_size
-                    outputData.append(destinationPointer, count: outputSize)
-                default:
-                    return
-                }
-            } while status == COMPRESSION_STATUS_OK
-        }
-
-        return status == COMPRESSION_STATUS_END ? outputData : nil
-    }
-    
     
 }
