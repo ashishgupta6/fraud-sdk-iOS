@@ -21,6 +21,30 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
     
     init() {}
     
+    func generateDeviceToken() async -> String {
+        await Utils.getDeviceSignals(
+            functionName: "generateDeviceToken",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown"
+        ) {
+            let currentDevice = DCDevice.current
+            if currentDevice.isSupported {
+                return await withCheckedContinuation { continuation in
+                    currentDevice.generateToken { data, error in
+                        if let tokenData = data {
+                            continuation.resume(returning: tokenData.base64EncodedString())
+                        } else {
+                            continuation.resume(returning: "")
+                        }
+                    }
+                }
+            } else {
+                return "Unsupported Device"
+            }
+        }
+    }
+
+    
     func getiOSDeviceId() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getiOSDeviceId",
@@ -30,19 +54,6 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                 guard let id = await UIDevice.current.identifierForVendor?.uuidString else {
                     return "Unable to get device ID"
                 }
-                //                let curDevice = DCDevice.current
-                //                if curDevice.isSupported {
-                //                    curDevice.generateToken(completionHandler: { (data, error) in
-                //                        if let data = data {
-                //                            // You will get a device-specific token here
-                //                            let deviceToken = data.base64EncodedString()
-                //                            print("Device token: \(deviceToken)")
-                //                        } else if let error = error {
-                //                            print("Error: \(error.localizedDescription)")
-                //                        }
-                //                    })
-                //                }
-                
                 return id
             }
         )

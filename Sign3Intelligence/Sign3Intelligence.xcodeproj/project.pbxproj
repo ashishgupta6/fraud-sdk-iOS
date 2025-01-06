@@ -62,6 +62,8 @@
 		39EB9FFA2D26D8B600A93D27 /* RealmDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */; };
 		39EB9FFB2D26D8B600A93D27 /* IntelligenceResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF62D26D8B600A93D27 /* IntelligenceResponseObject.swift */; };
 		39EBA13F2D2ACB3500A93D27 /* ClonedDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA13D2D2ACB3500A93D27 /* ClonedDetector.swift */; };
+		39EBA1442D2BF7BE00A93D27 /* IngestionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA1432D2BF7BE00A93D27 /* IngestionResponse.swift */; };
+		39EBA1482D2C2F3C00A93D27 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 39EBA1472D2C2F3C00A93D27 /* Mixpanel */; };
 		39ED49012D0776C600584401 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49002D0776C600584401 /* ConfigManager.swift */; };
 		39ED49032D0776FD00584401 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49022D0776FD00584401 /* Config.swift */; };
 		39ED49052D07786000584401 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49042D07786000584401 /* Resource.swift */; };
@@ -88,7 +90,6 @@
 		797C73F32D12C8AF00C4B821 /* DeviceCheckData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */; };
 		79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C922CFF4B8300A66FF5 /* Log.swift */; };
 		79EA04A52D26A88F00DF873D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04A42D26A88F00DF873D /* KeychainHelper.swift */; };
-		79EA04AA2D26C50F00DF873D /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 79EA04A92D26C50F00DF873D /* Mixpanel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +161,7 @@
 		39EB9FF62D26D8B600A93D27 /* IntelligenceResponseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponseObject.swift; sourceTree = "<group>"; };
 		39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataStorage.swift; sourceTree = "<group>"; };
 		39EBA13D2D2ACB3500A93D27 /* ClonedDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClonedDetector.swift; sourceTree = "<group>"; };
+		39EBA1432D2BF7BE00A93D27 /* IngestionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionResponse.swift; sourceTree = "<group>"; };
 		39ED49002D0776C600584401 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		39ED49022D0776FD00584401 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		39ED49042D07786000584401 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
@@ -193,7 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79EA04AA2D26C50F00DF873D /* Mixpanel in Frameworks */,
+				39EBA1482D2C2F3C00A93D27 /* Mixpanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +221,7 @@
 		393E768C2C809FC100572A77 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				39EBA1432D2BF7BE00A93D27 /* IngestionResponse.swift */,
 				39EB9FF42D26C76C00A93D27 /* SdkError.swift */,
 				797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */,
 				39ED492B2D08567200584401 /* IntelligenceError.swift */,
@@ -364,6 +367,7 @@
 			children = (
 				398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */,
 				398EB5B42C63BC6B002FC9CA /* Sign3IntelligenceTests */,
+				39EBA1462D2C2F3C00A93D27 /* Frameworks */,
 				398EB5A72C63BC6A002FC9CA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -490,6 +494,13 @@
 			path = Cloned;
 			sourceTree = "<group>";
 		};
+		39EBA1462D2C2F3C00A93D27 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		39F2999B2C995FAC00D896F2 /* LocationSpoffer */ = {
 			isa = PBXGroup;
 			children = (
@@ -579,7 +590,7 @@
 			);
 			mainGroup = 398EB59C2C63BC6A002FC9CA;
 			packageReferences = (
-				79EA04A62D26BA5200DF873D /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
+				39EBA1452D2C2F3600A93D27 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 			);
 			productRefGroup = 398EB5A72C63BC6A002FC9CA /* Products */;
 			projectDirPath = "";
@@ -634,6 +645,7 @@
 				39E738FE2C88826F002B24C8 /* Location.swift in Sources */,
 				39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */,
 				39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */,
+				39EBA1442D2BF7BE00A93D27 /* IngestionResponse.swift in Sources */,
 				39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */,
 				397CD2B52CF091ED00A0E398 /* HookingDetector.swift in Sources */,
 				39E164662D0AB58D001A7C53 /* CronTrigger.swift in Sources */,
@@ -979,9 +991,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		79EA04A62D26BA5200DF873D /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
+		39EBA1452D2C2F3600A93D27 /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift.git";
 			requirement = {
 				kind = exactVersion;
 				version = 4.3.0;
@@ -990,9 +1002,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		79EA04A92D26C50F00DF873D /* Mixpanel */ = {
+		39EBA1472D2C2F3C00A93D27 /* Mixpanel */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 79EA04A62D26BA5200DF873D /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			package = 39EBA1452D2C2F3600A93D27 /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
 			productName = Mixpanel;
 		};
 /* End XCSwiftPackageProductDependency section */

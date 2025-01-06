@@ -57,17 +57,15 @@ internal struct ActionHandlerImpl {
         let clientParams = ClientParams.fromOptions(options)
         
         let deviceParamsHash = DataHashUtil.generateHash(deviceParams, sign3Intelligence)
-        Log.i("New Hash_:", deviceParamsHash.description)
         
-        
-        var dataRequest = DataRequest(
+        let dataRequest = DataRequest(
             requestId: requestId,
             sessionId: sessionId,
             deviceParams: deviceParams,
             clientParams: clientParams
         )
         
-        Api.shared.getScore(&dataRequest, sign3Intelligence, source) { result in
+        Api.shared.getScore(dataRequest, sign3Intelligence, source) { result in
             switch result.status {
             case .success:
                 if let responseData = result.data {
@@ -84,7 +82,7 @@ internal struct ActionHandlerImpl {
             case .error:
                 let intelligenceError = IntelligenceError( requestId: requestId, errorMessage: "Sign3 Server Error")
                 listener.onError(error: intelligenceError)
-                Log.i("Get Score:", result.message ?? "demo")
+                Log.e("Get Score:", result.message ?? "demo")
                 Utils.pushEventMetric(
                     EventMetric(
                         timeRequiredInMs: Int64(Date().timeIntervalSince1970) * 1000,

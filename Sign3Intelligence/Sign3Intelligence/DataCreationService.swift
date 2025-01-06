@@ -15,6 +15,23 @@ internal struct DataCreationService{
         return Sign3IntelligenceSdkApiImpl(deviceSignalsApi: deviceSignalsApi)
     }()
     
+    internal func initColdStart() async {
+        let base64TokenString = await deviceSignalsApi.generateDeviceToken()
+        hitDeviceCheckApi(base64TokenString)
+    }
+
+    internal func hitDeviceCheckApi(_ base64TokenString: String) {
+        Api.shared.queryDeviceCheck(deviceToken: base64TokenString) { resource in
+            switch resource.status {
+            case .success:
+                Log.i("hitDeviceCheckApi", resource.data ?? "empty data")
+            case .error:
+                Log.e("hitDeviceCheckApi: ", "\(resource.message ?? "Unknown error")")
+            case .loading: break
+            }
+        }
+    }
+    
     internal mutating func getDeviceParams() async -> DeviceParams{
         let isVpnEnabled = await sign3IntelliegnceSdkApiImpl.isVpnDetected()
         let isSimulatorDetected = await sign3IntelliegnceSdkApiImpl.isSimulatorDetected()

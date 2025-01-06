@@ -180,9 +180,14 @@ internal class Sign3IntelligenceInternal{
             Task{
                 if (self.isReady){
                     await self.startMandatoryCalls()
+                    await self.initColdStart()
                 }
             }
         }
+    }
+    
+    internal func initColdStart() async {
+        await dataCreationService.initColdStart()
     }
     
     internal func startMandatoryCalls() async {

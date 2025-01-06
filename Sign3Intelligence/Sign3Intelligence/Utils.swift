@@ -201,20 +201,25 @@ internal struct Utils{
             }
             var cData = compressedData
             data.withUnsafeBytes { inputPointer in
-                stream.next_in = UnsafeMutablePointer<Bytef>(
-                    mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!
-                ).advanced(by: Int(stream.total_in))
+                guard let baseAddress = inputPointer.bindMemory(to: Bytef.self).baseAddress else {
+                    return
+                }
+                
+                stream.next_in = UnsafeMutablePointer<Bytef>(mutating: baseAddress).advanced(by: Int(stream.total_in))
                 stream.avail_in = uInt(data.count) - uInt(stream.total_in)
 
-            
                 cData.withUnsafeMutableBytes { outputPointer in
-                    stream.next_out = outputPointer.bindMemory(to: Bytef.self).baseAddress!
-                        .advanced(by: Int(stream.total_out))
+                    guard let outputBaseAddress = outputPointer.bindMemory(to: Bytef.self).baseAddress else {
+                        return
+                    }
+                    
+                    stream.next_out = outputBaseAddress.advanced(by: Int(stream.total_out))
                     stream.avail_out = uInt(compressedData.count) - uInt(stream.total_out)
 
                     statusDeflate = deflate(&stream, Z_FINISH)
                 }
             }
+            
             compressedData = cData
 
         } while stream.avail_out == 0 && statusDeflate == Z_OK

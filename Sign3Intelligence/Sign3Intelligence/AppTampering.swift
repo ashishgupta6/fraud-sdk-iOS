@@ -103,7 +103,6 @@ internal class AppTampering{
             return false
         }
         
-        
         let url = URL(fileURLWithPath: path)
         
         if FileManager.default.fileExists(atPath: url.path) {
@@ -113,7 +112,6 @@ internal class AppTampering{
                 data.withUnsafeBytes {
                     _ = CC_SHA256($0.baseAddress, CC_LONG(data.count), &hash)
                 }
-                
                 if Data(hash).hexEncodedString() != expectedSha256Value {
                     return true
                 }

@@ -53,14 +53,14 @@ internal class ActionHandlerContinuousIntegrationImpl {
 
         if shouldHitApi {
             Log.i("Doing API Call:", shouldHitApi.description)
-            var dataRequest = DataRequest(
+            let dataRequest = DataRequest(
                 requestId: requestId,
                 sessionId: sessionId,
                 deviceParams: deviceParams,
                 clientParams: clientParams
             )
             
-            Api.shared.ingestion(&dataRequest, sign3Intelligence, sourceString) { result in
+            Api.shared.ingestion(dataRequest, sign3Intelligence, sourceString) { result in
                 switch result.status {
                 case .success:
                     if let responseData = result.data {
@@ -74,7 +74,7 @@ internal class ActionHandlerContinuousIntegrationImpl {
                         Log.i("Ingestion:", Utils.convertToJson(responseData))
                     }
                 case .error:
-                    Log.i("Ingestion:", result.message ?? "demo")
+                    Log.e("Ingestion:", result.message ?? "demo")
                     Utils.pushEventMetric(
                         EventMetric(
                             timeRequiredInMs: Int64(Date().timeIntervalSince1970) * 1000,

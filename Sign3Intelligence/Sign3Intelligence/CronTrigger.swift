@@ -46,7 +46,6 @@ internal class CronTrigger {
         
         timer?.setEventHandler { [weak self] in
             guard let self = self else { return }
-            Log.i(TAG, "Cron Trigger")
             self.trigger()
         }
         
@@ -56,7 +55,6 @@ internal class CronTrigger {
     private func startBackgroundTask() {
         Log.i(TAG, "Background Task Started")
         count = count + 1
-        Log.i(TAG, count.description)
         backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(withName: "\(TAG)\(count)") { [weak self] in
             guard let self = self else { return }
             self.endBackgroundTask()

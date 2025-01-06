@@ -8,7 +8,7 @@
 import Foundation
 
 internal protocol DeviceSignalsApi{
-    
+    func generateDeviceToken() async -> String
     func getiOSDeviceId() async -> String
     func getIDFA() async -> String
     func getCloudId() async -> String
