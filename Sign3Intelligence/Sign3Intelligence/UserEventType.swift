@@ -8,7 +8,7 @@
 import Foundation
 
 
-public enum UserEventType:String, Codable{
+public enum UserEventType:String{
     case LOGIN
     case SIGNUP
     case TRANSACTION

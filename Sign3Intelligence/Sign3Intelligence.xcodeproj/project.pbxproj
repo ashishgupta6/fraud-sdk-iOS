@@ -41,7 +41,7 @@
 		39C775552C8F2FE90006E042 /* ProdKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */; };
 		39C775572C8F320F0006E042 /* DevKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775562C8F320F0006E042 /* DevKeyProvider.swift */; };
 		39C775592C8F321C0006E042 /* StagingKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775582C8F321C0006E042 /* StagingKeyProvider.swift */; };
-		39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */; };
+		39CC8F6D2C7F59DD00239032 /* Sign3SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6C2C7F59DD00239032 /* Sign3SDK.swift */; };
 		39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */; };
 		39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F772C7F63FE00239032 /* DataCreationService.swift */; };
 		39E164662D0AB58D001A7C53 /* CronTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E164652D0AB58D001A7C53 /* CronTrigger.swift */; };
@@ -138,7 +138,7 @@
 		39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdKeyProvider.swift; sourceTree = "<group>"; };
 		39C775562C8F320F0006E042 /* DevKeyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevKeyProvider.swift; sourceTree = "<group>"; };
 		39C775582C8F321C0006E042 /* StagingKeyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingKeyProvider.swift; sourceTree = "<group>"; };
-		39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3Intelligence.swift; sourceTree = "<group>"; };
+		39CC8F6C2C7F59DD00239032 /* Sign3SDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3SDK.swift; sourceTree = "<group>"; };
 		39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceInternal.swift; sourceTree = "<group>"; };
 		39CC8F772C7F63FE00239032 /* DataCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCreationService.swift; sourceTree = "<group>"; };
 		39E164652D0AB58D001A7C53 /* CronTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronTrigger.swift; sourceTree = "<group>"; };
@@ -395,7 +395,7 @@
 				397950E82C7DC6F80043677B /* Utils */,
 				398EB5C02C63BC8A002FC9CA /* DeviceSignals */,
 				398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */,
-				39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */,
+				39CC8F6C2C7F59DD00239032 /* Sign3SDK.swift */,
 				39ED49002D0776C600584401 /* ConfigManager.swift */,
 				39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */,
 				3984B68D2C8E2B3B00EE992E /* Options.swift */,
@@ -699,7 +699,7 @@
 				397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */,
 				39ED49202D0846F200584401 /* DeviceStateRawData.swift in Sources */,
 				39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */,
-				39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */,
+				39CC8F6D2C7F59DD00239032 /* Sign3SDK.swift in Sources */,
 				395273792CFDAC0E00193923 /* FileChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -727,6 +727,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -792,6 +793,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -876,7 +878,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.sign3Intelligence;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -917,7 +919,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.sign3Intelligence;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

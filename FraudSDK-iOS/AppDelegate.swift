@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .setEnvironment(Environment.STAGING)
             .build()
         
-        Sign3Intelligence.getInstance().initAsync(options: options){isInitialize in
+        Sign3SDK.getInstance().initAsync(options: options){isInitialize in
             Utils.showInfologs(tags: "TAG_AppInstance", value: isInitialize.description)
         }
         return true
