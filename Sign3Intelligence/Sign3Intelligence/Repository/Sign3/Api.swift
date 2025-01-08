@@ -193,6 +193,8 @@ internal struct Api{
             dataRequest.clientParams = Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence)
             Log.i("ClientParams:", Utils.convertToJson(dataRequest.clientParams))
             
+            Log.i("DataRequest:", Utils.convertToJson(dataRequest))
+            
             let jsonData = try JSONEncoder().encode(dataRequest)
             let byteArray = try Utils.gzip(jsonData)
             guard String(data: jsonData, encoding: .utf8) != nil else {

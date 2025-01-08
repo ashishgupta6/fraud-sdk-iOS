@@ -17,7 +17,7 @@ public struct IntelligenceResponse: Codable {
     public let proxy: Bool
     public let mirroredScreen: Bool
     public var gpsLocation: GPSLocation?
-    public var cloned: Bool?
+    public var cloned: Bool
 
     enum CodingKeys: String, CodingKey {
         case deviceId = "deviceId"

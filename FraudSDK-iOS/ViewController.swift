@@ -145,6 +145,7 @@ extension IntelligenceResponse {
             "hooking": self.hooking,
             "proxy": self.proxy,
             "mirroredScreen": self.mirroredScreen,
+            "cloned": self.cloned
         ]
         
         // Include `gpsLocation` only if it's not nil
