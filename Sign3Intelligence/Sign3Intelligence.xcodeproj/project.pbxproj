@@ -18,6 +18,7 @@
 		396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */; };
 		396681362CF710AA00DF3306 /* RemoteAccessDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396681352CF710AA00DF3306 /* RemoteAccessDetector.swift */; };
 		3966813A2CF730A300DF3306 /* FridaChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396681392CF730A300DF3306 /* FridaChecker.swift */; };
+		397605742D2EC548001D504A /* Sign3Intelligence.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 397605732D2EC548001D504A /* Sign3Intelligence.podspec */; };
 		397950EA2C7DC73E0043677B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397950E92C7DC73E0043677B /* Utils.swift */; };
 		397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */; };
 		397AF53B2C92FA6F004F74D9 /* JailBrokenChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */; };
@@ -114,6 +115,7 @@
 		396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsApiImpl.swift; sourceTree = "<group>"; };
 		396681352CF710AA00DF3306 /* RemoteAccessDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAccessDetector.swift; sourceTree = "<group>"; };
 		396681392CF730A300DF3306 /* FridaChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridaChecker.swift; sourceTree = "<group>"; };
+		397605732D2EC548001D504A /* Sign3Intelligence.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sign3Intelligence.podspec; sourceTree = "<group>"; };
 		397950E92C7DC73E0043677B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBrokenDetector.swift; sourceTree = "<group>"; };
 		397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JailBrokenChecker.m; sourceTree = "<group>"; };
@@ -367,7 +369,6 @@
 			children = (
 				398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */,
 				398EB5B42C63BC6B002FC9CA /* Sign3IntelligenceTests */,
-				39EBA1462D2C2F3C00A93D27 /* Frameworks */,
 				398EB5A72C63BC6A002FC9CA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -384,6 +385,7 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
+				397605732D2EC548001D504A /* Sign3Intelligence.podspec */,
 				39EB9FF92D26D8B600A93D27 /* RealmDB */,
 				39577E682CE4AE2C00DCD69F /* Repository */,
 				390D71F12C962AF20090147D /* Encryption */,
@@ -494,13 +496,6 @@
 			path = Cloned;
 			sourceTree = "<group>";
 		};
-		39EBA1462D2C2F3C00A93D27 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		39F2999B2C995FAC00D896F2 /* LocationSpoffer */ = {
 			isa = PBXGroup;
 			children = (
@@ -607,6 +602,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				397605742D2EC548001D504A /* Sign3Intelligence.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,7 +851,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = A8YD7RNP82;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -872,7 +868,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.0.1000;
 				MODULEMAP_FILE = "${PROJECT_DIR}/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -896,7 +892,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = A8YD7RNP82;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -913,7 +909,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.0.1000;
 				MODULEMAP_FILE = "${PROJECT_DIR}/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
