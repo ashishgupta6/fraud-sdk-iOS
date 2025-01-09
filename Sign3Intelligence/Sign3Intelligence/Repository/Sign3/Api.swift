@@ -78,10 +78,10 @@ internal struct Api{
                         }
                         
                         completion(.success(decryptedString))
-                    }else {
-                        completion(.error("After API hit no data received"))
+                    } else {
+                        completion(.success("API hit success, no data received"))
                     }
-                }else {
+                } else {
                     completion(.error("Device Check Failed: \(httpResponse.statusCode)"))
                 }
             }.resume()
