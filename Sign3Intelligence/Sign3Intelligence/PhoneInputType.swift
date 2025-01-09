@@ -8,7 +8,7 @@
 import Foundation
 
 
-public enum PhoneInputType:String, Codable{
+public enum PhoneInputType:String{
     case MANUAL
     case COPY_PASTE
     case GOOGLE_HINT

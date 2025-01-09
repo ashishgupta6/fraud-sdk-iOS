@@ -43,7 +43,7 @@ internal class HeaderProvider{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                let version = Bundle(for: Sign3Intelligence.self).infoDictionary?["CFBundleShortVersionString"] as? String
+                let version = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleShortVersionString"] as? String
                 return version ?? "Unknown"
             }
         )
@@ -86,7 +86,7 @@ internal class HeaderProvider{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                let version = Bundle(for: Sign3Intelligence.self).infoDictionary?["CFBundleVersion"] as? String
+                let version = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleVersion"] as? String
                 return version ?? "Unknown"
             }
         )

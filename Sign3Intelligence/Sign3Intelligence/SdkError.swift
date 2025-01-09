@@ -16,8 +16,8 @@ internal struct SdkError: Codable {
     var createdAtInMillis: CLong = CLong(Int64(Date().timeIntervalSince1970) * 1000)
     var clientId: String = Sign3IntelligenceInternal.sdk?.options?.clientId ?? "unknown"
     var sessionId: String = Sign3IntelligenceInternal.sdk?.appSessionId ?? "unknown"
-    var frameworkVersionName: String = Bundle(for: Sign3Intelligence.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-    var frameworkVersionCode: String = Bundle(for: Sign3Intelligence.self).infoDictionary?["CFBundleVersion"] as? String ?? ""
+    var frameworkVersionName: String = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+    var frameworkVersionCode: String = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleVersion"] as? String ?? ""
     
     enum CodingKeys: String, CodingKey {
         case eventName = "eventName"

@@ -13,7 +13,7 @@ import Sign3Intelligence
 class ViewController: UIViewController {
     static var shared: ViewController?
     
-    let sign3Intelligence = Sign3Intelligence.getInstance()
+    let sign3Intelligence = Sign3SDK.getInstance()
     let listener = Sign3()
     
     private let textView: UITextView = {
@@ -115,7 +115,7 @@ class ViewController: UIViewController {
     
     // Action for the second button
     @objc func button2Tapped() {
-        Sign3Intelligence.getInstance().updateOptions(updateOption:  UpdateOption.Builder()
+        Sign3SDK.getInstance().updateOptions(updateOption:  UpdateOption.Builder()
             .setPhoneNumber("1234567890")
             .setUserId("12345")
             .setPhoneInputType(PhoneInputType.GOOGLE_HINT)
@@ -145,6 +145,7 @@ extension IntelligenceResponse {
             "hooking": self.hooking,
             "proxy": self.proxy,
             "mirroredScreen": self.mirroredScreen,
+            "cloned": self.cloned
         ]
         
         // Include `gpsLocation` only if it's not nil

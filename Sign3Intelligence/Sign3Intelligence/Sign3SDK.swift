@@ -7,19 +7,15 @@
 
 import Foundation
 
-import os.log
-import BackgroundTasks
-import DeviceCheck
-
-public final class Sign3Intelligence {
-    private static var sdk: Sign3Intelligence?
+public final class Sign3SDK {
+    private static var sdk: Sign3SDK?
     private lazy var sign3IntelligenceInternal = Sign3IntelligenceInternal.getInstance()
 
-    public static func getInstance() -> Sign3Intelligence {
+    public static func getInstance() -> Sign3SDK {
         if sdk == nil {
-            synchronized(Sign3Intelligence.self) {
+            synchronized(Sign3SDK.self) {
                 if sdk == nil {
-                    sdk = Sign3Intelligence()
+                    sdk = Sign3SDK()
                 }
             }
         }

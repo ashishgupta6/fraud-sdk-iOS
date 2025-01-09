@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Mixpanel
+internal import Mixpanel
 
 internal class Sign3IntelligenceInternal{
     internal static var sdk: Sign3IntelligenceInternal?
