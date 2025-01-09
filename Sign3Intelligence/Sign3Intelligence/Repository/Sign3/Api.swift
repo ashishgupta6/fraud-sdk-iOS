@@ -59,9 +59,25 @@ internal struct Api{
                     return
                 }
                 
+                guard let base64Iv = httpResponse.allHeaderFields[CryptoGCM.GET_IV_HEADER] as? String,
+                      let _ = Data(base64Encoded: base64Iv) else {
+                    completion(.error("Failed to retrieve or decode the IV from headers."))
+                    return
+                }
+                
                 if httpResponse.statusCode == 200 {
+                    
                     if let data = data {
-                        completion(.success(String(data: data, encoding: .utf8)))
+                        
+                        guard let decryptedString = CryptoGCM.decrypt(
+                            ciphertextBase64: String(data: data, encoding: .utf8) ?? "",
+                            nonceBase64: base64Iv
+                        ) else {
+                            completion(.error("Decryption failed."))
+                            return
+                        }
+                        
+                        completion(.success(decryptedString))
                     }else {
                         completion(.error("After API hit no data received"))
                     }
