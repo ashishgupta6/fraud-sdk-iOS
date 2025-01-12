@@ -18,11 +18,13 @@
 		396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */; };
 		396681362CF710AA00DF3306 /* RemoteAccessDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396681352CF710AA00DF3306 /* RemoteAccessDetector.swift */; };
 		3966813A2CF730A300DF3306 /* FridaChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396681392CF730A300DF3306 /* FridaChecker.swift */; };
+		397605742D2EC548001D504A /* Sign3Intelligence.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 397605732D2EC548001D504A /* Sign3Intelligence.podspec */; };
 		397950EA2C7DC73E0043677B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397950E92C7DC73E0043677B /* Utils.swift */; };
 		397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */; };
 		397AF53B2C92FA6F004F74D9 /* JailBrokenChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */; };
 		397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5412C9329A9004F74D9 /* AppTampering.swift */; };
 		397CD2B52CF091ED00A0E398 /* HookingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397CD2B42CF091ED00A0E398 /* HookingDetector.swift */; };
+		3980B7F82D32DDC2006B711A /* SimulatorChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3980B7F72D32DDC2006B711A /* SimulatorChecker.m */; };
 		3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68D2C8E2B3B00EE992E /* Options.swift */; };
 		3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68F2C8E2C3000EE992E /* UserEventType.swift */; };
 		3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B6932C8E2C8100EE992E /* PhoneInputType.swift */; };
@@ -51,7 +53,6 @@
 		39E164702D0AF25D001A7C53 /* DataHashUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E1646F2D0AF25D001A7C53 /* DataHashUtil.swift */; };
 		39E164722D0B0274001A7C53 /* GPSLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E164712D0B0274001A7C53 /* GPSLocation.swift */; };
 		39E164742D0B435E001A7C53 /* ActionContextEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E164732D0B435E001A7C53 /* ActionContextEvent.swift */; };
-		39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E36C292C90839500625BE6 /* SimulatorChecker.m */; };
 		39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		39E6BF5E2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF5D2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift */; };
 		39E6BF602CF60B9A0086203C /* HookingDetectorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF5F2CF60B9A0086203C /* HookingDetectorConst.swift */; };
@@ -86,7 +87,6 @@
 		39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */; };
 		39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */; };
 		39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */; };
-		39F299A32C9C3EDE00D896F2 /* Sign3PublicHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		797C73F32D12C8AF00C4B821 /* DeviceCheckData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */; };
 		79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C922CFF4B8300A66FF5 /* Log.swift */; };
 		79EA04A52D26A88F00DF873D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04A42D26A88F00DF873D /* KeychainHelper.swift */; };
@@ -114,11 +114,13 @@
 		396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsApiImpl.swift; sourceTree = "<group>"; };
 		396681352CF710AA00DF3306 /* RemoteAccessDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAccessDetector.swift; sourceTree = "<group>"; };
 		396681392CF730A300DF3306 /* FridaChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridaChecker.swift; sourceTree = "<group>"; };
+		397605732D2EC548001D504A /* Sign3Intelligence.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sign3Intelligence.podspec; sourceTree = "<group>"; };
 		397950E92C7DC73E0043677B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBrokenDetector.swift; sourceTree = "<group>"; };
 		397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JailBrokenChecker.m; sourceTree = "<group>"; };
 		397AF5412C9329A9004F74D9 /* AppTampering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTampering.swift; sourceTree = "<group>"; };
 		397CD2B42CF091ED00A0E398 /* HookingDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookingDetector.swift; sourceTree = "<group>"; };
+		3980B7F72D32DDC2006B711A /* SimulatorChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulatorChecker.m; sourceTree = "<group>"; };
 		3984B68D2C8E2B3B00EE992E /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		3984B68F2C8E2C3000EE992E /* UserEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEventType.swift; sourceTree = "<group>"; };
 		3984B6932C8E2C8100EE992E /* PhoneInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInputType.swift; sourceTree = "<group>"; };
@@ -148,7 +150,6 @@
 		39E1646F2D0AF25D001A7C53 /* DataHashUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHashUtil.swift; sourceTree = "<group>"; };
 		39E164712D0B0274001A7C53 /* GPSLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSLocation.swift; sourceTree = "<group>"; };
 		39E164732D0B435E001A7C53 /* ActionContextEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionContextEvent.swift; sourceTree = "<group>"; };
-		39E36C292C90839500625BE6 /* SimulatorChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimulatorChecker.m; sourceTree = "<group>"; };
 		39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sign3PrivateHeader.h; sourceTree = "<group>"; };
 		39E36C3A2C91885D00625BE6 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		39E6BF5D2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseEngineeringToolsChecker.swift; sourceTree = "<group>"; };
@@ -184,7 +185,6 @@
 		39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSpoffer.swift; sourceTree = "<group>"; };
 		39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSignalsFromObjectiveC.m; sourceTree = "<group>"; };
-		39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sign3PublicHeader.h; sourceTree = "<group>"; };
 		797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCheckData.swift; sourceTree = "<group>"; };
 		79E86C922CFF4B8300A66FF5 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		79EA04A42D26A88F00DF873D /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -320,7 +320,6 @@
 			children = (
 				398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */,
 				39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */,
-				39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -367,7 +366,6 @@
 			children = (
 				398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */,
 				398EB5B42C63BC6B002FC9CA /* Sign3IntelligenceTests */,
-				39EBA1462D2C2F3C00A93D27 /* Frameworks */,
 				398EB5A72C63BC6A002FC9CA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -384,6 +382,7 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
+				397605732D2EC548001D504A /* Sign3Intelligence.podspec */,
 				39EB9FF92D26D8B600A93D27 /* RealmDB */,
 				39577E682CE4AE2C00DCD69F /* Repository */,
 				390D71F12C962AF20090147D /* Encryption */,
@@ -443,8 +442,8 @@
 		39C7754F2C8F139F0006E042 /* SimulatorDetector */ = {
 			isa = PBXGroup;
 			children = (
-				39E36C292C90839500625BE6 /* SimulatorChecker.m */,
 				39C775502C8F13B10006E042 /* SimulatorDetector.swift */,
+				3980B7F72D32DDC2006B711A /* SimulatorChecker.m */,
 			);
 			name = SimulatorDetector;
 			sourceTree = "<group>";
@@ -494,13 +493,6 @@
 			path = Cloned;
 			sourceTree = "<group>";
 		};
-		39EBA1462D2C2F3C00A93D27 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		39F2999B2C995FAC00D896F2 /* LocationSpoffer */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,7 +509,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				398EB5B72C63BC6B002FC9CA /* Sign3Intelligence.h in Headers */,
-				39F299A32C9C3EDE00D896F2 /* Sign3PublicHeader.h in Headers */,
 				39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,6 +598,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				397605742D2EC548001D504A /* Sign3Intelligence.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,6 +638,7 @@
 				39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */,
 				39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */,
 				39EBA1442D2BF7BE00A93D27 /* IngestionResponse.swift in Sources */,
+				3980B7F82D32DDC2006B711A /* SimulatorChecker.m in Sources */,
 				39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */,
 				397CD2B52CF091ED00A0E398 /* HookingDetector.swift in Sources */,
 				39E164662D0AB58D001A7C53 /* CronTrigger.swift in Sources */,
@@ -698,7 +691,6 @@
 				39E1646A2D0AB68D001A7C53 /* ActionContextSource.swift in Sources */,
 				397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */,
 				39ED49202D0846F200584401 /* DeviceStateRawData.swift in Sources */,
-				39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */,
 				39CC8F6D2C7F59DD00239032 /* Sign3SDK.swift in Sources */,
 				395273792CFDAC0E00193923 /* FileChecker.swift in Sources */,
 			);
@@ -855,7 +847,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = A8YD7RNP82;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -872,7 +864,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.0.1001;
 				MODULEMAP_FILE = "${PROJECT_DIR}/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -896,7 +888,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = A8YD7RNP82;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -913,7 +905,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.0.1001;
 				MODULEMAP_FILE = "${PROJECT_DIR}/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";

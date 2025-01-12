@@ -65,12 +65,14 @@
                 return YES;
             }
         }
-        
-        char *env = getenv("DYLD_INSERT_LIBRARIES");
-        if (env != NULL) {
-            return YES;
-        }
-        
+
+        /// START
+        /// Need to check this code block
+//        char *env = getenv("DYLD_INSERT_LIBRARIES");
+//        if (env != NULL) {
+//            return YES;
+//        }
+        /// END
         
         //symlink verification check
         NSArray *symlinkList = @[
