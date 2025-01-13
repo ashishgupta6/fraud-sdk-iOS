@@ -16,6 +16,7 @@ import LocalAuthentication
 import CoreMotion
 import DeviceCheck
 import Network
+import SystemConfiguration.CaptiveNetwork
 
 internal class DeviceSignalsApiImpl : DeviceSignalsApi{
     
@@ -1571,8 +1572,34 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getSerialNumber() async -> String {
-        return ""
+    func lockDownMode() async -> Bool {
+        return await Utils.getDeviceSignals(
+            functionName: "lockdownMode",
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+                return UserDefaults.standard.bool(forKey: "LDMGlobalEnabled")
+            }
+        )
+    }
+    
+    func getWifiSSID() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getWifiSSID",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                if let interfaces = CNCopySupportedInterfaces() as? [String] {
+                    for interface in interfaces {
+                        if let networkInfo = CNCopyCurrentNetworkInfo(interface as CFString) as? [String: AnyObject],
+                           let currentSSID = networkInfo["SSID"] as? String {
+                            return currentSSID
+                        }
+                    }
+                }
+                return "Unknown SSID"
+            }
+        )
     }
     
     

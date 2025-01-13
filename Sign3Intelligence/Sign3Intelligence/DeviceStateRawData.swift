@@ -50,8 +50,9 @@ internal struct DeviceStateRawData: Codable {
     let proximitySensor: Bool
     let localizedModel: String
     let systemName: String
-    let serialNumber: String
-    let deviceAddress: DeviceFingerprint?
+    let lockdownMode: Bool
+    let wifiSSID: String
+    let deviceReference: DeviceFingerprint?
     
     enum CodingKeys: String, CodingKey {
         case displayWidth = "a"
@@ -96,7 +97,8 @@ internal struct DeviceStateRawData: Codable {
         case proximitySensor = "an"
         case localizedModel = "ao"
         case systemName = "ap"
-        case serialNumber = "aq"
-        case deviceAddress = "as"
+        case lockdownMode = "aq"
+        case wifiSSID = "ar"
+        case deviceReference = "as"
     }
 }

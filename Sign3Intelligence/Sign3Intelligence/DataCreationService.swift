@@ -119,11 +119,12 @@ internal struct DataCreationService{
         let localizedModel = await deviceSignalsApi.getLocalizedModel()
         let systemName = await deviceSignalsApi.getSystemName()
         let macAddress = await deviceSignalsApi.getMacAddress()
-        let serialNumber = await deviceSignalsApi.getSerialNumber()
         let iPhoneBluetoothMacAddress = await deviceSignalsApi.getIPhoneBluetoothMacAddress()
         let iPadBluetoothMacAddress = await deviceSignalsApi.getIPadBluetoothMacAddress()
-        let deviceAddress = KeychainHelper.shared.retrieveDeviceFingerprint()
-        
+        let lockdownMode = await deviceSignalsApi.lockDownMode()
+        let wifiSSID = await deviceSignalsApi.getWifiSSID()
+        let deviceReference = KeychainHelper.shared.retrieveDeviceFingerprint()
+                
         let iOSDataRequest = iOSDataRequest(
             iOSDeviceID: deviceId,
             applicationId: appId,
@@ -195,8 +196,9 @@ internal struct DataCreationService{
             proximitySensor: proximitySensor,
             localizedModel: localizedModel,
             systemName: systemName,
-            serialNumber: serialNumber,
-            deviceAddress: deviceAddress
+            lockdownMode: lockdownMode,
+            wifiSSID: wifiSSID,
+            deviceReference: deviceReference
         )
         
         let hardwareFingerprintRawData = HardwareFingerprintRawData(
