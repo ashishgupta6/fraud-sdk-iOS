@@ -9,7 +9,7 @@
 import Foundation
 import os
 
-struct Log {
+internal struct Log {
     private static let subsystem = "com.yourapp"
 
     private enum Color: String {

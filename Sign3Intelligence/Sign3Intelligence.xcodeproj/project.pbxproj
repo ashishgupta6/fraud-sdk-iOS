@@ -88,6 +88,7 @@
 		39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */; };
 		39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */; };
 		797C73F32D12C8AF00C4B821 /* DeviceCheckData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */; };
+		79D8603F2D34570A00BA983A /* DeviceFingerprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8603E2D34570100BA983A /* DeviceFingerprint.swift */; };
 		79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C922CFF4B8300A66FF5 /* Log.swift */; };
 		79EA04A52D26A88F00DF873D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04A42D26A88F00DF873D /* KeychainHelper.swift */; };
 /* End PBXBuildFile section */
@@ -186,6 +187,7 @@
 		39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSignalsFromObjectiveC.m; sourceTree = "<group>"; };
 		797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCheckData.swift; sourceTree = "<group>"; };
+		79D8603E2D34570100BA983A /* DeviceFingerprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFingerprint.swift; sourceTree = "<group>"; };
 		79E86C922CFF4B8300A66FF5 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		79EA04A42D26A88F00DF873D /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -221,6 +223,7 @@
 		393E768C2C809FC100572A77 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				79D8603E2D34570100BA983A /* DeviceFingerprint.swift */,
 				39EBA1432D2BF7BE00A93D27 /* IngestionResponse.swift */,
 				39EB9FF42D26C76C00A93D27 /* SdkError.swift */,
 				797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */,
@@ -626,6 +629,7 @@
 				39ED490C2D083D9800584401 /* ClientParam.swift in Sources */,
 				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
 				3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */,
+				79D8603F2D34570A00BA983A /* DeviceFingerprint.swift in Sources */,
 				39E164722D0B0274001A7C53 /* GPSLocation.swift in Sources */,
 				39C775512C8F13B10006E042 /* SimulatorDetector.swift in Sources */,
 				39EB9FF52D26C76C00A93D27 /* SdkError.swift in Sources */,
