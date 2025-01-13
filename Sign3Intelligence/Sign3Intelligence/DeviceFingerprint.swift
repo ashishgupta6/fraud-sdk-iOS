@@ -6,11 +6,11 @@
 //
 
 internal struct DeviceFingerprint: Codable {
-    let iv: String = CryptoGCM.getIvHeader().base64EncodedString()
-    let deviceId: String
+    let encodedIv: String
+    let encryptedDeviceId: String
 
     enum CodingKeys: String, CodingKey {
-        case iv = "a"
-        case deviceId = "b"
+        case encodedIv = "a"
+        case encryptedDeviceId = "b"
     }
 }
