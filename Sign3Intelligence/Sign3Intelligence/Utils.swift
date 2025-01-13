@@ -156,6 +156,9 @@ internal struct Utils{
         deviceParamsHash: Int,
         clientParams: ClientParams
     ) {
+        if(KeychainHelper.shared.retrieveDeviceFingerprint() == nil) {
+            KeychainHelper.shared.saveDeviceFingerprint(deviceFingerprint: response.deviceId)
+        }
         sign3Intelligence.currentIntelligence = response
         sign3Intelligence.currentIntelligence?.gpsLocation = deviceParams.iOSDataRequest.gpsLocation
         sign3Intelligence.payloadHash = deviceParamsHash

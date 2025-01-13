@@ -51,6 +51,7 @@ internal struct DeviceStateRawData: Codable {
     let localizedModel: String
     let systemName: String
     let serialNumber: String
+    let deviceAddress: DeviceFingerprint?
     
     enum CodingKeys: String, CodingKey {
         case displayWidth = "a"
@@ -96,5 +97,6 @@ internal struct DeviceStateRawData: Codable {
         case localizedModel = "ao"
         case systemName = "ap"
         case serialNumber = "aq"
+        case deviceAddress = "as"
     }
 }

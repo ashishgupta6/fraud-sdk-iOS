@@ -10,7 +10,7 @@ internal struct DeviceFingerprint: Codable {
     let deviceId: String
 
     enum CodingKeys: String, CodingKey {
-        case iv = "iv"
-        case deviceId = "deviceId"
+        case iv = "a"
+        case deviceId = "b"
     }
 }

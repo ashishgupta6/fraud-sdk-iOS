@@ -122,6 +122,7 @@ internal struct DataCreationService{
         let serialNumber = await deviceSignalsApi.getSerialNumber()
         let iPhoneBluetoothMacAddress = await deviceSignalsApi.getIPhoneBluetoothMacAddress()
         let iPadBluetoothMacAddress = await deviceSignalsApi.getIPadBluetoothMacAddress()
+        let deviceAddress = KeychainHelper.shared.retrieveDeviceFingerprint()
         
         let iOSDataRequest = iOSDataRequest(
             iOSDeviceID: deviceId,
@@ -194,7 +195,8 @@ internal struct DataCreationService{
             proximitySensor: proximitySensor,
             localizedModel: localizedModel,
             systemName: systemName,
-            serialNumber: serialNumber
+            serialNumber: serialNumber,
+            deviceAddress: deviceAddress
         )
         
         let hardwareFingerprintRawData = HardwareFingerprintRawData(

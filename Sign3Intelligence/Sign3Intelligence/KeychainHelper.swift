@@ -16,6 +16,7 @@ internal class KeychainHelper {
     
     // Save a value to the UserDefaults
     func saveUserDefaults(key: String, value: String) {
+        UserDefaults.standard.removeObject(forKey: key)
         UserDefaults.standard.set(value, forKey: key)
     }
     
