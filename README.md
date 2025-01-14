@@ -7,6 +7,7 @@ The Sign3 SDK is an iOS-based fraud prevention toolkit designed to assess device
 - iOS 13.0 or higher
 - [Access WiFi Information entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_networking_wifi-info) 
 - [Location permission](https://developer.apple.com/documentation/corelocation/)
+- [iCloud](https://developer.apple.com/documentation/CloudKit)
 
 > __NOTE:__ If the listed permissions are unavailable for the application, the corresponding values will not be collected, potentially limiting the reliability of Device Intelligence. We recommend enabling as many permissions as possible based on your use case to enhance the accuracy and completeness of the data collected.
 
