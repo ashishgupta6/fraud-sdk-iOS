@@ -25,6 +25,8 @@
 		397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5412C9329A9004F74D9 /* AppTampering.swift */; };
 		397CD2B52CF091ED00A0E398 /* HookingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397CD2B42CF091ED00A0E398 /* HookingDetector.swift */; };
 		3980B7F82D32DDC2006B711A /* SimulatorChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3980B7F72D32DDC2006B711A /* SimulatorChecker.m */; };
+		3980B91A2D367D04006B711A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3980B9182D367D04006B711A /* LICENSE */; };
+		3980B91B2D367D04006B711A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3980B9192D367D04006B711A /* README.md */; };
 		3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68D2C8E2B3B00EE992E /* Options.swift */; };
 		3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68F2C8E2C3000EE992E /* UserEventType.swift */; };
 		3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B6932C8E2C8100EE992E /* PhoneInputType.swift */; };
@@ -122,6 +124,8 @@
 		397AF5412C9329A9004F74D9 /* AppTampering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTampering.swift; sourceTree = "<group>"; };
 		397CD2B42CF091ED00A0E398 /* HookingDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookingDetector.swift; sourceTree = "<group>"; };
 		3980B7F72D32DDC2006B711A /* SimulatorChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulatorChecker.m; sourceTree = "<group>"; };
+		3980B9182D367D04006B711A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		3980B9192D367D04006B711A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3984B68D2C8E2B3B00EE992E /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		3984B68F2C8E2C3000EE992E /* UserEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEventType.swift; sourceTree = "<group>"; };
 		3984B6932C8E2C8100EE992E /* PhoneInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInputType.swift; sourceTree = "<group>"; };
@@ -156,7 +160,7 @@
 		39E6BF5D2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseEngineeringToolsChecker.swift; sourceTree = "<group>"; };
 		39E6BF5F2CF60B9A0086203C /* HookingDetectorConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookingDetectorConst.swift; sourceTree = "<group>"; };
 		39E6BF612CF60FFB0086203C /* MSHookChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSHookChecker.swift; sourceTree = "<group>"; };
-		39E738FA2C885D01002B24C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		39E738FA2C885D01002B24C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39E738FD2C88826F002B24C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		39E738FF2C888F16002B24C8 /* LocationDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetector.swift; sourceTree = "<group>"; };
 		39EB9FF42D26C76C00A93D27 /* SdkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdkError.swift; sourceTree = "<group>"; };
@@ -385,18 +389,17 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
-				397605732D2EC548001D504A /* Sign3Intelligence.podspec */,
 				39EB9FF92D26D8B600A93D27 /* RealmDB */,
 				39577E682CE4AE2C00DCD69F /* Repository */,
 				390D71F12C962AF20090147D /* Encryption */,
 				397AF5342C92036A004F74D9 /* Headers */,
 				397AF52A2C91DE29004F74D9 /* Module */,
-				39E738FA2C885D01002B24C8 /* Info.plist */,
 				39E738F92C882AB4002B24C8 /* Detectors */,
 				393E768C2C809FC100572A77 /* Model */,
 				397950E82C7DC6F80043677B /* Utils */,
 				398EB5C02C63BC8A002FC9CA /* DeviceSignals */,
 				398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */,
+				39E738FA2C885D01002B24C8 /* Info.plist */,
 				39CC8F6C2C7F59DD00239032 /* Sign3SDK.swift */,
 				39ED49002D0776C600584401 /* ConfigManager.swift */,
 				39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */,
@@ -412,6 +415,9 @@
 				39E164672D0AB5FD001A7C53 /* ActionHandlerContinuousIntegrationImpl.swift */,
 				39E164692D0AB68C001A7C53 /* ActionContextSource.swift */,
 				39E164732D0B435E001A7C53 /* ActionContextEvent.swift */,
+				3980B9182D367D04006B711A /* LICENSE */,
+				3980B9192D367D04006B711A /* README.md */,
+				397605732D2EC548001D504A /* Sign3Intelligence.podspec */,
 			);
 			path = Sign3Intelligence;
 			sourceTree = "<group>";
@@ -601,6 +607,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3980B91A2D367D04006B711A /* LICENSE in Resources */,
+				3980B91B2D367D04006B711A /* README.md in Resources */,
 				397605742D2EC548001D504A /* Sign3Intelligence.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
