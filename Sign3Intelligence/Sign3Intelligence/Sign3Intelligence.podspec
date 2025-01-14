@@ -10,3 +10,4 @@ Pod::Spec.new do |spec|
   spec.source       = { :http => 'https://firebasestorage.googleapis.com/v0/b/make-friends-7338f.appspot.com/o/test-intelligence-iOS%2F0.0.1001%2FSign3Intelligence.xcframework.zip?alt=media&token=0ad0d595-48e9-445e-b4d6-7845ad124c14' }
   spec.vendored_frameworks = 'Sign3Intelligence.xcframework'
 end
+ 

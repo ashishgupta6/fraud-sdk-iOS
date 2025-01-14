@@ -11,6 +11,7 @@ import Security
 
 internal class KeychainHelper {
     static let shared = KeychainHelper()
+    let keyValueStore = NSUbiquitousKeyValueStore.default
 
     private init() {}
     
@@ -33,12 +34,15 @@ internal class KeychainHelper {
     func saveDeviceFingerprint(deviceFingerprint: String) -> Bool {
         do {
             let fpKey = "fpInfo"
-            let fingerprint = DeviceFingerprint(deviceId: deviceFingerprint)
+            let iv = try CryptoGCM.getIvHeader()
+            let encryptedDeviceFingerprint = try CryptoGCM.encrypt(deviceFingerprint, iv)
+            let fingerprint = DeviceFingerprint(encodedIv: iv.base64EncodedString(), encryptedDeviceId: encryptedDeviceFingerprint)
             guard let jsonString = try String(data: JSONEncoder().encode(fingerprint), encoding: .utf8) else {
                 return false
             }
             saveUserDefaults(key: fpKey, value: jsonString)
             save(key: fpKey, value: jsonString)
+            saveData(key: fpKey, value: jsonString)
             return true
         } catch {
             return false
@@ -49,15 +53,22 @@ internal class KeychainHelper {
         let fpKey = "fpInfo"
         let fpValueFromLocal = retrieveUserDefaults(key: fpKey)
         let fpValueFromKeychain = retrieve(key: fpKey)
+        let fpValueFromCloud = retrieveData(key: fpKey)
         
-        if(fpValueFromLocal == nil && fpValueFromKeychain == nil) {
+        if(fpValueFromLocal == nil && fpValueFromKeychain == nil && fpValueFromCloud == nil) {
             return nil
-        } else if(fpValueFromKeychain == nil) {
+        } else if(fpValueFromLocal != nil) {
             save(key: fpKey, value: fpValueFromLocal ?? "")
+            saveData(key: fpKey, value: fpValueFromLocal ?? "")
             return getDeviceFingerprintObject(fpValueFromLocal)
-        }  else if(fpValueFromLocal == nil) {
+        }  else if(fpValueFromKeychain != nil) {
             saveUserDefaults(key: fpKey, value: fpValueFromKeychain ?? "")
+            saveData(key: fpKey, value: fpValueFromKeychain ?? "")
             return getDeviceFingerprintObject(fpValueFromKeychain)
+        } else if(fpValueFromCloud != nil) {
+            saveUserDefaults(key: fpKey, value: fpValueFromCloud ?? "")
+            save(key: fpKey, value: fpValueFromCloud ?? "")
+            return getDeviceFingerprintObject(fpValueFromCloud)
         } else {
             //no such cases -- Need to be modified later
             return getDeviceFingerprintObject(fpValueFromKeychain)
@@ -91,6 +102,15 @@ internal class KeychainHelper {
 
         let status = SecItemAdd(query as CFDictionary, nil)
         return status == errSecSuccess
+    }
+    
+    func saveData(key: String, value: String) {
+        keyValueStore.set(value, forKey: key)
+        keyValueStore.synchronize()
+    }
+    
+    func retrieveData(key: String) -> String? {
+        return keyValueStore.string(forKey: key)
     }
 
     // Retrieve a value from the Keychain
