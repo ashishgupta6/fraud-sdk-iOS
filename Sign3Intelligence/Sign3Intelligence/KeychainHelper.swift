@@ -35,14 +35,16 @@ internal class KeychainHelper {
         do {
             let fpKey = "fpInfo"
             let iv = try CryptoGCM.getIvHeader()
+            let frameworkBuildNumber = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleVersion"] as? String ?? ""
+            let frameworkVersion = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
             let encryptedDeviceFingerprint = try CryptoGCM.encrypt(deviceFingerprint, iv)
-            let fingerprint = DeviceFingerprint(encodedIv: iv.base64EncodedString(), encryptedDeviceId: encryptedDeviceFingerprint)
+            let fingerprint = DeviceFingerprint(encodedIv: iv.base64EncodedString(), encryptedDeviceId: encryptedDeviceFingerprint, frameworkBuildNumber: frameworkBuildNumber, frameworkVersion: frameworkVersion)
             guard let jsonString = try String(data: JSONEncoder().encode(fingerprint), encoding: .utf8) else {
                 return false
             }
             saveUserDefaults(key: fpKey, value: jsonString)
-            save(key: fpKey, value: jsonString)
-            saveData(key: fpKey, value: jsonString)
+            saveInKeychain(key: fpKey, value: jsonString)
+            saveInCloud(key: fpKey, value: jsonString)
             return true
         } catch {
             return false
@@ -52,22 +54,23 @@ internal class KeychainHelper {
     func retrieveDeviceFingerprint() -> DeviceFingerprint? {
         let fpKey = "fpInfo"
         let fpValueFromLocal = retrieveUserDefaults(key: fpKey)
-        let fpValueFromKeychain = retrieve(key: fpKey)
-        let fpValueFromCloud = retrieveData(key: fpKey)
+        let fpValueFromKeychain = retrieveKeyChain(key: fpKey)
+        let fpValueFromCloud = retrieveCloud(key: fpKey)
+        
         
         if(fpValueFromLocal == nil && fpValueFromKeychain == nil && fpValueFromCloud == nil) {
             return nil
         } else if(fpValueFromLocal != nil) {
-            save(key: fpKey, value: fpValueFromLocal ?? "")
-            saveData(key: fpKey, value: fpValueFromLocal ?? "")
+            saveInKeychain(key: fpKey, value: fpValueFromLocal ?? "")
+            saveInCloud(key: fpKey, value: fpValueFromLocal ?? "")
             return getDeviceFingerprintObject(fpValueFromLocal)
         }  else if(fpValueFromKeychain != nil) {
             saveUserDefaults(key: fpKey, value: fpValueFromKeychain ?? "")
-            saveData(key: fpKey, value: fpValueFromKeychain ?? "")
+            saveInCloud(key: fpKey, value: fpValueFromKeychain ?? "")
             return getDeviceFingerprintObject(fpValueFromKeychain)
         } else if(fpValueFromCloud != nil) {
             saveUserDefaults(key: fpKey, value: fpValueFromCloud ?? "")
-            save(key: fpKey, value: fpValueFromCloud ?? "")
+            saveInKeychain(key: fpKey, value: fpValueFromCloud ?? "")
             return getDeviceFingerprintObject(fpValueFromCloud)
         } else {
             //no such cases -- Need to be modified later
@@ -87,7 +90,7 @@ internal class KeychainHelper {
     }
 
     // Save a value to the Keychain
-    func save(key: String, value: String) -> Bool {
+    func saveInKeychain(key: String, value: String) -> Bool {
         guard let valueData = value.data(using: .utf8) else { return false }
 
         // Remove any existing item with the same key
@@ -104,17 +107,17 @@ internal class KeychainHelper {
         return status == errSecSuccess
     }
     
-    func saveData(key: String, value: String) {
+    func saveInCloud(key: String, value: String) {
         keyValueStore.set(value, forKey: key)
         keyValueStore.synchronize()
     }
     
-    func retrieveData(key: String) -> String? {
+    func retrieveCloud(key: String) -> String? {
         return keyValueStore.string(forKey: key)
     }
 
     // Retrieve a value from the Keychain
-    func retrieve(key: String) -> String? {
+    func retrieveKeyChain(key: String) -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
