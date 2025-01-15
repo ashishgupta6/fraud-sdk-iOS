@@ -156,7 +156,8 @@ internal struct Utils{
         deviceParamsHash: Int,
         clientParams: ClientParams
     ) {
-        if(KeychainHelper.shared.retrieveDeviceFingerprint() == nil) {
+        let retrievedDeviceFingerprint = KeychainHelper.shared.retrieveDeviceFingerprint()
+        if(retrievedDeviceFingerprint == nil) {
             KeychainHelper.shared.saveDeviceFingerprint(deviceFingerprint: response.deviceId)
         }
         sign3Intelligence.currentIntelligence = response
