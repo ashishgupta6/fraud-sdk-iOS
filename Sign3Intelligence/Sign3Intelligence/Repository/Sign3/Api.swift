@@ -30,6 +30,37 @@ internal struct Api{
         self.headerProvider = HeaderProvider(clientId: clientId, clientSecret: clientSecret)
     }
     
+    internal func getAbiType() -> String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        
+        let machine = withUnsafePointer(to: &systemInfo.machine) {
+            $0.withMemoryRebound(to: CChar.self, capacity: 1) {
+                String(cString: $0)
+            }
+        }
+        
+        switch machine {
+        case "x86_64":
+            return "x86_64 (Simulator)"
+        case "i386":
+            return "i386 (Simulator)"
+        case "arm64":
+            return "arm64 (Device)"
+        case "armv7":
+            return "armv7 (Device)"
+        case "armv6":
+            return "armv6 (Device)"
+        case "armv7s":  // ARMv7s (used in devices like iPhone 5, iPad Mini)
+            return "armv7s (Device)"
+        case "arm64e":  // ARM64e (used in newer devices like iPhone XS and later)
+            return "arm64e (Device)"
+        default:
+            return machine
+        }
+    }
+    
+    
     internal func queryDeviceCheck(deviceToken: String ,completion: @escaping (Resource<String>) -> Void) {
         guard let baseUrl = baseUrl, let url = URL(string: "\(baseUrl)v1/queryBits") else {
             completion(.error("Invalid or missing base URL.", data: ""))
@@ -41,6 +72,9 @@ internal struct Api{
             let iv = CryptoGCM.getIvHeader()
             request.httpMethod = "POST"
             request.addValue(iv.base64EncodedString(), forHTTPHeaderField: CryptoGCM.GET_IV_HEADER)
+            //TODO:(Sreyans) TO remove this later after graphana graph analysis
+            let abiType = getAbiType()
+            request.addValue(abiType, forHTTPHeaderField: "device-abi")
             request.httpBody = try CryptoGCM.encrypt(deviceToken, iv).data(using: .utf8)
             
             /// Add headers to the request
