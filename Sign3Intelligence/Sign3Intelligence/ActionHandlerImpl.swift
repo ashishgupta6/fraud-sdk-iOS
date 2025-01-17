@@ -37,7 +37,7 @@ internal struct ActionHandlerImpl {
             listener.onError(error: IntelligenceError(requestId: requestId, errorMessage: error.localizedDescription))
         }
         
-        let deviceParams: DeviceParams
+        let deviceParams: DeviceParams?
         if ConfigManager.fetchSignals {
             sign3Intelligence.deviceParam = await dataCreationService.getDeviceParams()
             deviceParams = await dataCreationService.getDeviceParams()

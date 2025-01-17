@@ -10,7 +10,7 @@ import Foundation
 internal struct DataRequest: Codable {
     let requestId: String
     let sessionId: String
-    let deviceParams: DeviceParams
+    let deviceParams: DeviceParams?
     var clientParams: ClientParams
     
     enum CodingKeys: String, CodingKey {

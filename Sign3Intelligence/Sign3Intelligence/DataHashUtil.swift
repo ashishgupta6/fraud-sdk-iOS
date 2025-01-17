@@ -10,7 +10,7 @@ import CoreLocation
 
 internal class DataHashUtil {
     
-    static func generateHash(_ deviceParams: DeviceParams, _ sign3Intelligence: Sign3IntelligenceInternal) -> Int {
+    static func generateHash(_ deviceParams: DeviceParams?, _ sign3Intelligence: Sign3IntelligenceInternal) -> Int {
         var latValue: String? = nil
         var longValue: String?
         let hasList = ConfigManager.hasList
@@ -84,20 +84,20 @@ internal class DataHashUtil {
         return 0 // Return default in case of an error
     }
     
-    private static func getHashData(deviceParams: DeviceParams) -> HashData {
+    private static func getHashData(deviceParams: DeviceParams?) -> HashData {
         return HashData(
-            isJailbroken: deviceParams.iOSDataRequest.jailBroken,
-            isHooking: deviceParams.iOSDataRequest.hooking,
-            isVpn: deviceParams.iOSDataRequest.isVpn,
-            isProxy: deviceParams.iOSDataRequest.proxy,
-            isGeoSpoofed: deviceParams.iOSDataRequest.isGeoSpoofed,
-            isSimulator: deviceParams.iOSDataRequest.simulator,
-            isMirroredScreen: deviceParams.iOSDataRequest.mirroredScreen,
-            isAppTampering: deviceParams.iOSDataRequest.isAppTampering,
-            totalMemory: deviceParams.deviceIdRawData.hardwareFingerprintRawData.totalDiskSpace,
-            availableMemory: deviceParams.deviceIdRawData.hardwareFingerprintRawData.freeDiskSpace,
-            latitude: deviceParams.networkData.networkLocation.latitude,
-            longitude: deviceParams.networkData.networkLocation.longitude
+            isJailbroken: deviceParams?.iOSDataRequest.jailBroken ?? false,
+            isHooking: deviceParams?.iOSDataRequest.hooking ?? false,
+            isVpn: deviceParams?.iOSDataRequest.isVpn ?? false,
+            isProxy: deviceParams?.iOSDataRequest.proxy ?? false,
+            isGeoSpoofed: deviceParams?.iOSDataRequest.isGeoSpoofed ?? false,
+            isSimulator: deviceParams?.iOSDataRequest.simulator ?? false,
+            isMirroredScreen: deviceParams?.iOSDataRequest.mirroredScreen ?? false,
+            isAppTampering: deviceParams?.iOSDataRequest.isAppTampering ?? false,
+            totalMemory: deviceParams?.deviceIdRawData.hardwareFingerprintRawData.totalDiskSpace ?? 0,
+            availableMemory: deviceParams?.deviceIdRawData.hardwareFingerprintRawData.freeDiskSpace ?? 0,
+            latitude: deviceParams?.networkData.networkLocation.latitude ?? 0.0,
+            longitude: deviceParams?.networkData.networkLocation.longitude ?? 0.0
         )
     }
     

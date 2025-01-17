@@ -33,7 +33,8 @@ internal struct DataCreationService{
     }
     
     internal mutating func getDeviceParams() async -> DeviceParams{
-        let isVpnEnabled = await sign3IntelliegnceSdkApiImpl.isVpnDetected()
+//        let isVpnEnabled = await sign3IntelliegnceSdkApiImpl.isVpnDetected()
+        let isVpnEnabled = false
         let isSimulatorDetected = await sign3IntelliegnceSdkApiImpl.isSimulatorDetected()
         let isJainBrokenDetected = await sign3IntelliegnceSdkApiImpl.isJailBrokenDetected()
         let locationSpoffer = await sign3IntelliegnceSdkApiImpl.isMockLocation()
@@ -45,7 +46,8 @@ internal struct DataCreationService{
         
         // Signals
         let deviceId = await deviceSignalsApi.getiOSDeviceId()
-        let cloudId = await deviceSignalsApi.getCloudId()
+//        let cloudId = await deviceSignalsApi.getCloudId()
+        let cloudId = ""
         let appId = await deviceSignalsApi.getApplicationId()
         let idfa = await deviceSignalsApi.getIDFA()
         let batteryStatus = await deviceSignalsApi.getBatteryStatus()
@@ -122,8 +124,9 @@ internal struct DataCreationService{
         let iPhoneBluetoothMacAddress = await deviceSignalsApi.getIPhoneBluetoothMacAddress()
         let iPadBluetoothMacAddress = await deviceSignalsApi.getIPadBluetoothMacAddress()
         let lockdownMode = await deviceSignalsApi.lockDownMode()
-        let wifiSSID = await deviceSignalsApi.getWifiSSID()
-        let deviceReference = KeychainHelper.shared.retrieveDeviceFingerprint()
+//        let wifiSSID = await deviceSignalsApi.getWifiSSID()
+        let wifiSSID = ""
+//        let deviceReference = KeychainHelper.shared.retrieveDeviceFingerprint()
                 
         let iOSDataRequest = iOSDataRequest(
             iOSDeviceID: deviceId,
@@ -198,7 +201,7 @@ internal struct DataCreationService{
             systemName: systemName,
             lockdownMode: lockdownMode,
             wifiSSID: wifiSSID,
-            deviceReference: deviceReference
+            deviceReference: nil
         )
         
         let hardwareFingerprintRawData = HardwareFingerprintRawData(

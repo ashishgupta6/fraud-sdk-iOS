@@ -14,7 +14,7 @@ import AppTrackingTransparency
 import AVFoundation
 import LocalAuthentication
 import CoreMotion
-import DeviceCheck
+//import DeviceCheck
 import Network
 import SystemConfiguration.CaptiveNetwork
 
@@ -23,26 +23,27 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
     init() {}
     
     func generateDeviceToken() async -> String {
-        await Utils.getDeviceSignals(
-            functionName: "generateDeviceToken",
-            requestId: UUID().uuidString,
-            defaultValue: "Unknown"
-        ) {
-            let currentDevice = DCDevice.current
-            if currentDevice.isSupported {
-                return await withCheckedContinuation { continuation in
-                    currentDevice.generateToken { data, error in
-                        if let tokenData = data {
-                            continuation.resume(returning: tokenData.base64EncodedString())
-                        } else {
-                            continuation.resume(returning: "")
-                        }
-                    }
-                }
-            } else {
-                return "Unsupported Device"
-            }
-        }
+//        await Utils.getDeviceSignals(
+//            functionName: "generateDeviceToken",
+//            requestId: UUID().uuidString,
+//            defaultValue: "Unknown"
+//        ) {
+//            let currentDevice = DCDevice.current
+//            if currentDevice.isSupported {
+//                return await withCheckedContinuation { continuation in
+//                    currentDevice.generateToken { data, error in
+//                        if let tokenData = data {
+//                            continuation.resume(returning: tokenData.base64EncodedString())
+//                        } else {
+//                            continuation.resume(returning: "")
+//                        }
+//                    }
+//                }
+//            } else {
+//                return "Unsupported Device"
+//            }
+//        }
+        return ""
     }
 
     
@@ -94,21 +95,20 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     func getCloudId() async -> String {
-        return ""
-//        return await Utils.getDeviceSignals(
-//            functionName: "getCloudId",
-//            requestId: UUID().uuidString,
-//            defaultValue: "Unknown",
-//            function: {
-//                let container = CKContainer.default()
-//                do {
-//                    let recordID = try await container.userRecordID()
-//                    return recordID.recordName
-//                }catch {
-//                    return error.localizedDescription
-//                }
-//            }
-//        )
+        return await Utils.getDeviceSignals(
+            functionName: "getCloudId",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                let container = CKContainer.default()
+                do {
+                    let recordID = try await container.userRecordID()
+                    return recordID.recordName
+                }catch {
+                    return error.localizedDescription
+                }
+            }
+        )
     }
     
     func getApplicationId() async -> String {

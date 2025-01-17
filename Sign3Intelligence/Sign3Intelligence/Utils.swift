@@ -152,7 +152,7 @@ internal struct Utils{
     internal static func updateData(
         response: IntelligenceResponse,
         sign3Intelligence: Sign3IntelligenceInternal,
-        deviceParams: DeviceParams,
+        deviceParams: DeviceParams?,
         deviceParamsHash: Int,
         clientParams: ClientParams
     ) {
@@ -161,12 +161,14 @@ internal struct Utils{
             KeychainHelper.shared.saveDeviceFingerprint(deviceFingerprint: response.deviceId)
         }
         sign3Intelligence.currentIntelligence = response
-        sign3Intelligence.currentIntelligence?.gpsLocation = deviceParams.iOSDataRequest.gpsLocation
+        sign3Intelligence.currentIntelligence?.gpsLocation = deviceParams?.iOSDataRequest.gpsLocation ?? GPSLocation(
+            latitude: 0.0, longitude: 0.0, altitude: 0.0
+        )
         sign3Intelligence.payloadHash = deviceParamsHash
         sign3Intelligence.deviceParam = deviceParams
-        sign3Intelligence.availableMemory = deviceParams.deviceIdRawData.hardwareFingerprintRawData.freeDiskSpace
+        sign3Intelligence.availableMemory = deviceParams?.deviceIdRawData.hardwareFingerprintRawData.freeDiskSpace ?? 0
         sign3Intelligence.sentClientParams = clientParams
-        sign3Intelligence.totalMemory = deviceParams.deviceIdRawData.hardwareFingerprintRawData.totalDiskSpace
+        sign3Intelligence.totalMemory = deviceParams?.deviceIdRawData.hardwareFingerprintRawData.totalDiskSpace ?? 0
         sign3Intelligence.locationThresholdReached = false
         sign3Intelligence.memoryThresholdReached = false
     }
