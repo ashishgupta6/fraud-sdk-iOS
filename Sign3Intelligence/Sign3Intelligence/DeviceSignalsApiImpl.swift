@@ -94,20 +94,21 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     func getCloudId() async -> String {
-        return await Utils.getDeviceSignals(
-            functionName: "getCloudId",
-            requestId: UUID().uuidString,
-            defaultValue: "Unknown",
-            function: {
-                let container = CKContainer.default()
-                do {
-                    let recordID = try await container.userRecordID()
-                    return recordID.recordName
-                }catch {
-                    return error.localizedDescription
-                }
-            }
-        )
+        return ""
+//        return await Utils.getDeviceSignals(
+//            functionName: "getCloudId",
+//            requestId: UUID().uuidString,
+//            defaultValue: "Unknown",
+//            function: {
+//                let container = CKContainer.default()
+//                do {
+//                    let recordID = try await container.userRecordID()
+//                    return recordID.recordName
+//                }catch {
+//                    return error.localizedDescription
+//                }
+//            }
+//        )
     }
     
     func getApplicationId() async -> String {
