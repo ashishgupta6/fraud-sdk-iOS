@@ -11,7 +11,7 @@ import CoreLocation
 import zlib
 
 
-internal struct Utils{
+internal actor Utils{
     
     internal static func getDeviceSignals<T>(functionName: String, requestId: String, defaultValue: T, function: () async throws -> T) async -> T {
         do {
