@@ -60,7 +60,7 @@ internal class ActionHandlerContinuousIntegrationImpl {
                 clientParams: clientParams
             )
             
-            Api.shared.ingestion(dataRequest, sign3Intelligence, sourceString) { result in
+            await Api.shared.ingestion(dataRequest, sign3Intelligence, sourceString) { result in
                 switch result.status {
                 case .success:
                     if let responseData = result.data {

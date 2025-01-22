@@ -65,7 +65,7 @@ internal struct ActionHandlerImpl {
             clientParams: clientParams
         )
         
-        Api.shared.getScore(dataRequest, sign3Intelligence, source) { result in
+        await Api.shared.getScore(dataRequest, sign3Intelligence, source) { result in
             switch result.status {
             case .success:
                 if let responseData = result.data {

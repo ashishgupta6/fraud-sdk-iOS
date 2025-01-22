@@ -136,6 +136,9 @@ internal struct Utils{
         }
     }
     
+    /**
+     Caution: Please note that while converting complete actor object to json, one extra wrapper of that data needs to be created otherwise JSONEncoder().encode() will throw exception.
+     */
     internal static func convertToJson<T: Encodable>(_ object: T) -> String {
         do {
             let jsonData = try JSONEncoder().encode(object)

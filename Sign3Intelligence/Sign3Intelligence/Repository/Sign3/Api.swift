@@ -237,8 +237,8 @@ internal struct Api{
         }
     }
     
-    internal func getScore(_ dataRequest: DataRequest, _ sign3Intelligence: Sign3IntelligenceInternal, _ source: String, completion: @escaping (Resource<IntelligenceResponse>) -> Void) {
-        var dataRequest = dataRequest
+    internal func getScore(_ dataRequest: DataRequest, _ sign3Intelligence: Sign3IntelligenceInternal, _ source: String, completion: @escaping (Resource<IntelligenceResponse>) -> Void) async {
+        var dataRequest = await dataRequest.getData()
         do {
             dataRequest.clientParams = Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence)
             Log.i("ClientParams:", Utils.convertToJson(dataRequest.clientParams))
@@ -344,8 +344,8 @@ internal struct Api{
         }
     }
     
-    internal func ingestion(_ dataRequest: DataRequest, _ sign3Intelligence: Sign3IntelligenceInternal, _ source: String, completion: @escaping (Resource<IntelligenceResponse>) -> Void) {
-        var dataRequest = dataRequest
+    internal func ingestion(_ dataRequest: DataRequest, _ sign3Intelligence: Sign3IntelligenceInternal, _ source: String, completion: @escaping (Resource<IntelligenceResponse>) -> Void) async {
+        var dataRequest = await dataRequest.getData()
         do {
             dataRequest.clientParams = Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence)
             Log.i("ClientParams:", Utils.convertToJson(dataRequest.clientParams))
@@ -444,7 +444,8 @@ internal struct Api{
                             //            sign3Intelligence.realmDataStorage.saveIntelligenceResponseToRealm(dataRequest, sign3Intelligence, intelligenceResponse)
                             
                             /// Store Response in UserDefault
-                            sign3Intelligence.userDefaultsManager.saveIntelligenceResponseToUserDefaults(dataRequest, sign3Intelligence, intelligenceResponse)
+                           // TODO: (Sreyans) Commenting as this needs to be removed
+//                            sign3Intelligence.userDefaultsManager.saveIntelligenceResponseToUserDefaults(dataRequest, sign3Intelligence, intelligenceResponse)
                             
                             completion(Resource.success(intelligenceResponse))
                         } catch {
