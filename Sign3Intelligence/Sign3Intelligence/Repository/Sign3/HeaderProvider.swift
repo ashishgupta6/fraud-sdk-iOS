@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 internal class HeaderProvider{
     private let clientId: String
@@ -27,7 +28,7 @@ internal class HeaderProvider{
             "app-version-name": getiOSAppVersion(),
             "sdk-version-code": getFrameworkBuildNumber(),
             "sdk-version-name": getFrameworkVersion(),
-            "client-ts-millis": "\(Date().timeIntervalSince1970 * 1000)"
+            "client-ts-millis": "\(Date().timeIntervalSince1970 * 1000)",
         ]
     }
     
@@ -43,7 +44,7 @@ internal class HeaderProvider{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                let version = Bundle(for: Sign3Intelligence.self).infoDictionary?["CFBundleShortVersionString"] as? String
+                let version = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleShortVersionString"] as? String
                 return version ?? "Unknown"
             }
         )
@@ -86,7 +87,7 @@ internal class HeaderProvider{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                let version = Bundle(for: Sign3Intelligence.self).infoDictionary?["CFBundleVersion"] as? String
+                let version = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleVersion"] as? String
                 return version ?? "Unknown"
             }
         )

@@ -7,8 +7,8 @@
 
 import Foundation
 
-public enum Environment:String, Codable{
-    case PROD
+public enum Environment:String{
     case DEV
-    case PRE
+    case STAGING
+    case PROD
 }

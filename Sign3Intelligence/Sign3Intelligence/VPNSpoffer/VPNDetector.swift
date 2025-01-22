@@ -11,23 +11,32 @@ internal class VPNDetector{
     
     private let TAG = "VpnDetector"
     
-    internal func isVpnEnabled() async -> Bool{
+    internal func isVpnEnabled() async -> Bool {
         return await Utils.getDeviceSignals(
             functionName: TAG,
             requestId: UUID().uuidString,
             defaultValue: false,
             function: {
-                let cfDict = CFNetworkCopySystemProxySettings()
-                let nsDict = cfDict!.takeRetainedValue() as NSDictionary
-                let keys = nsDict["__SCOPED__"] as! NSDictionary
-  
-                for key: String in keys.allKeys as! [String] {
-                    if (key == "tap" || key == "tun" || key == "ppp" || key == "ipsec" || key == "ipsec0" || key == "ipsec1" || key == "utun1" || key == "utun2" || key == "utun5") {
+                guard let cfDict = CFNetworkCopySystemProxySettings() else {
+                    return false
+                }
+
+                let nsDict = cfDict.takeRetainedValue() as NSDictionary
+
+                guard let scopedKeys = nsDict["__SCOPED__"] as? NSDictionary else {
+                    return false
+                }
+
+                for key in scopedKeys.allKeys {
+                    if let keyString = key as? String,
+                       ["tap", "tun", "ppp", "ipsec", "ipsec0", "ipsec1", "utun1", "utun2", "utun5"].contains(keyString) {
                         return true
                     }
                 }
+
                 return false
             }
         )
     }
+
 }

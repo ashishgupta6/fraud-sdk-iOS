@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal class ReverseEngineeringToolsChecker {
+internal actor ReverseEngineeringToolsChecker {
     private let TAG = "ReverseEngineeringToolsChecker"
     private let simulatorDetector = SimulatorDetector()
     
@@ -55,10 +55,7 @@ internal class ReverseEngineeringToolsChecker {
             
             // These files can give false positive in the emulator
             if !simulatorDetector.isSimulatorDetectedWithoutAsync() {
-                HookingDetectorConst.suspiciousLibraries += [
-                    "Flex",
-                ]
-                
+                HookingDetectorConst.suspiciousLibraries.addUnique("Flex")
             }
             
             // The fastest case insensitive contains check.

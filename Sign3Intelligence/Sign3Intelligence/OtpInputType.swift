@@ -8,7 +8,7 @@
 import Foundation
 
 
-public enum OtpInputType:String, Codable{
+public enum OtpInputType:String{
     case MANUAL
     case COPY_PASTED
     case AUTO_FILLED

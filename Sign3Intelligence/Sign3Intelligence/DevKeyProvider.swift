@@ -8,7 +8,7 @@
 import Foundation
 
 
-class DevKeyProvider: BaseKey{
+internal class DevKeyProvider: BaseKey{
     
     internal override var baseUrl: String {
         return "https://intelligence-dev.sign3.in/"

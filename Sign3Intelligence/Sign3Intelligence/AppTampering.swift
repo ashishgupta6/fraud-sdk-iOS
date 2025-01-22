@@ -48,8 +48,8 @@ internal class AppTampering{
                 await amITampered(
                     [
                         AppTampering.AppTamperingCheck.bundleID("com.sign3labs.fraudsdk.FraudSDK"),
-//                        AppTampering.AppTamperingCheck.isDebuggerEnabled,
-//                        AppTampering.AppTamperingCheck.isJailBroken,
+                        AppTampering.AppTamperingCheck.isDebuggerEnabled,
+                        AppTampering.AppTamperingCheck.isJailBroken,
                         AppTampering.AppTamperingCheck.checkBuildConfiguration,
                         AppTampering.AppTamperingCheck.isMobileProvisionModified("13c287086eff1f58f9c8192e383b75a978047cbd32407c33bb872c614ac4d1b4")
                     ]
@@ -103,7 +103,6 @@ internal class AppTampering{
             return false
         }
         
-        
         let url = URL(fileURLWithPath: path)
         
         if FileManager.default.fileExists(atPath: url.path) {
@@ -113,7 +112,6 @@ internal class AppTampering{
                 data.withUnsafeBytes {
                     _ = CC_SHA256($0.baseAddress, CC_LONG(data.count), &hash)
                 }
-                
                 if Data(hash).hexEncodedString() != expectedSha256Value {
                     return true
                 }

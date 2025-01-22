@@ -8,7 +8,7 @@
 import Foundation
 
 
-public class Options: Codable{
+public class Options{
     private(set) var clientId: String
     private(set) var clientSecret: String
     private(set) var sessionId: String?

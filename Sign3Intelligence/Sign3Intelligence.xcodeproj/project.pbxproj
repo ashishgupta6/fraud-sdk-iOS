@@ -18,11 +18,15 @@
 		396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */; };
 		396681362CF710AA00DF3306 /* RemoteAccessDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396681352CF710AA00DF3306 /* RemoteAccessDetector.swift */; };
 		3966813A2CF730A300DF3306 /* FridaChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396681392CF730A300DF3306 /* FridaChecker.swift */; };
+		397605742D2EC548001D504A /* Sign3Intelligence.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 397605732D2EC548001D504A /* Sign3Intelligence.podspec */; };
 		397950EA2C7DC73E0043677B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397950E92C7DC73E0043677B /* Utils.swift */; };
 		397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */; };
 		397AF53B2C92FA6F004F74D9 /* JailBrokenChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */; };
 		397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397AF5412C9329A9004F74D9 /* AppTampering.swift */; };
 		397CD2B52CF091ED00A0E398 /* HookingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397CD2B42CF091ED00A0E398 /* HookingDetector.swift */; };
+		3980B7F82D32DDC2006B711A /* SimulatorChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3980B7F72D32DDC2006B711A /* SimulatorChecker.m */; };
+		3980B91A2D367D04006B711A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3980B9182D367D04006B711A /* LICENSE */; };
+		3980B91B2D367D04006B711A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3980B9192D367D04006B711A /* README.md */; };
 		3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68D2C8E2B3B00EE992E /* Options.swift */; };
 		3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B68F2C8E2C3000EE992E /* UserEventType.swift */; };
 		3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984B6932C8E2C8100EE992E /* PhoneInputType.swift */; };
@@ -41,20 +45,54 @@
 		39C775552C8F2FE90006E042 /* ProdKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */; };
 		39C775572C8F320F0006E042 /* DevKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775562C8F320F0006E042 /* DevKeyProvider.swift */; };
 		39C775592C8F321C0006E042 /* StagingKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C775582C8F321C0006E042 /* StagingKeyProvider.swift */; };
-		39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */; };
+		39CC8F6D2C7F59DD00239032 /* Sign3SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6C2C7F59DD00239032 /* Sign3SDK.swift */; };
 		39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */; };
 		39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC8F772C7F63FE00239032 /* DataCreationService.swift */; };
-		39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E36C292C90839500625BE6 /* SimulatorChecker.m */; };
+		39E164662D0AB58D001A7C53 /* CronTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E164652D0AB58D001A7C53 /* CronTrigger.swift */; };
+		39E164682D0AB5FD001A7C53 /* ActionHandlerContinuousIntegrationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E164672D0AB5FD001A7C53 /* ActionHandlerContinuousIntegrationImpl.swift */; };
+		39E1646A2D0AB68D001A7C53 /* ActionContextSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E164692D0AB68C001A7C53 /* ActionContextSource.swift */; };
+		39E1646E2D0AF140001A7C53 /* HashData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E1646D2D0AF140001A7C53 /* HashData.swift */; };
+		39E164702D0AF25D001A7C53 /* DataHashUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E1646F2D0AF25D001A7C53 /* DataHashUtil.swift */; };
+		39E164722D0B0274001A7C53 /* GPSLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E164712D0B0274001A7C53 /* GPSLocation.swift */; };
+		39E164742D0B435E001A7C53 /* ActionContextEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E164732D0B435E001A7C53 /* ActionContextEvent.swift */; };
 		39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		39E6BF5E2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF5D2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift */; };
 		39E6BF602CF60B9A0086203C /* HookingDetectorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF5F2CF60B9A0086203C /* HookingDetectorConst.swift */; };
 		39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6BF612CF60FFB0086203C /* MSHookChecker.swift */; };
 		39E738FE2C88826F002B24C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FD2C88826F002B24C8 /* Location.swift */; };
 		39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E738FF2C888F16002B24C8 /* LocationDetector.swift */; };
+		39EB9FF52D26C76C00A93D27 /* SdkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF42D26C76C00A93D27 /* SdkError.swift */; };
+		39EB9FFA2D26D8B600A93D27 /* RealmDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */; };
+		39EB9FFB2D26D8B600A93D27 /* IntelligenceResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EB9FF62D26D8B600A93D27 /* IntelligenceResponseObject.swift */; };
+		39EBA13F2D2ACB3500A93D27 /* ClonedDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA13D2D2ACB3500A93D27 /* ClonedDetector.swift */; };
+		39EBA1442D2BF7BE00A93D27 /* IngestionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA1432D2BF7BE00A93D27 /* IngestionResponse.swift */; };
+		39EBA1482D2C2F3C00A93D27 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 39EBA1472D2C2F3C00A93D27 /* Mixpanel */; };
+		39ED49012D0776C600584401 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49002D0776C600584401 /* ConfigManager.swift */; };
+		39ED49032D0776FD00584401 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49022D0776FD00584401 /* Config.swift */; };
+		39ED49052D07786000584401 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49042D07786000584401 /* Resource.swift */; };
+		39ED49072D08309100584401 /* EventMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49062D08309100584401 /* EventMetric.swift */; };
+		39ED49092D083C6000584401 /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49082D083C6000584401 /* DataRequest.swift */; };
+		39ED490C2D083D9800584401 /* ClientParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED490B2D083D9800584401 /* ClientParam.swift */; };
+		39ED490E2D083E4A00584401 /* DeviceParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED490D2D083E4A00584401 /* DeviceParam.swift */; };
+		39ED49102D083F8E00584401 /* iOSDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED490F2D083F8E00584401 /* iOSDataRequest.swift */; };
+		39ED49122D0841D000584401 /* iOSNetworkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49112D0841D000584401 /* iOSNetworkData.swift */; };
+		39ED49142D0841FD00584401 /* NetworkLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49132D0841FD00584401 /* NetworkLocation.swift */; };
+		39ED49162D08424800584401 /* iOSDeviceRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49152D08424800584401 /* iOSDeviceRawData.swift */; };
+		39ED49182D08429100584401 /* iOSDeviceIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49172D08429100584401 /* iOSDeviceIDs.swift */; };
+		39ED491A2D08432A00584401 /* OsBuildRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED49192D08432A00584401 /* OsBuildRawData.swift */; };
+		39ED491C2D0843E900584401 /* InstalledAppsRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED491B2D0843E900584401 /* InstalledAppsRawData.swift */; };
+		39ED491E2D0844A500584401 /* HardwareFingerprintRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED491D2D0844A500584401 /* HardwareFingerprintRawData.swift */; };
+		39ED49202D0846F200584401 /* DeviceStateRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED491F2D0846F200584401 /* DeviceStateRawData.swift */; };
+		39ED492C2D08567200584401 /* IntelligenceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED492B2D08567200584401 /* IntelligenceError.swift */; };
+		39ED492E2D0856C600584401 /* ActionHandlerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED492D2D0856C600584401 /* ActionHandlerImpl.swift */; };
+		39ED49302D08A50900584401 /* IntelligenceResponseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED492F2D08A50900584401 /* IntelligenceResponseListener.swift */; };
 		39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */; };
 		39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */; };
 		39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */; };
-		39F299A32C9C3EDE00D896F2 /* Sign3PublicHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		797C73F32D12C8AF00C4B821 /* DeviceCheckData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */; };
+		79D8603F2D34570A00BA983A /* DeviceFingerprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8603E2D34570100BA983A /* DeviceFingerprint.swift */; };
+		79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C922CFF4B8300A66FF5 /* Log.swift */; };
+		79EA04A52D26A88F00DF873D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04A42D26A88F00DF873D /* KeychainHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,11 +117,15 @@
 		396356522C74BE9600405989 /* DeviceSignalsApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignalsApiImpl.swift; sourceTree = "<group>"; };
 		396681352CF710AA00DF3306 /* RemoteAccessDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAccessDetector.swift; sourceTree = "<group>"; };
 		396681392CF730A300DF3306 /* FridaChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridaChecker.swift; sourceTree = "<group>"; };
+		397605732D2EC548001D504A /* Sign3Intelligence.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sign3Intelligence.podspec; sourceTree = "<group>"; };
 		397950E92C7DC73E0043677B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		397AF5382C92F0CF004F74D9 /* JailBrokenDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBrokenDetector.swift; sourceTree = "<group>"; };
 		397AF53A2C92FA6F004F74D9 /* JailBrokenChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JailBrokenChecker.m; sourceTree = "<group>"; };
 		397AF5412C9329A9004F74D9 /* AppTampering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTampering.swift; sourceTree = "<group>"; };
 		397CD2B42CF091ED00A0E398 /* HookingDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookingDetector.swift; sourceTree = "<group>"; };
+		3980B7F72D32DDC2006B711A /* SimulatorChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulatorChecker.m; sourceTree = "<group>"; };
+		3980B9182D367D04006B711A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		3980B9192D367D04006B711A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3984B68D2C8E2B3B00EE992E /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		3984B68F2C8E2C3000EE992E /* UserEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEventType.swift; sourceTree = "<group>"; };
 		3984B6932C8E2C8100EE992E /* PhoneInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInputType.swift; sourceTree = "<group>"; };
@@ -103,22 +145,55 @@
 		39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdKeyProvider.swift; sourceTree = "<group>"; };
 		39C775562C8F320F0006E042 /* DevKeyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevKeyProvider.swift; sourceTree = "<group>"; };
 		39C775582C8F321C0006E042 /* StagingKeyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingKeyProvider.swift; sourceTree = "<group>"; };
-		39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3Intelligence.swift; sourceTree = "<group>"; };
+		39CC8F6C2C7F59DD00239032 /* Sign3SDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3SDK.swift; sourceTree = "<group>"; };
 		39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign3IntelligenceInternal.swift; sourceTree = "<group>"; };
 		39CC8F772C7F63FE00239032 /* DataCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCreationService.swift; sourceTree = "<group>"; };
-		39E36C292C90839500625BE6 /* SimulatorChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimulatorChecker.m; sourceTree = "<group>"; };
+		39E164652D0AB58D001A7C53 /* CronTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronTrigger.swift; sourceTree = "<group>"; };
+		39E164672D0AB5FD001A7C53 /* ActionHandlerContinuousIntegrationImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionHandlerContinuousIntegrationImpl.swift; sourceTree = "<group>"; };
+		39E164692D0AB68C001A7C53 /* ActionContextSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionContextSource.swift; sourceTree = "<group>"; };
+		39E1646D2D0AF140001A7C53 /* HashData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashData.swift; sourceTree = "<group>"; };
+		39E1646F2D0AF25D001A7C53 /* DataHashUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHashUtil.swift; sourceTree = "<group>"; };
+		39E164712D0B0274001A7C53 /* GPSLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSLocation.swift; sourceTree = "<group>"; };
+		39E164732D0B435E001A7C53 /* ActionContextEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionContextEvent.swift; sourceTree = "<group>"; };
 		39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sign3PrivateHeader.h; sourceTree = "<group>"; };
 		39E36C3A2C91885D00625BE6 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		39E6BF5D2CF5F5BD0086203C /* ReverseEngineeringToolsChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseEngineeringToolsChecker.swift; sourceTree = "<group>"; };
 		39E6BF5F2CF60B9A0086203C /* HookingDetectorConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookingDetectorConst.swift; sourceTree = "<group>"; };
 		39E6BF612CF60FFB0086203C /* MSHookChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSHookChecker.swift; sourceTree = "<group>"; };
-		39E738FA2C885D01002B24C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		39E738FA2C885D01002B24C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39E738FD2C88826F002B24C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		39E738FF2C888F16002B24C8 /* LocationDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetector.swift; sourceTree = "<group>"; };
+		39EB9FF42D26C76C00A93D27 /* SdkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdkError.swift; sourceTree = "<group>"; };
+		39EB9FF62D26D8B600A93D27 /* IntelligenceResponseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponseObject.swift; sourceTree = "<group>"; };
+		39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataStorage.swift; sourceTree = "<group>"; };
+		39EBA13D2D2ACB3500A93D27 /* ClonedDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClonedDetector.swift; sourceTree = "<group>"; };
+		39EBA1432D2BF7BE00A93D27 /* IngestionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionResponse.swift; sourceTree = "<group>"; };
+		39ED49002D0776C600584401 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
+		39ED49022D0776FD00584401 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		39ED49042D07786000584401 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		39ED49062D08309100584401 /* EventMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMetric.swift; sourceTree = "<group>"; };
+		39ED49082D083C6000584401 /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
+		39ED490B2D083D9800584401 /* ClientParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientParam.swift; sourceTree = "<group>"; };
+		39ED490D2D083E4A00584401 /* DeviceParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceParam.swift; sourceTree = "<group>"; };
+		39ED490F2D083F8E00584401 /* iOSDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSDataRequest.swift; sourceTree = "<group>"; };
+		39ED49112D0841D000584401 /* iOSNetworkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSNetworkData.swift; sourceTree = "<group>"; };
+		39ED49132D0841FD00584401 /* NetworkLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLocation.swift; sourceTree = "<group>"; };
+		39ED49152D08424800584401 /* iOSDeviceRawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSDeviceRawData.swift; sourceTree = "<group>"; };
+		39ED49172D08429100584401 /* iOSDeviceIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSDeviceIDs.swift; sourceTree = "<group>"; };
+		39ED49192D08432A00584401 /* OsBuildRawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OsBuildRawData.swift; sourceTree = "<group>"; };
+		39ED491B2D0843E900584401 /* InstalledAppsRawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledAppsRawData.swift; sourceTree = "<group>"; };
+		39ED491D2D0844A500584401 /* HardwareFingerprintRawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareFingerprintRawData.swift; sourceTree = "<group>"; };
+		39ED491F2D0846F200584401 /* DeviceStateRawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStateRawData.swift; sourceTree = "<group>"; };
+		39ED492B2D08567200584401 /* IntelligenceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceError.swift; sourceTree = "<group>"; };
+		39ED492D2D0856C600584401 /* ActionHandlerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionHandlerImpl.swift; sourceTree = "<group>"; };
+		39ED492F2D08A50900584401 /* IntelligenceResponseListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceResponseListener.swift; sourceTree = "<group>"; };
 		39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSpoffer.swift; sourceTree = "<group>"; };
 		39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSignalsFromObjectiveC.m; sourceTree = "<group>"; };
-		39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sign3PublicHeader.h; sourceTree = "<group>"; };
+		797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCheckData.swift; sourceTree = "<group>"; };
+		79D8603E2D34570100BA983A /* DeviceFingerprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFingerprint.swift; sourceTree = "<group>"; };
+		79E86C922CFF4B8300A66FF5 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		79EA04A42D26A88F00DF873D /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39EBA1482D2C2F3C00A93D27 /* Mixpanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,8 +227,29 @@
 		393E768C2C809FC100572A77 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				79D8603E2D34570100BA983A /* DeviceFingerprint.swift */,
+				39EBA1432D2BF7BE00A93D27 /* IngestionResponse.swift */,
+				39EB9FF42D26C76C00A93D27 /* SdkError.swift */,
+				797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */,
+				39ED492B2D08567200584401 /* IntelligenceError.swift */,
 				393E768D2C809FE700572A77 /* IntelligenceResponse.swift */,
 				39E738FD2C88826F002B24C8 /* Location.swift */,
+				39ED49022D0776FD00584401 /* Config.swift */,
+				39ED49062D08309100584401 /* EventMetric.swift */,
+				39ED49082D083C6000584401 /* DataRequest.swift */,
+				39ED490B2D083D9800584401 /* ClientParam.swift */,
+				39ED490D2D083E4A00584401 /* DeviceParam.swift */,
+				39ED490F2D083F8E00584401 /* iOSDataRequest.swift */,
+				39ED49112D0841D000584401 /* iOSNetworkData.swift */,
+				39ED49132D0841FD00584401 /* NetworkLocation.swift */,
+				39ED49152D08424800584401 /* iOSDeviceRawData.swift */,
+				39ED49172D08429100584401 /* iOSDeviceIDs.swift */,
+				39ED49192D08432A00584401 /* OsBuildRawData.swift */,
+				39ED491B2D0843E900584401 /* InstalledAppsRawData.swift */,
+				39ED491D2D0844A500584401 /* HardwareFingerprintRawData.swift */,
+				39ED491F2D0846F200584401 /* DeviceStateRawData.swift */,
+				39E1646D2D0AF140001A7C53 /* HashData.swift */,
+				39E164712D0B0274001A7C53 /* GPSLocation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -203,12 +300,16 @@
 		397950E82C7DC6F80043677B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				79EA04A42D26A88F00DF873D /* KeychainHelper.swift */,
 				397950E92C7DC73E0043677B /* Utils.swift */,
 				39C775522C8F2F470006E042 /* BaseKey.swift */,
 				39C775542C8F2FE90006E042 /* ProdKeyProvider.swift */,
 				39C775562C8F320F0006E042 /* DevKeyProvider.swift */,
 				39C775582C8F321C0006E042 /* StagingKeyProvider.swift */,
 				39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */,
+				79E86C922CFF4B8300A66FF5 /* Log.swift */,
+				39ED49042D07786000584401 /* Resource.swift */,
+				39E1646F2D0AF25D001A7C53 /* DataHashUtil.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -226,7 +327,6 @@
 			children = (
 				398EB5A92C63BC6A002FC9CA /* Sign3Intelligence.h */,
 				39E36C2A2C90839500625BE6 /* Sign3PrivateHeader.h */,
-				39F299A22C9C3E2600D896F2 /* Sign3PublicHeader.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -289,17 +389,19 @@
 		398EB5A82C63BC6A002FC9CA /* Sign3Intelligence */ = {
 			isa = PBXGroup;
 			children = (
+				39EB9FF92D26D8B600A93D27 /* RealmDB */,
 				39577E682CE4AE2C00DCD69F /* Repository */,
 				390D71F12C962AF20090147D /* Encryption */,
 				397AF5342C92036A004F74D9 /* Headers */,
 				397AF52A2C91DE29004F74D9 /* Module */,
-				39E738FA2C885D01002B24C8 /* Info.plist */,
 				39E738F92C882AB4002B24C8 /* Detectors */,
 				393E768C2C809FC100572A77 /* Model */,
 				397950E82C7DC6F80043677B /* Utils */,
 				398EB5C02C63BC8A002FC9CA /* DeviceSignals */,
 				398EB5AA2C63BC6A002FC9CA /* Sign3Intelligence.docc */,
-				39CC8F6C2C7F59DD00239032 /* Sign3Intelligence.swift */,
+				39E738FA2C885D01002B24C8 /* Info.plist */,
+				39CC8F6C2C7F59DD00239032 /* Sign3SDK.swift */,
+				39ED49002D0776C600584401 /* ConfigManager.swift */,
 				39CC8F6E2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift */,
 				3984B68D2C8E2B3B00EE992E /* Options.swift */,
 				3984B68F2C8E2C3000EE992E /* UserEventType.swift */,
@@ -307,6 +409,15 @@
 				3984B6952C8E2CD400EE992E /* OtpInputType.swift */,
 				3984B6972C8E2D3F00EE992E /* Environment.swift */,
 				390D71EF2C961AF30090147D /* UpdateOption.swift */,
+				39ED492D2D0856C600584401 /* ActionHandlerImpl.swift */,
+				39ED492F2D08A50900584401 /* IntelligenceResponseListener.swift */,
+				39E164652D0AB58D001A7C53 /* CronTrigger.swift */,
+				39E164672D0AB5FD001A7C53 /* ActionHandlerContinuousIntegrationImpl.swift */,
+				39E164692D0AB68C001A7C53 /* ActionContextSource.swift */,
+				39E164732D0B435E001A7C53 /* ActionContextEvent.swift */,
+				3980B9182D367D04006B711A /* LICENSE */,
+				3980B9192D367D04006B711A /* README.md */,
+				397605732D2EC548001D504A /* Sign3Intelligence.podspec */,
 			);
 			path = Sign3Intelligence;
 			sourceTree = "<group>";
@@ -340,8 +451,8 @@
 		39C7754F2C8F139F0006E042 /* SimulatorDetector */ = {
 			isa = PBXGroup;
 			children = (
-				39E36C292C90839500625BE6 /* SimulatorChecker.m */,
 				39C775502C8F13B10006E042 /* SimulatorDetector.swift */,
+				3980B7F72D32DDC2006B711A /* SimulatorChecker.m */,
 			);
 			name = SimulatorDetector;
 			sourceTree = "<group>";
@@ -349,20 +460,46 @@
 		39E738F92C882AB4002B24C8 /* Detectors */ = {
 			isa = PBXGroup;
 			children = (
+				39EBA13E2D2ACB3500A93D27 /* Cloned */,
 				396681342CF7109B00DF3306 /* RemoteAccess */,
 				397CD2B32CF091D200A0E398 /* Hooking */,
 				39577E762CEE0A1F00DCD69F /* Proxy */,
 				39F2999B2C995FAC00D896F2 /* LocationSpoffer */,
 				397AF5402C93299A004F74D9 /* AppTampering */,
 				397AF5372C92F0A3004F74D9 /* JailBroken */,
-				39CC8F772C7F63FE00239032 /* DataCreationService.swift */,
 				39C7754F2C8F139F0006E042 /* SimulatorDetector */,
 				39C775472C8EFC900006E042 /* VPNSpoffer */,
 				3984B69E2C8EFB8600EE992E /* LocationDetector */,
+				39CC8F772C7F63FE00239032 /* DataCreationService.swift */,
 				39C7754A2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift */,
 				39C7754C2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift */,
 			);
 			name = Detectors;
+			sourceTree = "<group>";
+		};
+		39EB9FF72D26D8B600A93D27 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				39EB9FF62D26D8B600A93D27 /* IntelligenceResponseObject.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		39EB9FF92D26D8B600A93D27 /* RealmDB */ = {
+			isa = PBXGroup;
+			children = (
+				39EB9FF72D26D8B600A93D27 /* Model */,
+				39EB9FF82D26D8B600A93D27 /* RealmDataStorage.swift */,
+			);
+			path = RealmDB;
+			sourceTree = "<group>";
+		};
+		39EBA13E2D2ACB3500A93D27 /* Cloned */ = {
+			isa = PBXGroup;
+			children = (
+				39EBA13D2D2ACB3500A93D27 /* ClonedDetector.swift */,
+			);
+			path = Cloned;
 			sourceTree = "<group>";
 		};
 		39F2999B2C995FAC00D896F2 /* LocationSpoffer */ = {
@@ -381,7 +518,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				398EB5B72C63BC6B002FC9CA /* Sign3Intelligence.h in Headers */,
-				39F299A32C9C3EDE00D896F2 /* Sign3PublicHeader.h in Headers */,
 				39E36C2C2C90839500625BE6 /* Sign3PrivateHeader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,7 +569,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					398EB5A52C63BC6A002FC9CA = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -453,6 +589,9 @@
 				Base,
 			);
 			mainGroup = 398EB59C2C63BC6A002FC9CA;
+			packageReferences = (
+				39EBA1452D2C2F3600A93D27 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
+			);
 			productRefGroup = 398EB5A72C63BC6A002FC9CA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -468,6 +607,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3980B91A2D367D04006B711A /* LICENSE in Resources */,
+				3980B91B2D367D04006B711A /* README.md in Resources */,
+				397605742D2EC548001D504A /* Sign3Intelligence.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,36 +628,69 @@
 			buildActionMask = 2147483647;
 			files = (
 				395273772CFD994400193923 /* JailBrokenDetectorConst.swift in Sources */,
+				39ED492C2D08567200584401 /* IntelligenceError.swift in Sources */,
 				398EB5C22C63BCAF002FC9CA /* DeviceSiganlsApi.swift in Sources */,
+				39ED49122D0841D000584401 /* iOSNetworkData.swift in Sources */,
+				39E164742D0B435E001A7C53 /* ActionContextEvent.swift in Sources */,
+				79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */,
 				3984B6982C8E2D3F00EE992E /* Environment.swift in Sources */,
+				39ED490C2D083D9800584401 /* ClientParam.swift in Sources */,
 				398EB5AB2C63BC6A002FC9CA /* Sign3Intelligence.docc in Sources */,
 				3984B6902C8E2C3000EE992E /* UserEventType.swift in Sources */,
+				79D8603F2D34570A00BA983A /* DeviceFingerprint.swift in Sources */,
+				39E164722D0B0274001A7C53 /* GPSLocation.swift in Sources */,
 				39C775512C8F13B10006E042 /* SimulatorDetector.swift in Sources */,
+				39EB9FF52D26C76C00A93D27 /* SdkError.swift in Sources */,
+				39ED491C2D0843E900584401 /* InstalledAppsRawData.swift in Sources */,
 				396681362CF710AA00DF3306 /* RemoteAccessDetector.swift in Sources */,
 				39577E6E2CE4AEC000DCD69F /* HeaderProvider.swift in Sources */,
+				797C73F32D12C8AF00C4B821 /* DeviceCheckData.swift in Sources */,
+				39E164702D0AF25D001A7C53 /* DataHashUtil.swift in Sources */,
 				39E738FE2C88826F002B24C8 /* Location.swift in Sources */,
 				39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */,
 				39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */,
+				39EBA1442D2BF7BE00A93D27 /* IngestionResponse.swift in Sources */,
+				3980B7F82D32DDC2006B711A /* SimulatorChecker.m in Sources */,
 				39E6BF622CF60FFB0086203C /* MSHookChecker.swift in Sources */,
 				397CD2B52CF091ED00A0E398 /* HookingDetector.swift in Sources */,
+				39E164662D0AB58D001A7C53 /* CronTrigger.swift in Sources */,
+				39ED49102D083F8E00584401 /* iOSDataRequest.swift in Sources */,
+				39ED49302D08A50900584401 /* IntelligenceResponseListener.swift in Sources */,
+				39ED49142D0841FD00584401 /* NetworkLocation.swift in Sources */,
+				39ED491E2D0844A500584401 /* HardwareFingerprintRawData.swift in Sources */,
+				39ED49092D083C6000584401 /* DataRequest.swift in Sources */,
+				39EB9FFA2D26D8B600A93D27 /* RealmDataStorage.swift in Sources */,
+				39EB9FFB2D26D8B600A93D27 /* IntelligenceResponseObject.swift in Sources */,
+				39ED49162D08424800584401 /* iOSDeviceRawData.swift in Sources */,
 				390D71F02C961AF30090147D /* UpdateOption.swift in Sources */,
 				39577E782CEE0A5F00DCD69F /* ProxyDetector.swift in Sources */,
 				39CC8F782C7F63FE00239032 /* DataCreationService.swift in Sources */,
 				39E6BF602CF60B9A0086203C /* HookingDetectorConst.swift in Sources */,
+				39E164682D0AB5FD001A7C53 /* ActionHandlerContinuousIntegrationImpl.swift in Sources */,
+				39ED49072D08309100584401 /* EventMetric.swift in Sources */,
 				3984B68E2C8E2B3B00EE992E /* Options.swift in Sources */,
+				39ED49052D07786000584401 /* Resource.swift in Sources */,
 				39C7754B2C8F066C0006E042 /* Sign3IntelligenceSdkApi.swift in Sources */,
 				397AF53B2C92FA6F004F74D9 /* JailBrokenChecker.m in Sources */,
 				39C775552C8F2FE90006E042 /* ProdKeyProvider.swift in Sources */,
 				3984B6962C8E2CD400EE992E /* OtpInputType.swift in Sources */,
+				39ED49012D0776C600584401 /* ConfigManager.swift in Sources */,
 				3966813A2CF730A300DF3306 /* FridaChecker.swift in Sources */,
+				39EBA13F2D2ACB3500A93D27 /* ClonedDetector.swift in Sources */,
 				39CC8F6F2C7F5D4D00239032 /* Sign3IntelligenceInternal.swift in Sources */,
 				39C775592C8F321C0006E042 /* StagingKeyProvider.swift in Sources */,
 				3984B6942C8E2C8100EE992E /* PhoneInputType.swift in Sources */,
+				39ED492E2D0856C600584401 /* ActionHandlerImpl.swift in Sources */,
+				79EA04A52D26A88F00DF873D /* KeychainHelper.swift in Sources */,
+				39ED490E2D083E4A00584401 /* DeviceParam.swift in Sources */,
 				396356532C74BE9600405989 /* DeviceSignalsApiImpl.swift in Sources */,
 				390D71F32C962B040090147D /* CryptoGCM.swift in Sources */,
+				39E1646E2D0AF140001A7C53 /* HashData.swift in Sources */,
 				393E768E2C809FE700572A77 /* IntelligenceResponse.swift in Sources */,
+				39ED491A2D08432A00584401 /* OsBuildRawData.swift in Sources */,
 				39577E6C2CE4AE5700DCD69F /* Api.swift in Sources */,
 				39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */,
+				39ED49182D08429100584401 /* iOSDeviceIDs.swift in Sources */,
 				39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */,
 				397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */,
 				39C775572C8F320F0006E042 /* DevKeyProvider.swift in Sources */,
@@ -524,9 +699,11 @@
 				39C775492C8EFCB20006E042 /* VPNDetector.swift in Sources */,
 				39C7754D2C8F06970006E042 /* Sign3IntelligenceSdkApiImpl.swift in Sources */,
 				397950EA2C7DC73E0043677B /* Utils.swift in Sources */,
+				39ED49032D0776FD00584401 /* Config.swift in Sources */,
+				39E1646A2D0AB68D001A7C53 /* ActionContextSource.swift in Sources */,
 				397AF5422C9329A9004F74D9 /* AppTampering.swift in Sources */,
-				39E36C2B2C90839500625BE6 /* SimulatorChecker.m in Sources */,
-				39CC8F6D2C7F59DD00239032 /* Sign3Intelligence.swift in Sources */,
+				39ED49202D0846F200584401 /* DeviceStateRawData.swift in Sources */,
+				39CC8F6D2C7F59DD00239032 /* Sign3SDK.swift in Sources */,
 				395273792CFDAC0E00193923 /* FileChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,6 +731,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -582,6 +760,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -619,6 +798,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -647,6 +827,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -680,7 +861,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = A8YD7RNP82;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -697,13 +878,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.0.1001;
 				MODULEMAP_FILE = "${PROJECT_DIR}/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.sign3Intelligence;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -721,7 +902,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = A8YD7RNP82;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -738,13 +919,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.0.1001;
 				MODULEMAP_FILE = "${PROJECT_DIR}/Sign3Intelligence/module.modulemap";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3.intelligence.sign3Intelligence;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -816,6 +997,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		39EBA1452D2C2F3600A93D27 /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		39EBA1472D2C2F3C00A93D27 /* Mixpanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 39EBA1452D2C2F3600A93D27 /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 398EB59D2C63BC6A002FC9CA /* Project object */;
 }

@@ -7,10 +7,9 @@
 
 import Foundation
 
-
-import Foundation
-
 internal class UserDefaultsManager {
+    private let userDefaults = UserDefaults.standard
+    private let responseKey = "IntelligenceResponseKey"
     
     private enum UserDefaultsKeys: String {
         case latitude
@@ -52,10 +51,11 @@ internal class UserDefaultsManager {
     }
     
     internal func saveLocation(_ location: Location) {
-        saveLatitude(location.latitude)
-        saveLongitude(location.longitude)
-        saveAltitude(location.altitude)
-        saveTimeStamp(location.timeStamp)
+        //TODO: (Sreyans) Remove this if it is unused
+//        saveLatitude(location.latitude)
+//        saveLongitude(location.longitude)
+//        saveAltitude(location.altitude)
+//        saveTimeStamp(location.timeStamp)
     }
     
     internal func getLocation() -> Location? {
@@ -66,7 +66,7 @@ internal class UserDefaultsManager {
             return nil
         }
         let location = "Latitude: \(latitude), Longitude: \(longitude), Altitude: \(altitude), Timestamp: \(timeStamp)"
-        Utils.showInfologs(tags: "TAG_SAVED_LOCATION", value: location)
+        Log.i("SAVED_LOCATION",location)
         return Location(latitude: latitude, longitude: longitude, altitude: altitude, timeStamp: timeStamp)
     }
     
@@ -75,5 +75,74 @@ internal class UserDefaultsManager {
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.longitude.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.altitude.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.timeStamp.rawValue)
+    }
+    
+    
+    internal func saveIntelligenceResponseToUserDefaults(
+        _ dataRequest: DataRequest,
+        _ sign3Intelligence: Sign3IntelligenceInternal,
+        _ intelligenceResponse: IntelligenceResponse
+    ) {
+        DispatchQueue.global(qos: .default).async {
+            do {
+                // Encrypt Response
+                let iv = CryptoGCM.getIvHeader()
+                let jsonData = try JSONEncoder().encode(intelligenceResponse)
+                guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+                    return
+                }
+                var encryptedResponse = try CryptoGCM.encrypt(
+                    jsonString,
+                    iv
+                )
+                encryptedResponse.append(" \(iv.base64EncodedString())")
+                
+                // Save to UserDefaults
+                self.userDefaults.set(encryptedResponse, forKey: self.responseKey)
+                Log.i("Response saved successfully.", encryptedResponse)
+            } catch {
+                Log.e("saveIntelligenceResponseToUserDefaults:", "\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    internal func fetchIntelligenceFromUserDefaults(completion: @escaping (IntelligenceResponse?) -> Void) {
+        DispatchQueue.global(qos: .default).async {
+            // Retrieve from UserDefaults
+            guard let response = self.userDefaults.string(forKey: self.responseKey) else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+                return
+            }
+            
+            // Decrypt Response
+            var nonceBase64 = ""
+            var ciphertextBase64 = ""
+            let trimmedString = response.split(separator: " ")
+            if trimmedString.count > 1 {
+                nonceBase64 = String(trimmedString[1])
+                ciphertextBase64 = String(trimmedString[0])
+            }
+            
+            let decryptedResponse = CryptoGCM.decrypt(ciphertextBase64: ciphertextBase64, nonceBase64: nonceBase64)
+            
+            if let jsonData = decryptedResponse?.data(using: .utf8) {
+                let decoder = JSONDecoder()
+                do {
+                    let response = try decoder.decode(IntelligenceResponse.self, from: jsonData)
+                    DispatchQueue.main.async {
+                        completion(response)
+                    }
+                    return
+                } catch {
+                    Log.e("Error decoding JSON:", error.localizedDescription)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                completion(nil)
+            }
+        }
     }
 }

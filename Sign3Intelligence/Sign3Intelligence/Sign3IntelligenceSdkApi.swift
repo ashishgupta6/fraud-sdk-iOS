@@ -16,4 +16,6 @@ internal protocol Sign3IntelligenceSdkApi{
     func isProxyDetected() async -> Bool
     func isHookingDetected() async -> Bool
     func isScreenBeingMirrored() async -> Bool
+    func isCloned() async -> Bool
+
 }

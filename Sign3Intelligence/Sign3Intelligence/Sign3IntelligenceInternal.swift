@@ -6,14 +6,30 @@
 //
 
 import Foundation
+internal import Mixpanel
 
 internal class Sign3IntelligenceInternal{
     internal static var sdk: Sign3IntelligenceInternal?
     internal lazy var userDefaultsManager = UserDefaultsManager()
     internal var options: Options?
     internal var isReady: Bool = false
-    internal lazy var appSessionId: String = Utils.getSessionId()
+    internal let appSessionId: String = Utils.getSessionId()
     internal var keyProvider: BaseKey?
+    internal lazy var actionHandlerImpl = ActionHandlerImpl(sign3Intelligence: self)
+    internal lazy var actionHandlerContinuousIntegrationImpl = ActionHandlerContinuousIntegrationImpl(sign3Intelligence: self)
+    internal lazy var dataCreationService = DataCreationService()
+    internal var deviceParam: DeviceParams?
+    internal var updateOptionCheck: Bool = false
+    private var cronTrigger: CronTrigger? = nil
+    internal var availableMemory: CLong? = nil
+    internal var totalMemory: CLong? = nil
+    internal var memoryThresholdReached: Bool = false
+    internal var locationThresholdReached: Bool = false
+    internal var currentIntelligence: IntelligenceResponse? = nil
+    internal var sentClientParams : ClientParams = ClientParams.empty()
+    internal var payloadHash: Int = -1
+    internal var mixpanel: MixpanelInstance? = nil
+//    internal let realmDataStorage = RealmDataStorage()
     
     internal static func getInstance() -> Sign3IntelligenceInternal {
         if sdk == nil {
@@ -77,33 +93,14 @@ internal class Sign3IntelligenceInternal{
                 .setMerchantId(merchantId)
                 .setAdditionalAttributes(additionalAttributes)
                 .build()
-            
-            Utils.encodeObject(tag: "TAG_UPDATED_OPTIONS", object: self.options)
+            updateOptionCheck = true
         }catch{
-            Utils.showErrorlogs(tags: "TAG_UPDATED_OPTIONS", value: error.localizedDescription)
+            updateOptionCheck = false
         }
     }
     
-    internal func getIntelligence(completion: @escaping ([String: Any]) -> Void) {
-        var intelligenceData: [String: Any] = [:]
-        
-        DispatchQueue.global().async {
-            Task.detached {
-                // Fetching data from the displayAllSignals method
-                let data = await DataCreationService.displayAllSignals()
-                
-                // Merge the data into the intelligenceData dictionary
-                intelligenceData.merge(data) { (_, new) in new }
-                
-                // Call the completion handler on the main thread after the data is collected
-                DispatchQueue.main.async {
-                    completion(intelligenceData)
-                }
-            }
-        }
-    }
     internal func initAsync(_ options: Options,_ completion: @escaping (Bool) -> Void) {
-        DispatchQueue.global().async{
+        DispatchQueue.global(qos: .userInitiated).async{
             let result = self.initialize(options: options)
             DispatchQueue.main.async {
                 completion(result)
@@ -118,7 +115,17 @@ internal class Sign3IntelligenceInternal{
                     isReady = try initMandatoryParams(options)
                     initMandatoryParamsAsync()
                 }catch{
-                    Utils.showErrorlogs(tags: "TAG_SdkInit:", value: error.localizedDescription)
+                    Log.e("SdkInit:", error.localizedDescription)
+                    Utils.pushEventMetric(
+                        EventMetric(
+                            timeRequiredInMs: Int64(Date().timeIntervalSince1970) * 1000,
+                            status: false,
+                            source: String(describing: ActionContextSource.INIT),
+                            errorMessage: error.localizedDescription,
+                            requestId: "",
+                            eventName: String(describing: ActionContextEvent.CONFIG)
+                        )
+                    )
                 }
             }
             
@@ -131,15 +138,12 @@ internal class Sign3IntelligenceInternal{
         self.options = options
         self.options = options.toBuilder().setSessionId(appSessionId).build()
         keyProvider = updateKeyProvider(options)
-        //        Utils.encodeObject(tag: "TAG_OPTIONS", object: options)
-        //        Utils.showInfologs(tags: "TAG_BASE_URL", value: keyProvider?.baseUrl ?? "demo")
         do{
             try CryptoGCM.initialize(options.clientSecret, options.clientId)
             isSuccess = true
         }catch{
             isSuccess = false
-            Utils.showErrorlogs(tags: "TAG_cryptoFailed", value: error.localizedDescription)
-            
+            Log.e("cryptoFailed:", error.localizedDescription)
         }
         return isSuccess
     }
@@ -148,7 +152,7 @@ internal class Sign3IntelligenceInternal{
         switch options.environment{
         case .DEV:
             return DevKeyProvider()
-        case .PRE:
+        case .STAGING:
             return StagingKeyProvider()
         case .PROD:
             return ProdKeyProvider()
@@ -156,27 +160,84 @@ internal class Sign3IntelligenceInternal{
         }
     }
     
-    internal func initMandatoryParamsAsync() {
-        DispatchQueue.global().async {
-            if (self.isReady){
-                self.startMandatoryCalls()
+    /// userInteractive: For UI-critical tasks like animations or instant touch feedback. Too high priority for your framework—avoid using it.
+    /// userInitiated: For user-triggered tasks requiring immediate results. Best for your framework if signal collection needs to be fast.
+    /// default: Standard priority for generic tasks. Suitable but not optimized for your framework's requirements.
+    /// utility: For long-running tasks with lower urgency, energy-efficient. Good for background data collection but not ideal for immediate results.
+    /// background: For non-urgent tasks invisible to the user, low priority. Too slow for your framework's needs.
+    /// unspecified: Leaves priority to the system; unpredictable. Not recommended for important tasks.
+    
+    internal func getIntelligence(listener: IntelligenceResponseListener) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            Task {
+                await self.actionHandlerImpl.handle(listener: listener)
             }
         }
     }
     
-    internal func startMandatoryCalls() {
-        //        // Doing API calls
-        //        Api.shared.getConfig{result in
-        //            switch result {
-        //            case .success(let response):
-        //                print("Config response:", response)
-        //            case .failure(let error):
-        //                print("Error:", error.localizedDescription)
-        //            }
-        //        }
+    internal func initMandatoryParamsAsync() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            Task{
+                if (self.isReady){
+                    await self.startMandatoryCalls()
+                    await self.initColdStart()
+                }
+            }
+        }
     }
     
+    internal func initColdStart() async {
+        await dataCreationService.initColdStart()
+    }
     
+    internal func startMandatoryCalls() async {
+        /// Init Config
+        ConfigManager.initConfig()
+        
+        /// Init Mixpanel
+        initMixpanel()
+        
+        /// Cron Start
+        if ConfigManager.isCronEnabled {
+            cronTrigger = CronTrigger.init(actionHandlerContinuousIntegrationImpl: actionHandlerContinuousIntegrationImpl)
+            cronTrigger?.initTrigger()
+        }
+        
+        /// Call On Start
+        if ConfigManager.callOnStart {
+            await actionHandlerContinuousIntegrationImpl.handle(source: ActionContextSource.INIT)
+        }
+    }
+    
+    internal func pushEventMetric(_ eventMetric: EventMetric){
+        Api.shared.pushEventMetric(eventMetric){resource in
+            switch resource.status{
+            case .success:
+                Log.i("pushEvent: ", "\(String(describing: resource.data))")
+                break
+            case .error:
+                Log.e("pushEvent: ", "\(String(describing: resource.message))")
+                break
+            case .loading:
+                Log.i("pushEvent: ", "\(String(describing: resource.message))")
+            }
+        }
+    }
+    
+    private func initMixpanel() {
+        mixpanel = Mixpanel.initialize(token: ConfigManager.mixPanelKey, trackAutomaticEvents: false)
+    }
+    
+    internal func pushSdkError(_ sdkError: SdkError) {
+        guard let mixpanelInstance = mixpanel else {
+            Log.i("pushSdkError", "Mixpanel Instance is nil")
+            return
+        }
+        let properties = Utils.createProperties(sdkError)
+        Task {
+            mixpanelInstance.track(event: await sdkError.eventName, properties: properties)
+        }
+    }
 }
 
 private func synchronized(_ lock: Any, _ closure: () -> Void) {

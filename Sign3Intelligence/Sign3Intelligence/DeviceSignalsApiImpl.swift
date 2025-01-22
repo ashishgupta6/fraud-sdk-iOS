@@ -16,10 +16,35 @@ import LocalAuthentication
 import CoreMotion
 import DeviceCheck
 import Network
+import SystemConfiguration.CaptiveNetwork
 
 internal class DeviceSignalsApiImpl : DeviceSignalsApi{
     
     init() {}
+    
+    func generateDeviceToken() async -> String {
+        await Utils.getDeviceSignals(
+            functionName: "generateDeviceToken",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown"
+        ) {
+            let currentDevice = DCDevice.current
+            if currentDevice.isSupported {
+                return await withCheckedContinuation { continuation in
+                    currentDevice.generateToken { data, error in
+                        if let tokenData = data {
+                            continuation.resume(returning: tokenData.base64EncodedString())
+                        } else {
+                            continuation.resume(returning: "")
+                        }
+                    }
+                }
+            } else {
+                return "Unsupported Device"
+            }
+        }
+    }
+
     
     func getiOSDeviceId() async -> String {
         return await Utils.getDeviceSignals(
@@ -30,19 +55,6 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                 guard let id = await UIDevice.current.identifierForVendor?.uuidString else {
                     return "Unable to get device ID"
                 }
-//                let curDevice = DCDevice.current
-//                if curDevice.isSupported {
-//                    curDevice.generateToken(completionHandler: { (data, error) in
-//                        if let data = data {
-//                            // You will get a device-specific token here
-//                            let deviceToken = data.base64EncodedString()
-//                            print("Device token: \(deviceToken)")
-//                        } else if let error = error {
-//                            print("Error: \(error.localizedDescription)")
-//                        }
-//                    })
-//                }
-                
                 return id
             }
         )
@@ -79,17 +91,6 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         } else {
             return true // As there is no tracking authorization in earlier versions
         }
-    }
-    
-    func getUUID() async -> String {
-        return await Utils.getDeviceSignals(
-            functionName: "getUUID",
-            requestId: UUID().uuidString,
-            defaultValue: "Unknown",
-            function: {
-                return UUID().uuidString
-            }
-        )
     }
     
     func getCloudId() async -> String {
@@ -185,52 +186,55 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
     }
     
     
-    func getFreeDiskSpace() async -> String {
+    func getFreeDiskSpace() async -> CLong {
         return await Utils.getDeviceSignals(
             functionName: "getFreeDiskSpace",
             requestId: UUID().uuidString,
-            defaultValue: "Unknown",
-            function: {
-                if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
-                   let totalSpace = attributes[.systemSize] as? Int64 {
-                    return ByteCountFormatter.string(fromByteCount: totalSpace, countStyle: .file)
-                } else {
-                    return "Unable to retrieve total disk space"
-                }
-            }
-        )
-    }
-    
-    func getTotalDiskSpace() async -> String {
-        return await Utils.getDeviceSignals(
-            functionName: "getTotalDiskSpace",
-            requestId: UUID().uuidString,
-            defaultValue: "Unknown",
+            defaultValue: -1,
             function: {
                 if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
                    let freeSpace = attributes[.systemFreeSize] as? Int64 {
-                    return ByteCountFormatter.string(fromByteCount: freeSpace, countStyle: .file)
+                    return CLong(freeSpace)
+                    //                    return ByteCountFormatter.string(fromByteCount: freeSpace, countStyle: .file)
                 } else {
-                    return "Unable to retrieve free disk space"
+                    return -1
                 }
             }
         )
     }
     
-    func getUsedDiskSpace() async -> String {
+    func getTotalDiskSpace() async -> CLong {
+        return await Utils.getDeviceSignals(
+            functionName: "getTotalDiskSpace",
+            requestId: UUID().uuidString,
+            defaultValue: -1,
+            function: {
+                if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
+                   let totalSpace = attributes[.systemSize] as? Int64 {
+                    return CLong(totalSpace)
+                    //                   return ByteCountFormatter.string(fromByteCount: totalSpace, countStyle: .file)
+                } else {
+                    return -1
+                }
+            }
+        )
+    }
+    
+    func getUsedDiskSpace() async -> CLong {
         return await Utils.getDeviceSignals(
             functionName: "getUsedDiskSpace",
             requestId: UUID().uuidString,
-            defaultValue: "Unknown",
+            defaultValue: -1,
             function: {
                 let fileManager = FileManager.default
                 let attributes = try fileManager.attributesOfFileSystem(forPath: NSHomeDirectory())
                 if let totalSpace = attributes[.systemSize] as? NSNumber,
                    let freeSpace = attributes[.systemFreeSize] as? NSNumber {
                     let usedSpace = totalSpace.int64Value - freeSpace.int64Value
-                    return ByteCountFormatter.string(fromByteCount: usedSpace, countStyle: .file)
+                    return CLong(usedSpace)
+                    //                    return ByteCountFormatter.string(fromByteCount: usedSpace, countStyle: .file)
                 } else {
-                    return "Unable to retrieve used disk space"
+                    return -1
                 }
                 
             }
@@ -298,35 +302,35 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getDisplayScale() async -> CGFloat {
+    func getDisplayScale() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getDisplayScale",
             requestId: UUID().uuidString,
             defaultValue: 1.0,
             function: {
-                return await UIScreen.main.scale
+                return await Float(UIScreen.main.scale)
             }
         )
     }
     
-    func getDisplayWidth() async -> CGFloat {
+    func getDisplayWidth() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getDisplayWidth",
             requestId: UUID().uuidString,
             defaultValue: 0.0,
             function: {
-                return await UIScreen.main.bounds.size.height
+                return await Float(UIScreen.main.bounds.size.height)
             }
         )
     }
     
-    func getDisplayHeight() async -> CGFloat {
+    func getDisplayHeight() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getDisplayHeight",
             requestId: UUID().uuidString,
             defaultValue: 0.0,
             function: {
-                return await UIScreen.main.bounds.size.width
+                return await Float(UIScreen.main.bounds.size.width)
             }
         )
     }
@@ -699,7 +703,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                let version = Bundle(for: Sign3Intelligence.self).infoDictionary?["CFBundleShortVersionString"] as? String
+                let version = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleShortVersionString"] as? String
                 return version ?? "Unknown"
             }
         )
@@ -824,7 +828,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                let version = Bundle(for: Sign3Intelligence.self).infoDictionary?["CFBundleVersion"] as? String
+                let version = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleVersion"] as? String
                 return version ?? "Unknown"
             }
         )
@@ -837,30 +841,83 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 0),
             function: {
-                // Check if location permission is granted
-                guard Utils.checkLocationPermission() else {
-                    Utils.showInfologs(tags: "Permission Denied", value: "Location permission not granted")
-                    return Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 0)
+                /// Check if location permission is granted
+                if await UIApplication.shared.applicationState == .background {
+                    guard Utils.hasBackgroundLocationPermission() else {
+                        Log.e("Permission Denied", "Background Location permission not granted")
+                        return Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 1)
+                    }
+                } else {
+                    guard Utils.hasForegroundLocationPermission() else {
+                        Log.e("Permission Denied", "Foreground Location permission not granted")
+                        return Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 2)
+                    }
                 }
                 
-                // Use withCheckedContinuation to handle the location updates asynchronously
-                return await withCheckedContinuation { continuation in
-                    DispatchQueue.main.async {
-                        LocationFramework.shared.startUpdatingLocation { location in
-                            let latitude = location.coordinate.latitude
-                            let longitude = location.coordinate.longitude
-                            let altitude = location.altitude
-                            let timeStamp = location.timestamp
-                            LocationFramework.shared.stopUpdatingLocation()
-                            
-                            // Resume the continuation with the result
-                            continuation.resume(returning: Location(latitude: latitude, longitude: longitude, altitude: altitude, timeStamp: Utils.dateToUnixTimestamp(timeStamp)))
-                        }
-                    }
+                do {
+                    let location = try await getUpdatedLocation()
+                    let latitude = await location.latitude
+                    let longitude = await location.longitude
+                    let altitude = await location.altitude
+                    let timeStamp = await location.timeStamp
+                    
+                    return Location(
+                        latitude: latitude,
+                        longitude: longitude,
+                        altitude: altitude,
+                        timeStamp: timeStamp
+                    )
+                } catch {
+                    Log.e("Location Error", "Failed to fetch location: \(error.localizedDescription)")
+                    return Location(latitude: 0.0, longitude: 0.0, altitude: 0.0, timeStamp: 3)
                 }
             }
         )
     }
+    
+    private func getUpdatedLocation() async throws -> Location {
+        return await withCheckedContinuation { continuation in
+            DispatchQueue.main.async {
+                var hasResumed = false
+                let defaultLocation = Location(
+                    latitude: 0.0,
+                    longitude: 0.0,
+                    altitude: 0.0,
+                    timeStamp: 4)
+                
+                /// Getting current location
+                LocationFramework.shared.startUpdatingLocation { location in
+                    /// Prevent duplicate resumes
+                    guard !hasResumed else { return }
+                    
+                    let latitude = location.coordinate.latitude
+                    let longitude = location.coordinate.longitude
+                    let altitude = location.altitude
+                    let timeStamp = location.timestamp
+                    LocationFramework.shared.stopUpdatingLocation()
+                    
+                    /// Mark continuation as resumed and return the result
+                    hasResumed = true
+                    continuation.resume(returning: Location(
+                        latitude: latitude,
+                        longitude: longitude,
+                        altitude: altitude,
+                        timeStamp: Utils.dateToUnixTimestamp(timeStamp)
+                    ))
+                    return
+                }
+                
+                /// This code executes when the app goes into the background. It waits for 10 seconds to get the current location, if the location is not obtained, it returns the default location.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                    /// Prevent duplicate resumes
+                    guard !hasResumed else { return }
+                    hasResumed = true
+                    continuation.resume(returning: defaultLocation)
+                }
+            }
+        }
+    }
+
     
     func isTelephonySupported() async -> Bool {
         return await Utils.getDeviceSignals(
@@ -1213,7 +1270,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getFontScale() async -> CGFloat {
+    func getFontScale() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getFontScale",
             requestId: UUID().uuidString,
@@ -1221,7 +1278,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
             function: {
                 let font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
                 let scaledFont = UIFontMetrics.default.scaledFont(for: font)
-                return scaledFont.pointSize / UIFont.systemFontSize
+                return Float(scaledFont.pointSize / UIFont.systemFontSize)
             }
         )
     }
@@ -1278,13 +1335,13 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getCurrentBrightness() async -> CGFloat {
+    func getCurrentBrightness() async -> Float {
         return await Utils.getDeviceSignals(
             functionName: "getCurrentBrightness",
             requestId: UUID().uuidString,
             defaultValue: 0.0,
             function: {
-                return await UIScreen.main.brightness
+                return await Float(UIScreen.main.brightness)
             }
         )
     }
@@ -1515,8 +1572,34 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getSerialNumber() async -> String {
-        return ""
+    func lockDownMode() async -> Bool {
+        return await Utils.getDeviceSignals(
+            functionName: "lockdownMode",
+            requestId: UUID().uuidString,
+            defaultValue: false,
+            function: {
+                return UserDefaults.standard.bool(forKey: "LDMGlobalEnabled")
+            }
+        )
+    }
+    
+    func getWifiSSID() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getWifiSSID",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                if let interfaces = CNCopySupportedInterfaces() as? [String] {
+                    for interface in interfaces {
+                        if let networkInfo = CNCopyCurrentNetworkInfo(interface as CFString) as? [String: AnyObject],
+                           let currentSSID = networkInfo["SSID"] as? String {
+                            return currentSSID
+                        }
+                    }
+                }
+                return "Unknown SSID"
+            }
+        )
     }
     
     

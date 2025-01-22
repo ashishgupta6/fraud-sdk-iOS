@@ -9,25 +9,21 @@ import Foundation
 import CryptoKit
 import CommonCrypto
 
-internal class CryptoGCM {
-    public static let AES_KEY_SIZE = 256
-    public static let GCM_IV_LENGTH = 16
+import Foundation
+import CryptoKit
+
+enum CryptoGCMError: Error {
+    case keyNotInitialized
+}
+
+class CryptoGCM {
+    public static let AES_KEY_SIZE = 32
+    public static let GCM_IV_LENGTH = 12
     public static let GCM_TAG_LENGTH = 16
     public static let ALGORITHM = "AES/GCM/NoPadding"
-    public static let GET_IV_HEADER = "TENANT-ID"
+    public static let GET_IV_HEADER = "tenant-id"
     private static var key: SymmetricKey?
     
-    private enum CryptoGCMError: Error {
-        case keyNotInitialized
-        case invalidBase64String
-        case invalidUTF8Data
-    }
-
-    internal static func initialize(_ password: String, _ salt: String) throws {
-        let keyData = try getKeyFromPassword(password: password, salt: salt)
-        key = SymmetricKey(data: keyData)
-    }
-
     internal static func getIvHeader() -> Data {
         var iv = Data(count: GCM_IV_LENGTH)
         _ = iv.withUnsafeMutableBytes {
@@ -36,49 +32,85 @@ internal class CryptoGCM {
         return iv
     }
 
+    static func initialize(_ password: String, _ salt: String) throws {
+        let derivedKey = try getKeyFromPassword(password: password, salt: salt)
+        key = SymmetricKey(data: derivedKey) // Convert to SymmetricKey
+    }
+
     private static func getKeyFromPassword(password: String, salt: String) throws -> Data {
-        let passwordData = password.data(using: .utf8)!
-        let saltData = salt.data(using: .utf8)!
-        
-        var derivedKeyData = Data(repeating: 0, count: AES_KEY_SIZE)
-        let status = derivedKeyData.withUnsafeMutableBytes { derivedKeyBytes in
+        let saltData = Data(salt.utf8)
+        var keyData = Data(count: 32) // 32 bytes for AES-256
+        let keyDataCount = keyData.count
+        let saltDataCount = saltData.count
+
+        let result = keyData.withUnsafeMutableBytes { keyBytes in
             saltData.withUnsafeBytes { saltBytes in
                 CCKeyDerivationPBKDF(
                     CCPBKDFAlgorithm(kCCPBKDF2),
-                    password,
-                    passwordData.count,
-                    saltBytes.baseAddress!.assumingMemoryBound(to: UInt8.self),
-                    saltData.count,
+                    password, password.utf8.count,
+                    saltBytes.baseAddress!, saltDataCount,
                     CCPseudoRandomAlgorithm(kCCPRFHmacAlgSHA1),
                     65536,
-                    derivedKeyBytes.baseAddress!.assumingMemoryBound(to: UInt8.self),
-                    AES_KEY_SIZE
+                    keyBytes.baseAddress!.assumingMemoryBound(to: UInt8.self), keyDataCount
                 )
             }
         }
+        guard result == kCCSuccess else {
+            throw NSError(domain: "KeyDerivationError", code: Int(result), userInfo: nil)
+        }
+        return keyData
+    }
+
+    static func encrypt(_ plaintext: String, _ IV: Data) throws -> String {
+        // Ensure the encryption key is initialized
+        guard let key = key else { throw CryptoGCMError.keyNotInitialized }
         
-        if status != kCCSuccess {
-            throw NSError(domain: "KeyDerivationError", code: Int(status), userInfo: nil)
+        // Convert the plaintext into Data
+        guard let plaintextData = plaintext.data(using: .utf8) else {
+            throw NSError(domain: "EncryptionError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid plaintext string"])
         }
         
-        return derivedKeyData
+        // Ensure the IV is the correct size
+        guard IV.count == 12 else {
+            throw NSError(domain: "EncryptionError", code: -1, userInfo: [NSLocalizedDescriptionKey: "IV must be 12 bytes for AES-GCM"])
+        }
+        
+        // Create a Nonce from the IV
+        let nonce = try AES.GCM.Nonce(data: IV)
+        
+        // Encrypt the data
+        let sealedBox = try AES.GCM.seal(plaintextData, using: key, nonce: nonce)
+        
+        // Combine ciphertext and tag
+        let combinedData = sealedBox.ciphertext + sealedBox.tag
+        
+        // Return the Base64-encoded string
+        return combinedData.base64EncodedString()
     }
 
-    internal static func encrypt(_ inputString: String, _ IV: Data) throws -> String {
-        guard let key = key else { throw CryptoGCMError.keyNotInitialized }
-        let inputData = Data(inputString.utf8)
-        let sealedBox = try AES.GCM.seal(inputData, using: key, nonce: AES.GCM.Nonce(data: IV))
-        return sealedBox.combined!.base64EncodedString()
-    }
+    static func decrypt(ciphertextBase64: String, nonceBase64: String) -> String? {
+        // Decode Base64 inputs
+        guard let nonceData = Data(base64Encoded: nonceBase64),
+              let ciphertextData = Data(base64Encoded: ciphertextBase64) else {
+            print("Failed to decode Base64 inputs")
+            return nil
+        }
 
-    internal static func decrypt(_ encryptedString: String, _ IV: Data) throws -> String {
-        guard let key = key else { throw CryptoGCMError.keyNotInitialized }
-        guard let cipherData = Data(base64Encoded: encryptedString) else { throw CryptoGCMError.invalidBase64String }
-        
-        let sealedBox = try AES.GCM.SealedBox(combined: cipherData)
-        let decryptedData = try AES.GCM.open(sealedBox, using: key)
-        
-        guard let decryptedString = String(data: decryptedData, encoding: .utf8) else { throw CryptoGCMError.invalidUTF8Data }
-        return decryptedString
+        guard let nonce = try? AES.GCM.Nonce(data: nonceData) else {
+            print("Invalid nonce")
+            return nil
+        }
+
+        do {
+            // Create SealedBox from ciphertext and tag
+            let sealedBox = try AES.GCM.SealedBox(nonce: nonce, ciphertext: ciphertextData.dropLast(16), tag: ciphertextData.suffix(16))
+
+            // Decrypt data
+            let plaintextData = try AES.GCM.open(sealedBox, using: key!)
+            return String(data: plaintextData, encoding: .utf8)
+        } catch {
+            print("Decryption failed: \(error)")
+            return nil
+        }
     }
 }

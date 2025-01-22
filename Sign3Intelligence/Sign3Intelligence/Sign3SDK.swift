@@ -7,18 +7,15 @@
 
 import Foundation
 
-import os.log
-import BackgroundTasks
-
-public final class Sign3Intelligence {
-    private static var sdk: Sign3Intelligence?
+public final class Sign3SDK {
+    private static var sdk: Sign3SDK?
     private lazy var sign3IntelligenceInternal = Sign3IntelligenceInternal.getInstance()
 
-    public static func getInstance() -> Sign3Intelligence {
+    public static func getInstance() -> Sign3SDK {
         if sdk == nil {
-            synchronized(Sign3Intelligence.self) {
+            synchronized(Sign3SDK.self) {
                 if sdk == nil {
-                    sdk = Sign3Intelligence()
+                    sdk = Sign3SDK()
                 }
             }
         }
@@ -33,11 +30,8 @@ public final class Sign3Intelligence {
         sign3IntelligenceInternal.updateOption(updateOption)
     }
 
-    public func getIntelligence(completion: @escaping ([String: Any]) -> Void) {
-        sign3IntelligenceInternal.getIntelligence { intelligenceData in
-            // Call the completion handler with the received intelligence data
-            completion(intelligenceData)
-        }
+    public func getIntelligence(listener: IntelligenceResponseListener) {
+        sign3IntelligenceInternal.getIntelligence(listener: listener)
     }
     
     public func getSessionId() -> String {
@@ -50,4 +44,5 @@ private func synchronized(_ lock: Any, _ closure: () -> Void) {
     closure()
     objc_sync_exit(lock)
 }
+
 

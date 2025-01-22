@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MachO.dyld.utils
 
 internal class JailBrokenDetector{
     
@@ -118,7 +119,7 @@ internal class JailBrokenDetector{
     private func checkExistenceOfSuspiciousFiles() -> Bool {
         // These files can give false positive in the emulator
         if  !simulatorDetector.isSimulatorDetectedWithoutAsync() {
-            JailBrokenDetectorConst.suspiciousFilePath += [
+            JailBrokenDetectorConst.suspiciousFilePath.addUnique([
                 "/bin/bash",
                 "/usr/sbin/sshd",
                 "/usr/libexec/ssh-keysign",
@@ -126,7 +127,7 @@ internal class JailBrokenDetector{
                 "/etc/ssh/sshd_config",
                 "/usr/libexec/sftp-server",
                 "/usr/bin/ssh"
-            ]
+            ])
         }
         
         for path in JailBrokenDetectorConst.suspiciousFilePath {
@@ -153,7 +154,7 @@ internal class JailBrokenDetector{
     private func checkSuspiciousFilesCanBeOpened() -> Bool {
         // These files can give false positive in the emulator
         if !simulatorDetector.isSimulatorDetectedWithoutAsync() {
-            JailBrokenDetectorConst.suspiciousFilePath += [
+            JailBrokenDetectorConst.suspiciousFilePath.addUnique([
                 "/bin/bash",
                 "/usr/sbin/sshd",
                 "/usr/libexec/ssh-keysign",
@@ -161,7 +162,7 @@ internal class JailBrokenDetector{
                 "/etc/ssh/sshd_config",
                 "/usr/libexec/sftp-server",
                 "/usr/bin/ssh"
-            ]
+            ])
         }
         
         for path in JailBrokenDetectorConst.suspiciousFilePath {

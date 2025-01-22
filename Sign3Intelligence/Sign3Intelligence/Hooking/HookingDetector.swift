@@ -67,7 +67,7 @@ internal class HookingDetector{
                     detectHook = true
                 }
             case .isReverseEngineeringToolsDetected:
-                if (ReverseEngineeringToolsChecker().isReverseEngineeringToolsBeingUsed()){
+                if (await ReverseEngineeringToolsChecker().isReverseEngineeringToolsBeingUsed()){
                     detectHook = true
                 }
             case .amIMSHooked:

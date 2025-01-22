@@ -86,6 +86,7 @@
 		398EB58E2C63BB10002FC9CA /* FraudSDK_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FraudSDK_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		398EB5D12C63C0CE002FC9CA /* Sign3Intelligence.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sign3Intelligence.xcodeproj; path = Sign3Intelligence/Sign3Intelligence.xcodeproj; sourceTree = "<group>"; };
 		79E86C8E2CFF48B000A66FF5 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		79F81E792D31260C0054162D /* FraudSDK-iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "FraudSDK-iOSDebug.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +157,7 @@
 		398EB56A2C63BB0E002FC9CA /* FraudSDK-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				79F81E792D31260C0054162D /* FraudSDK-iOSDebug.entitlements */,
 				39577E752CEB6D9200DCD69F /* FraudSDK-iOS.entitlements */,
 				393E76842C804B9900572A77 /* Utils */,
 				398EB59B2C63BBA6002FC9CA /* App */,
@@ -540,7 +542,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = "FraudSDK-iOS/FraudSDK-iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "FraudSDK-iOS/FraudSDK-iOSDebug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -551,7 +553,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Sign3 Fraud";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to provide better services even when the app is in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide the best experience.";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "I waana track your IDFA to helpother learns about apples's ad support.\n\n\n\n\n\n\n";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "I waana track your IDFA to helpother learns about apples's ad support.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -562,7 +564,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3labs.fraudsdk.FraudSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -593,7 +595,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Sign3 Fraud";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to provide better services even when the app is in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide the best experience.";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "I waana track your IDFA to helpother learns about apples's ad support.\n\n\n\n\n\n\n";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "I waana track your IDFA to helpother learns about apples's ad support.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -604,7 +606,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sign3labs.fraudsdk.FraudSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";

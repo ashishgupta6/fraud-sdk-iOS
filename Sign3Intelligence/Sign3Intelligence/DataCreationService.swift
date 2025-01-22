@@ -7,308 +7,258 @@
 
 import Foundation
 
-
 internal struct DataCreationService{
     
-    private static let deviceSignalsApi: DeviceSignalsApi = {
-        return DeviceSignalsApiImpl()
-    }()
+    private let deviceSignalsApi: DeviceSignalsApi = DeviceSignalsApiImpl()
     
-    private static let sign3IntelliegnceSdkApiImpl: Sign3IntelligenceSdkApi = {
+    private lazy var sign3IntelliegnceSdkApiImpl: Sign3IntelligenceSdkApi = {
         return Sign3IntelligenceSdkApiImpl(deviceSignalsApi: deviceSignalsApi)
     }()
     
-    
-    internal static func displayAllSignals() async -> [String: Any] {
-        var signals: [String: Any] = [:]
-        
-        // Detectors
-        signals["VPN Detector"] = await sign3IntelliegnceSdkApiImpl.isVpnDetected()
-        signals["Simulator Detector"] = await sign3IntelliegnceSdkApiImpl.isSimulatorDetected()
-        signals["JailBroken Detector"] = await sign3IntelliegnceSdkApiImpl.isJailBrokenDetected()
-        signals["Location Spoofer"] = await sign3IntelliegnceSdkApiImpl.isMockLocation()
-        signals["App Tampering"] = await sign3IntelliegnceSdkApiImpl.isAppTampered()
-        signals["Proxy Detector"] = await sign3IntelliegnceSdkApiImpl.isProxyDetected()
-        signals["Hooking Detector"] = await sign3IntelliegnceSdkApiImpl.isHookingDetected()
-        signals["Mirrored Screen"] = await sign3IntelliegnceSdkApiImpl.isScreenBeingMirrored()
-        
-        // Signals
-        signals["Device ID"] = await deviceSignalsApi.getiOSDeviceId()
-        signals["Cloud ID"] = await deviceSignalsApi.getCloudId()
-        signals["Application ID"] = await deviceSignalsApi.getApplicationId()
-        signals["IDFA"] = await deviceSignalsApi.getIDFA()
-        signals["UUID"] = await deviceSignalsApi.getUUID()
-        signals["Battery Status"] = await deviceSignalsApi.getBatteryStatus()
-        signals["Battery Level"] = await deviceSignalsApi.getBatteryLevel()
-        signals["CPU Count"] = await deviceSignalsApi.getCpuCount()
-        signals["Free Disk Space"] = await deviceSignalsApi.getFreeDiskSpace()
-        signals["Total Disk Space"] = await deviceSignalsApi.getTotalDiskSpace()
-        signals["Used Disk Space"] = await deviceSignalsApi.getUsedDiskSpace()
-        signals["Device Model"] = await deviceSignalsApi.getDeviceModel()
-        signals["Device Name"] = await deviceSignalsApi.getDeviceName()
-        signals["WiFi IP Address"] = await deviceSignalsApi.getWifiIPAddress()
-        signals["Display Scale"] = await deviceSignalsApi.getDisplayScale()
-        signals["Display Width"] = await deviceSignalsApi.getDisplayWidth()
-        signals["Display Height"] = await deviceSignalsApi.getDisplayHeight()
-        signals["Time Zone"] = await deviceSignalsApi.getTimeZone()
-        signals["Current Time"] = await deviceSignalsApi.getCurrentTime()
-        signals["Current Locale"] = await deviceSignalsApi.getCurrentLocal()
-        signals["Preferred Language"] = await deviceSignalsApi.getPreferredLanguage()
-        signals["Sandbox Path"] = await deviceSignalsApi.getSandboxPath()
-        signals["Mobile Country Code"] = await deviceSignalsApi.getMobileCountryCode()
-        signals["Network Country Code"] = await deviceSignalsApi.getNetworkCountryCode()
-        signals["Host Name"] = await deviceSignalsApi.getHostName()
-        signals["Is iOS App On Mac"] = await deviceSignalsApi.isiOSAppOnMac()
-        signals["Orientation"] = await deviceSignalsApi.getOrientation()
-        signals["Carrier Name"] = await deviceSignalsApi.getCarrierName()
-        signals["Network Type"] = await deviceSignalsApi.getNetworkType()
-        signals["System Uptime"] = await deviceSignalsApi.getSystemUptime()
-        signals["RAM Usage"] = await deviceSignalsApi.getRAMUsage()
-        signals["Total RAM Size"] = await deviceSignalsApi.getTotalRAMSize()
-        signals["Kernel Version"] = await deviceSignalsApi.getKernelVersion()
-        signals["Kernel OS Version"] = await deviceSignalsApi.getKernelOSVersion()
-        signals["Kernel OS Release"] = await deviceSignalsApi.getKernelOSRelease()
-        signals["Kernel OS Type"] = await deviceSignalsApi.getKernelOSType()
-        signals["iOS Version"] = await deviceSignalsApi.getiOSVersion()
-        signals["Framework Version"] = await deviceSignalsApi.getFrameworkVersion()
-        signals["iOS App Version"] = await deviceSignalsApi.getiOSAppVersion()
-        signals["App Name"] = await deviceSignalsApi.getAppName()
-        signals["App Install Time"] = await deviceSignalsApi.getAppInstallTime()
-        signals["App Update Time"] = await deviceSignalsApi.getAppUpdateTime()
-        signals["App State"] = await deviceSignalsApi.getAppState()
-        signals["App Build Number"] = await deviceSignalsApi.getAppBuildNumber()
-        signals["Framework Build Number"] = await deviceSignalsApi.getFrameworkBuildNumber()
-        signals["Location"] = [
-            "Latitude": await deviceSignalsApi.getLocation().latitude,
-            "Longitude": await deviceSignalsApi.getLocation().longitude,
-            "Altitude": await deviceSignalsApi.getLocation().altitude,
-            "TimeStamp": await deviceSignalsApi.getLocation().timeStamp
-        ]
-        signals["Telephony Supported"] = await deviceSignalsApi.isTelephonySupported()
-        signals["Camera List"] = await deviceSignalsApi.getCameraList()
-        signals["ABI Type"] = await deviceSignalsApi.getAbiType()
-        signals["Ringtone Source"] = await deviceSignalsApi.getRingtoneSource()
-        signals["Available Locales"] = await deviceSignalsApi.getAvailableLocales()
-        signals["Security Providers Data"] = await deviceSignalsApi.getSecurityProvidersData()
-        signals["Fingerprint Sensor Status"] = await deviceSignalsApi.getFingerPrintSensorStatus()
-        signals["GLES Version"] = await deviceSignalsApi.getGlesVersion()
-        signals["Development Settings Enabled"] = await deviceSignalsApi.isDevelopmentSettingsEnabled()
-        signals["HTTP Proxy"] = await deviceSignalsApi.getHttpProxy()
-        signals["Accessibility Settings"] = await deviceSignalsApi.getAccessibilitySettings()
-        signals["Touch Exploration Enabled"] = await deviceSignalsApi.isTouchExplorationEnabled()
-        signals["Alarm Alert Path"] = await deviceSignalsApi.getAlarmAlertPath()
-        signals["Time Format"] = await deviceSignalsApi.getTime12Or24()
-        signals["Font Scale"] = await deviceSignalsApi.getFontScale()
-        signals["Text Auto Replace"] = await deviceSignalsApi.getTextAutoReplace()
-        signals["Text Auto Punctuate"] = await deviceSignalsApi.getTextAutoPunctuate()
-        signals["Boot Time"] = await deviceSignalsApi.getBootTime()
-        signals["Current Brightness"] = await deviceSignalsApi.getCurrentBrightness()
-        signals["Sim Info List"] = await deviceSignalsApi.getSimInfoList()
-        signals["Default Browser"] = await deviceSignalsApi.getDefaultBrowser()
-        signals["Audio Current Volume"] = await deviceSignalsApi.getAudioVolumeCurrent()
-        signals["Carrier Country"] = await deviceSignalsApi.getCarrierCountry()
-        signals["Debugger Enabled"] = await deviceSignalsApi.isDebuggerEnabled()
-        signals["Build Configuration"] = await deviceSignalsApi.checkBuildConfiguration()
-        signals["CPU Type"] = await deviceSignalsApi.getCPUType()
-        signals["Proximity Sensor"] = await deviceSignalsApi.hasProximitySensor()
-        signals["Localized Model"] = await deviceSignalsApi.getLocalizedModel()
-        signals["System Name"] = await deviceSignalsApi.getSystemName()
-        signals["MAC Address"] = await deviceSignalsApi.getMacAddress()
-        signals["iPhone Bluetooth MAC Address"] = await deviceSignalsApi.getIPhoneBluetoothMacAddress()
-        signals["iPad Bluetooth MAC Address"] = await deviceSignalsApi.getIPadBluetoothMacAddress()
-        
-        return signals
+    internal func initColdStart() async {
+        let base64TokenString = await deviceSignalsApi.generateDeviceToken()
+        hitDeviceCheckApi(base64TokenString)
     }
 
+    internal func hitDeviceCheckApi(_ base64TokenString: String) {
+        Api.shared.queryDeviceCheck(deviceToken: base64TokenString) { resource in
+            switch resource.status {
+            case .success:
+                Log.i("hitDeviceCheckApi", resource.data ?? "empty data")
+            case .error:
+                Log.e("hitDeviceCheckApi: ", "\(resource.message ?? "Unknown error")")
+            case .loading: break
+            }
+        }
+    }
     
-//    internal static func displayAllSignals(){
-//        
-//        DispatchQueue.global().async {
-//            Task.detached{
-//                // Detectors
-//                let isVpnEnabled = await sign3IntelliegnceSdkApiImpl.isVpnDetected()
-//                let isSimulatorDetected = await sign3IntelliegnceSdkApiImpl.isSimulatorDetected()
-//                let isJainBrokenDetected = await sign3IntelliegnceSdkApiImpl.isJailBrokenDetected()
-//                let locationSpoffer = await sign3IntelliegnceSdkApiImpl.isMockLocation()
-//                let appTampering = await sign3IntelliegnceSdkApiImpl.isAppTampered()
-//                let proxyDetector = await sign3IntelliegnceSdkApiImpl.isProxyDetected()
-//                let hookingDetector = await sign3IntelliegnceSdkApiImpl.isHookingDetected()
-//                let mirroredScreen = await sign3IntelliegnceSdkApiImpl.isScreenBeingMirrored()
-//                
-//                
-//                // Signals
-//                let deviceId = await deviceSignalsApi.getiOSDeviceId()
-//                let cloudId = await deviceSignalsApi.getCloudId()
-//                let appId = await deviceSignalsApi.getApplicationId()
-//                let idfa = await deviceSignalsApi.getIDFA()
-//                let uuid = await deviceSignalsApi.getUUID()
-//                let batteryStatus = await deviceSignalsApi.getBatteryStatus()
-//                let batteryLavel = await deviceSignalsApi.getBatteryLevel()
-//                let cpuCount = await deviceSignalsApi.getCpuCount()
-//                let freeDiskSpace = await deviceSignalsApi.getFreeDiskSpace()
-//                let totalDiskSpace = await deviceSignalsApi.getTotalDiskSpace()
-//                let usedDiskSpace = await deviceSignalsApi.getUsedDiskSpace()
-//                let deviceModel = await deviceSignalsApi.getDeviceModel()
-//                let deviceName = await deviceSignalsApi.getDeviceName()
-//                let wifiIpAddress = await deviceSignalsApi.getWifiIPAddress()
-//                let displayScale = await deviceSignalsApi.getDisplayScale()
-//                let displayWidth = await deviceSignalsApi.getDisplayWidth()
-//                let displayHeight = await deviceSignalsApi.getDisplayHeight()
-//                let timeZone = await deviceSignalsApi.getTimeZone()
-//                let currentTime = await deviceSignalsApi.getCurrentTime()
-//                let currentLocal = await deviceSignalsApi.getCurrentLocal()
-//                let preferredLanguage = await deviceSignalsApi.getPreferredLanguage()
-//                let sanboxPath = await deviceSignalsApi.getSandboxPath()
-//                let mcc = await deviceSignalsApi.getMobileCountryCode()
-//                let ncc = await deviceSignalsApi.getNetworkCountryCode()
-//                let hostName = await deviceSignalsApi.getHostName()
-//                let isiOSAppOnMac = await deviceSignalsApi.isiOSAppOnMac()
-//                let orientation = await deviceSignalsApi.getOrientation()
-//                let carrierName = await deviceSignalsApi.getCarrierName()
-//                let networkType = await deviceSignalsApi.getNetworkType()
-//                let systemUptime = await deviceSignalsApi.getSystemUptime()
-//                let ramUses = await deviceSignalsApi.getRAMUsage()
-//                let totalRamSize = await deviceSignalsApi.getTotalRAMSize()
-//                let kernalVersion = await deviceSignalsApi.getKernelVersion()
-//                let kernalOSVersion = await deviceSignalsApi.getKernelOSVersion()
-//                let kernalOSRelase = await deviceSignalsApi.getKernelOSRelease()
-//                let kernalOSType = await deviceSignalsApi.getKernelOSType()
-//                let iOSVersion = await deviceSignalsApi.getiOSVersion()
-//                let frameWorkVersion = await deviceSignalsApi.getFrameworkVersion()
-//                let iOSAppVersion = await deviceSignalsApi.getiOSAppVersion()
-//                let appName = await deviceSignalsApi.getAppName()
-//                let appInstallTime = await deviceSignalsApi.getAppInstallTime()
-//                let appUpdateTime = await deviceSignalsApi.getAppUpdateTime()
-//                let appState = await deviceSignalsApi.getAppState()
-//                let appBuildNumber = await deviceSignalsApi.getAppBuildNumber()
-//                let frameworkBuildNumber = await deviceSignalsApi.getFrameworkBuildNumber()
-//                let location = await deviceSignalsApi.getLocation()
-//                let isTelephonySupported = await deviceSignalsApi.isTelephonySupported()
-//                let cameraList = await deviceSignalsApi.getCameraList()
-//                let abiType = await deviceSignalsApi.getAbiType()
-//                let ringToneSource = await deviceSignalsApi.getRingtoneSource()
-//                let availableLocals = await deviceSignalsApi.getAvailableLocales()
-//                let securityProvidersData = await deviceSignalsApi.getSecurityProvidersData()
-//                let fingerPrintSensorStatus = await deviceSignalsApi.getFingerPrintSensorStatus()
-//                let glesVersion = await deviceSignalsApi.getGlesVersion()
-//                let developmentSettingsEnabled = await deviceSignalsApi.isDevelopmentSettingsEnabled()
-//                let httpProxy = await deviceSignalsApi.getHttpProxy()
-//                let accessibilitySettings = await deviceSignalsApi.getAccessibilitySettings()
-//                let touchExplorationEnabled = await deviceSignalsApi.isTouchExplorationEnabled()
-//                let alarmAlertPath = await deviceSignalsApi.getAlarmAlertPath()
-//                let time12Or24 = await deviceSignalsApi.getTime12Or24()
-//                let fontScale = await deviceSignalsApi.getFontScale()
-//                let textAutoReplace = await deviceSignalsApi.getTextAutoReplace()
-//                let textAutoPunctuate = await deviceSignalsApi.getTextAutoPunctuate()
-//                let bootTime = await deviceSignalsApi.getBootTime()
-//                let currentBrightness = await deviceSignalsApi.getCurrentBrightness()
-//                let simInfoList = await deviceSignalsApi.getSimInfoList()
-//                let defaultBrowser = await deviceSignalsApi.getDefaultBrowser()
-//                let audioCurrentVolume = await deviceSignalsApi.getAudioVolumeCurrent()
-//                let carrierCountry = await deviceSignalsApi.getCarrierCountry()
-//                let debuggerEnabled = await deviceSignalsApi.isDebuggerEnabled()
-//                let checkBuildConfiguration = await deviceSignalsApi.checkBuildConfiguration()
-//                let cpuType = await deviceSignalsApi.getCPUType()
-//                let proximitySensor = await deviceSignalsApi.hasProximitySensor()
-//                let localizedModel = await deviceSignalsApi.getLocalizedModel()
-//                let systemName = await deviceSignalsApi.getSystemName()
-//                let macAddress = await deviceSignalsApi.getMacAddress()
-//                let iPhoneBluetoothMacAddress = await deviceSignalsApi.getIPhoneBluetoothMacAddress()
-//                let iPadBluetoothMacAddress = await deviceSignalsApi.getIPadBluetoothMacAddress()
-//                
-//                DispatchQueue.main.async {
-//                    Utils.showInfologs(tags: "Device ID", value: deviceId)
-//                    Utils.showInfologs(tags: "Cloud ID", value: cloudId)
-//                    Utils.showInfologs(tags: "Application ID", value: appId)
-//                    Utils.showInfologs(tags: "IDFA", value: idfa)
-//                    Utils.showInfologs(tags: "UUID", value: uuid)
-//                    Utils.showInfologs(tags: "Battery Status", value: batteryStatus)
-//                    Utils.showInfologs(tags: "Battery Level", value: String(batteryLavel))
-//                    Utils.showInfologs(tags: "Cpu Count", value: String(cpuCount))
-//                    Utils.showInfologs(tags: "Free Disk Space", value: freeDiskSpace)
-//                    Utils.showInfologs(tags: "Total Disk Space", value: totalDiskSpace)
-//                    Utils.showInfologs(tags: "Used Disk Space", value: usedDiskSpace)
-//                    Utils.showInfologs(tags: "Device Model", value: deviceModel)
-//                    Utils.showInfologs(tags: "Device Name", value: deviceName)
-//                    Utils.showInfologs(tags: "Wifi IP Address", value: wifiIpAddress)
-//                    Utils.showInfologs(tags: "Display Scale", value: displayScale.description)
-//                    Utils.showInfologs(tags: "Display Width", value: displayWidth.description)
-//                    Utils.showInfologs(tags: "Display Height", value: displayHeight.description)
-//                    Utils.showInfologs(tags: "Time Zone", value: timeZone)
-//                    Utils.showInfologs(tags: "Current Time", value: Utils.dateToString(currentTime))
-//                    Utils.showInfologs(tags: "Current Local", value: currentLocal)
-//                    Utils.showInfologs(tags: "Preferred Language", value: preferredLanguage)
-//                    Utils.showInfologs(tags: "Sandbox Path", value: sanboxPath)
-//                    Utils.showInfologs(tags: "Mobile Country Code", value: mcc.description)
-//                    Utils.showInfologs(tags: "Network Country Code", value: ncc.description)
-//                    Utils.showInfologs(tags: "Host Name", value: hostName)
-//                    Utils.showInfologs(tags: "Is iOS App On Mac", value: isiOSAppOnMac.description)
-//                    Utils.showInfologs(tags: "Orientation", value: orientation)
-//                    Utils.showInfologs(tags: "Carrier Name", value: carrierName)
-//                    Utils.showInfologs(tags: "Network Type", value: networkType)
-//                    Utils.showInfologs(tags: "System Uptime", value: systemUptime)
-//                    Utils.showInfologs(tags: "RAM Uses", value: ramUses)
-//                    Utils.showInfologs(tags: "Toatal RAM Size", value: totalRamSize)
-//                    Utils.showInfologs(tags: "Kernal Version", value: kernalVersion)
-//                    Utils.showInfologs(tags: "Kernal OS Version", value: kernalOSVersion)
-//                    Utils.showInfologs(tags: "Kernal OS Relase", value: kernalOSRelase)
-//                    Utils.showInfologs(tags: "Kernal OS Type", value: kernalOSType)
-//                    Utils.showInfologs(tags: "iOS Version", value: iOSVersion)
-//                    Utils.showInfologs(tags: "FrameWork Version", value: frameWorkVersion)
-//                    Utils.showInfologs(tags: "iOS APP Version", value: iOSAppVersion)
-//                    Utils.showInfologs(tags: "APP Name", value: appName)
-//                    Utils.showInfologs(tags: "APP Install Time", value: Utils.dateToString(appInstallTime))
-//                    Utils.showInfologs(tags: "APP Update Time", value: Utils.dateToString(appUpdateTime))
-//                    Utils.showInfologs(tags: "APP State", value: appState)
-//                    Utils.showInfologs(tags: "APP Build Number", value: appBuildNumber)
-//                    Utils.showInfologs(tags: "Framework Build Number", value: frameworkBuildNumber)
-//                    Utils.showInfologs(tags: "Latitude", value: location.latitude.description)
-//                    Utils.showInfologs(tags: "Longitude", value: location.longitude.description)
-//                    Utils.showInfologs(tags: "Altitude", value: location.altitude.description)
-//                    Utils.showInfologs(tags: "TimeStamp", value: location.timeStamp.description)
-//                    Utils.showInfologs(tags: "Telephony Supported", value: isTelephonySupported.description)
-//                    Utils.showInfologs(tags: "Camera List", value: cameraList.description)
-//                    Utils.showInfologs(tags: "Abi Type", value: abiType.description)
-//                    Utils.showInfologs(tags: "Ringtone Source", value: ringToneSource.description)
-//                    Utils.showInfologs(tags: "Available Locals", value: availableLocals.first?.description ?? "")
-//                    Utils.showInfologs(tags: "Security Providers Data", value: securityProvidersData.description)
-//                    Utils.showInfologs(tags: "FingerPrint Sensor Status", value: fingerPrintSensorStatus.description)
-//                    Utils.showInfologs(tags: "Gles Version", value: glesVersion)
-//                    Utils.showInfologs(tags: "Development Settings Enabled", value: developmentSettingsEnabled.description)
-//                    Utils.showInfologs(tags: "HTTP Proxy", value: httpProxy)
-//                    Utils.showInfologs(tags: "Accessibility Settings", value: accessibilitySettings.description)
-//                    Utils.showInfologs(tags: "Touch Exploration Enabled", value: touchExplorationEnabled.description)
-//                    Utils.showInfologs(tags: "Alarm Alert Path", value: alarmAlertPath.description)
-//                    Utils.showInfologs(tags: "Time 12Or24 Format", value: time12Or24.description)
-//                    Utils.showInfologs(tags: "Font Scale", value: fontScale.description)
-//                    Utils.showInfologs(tags: "TextAutoReplace", value: textAutoReplace.description)
-//                    Utils.showInfologs(tags: "TextAutoPunctuate", value: textAutoPunctuate.description)
-//                    Utils.showInfologs(tags: "Boot Time", value: Utils.dateToString(bootTime))
-//                    Utils.showInfologs(tags: "Current Brightness", value: currentBrightness.description)
-//                    Utils.showInfologs(tags: "Sim Info List", value: simInfoList.description)
-//                    Utils.showInfologs(tags: "Default Browser", value: defaultBrowser.description)
-//                    Utils.showInfologs(tags: "Audio Current Volume", value: audioCurrentVolume.description)
-//                    Utils.showInfologs(tags: "Carrier Country", value: carrierCountry.description)
-//                    Utils.showInfologs(tags: "Debuger Enabled", value: debuggerEnabled.description)
-//                    Utils.showInfologs(tags: "Build Configuration", value: checkBuildConfiguration.description)
-//                    Utils.showInfologs(tags: "CPU Type", value: cpuType.description)
-//                    Utils.showInfologs(tags: "Proximity Sensor", value: proximitySensor.description)
-//                    Utils.showInfologs(tags: "Localized Model", value: localizedModel.description)
-//                    Utils.showInfologs(tags: "System Name", value: systemName.description)
-//                    Utils.showInfologs(tags: "MAC Address", value: macAddress.description)
-//                    Utils.showInfologs(tags: "iPhone Bluetooth Mac Address", value: iPhoneBluetoothMacAddress.description)
-//                    Utils.showInfologs(tags: "iPad Bluetooth Mac Address", value: iPadBluetoothMacAddress.description)
-//                    
-//                    Utils.showInfologs(tags: "VPN Detector", value: isVpnEnabled.description)
-//                    Utils.showInfologs(tags: "Simulator Detector", value: isSimulatorDetected.description)
-//                    Utils.showInfologs(tags: "JainBroken Detector", value: isJainBrokenDetected.description)
-//                    Utils.showInfologs(tags: "Location Spoffer", value: locationSpoffer.description)
-//                    Utils.showInfologs(tags: "App Tampering", value: appTampering.description)
-//                    Utils.showInfologs(tags: "Proxy Detector", value: proxyDetector.description)
-//                    Utils.showInfologs(tags: "Hooking Detector", value: hookingDetector.description)
-//                    Utils.showInfologs(tags: "Mirrored Screen", value: mirroredScreen.description)
-//                }
-//            }
-//        }
-//    }
+    internal mutating func getDeviceParams() async -> DeviceParams{
+        let isVpnEnabled = await sign3IntelliegnceSdkApiImpl.isVpnDetected()
+        let isSimulatorDetected = await sign3IntelliegnceSdkApiImpl.isSimulatorDetected()
+        let isJainBrokenDetected = await sign3IntelliegnceSdkApiImpl.isJailBrokenDetected()
+        let locationSpoffer = await sign3IntelliegnceSdkApiImpl.isMockLocation()
+        let appTampering = await sign3IntelliegnceSdkApiImpl.isAppTampered()
+        let proxyDetector = await sign3IntelliegnceSdkApiImpl.isProxyDetected()
+        let hookingDetector = await sign3IntelliegnceSdkApiImpl.isHookingDetected()
+        let mirroredScreen = await sign3IntelliegnceSdkApiImpl.isScreenBeingMirrored()
+        let appCloned = await sign3IntelliegnceSdkApiImpl.isCloned()
+        
+        // Signals
+        let deviceId = await deviceSignalsApi.getiOSDeviceId()
+        let cloudId = await deviceSignalsApi.getCloudId()
+        let appId = await deviceSignalsApi.getApplicationId()
+        let idfa = await deviceSignalsApi.getIDFA()
+        let batteryStatus = await deviceSignalsApi.getBatteryStatus()
+        let batteryLavel = await deviceSignalsApi.getBatteryLevel()
+        let cpuCount = await deviceSignalsApi.getCpuCount()
+        let freeDiskSpace = await deviceSignalsApi.getFreeDiskSpace()
+        let totalDiskSpace = await deviceSignalsApi.getTotalDiskSpace()
+        let usedDiskSpace = await deviceSignalsApi.getUsedDiskSpace()
+        let deviceModel = await deviceSignalsApi.getDeviceModel()
+        let deviceName = await deviceSignalsApi.getDeviceName()
+        let wifiIpAddress = await deviceSignalsApi.getWifiIPAddress()
+        let displayScale = await deviceSignalsApi.getDisplayScale()
+        let displayWidth = await deviceSignalsApi.getDisplayWidth()
+        let displayHeight = await deviceSignalsApi.getDisplayHeight()
+        let timeZone = await deviceSignalsApi.getTimeZone()
+        let currentTime = await deviceSignalsApi.getCurrentTime()
+        let currentLocal = await deviceSignalsApi.getCurrentLocal()
+        let preferredLanguage = await deviceSignalsApi.getPreferredLanguage()
+        let sanboxPath = await deviceSignalsApi.getSandboxPath()
+        let mcc = await deviceSignalsApi.getMobileCountryCode()
+        let ncc = await deviceSignalsApi.getNetworkCountryCode()
+        let hostName = await deviceSignalsApi.getHostName()
+        let isiOSAppOnMac = await deviceSignalsApi.isiOSAppOnMac()
+        let orientation = await deviceSignalsApi.getOrientation()
+        let carrierName = await deviceSignalsApi.getCarrierName()
+        let networkType = await deviceSignalsApi.getNetworkType()
+        let systemUptime = await deviceSignalsApi.getSystemUptime()
+        let ramUses = await deviceSignalsApi.getRAMUsage()
+        let totalRamSize = await deviceSignalsApi.getTotalRAMSize()
+        let kernalVersion = await deviceSignalsApi.getKernelVersion()
+        let kernalOSVersion = await deviceSignalsApi.getKernelOSVersion()
+        let kernalOSRelase = await deviceSignalsApi.getKernelOSRelease()
+        let kernalOSType = await deviceSignalsApi.getKernelOSType()
+        let iOSVersion = await deviceSignalsApi.getiOSVersion()
+        let frameWorkVersion = await deviceSignalsApi.getFrameworkVersion()
+        let iOSAppVersion = await deviceSignalsApi.getiOSAppVersion()
+        let appName = await deviceSignalsApi.getAppName()
+        let appInstallTime = await deviceSignalsApi.getAppInstallTime()
+        let appUpdateTime = await deviceSignalsApi.getAppUpdateTime()
+        let appState = await deviceSignalsApi.getAppState()
+        let appBuildNumber = await deviceSignalsApi.getAppBuildNumber()
+        let frameworkBuildNumber = await deviceSignalsApi.getFrameworkBuildNumber()
+        let location = await deviceSignalsApi.getLocation()
+        let isTelephonySupported = await deviceSignalsApi.isTelephonySupported()
+        let cameraList = await deviceSignalsApi.getCameraList()
+        let abiType = await deviceSignalsApi.getAbiType()
+        let ringToneSource = await deviceSignalsApi.getRingtoneSource()
+        let availableLocals = await deviceSignalsApi.getAvailableLocales()
+        let securityProvidersData = await deviceSignalsApi.getSecurityProvidersData()
+        let fingerPrintSensorStatus = await deviceSignalsApi.getFingerPrintSensorStatus()
+        let glesVersion = await deviceSignalsApi.getGlesVersion()
+        let developmentSettingsEnabled = await deviceSignalsApi.isDevelopmentSettingsEnabled()
+        let httpProxy = await deviceSignalsApi.getHttpProxy()
+        let accessibilitySettings = await deviceSignalsApi.getAccessibilitySettings()
+        let touchExplorationEnabled = await deviceSignalsApi.isTouchExplorationEnabled()
+        let alarmAlertPath = await deviceSignalsApi.getAlarmAlertPath()
+        let time12Or24 = await deviceSignalsApi.getTime12Or24()
+        let fontScale = await deviceSignalsApi.getFontScale()
+        let textAutoReplace = await deviceSignalsApi.getTextAutoReplace()
+        let textAutoPunctuate = await deviceSignalsApi.getTextAutoPunctuate()
+        let bootTime = await deviceSignalsApi.getBootTime()
+        let currentBrightness = await deviceSignalsApi.getCurrentBrightness()
+        let simInfoList = await deviceSignalsApi.getSimInfoList()
+        let defaultBrowser = await deviceSignalsApi.getDefaultBrowser()
+        let audioCurrentVolume = await deviceSignalsApi.getAudioVolumeCurrent()
+        let carrierCountry = await deviceSignalsApi.getCarrierCountry()
+        let debuggerEnabled = await deviceSignalsApi.isDebuggerEnabled()
+        let checkBuildConfiguration = await deviceSignalsApi.checkBuildConfiguration()
+        let cpuType = await deviceSignalsApi.getCPUType()
+        let proximitySensor = await deviceSignalsApi.hasProximitySensor()
+        let localizedModel = await deviceSignalsApi.getLocalizedModel()
+        let systemName = await deviceSignalsApi.getSystemName()
+        let macAddress = await deviceSignalsApi.getMacAddress()
+        let iPhoneBluetoothMacAddress = await deviceSignalsApi.getIPhoneBluetoothMacAddress()
+        let iPadBluetoothMacAddress = await deviceSignalsApi.getIPadBluetoothMacAddress()
+        let lockdownMode = await deviceSignalsApi.lockDownMode()
+        let wifiSSID = await deviceSignalsApi.getWifiSSID()
+        let deviceReference = KeychainHelper.shared.retrieveDeviceFingerprint()
+                
+        let iOSDataRequest = await iOSDataRequest(
+            iOSDeviceID: deviceId,
+            applicationId: appId,
+            advertisingID: idfa,
+            cloudId: cloudId,
+            simulator: isSimulatorDetected,
+            jailBroken: isJainBrokenDetected,
+            isVpn: isVpnEnabled,
+            isGeoSpoofed: locationSpoffer,
+            isAppTampering: appTampering,
+            hooking: hookingDetector,
+            proxy: proxyDetector,
+            mirroredScreen: mirroredScreen,
+            gpsLocation: GPSLocation(
+                latitude: location.latitude,
+                longitude: location.longitude,
+                altitude: location.altitude
+            ),
+            cloned: appCloned
+        )
+        
+        let iOSDeviceIDs = iOSDeviceIDs(
+            iOSDeviceId: deviceId,
+            cloudId: cloudId,
+            applicationId: appId,
+            advertisingID: idfa
+        )
+        
+        let deviceStateRawData = DeviceStateRawData(
+            displayWidth: displayWidth,
+            displayHeight: displayHeight,
+            displayScale: displayScale,
+            timeZone: timeZone,
+            currentTime: currentTime,
+            currentLocal: currentLocal,
+            preferredLanguage: preferredLanguage,
+            sandboxPath: sanboxPath,
+            mcc: mcc,
+            ncc: ncc,
+            hostName: hostName,
+            isiOSAppOnMac: isiOSAppOnMac,
+            orientation: orientation,
+            carrierName: carrierName,
+            networkType: networkType,
+            systemUptime: systemUptime,
+            ramUsage: ramUses,
+            totalRamSize: totalRamSize,
+            telephonySupport: isTelephonySupported,
+            ringtoneSource: ringToneSource,
+            availableLocals: availableLocals,
+            fingerprintSensorStatus: fingerPrintSensorStatus,
+            developerOptionEnabled: developmentSettingsEnabled,
+            httpProxy: httpProxy,
+            accessibilitySettings: accessibilitySettings,
+            touchExplorationEnabled: touchExplorationEnabled,
+            alarmAlertPath: alarmAlertPath,
+            time12Or24: time12Or24,
+            fontScale: fontScale,
+            textAutoReplace: textAutoReplace,
+            textAutoPunctuate: textAutoPunctuate,
+            bootTime: bootTime,
+            currentBrightness: currentBrightness,
+            defaultBrowser: defaultBrowser,
+            audioVolumeCurrent: audioCurrentVolume,
+            carrierCountry: carrierCountry,
+            debuggerEnabled: debuggerEnabled,
+            checkBuildConfiguration: checkBuildConfiguration,
+            cpuType: cpuType,
+            proximitySensor: proximitySensor,
+            localizedModel: localizedModel,
+            systemName: systemName,
+            lockdownMode: lockdownMode,
+            wifiSSID: wifiSSID,
+            deviceReference: deviceReference
+        )
+        
+        let hardwareFingerprintRawData = HardwareFingerprintRawData(
+            batteryState: batteryStatus,
+            batteryLevel: batteryLavel,
+            cpuCount: cpuCount,
+            usedDiskSpace: usedDiskSpace,
+            freeDiskSpace: freeDiskSpace,
+            totalDiskSpace: totalDiskSpace,
+            deviceModel: deviceModel,
+            deviceName: deviceName,
+            wifiIPAddress: wifiIpAddress,
+            macAddress: macAddress,
+            iPhonebluetoothMacAddress: iPhoneBluetoothMacAddress,
+            iPadbluetoothMacAddress: iPadBluetoothMacAddress,
+            cameraList: cameraList,
+            abiType: abiType,
+            glesVersion: glesVersion,
+            simInfo: simInfoList
+        )
+        
+        let installedAppsRawData = InstalledAppsRawData(
+            applicationName: appName,
+            appInstallTime: appInstallTime,
+            appUpdateTime: appUpdateTime,
+            appState: appState,
+            frameworkVersion: frameWorkVersion,
+            frameworkBuildNumber: frameworkBuildNumber,
+            appVersion: iOSAppVersion,
+            appBuildNumber: appBuildNumber
+        )
+        
+        let osBuildRawData = OsBuildRawData(
+            kernalVersion: kernalVersion,
+            kernalOsVersion: kernalOSVersion,
+            kernalOsRelease: kernalOSRelase,
+            kernalOSType: kernalOSType,
+            iOSVersion: iOSVersion,
+            securityProvidersData: securityProvidersData
+        )
+        
+        let deviceParams = await DeviceParams(
+            iOSdataRequest: iOSDataRequest,
+            deviceIdRawData: iOSDeviceRawData(
+                iOSDeviceIdentifiers: iOSDeviceIDs,
+                deviceStateRawData: deviceStateRawData,
+                hardwareFingerprintRawData: hardwareFingerprintRawData,
+                installedAppsRawData: installedAppsRawData,
+                osBuildRawData: osBuildRawData
+            ),
+            networkData: iOSNetworkData(
+                networkLocation: NetworkLocation(
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                    altitude: location.altitude
+                )
+            )
+        )
+        
+        return deviceParams
+        
+    }
 }
