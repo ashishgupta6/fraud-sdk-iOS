@@ -240,7 +240,7 @@ internal struct DataCreationService{
             securityProvidersData: securityProvidersData
         )
         
-        let deviceParams = DeviceParams(
+        let deviceParams = await DeviceParams(
             iOSdataRequest: iOSDataRequest,
             deviceIdRawData: iOSDeviceRawData(
                 iOSDeviceIdentifiers: iOSDeviceIDs,
