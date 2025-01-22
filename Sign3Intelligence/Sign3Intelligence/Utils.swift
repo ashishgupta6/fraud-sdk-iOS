@@ -163,7 +163,7 @@ internal struct Utils{
             KeychainHelper.shared.saveDeviceFingerprint(deviceFingerprint: response.deviceId)
         }
         sign3Intelligence.currentIntelligence = response
-        sign3Intelligence.currentIntelligence?.gpsLocation = deviceParams.iOSDataRequest.gpsLocation
+        sign3Intelligence.currentIntelligence?.gpsLocation = deviceParams.iOSdataRequest.gpsLocation
         sign3Intelligence.payloadHash = deviceParamsHash
         sign3Intelligence.deviceParam = deviceParams
         sign3Intelligence.availableMemory = deviceParams.deviceIdRawData.hardwareFingerprintRawData.freeDiskSpace

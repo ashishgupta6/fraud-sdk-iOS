@@ -425,20 +425,20 @@ internal struct Api{
                             let intelligenceResponse = IntelligenceResponse(
                                 deviceId: ingestionResponse.deviceId,
                                 requestId: ingestionResponse.requestId,
-                                simulator: dataRequest.deviceParams.iOSDataRequest.simulator,
-                                jailbroken: dataRequest.deviceParams.iOSDataRequest.jailBroken,
-                                vpn: dataRequest.deviceParams.iOSDataRequest.isVpn,
-                                geoSpoofed: dataRequest.deviceParams.iOSDataRequest.isGeoSpoofed,
-                                appTampering: dataRequest.deviceParams.iOSDataRequest.isAppTampering,
-                                hooking: dataRequest.deviceParams.iOSDataRequest.hooking,
-                                proxy: dataRequest.deviceParams.iOSDataRequest.proxy,
-                                mirroredScreen: dataRequest.deviceParams.iOSDataRequest.mirroredScreen,
+                                simulator: dataRequest.deviceParams.iOSdataRequest.simulator,
+                                jailbroken: dataRequest.deviceParams.iOSdataRequest.jailBroken,
+                                vpn: dataRequest.deviceParams.iOSdataRequest.isVpn,
+                                geoSpoofed: dataRequest.deviceParams.iOSdataRequest.isGeoSpoofed,
+                                appTampering: dataRequest.deviceParams.iOSdataRequest.isAppTampering,
+                                hooking: dataRequest.deviceParams.iOSdataRequest.hooking,
+                                proxy: dataRequest.deviceParams.iOSdataRequest.proxy,
+                                mirroredScreen: dataRequest.deviceParams.iOSdataRequest.mirroredScreen,
                                 gpsLocation: GPSLocation(
                                     latitude: dataRequest.deviceParams.networkData.networkLocation.latitude,
                                     longitude: dataRequest.deviceParams.networkData.networkLocation.longitude,
                                     altitude: dataRequest.deviceParams.networkData.networkLocation.altitude
                                 ),
-                                cloned: dataRequest.deviceParams.iOSDataRequest.cloned
+                                cloned: dataRequest.deviceParams.iOSdataRequest.cloned
                             )
                             /// Store Response in RealmDataStorage
                             //            sign3Intelligence.realmDataStorage.saveIntelligenceResponseToRealm(dataRequest, sign3Intelligence, intelligenceResponse)

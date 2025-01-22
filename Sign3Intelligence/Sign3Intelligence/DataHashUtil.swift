@@ -86,14 +86,14 @@ internal class DataHashUtil {
     
     private static func getHashData(deviceParams: DeviceParams) -> HashData {
         return HashData(
-            isJailbroken: deviceParams.iOSDataRequest.jailBroken,
-            isHooking: deviceParams.iOSDataRequest.hooking,
-            isVpn: deviceParams.iOSDataRequest.isVpn,
-            isProxy: deviceParams.iOSDataRequest.proxy,
-            isGeoSpoofed: deviceParams.iOSDataRequest.isGeoSpoofed,
-            isSimulator: deviceParams.iOSDataRequest.simulator,
-            isMirroredScreen: deviceParams.iOSDataRequest.mirroredScreen,
-            isAppTampering: deviceParams.iOSDataRequest.isAppTampering,
+            isJailbroken: deviceParams.iOSdataRequest.jailBroken,
+            isHooking: deviceParams.iOSdataRequest.hooking,
+            isVpn: deviceParams.iOSdataRequest.isVpn,
+            isProxy: deviceParams.iOSdataRequest.proxy,
+            isGeoSpoofed: deviceParams.iOSdataRequest.isGeoSpoofed,
+            isSimulator: deviceParams.iOSdataRequest.simulator,
+            isMirroredScreen: deviceParams.iOSdataRequest.mirroredScreen,
+            isAppTampering: deviceParams.iOSdataRequest.isAppTampering,
             totalMemory: deviceParams.deviceIdRawData.hardwareFingerprintRawData.totalDiskSpace,
             availableMemory: deviceParams.deviceIdRawData.hardwareFingerprintRawData.freeDiskSpace,
             latitude: deviceParams.networkData.networkLocation.latitude,
@@ -102,41 +102,43 @@ internal class DataHashUtil {
     }
     
     private static func getFieldBySerializedName(hashData: HashData, serializedName: String) -> String? {
-        switch serializedName {
-        case "isJailbroken":
-            return "\(hashData.isJailbroken ?? false)"
-        case "isHooking":
-            return "\(hashData.isHooking ?? false)"
-        case "isVpn":
-            return "\(hashData.isVpn ?? false)"
-        case "isProxy":
-            return "\(hashData.isProxy ?? false)"
-        case "isGeoSpoofed":
-            return "\(hashData.isGeoSpoofed ?? false)"
-        case "isSimulator":
-            return "\(hashData.isSimulator ?? false)"
-        case "isMirroredScreen":
-            return "\(hashData.isMirroredScreen ?? false)"
-        case "isAppTampering":
-            return "\(hashData.isAppTampering ?? false)"
-        case "availableMemory":
-            return "\(hashData.availableMemory)"
-        case "latitude":
-            if let latitude = hashData.latitude {
-                return "\(latitude)"
-            } else {
-                return nil
+        var result: String?
+        
+        Task {
+            switch serializedName {
+            case "isJailbroken":
+                result = "\(await hashData.isJailbroken ?? false)"
+            case "isHooking":
+                result = "\(await hashData.isHooking ?? false)"
+            case "isVpn":
+                result = "\(await hashData.isVpn ?? false)"
+            case "isProxy":
+                result = "\(await hashData.isProxy ?? false)"
+            case "isGeoSpoofed":
+                result = "\(await hashData.isGeoSpoofed ?? false)"
+            case "isSimulator":
+                result = "\(await hashData.isSimulator ?? false)"
+            case "isMirroredScreen":
+                result = "\(await hashData.isMirroredScreen ?? false)"
+            case "isAppTampering":
+                result = "\(await hashData.isAppTampering ?? false)"
+            case "availableMemory":
+                result = "\(await hashData.availableMemory)"
+            case "latitude":
+                if let latitude = await hashData.latitude {
+                    result = "\(latitude)"
+                }
+            case "longitude":
+                if let longitude = await hashData.longitude {
+                    result = "\(longitude)"
+                }
+            default:
+                break
             }
-        case "longitude":
-            if let longitude = hashData.longitude {
-                return "\(longitude)"
-            } else {
-                return nil
-            }
-        default:
-            return nil
         }
+        
+        return result
     }
-    
+
     
 }

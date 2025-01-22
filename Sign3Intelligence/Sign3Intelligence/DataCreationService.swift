@@ -223,7 +223,7 @@ internal struct DataCreationService{
         let installedAppsRawData = InstalledAppsRawData(
             applicationName: appName,
             appInstallTime: appInstallTime,
-            AppUpdateTime: appUpdateTime,
+            appUpdateTime: appUpdateTime,
             appState: appState,
             frameworkVersion: frameWorkVersion,
             frameworkBuildNumber: frameworkBuildNumber,
@@ -241,9 +241,9 @@ internal struct DataCreationService{
         )
         
         let deviceParams = DeviceParams(
-            iOSDataRequest: iOSDataRequest,
+            iOSdataRequest: iOSDataRequest,
             deviceIdRawData: iOSDeviceRawData(
-                iOSDeviceIDs: iOSDeviceIDs,
+                iOSDeviceIdentifiers: iOSDeviceIDs,
                 deviceStateRawData: deviceStateRawData,
                 hardwareFingerprintRawData: hardwareFingerprintRawData,
                 installedAppsRawData: installedAppsRawData,
