@@ -11,7 +11,7 @@ import CoreLocation
 import zlib
 
 
-internal struct Utils{
+internal actor Utils{
     
     internal static func getDeviceSignals<T>(functionName: String, requestId: String, defaultValue: T, function: () async throws -> T) async -> T {
         do {
@@ -93,15 +93,17 @@ internal struct Utils{
     internal static func createProperties(_ sdkError: SdkError) -> [String: String] {
         var properties: [String: String] = [:]
         
-        properties["eventName"] = sdkError.eventName
-        properties["name"] = sdkError.name
-        properties["exceptionMsg"] = sdkError.exceptionMsg
-        properties["requestId"] = sdkError.requestId ?? "unknown"
-        properties["createdAtInMillis"] = "\(sdkError.createdAtInMillis)"
-        properties["clientId"] = sdkError.clientId
-        properties["sessionId"] = sdkError.sessionId
-        properties["frameworkVersionName"] = sdkError.frameworkVersionName
-        properties["frameworkVersionCode"] = sdkError.frameworkVersionCode
+        Task {
+            properties["eventName"] = await sdkError.eventName
+            properties["name"] = sdkError.name
+            properties["exceptionMsg"] = sdkError.exceptionMsg
+            properties["requestId"] = sdkError.requestId ?? "unknown"
+            properties["createdAtInMillis"] = "\(await sdkError.createdAtInMillis)"
+            properties["clientId"] = await sdkError.clientId
+            properties["sessionId"] = await sdkError.sessionId
+            properties["frameworkVersionName"] = await sdkError.frameworkVersionName
+            properties["frameworkVersionCode"] = await sdkError.frameworkVersionCode
+        }
         
         return properties
     }
@@ -134,6 +136,9 @@ internal struct Utils{
         }
     }
     
+    /**
+     Caution: Please note that while converting complete actor object to json, one extra wrapper of that data needs to be created otherwise JSONEncoder().encode() will throw exception.
+     */
     internal static func convertToJson<T: Encodable>(_ object: T) -> String {
         do {
             let jsonData = try JSONEncoder().encode(object)
@@ -161,7 +166,7 @@ internal struct Utils{
             KeychainHelper.shared.saveDeviceFingerprint(deviceFingerprint: response.deviceId)
         }
         sign3Intelligence.currentIntelligence = response
-        sign3Intelligence.currentIntelligence?.gpsLocation = deviceParams.iOSDataRequest.gpsLocation
+        sign3Intelligence.currentIntelligence?.gpsLocation = deviceParams.iOSdataRequest.gpsLocation
         sign3Intelligence.payloadHash = deviceParamsHash
         sign3Intelligence.deviceParam = deviceParams
         sign3Intelligence.availableMemory = deviceParams.deviceIdRawData.hardwareFingerprintRawData.freeDiskSpace

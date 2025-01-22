@@ -234,7 +234,9 @@ internal class Sign3IntelligenceInternal{
             return
         }
         let properties = Utils.createProperties(sdkError)
-        mixpanelInstance.track(event: sdkError.eventName, properties: properties)
+        Task {
+            mixpanelInstance.track(event: await sdkError.eventName, properties: properties)
+        }
     }
 }
 

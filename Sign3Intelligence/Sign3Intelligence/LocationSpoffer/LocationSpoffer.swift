@@ -108,27 +108,29 @@ internal class LocationSpoffer {
             timeStamp: Utils.dateToUnixTimestamp(location.timestamp)
         )
         
-        let isSpoofed = isLocationSpoofedForBelowiOS15(currentLocation, savedLocation)
-        if !isSpoofed {
-            Sign3IntelligenceInternal.sdk?.userDefaultsManager.saveLocation(Location(
-                latitude: location.coordinate.latitude,
-                longitude: location.coordinate.longitude,
-                altitude: location.altitude,
-                timeStamp: Utils.dateToUnixTimestamp(location.timestamp)))
+        Task {
+            let isSpoofed = await isLocationSpoofedForBelowiOS15(currentLocation, savedLocation)
+            if !isSpoofed {
+                Sign3IntelligenceInternal.sdk?.userDefaultsManager.saveLocation(Location(
+                    latitude: location.coordinate.latitude,
+                    longitude: location.coordinate.longitude,
+                    altitude: location.altitude,
+                    timeStamp: Utils.dateToUnixTimestamp(location.timestamp)))
+            }
+            LocationFramework.shared.stopUpdatingLocation()
+            continuation.resume(returning: isSpoofed)
         }
-        LocationFramework.shared.stopUpdatingLocation()
-        continuation.resume(returning: isSpoofed)
     }
     
-    private func isLocationSpoofedForBelowiOS15(_ currentLocation: Location, _ savedLocation: Location) -> Bool {
+    private func isLocationSpoofedForBelowiOS15(_ currentLocation: Location, _ savedLocation: Location) async -> Bool {
         let distanceThreshold: Double = 15000 // 15 KM threshold
         
-        if savedLocation.latitude == 0.0 && savedLocation.longitude == 0.0 && savedLocation.altitude == 0.0 && savedLocation.timeStamp == 0{
+        if await savedLocation.isZeroLocation() {
             return false
         }
         
-        let currentLocation = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-        let previousLocation = CLLocation(latitude: savedLocation.latitude, longitude: savedLocation.longitude)
+        let currentLocation = await CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+        let previousLocation = await CLLocation(latitude: savedLocation.latitude, longitude: savedLocation.longitude)
         
         let distance = currentLocation.distance(from: previousLocation)
         
