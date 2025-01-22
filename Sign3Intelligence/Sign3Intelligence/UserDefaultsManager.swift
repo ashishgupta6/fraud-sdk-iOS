@@ -51,10 +51,11 @@ internal class UserDefaultsManager {
     }
     
     internal func saveLocation(_ location: Location) {
-        saveLatitude(location.latitude)
-        saveLongitude(location.longitude)
-        saveAltitude(location.altitude)
-        saveTimeStamp(location.timeStamp)
+        //TODO: (Sreyans) Remove this if it is unused
+//        saveLatitude(location.latitude)
+//        saveLongitude(location.longitude)
+//        saveAltitude(location.altitude)
+//        saveTimeStamp(location.timeStamp)
     }
     
     internal func getLocation() -> Location? {
