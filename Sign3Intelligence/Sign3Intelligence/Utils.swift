@@ -93,15 +93,17 @@ internal struct Utils{
     internal static func createProperties(_ sdkError: SdkError) -> [String: String] {
         var properties: [String: String] = [:]
         
-        properties["eventName"] = sdkError.eventName
-        properties["name"] = sdkError.name
-        properties["exceptionMsg"] = sdkError.exceptionMsg
-        properties["requestId"] = sdkError.requestId ?? "unknown"
-        properties["createdAtInMillis"] = "\(sdkError.createdAtInMillis)"
-        properties["clientId"] = sdkError.clientId
-        properties["sessionId"] = sdkError.sessionId
-        properties["frameworkVersionName"] = sdkError.frameworkVersionName
-        properties["frameworkVersionCode"] = sdkError.frameworkVersionCode
+        Task {
+            properties["eventName"] = await sdkError.eventName
+            properties["name"] = sdkError.name
+            properties["exceptionMsg"] = sdkError.exceptionMsg
+            properties["requestId"] = sdkError.requestId ?? "unknown"
+            properties["createdAtInMillis"] = "\(await sdkError.createdAtInMillis)"
+            properties["clientId"] = await sdkError.clientId
+            properties["sessionId"] = await sdkError.sessionId
+            properties["frameworkVersionName"] = await sdkError.frameworkVersionName
+            properties["frameworkVersionCode"] = await sdkError.frameworkVersionCode
+        }
         
         return properties
     }
