@@ -71,9 +71,9 @@ internal actor SdkError: Codable {
         Task {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try await container.encode(eventName, forKey: .eventName)
-            try await container.encode(name, forKey: .name)
-            try await container.encode(exceptionMsg, forKey: .exceptionMsg)
-            try await container.encode(requestId, forKey: .requestId)
+            try container.encode(name, forKey: .name)
+            try container.encode(exceptionMsg, forKey: .exceptionMsg)
+            try container.encode(requestId, forKey: .requestId)
             try await container.encode(createdAtInMillis, forKey: .createdAtInMillis)
             try await container.encode(clientId, forKey: .clientId)
             try await container.encode(sessionId, forKey: .sessionId)

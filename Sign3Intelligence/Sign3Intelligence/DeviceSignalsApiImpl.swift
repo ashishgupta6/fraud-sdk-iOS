@@ -856,10 +856,10 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                 
                 do {
                     let location = try await getUpdatedLocation()
-                    let latitude = location.latitude
-                    let longitude = location.longitude
-                    let altitude = location.altitude
-                    let timeStamp = location.timeStamp
+                    let latitude = await location.latitude
+                    let longitude = await location.longitude
+                    let altitude = await location.altitude
+                    let timeStamp = await location.timeStamp
                     
                     return Location(
                         latitude: latitude,
