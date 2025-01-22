@@ -125,7 +125,7 @@ internal struct DataCreationService{
         let wifiSSID = await deviceSignalsApi.getWifiSSID()
         let deviceReference = KeychainHelper.shared.retrieveDeviceFingerprint()
                 
-        let iOSDataRequest = iOSDataRequest(
+        let iOSDataRequest = await iOSDataRequest(
             iOSDeviceID: deviceId,
             applicationId: appId,
             advertisingID: idfa,
@@ -240,7 +240,7 @@ internal struct DataCreationService{
             securityProvidersData: securityProvidersData
         )
         
-        let deviceParams = DeviceParams(
+        let deviceParams = await DeviceParams(
             iOSDataRequest: iOSDataRequest,
             deviceIdRawData: iOSDeviceRawData(
                 iOSDeviceIDs: iOSDeviceIDs,
