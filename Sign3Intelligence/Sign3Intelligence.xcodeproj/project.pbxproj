@@ -89,6 +89,7 @@
 		39F2999D2C995FBA00D896F2 /* LocationSpoffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */; };
 		39F2999F2C99A9F200D896F2 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */; };
 		39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */; };
+		7947985B2D411CA6004A16C5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7947985A2D411CA6004A16C5 /* Extensions.swift */; };
 		797C73F32D12C8AF00C4B821 /* DeviceCheckData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */; };
 		79D8603F2D34570A00BA983A /* DeviceFingerprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8603E2D34570100BA983A /* DeviceFingerprint.swift */; };
 		79E86C932CFF4B8300A66FF5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E86C922CFF4B8300A66FF5 /* Log.swift */; };
@@ -190,6 +191,7 @@
 		39F2999C2C995FBA00D896F2 /* LocationSpoffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSpoffer.swift; sourceTree = "<group>"; };
 		39F2999E2C99A9F200D896F2 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		39F299A02C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSignalsFromObjectiveC.m; sourceTree = "<group>"; };
+		7947985A2D411CA6004A16C5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		797C73F22D12C8A700C4B821 /* DeviceCheckData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCheckData.swift; sourceTree = "<group>"; };
 		79D8603E2D34570100BA983A /* DeviceFingerprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFingerprint.swift; sourceTree = "<group>"; };
 		79E86C922CFF4B8300A66FF5 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 		397950E82C7DC6F80043677B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7947985A2D411CA6004A16C5 /* Extensions.swift */,
 				79EA04A42D26A88F00DF873D /* KeychainHelper.swift */,
 				397950E92C7DC73E0043677B /* Utils.swift */,
 				39C775522C8F2F470006E042 /* BaseKey.swift */,
@@ -692,6 +695,7 @@
 				39E739002C888F16002B24C8 /* LocationDetector.swift in Sources */,
 				39ED49182D08429100584401 /* iOSDeviceIDs.swift in Sources */,
 				39F299A12C9C2CC500D896F2 /* DeviceSignalsFromObjectiveC.m in Sources */,
+				7947985B2D411CA6004A16C5 /* Extensions.swift in Sources */,
 				397AF5392C92F0CF004F74D9 /* JailBrokenDetector.swift in Sources */,
 				39C775572C8F320F0006E042 /* DevKeyProvider.swift in Sources */,
 				39C775532C8F2F470006E042 /* BaseKey.swift in Sources */,
