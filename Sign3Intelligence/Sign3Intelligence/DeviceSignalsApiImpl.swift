@@ -430,7 +430,9 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: "Unknown",
             function: {
-                return ProcessInfo.processInfo.hostName
+                /// TODO (Getting an issue with App Store distribution because the hostname is internally requesting permission for Local Network access.)
+//              return ProcessInfo.processInfo.hostName
+                return ""
             }
         )
     }
