@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
  spec.author   = 'SIGN3 TECHNOLOGIES PRIVATE LIMITED'
  spec.homepage   = 'https://sign3.ai'
  spec.name     = 'Sign3Intelligence'
- spec.version   = '0.0.1003'
+ spec.version   = '0.0.1004'
  spec.summary   = 'The Sign3 SDK is an iOS fraud prevention toolkit that assesses device security and detects risks to enhance protection against fraud.'
  spec.license = { :type => 'Custom', :text => 'Copyright 2024 SIGN3 TECHNOLOGIES PRIVATE LIMITED'}
  spec.platform   = :ios, "13"
