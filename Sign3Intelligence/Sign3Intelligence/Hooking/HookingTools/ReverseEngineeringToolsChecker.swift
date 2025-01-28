@@ -53,10 +53,12 @@ internal actor ReverseEngineeringToolsChecker {
         for index in 0..<_dyld_image_count() {
             let imageName = String(cString: _dyld_get_image_name(index))
             
-            // These files can give false positive in the emulator
-            if !simulatorDetector.isSimulatorDetectedWithoutAsync() {
-                HookingDetectorConst.suspiciousLibraries.addUnique("Flex")
-            }
+            // These files can give false positive
+//            if !simulatorDetector.isSimulatorDetectedWithoutAsync() {
+//                HookingDetectorConst.suspiciousLibraries += [
+//                    "Flex",
+//                ]
+//            }
             
             // The fastest case insensitive contains check.
             for library in HookingDetectorConst.suspiciousLibraries where imageName.localizedCaseInsensitiveContains(library) {

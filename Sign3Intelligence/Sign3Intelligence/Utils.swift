@@ -240,4 +240,12 @@ internal actor Utils{
         compressedData.count = Int(stream.total_out)
         return compressedData
     }
+    
+    internal static func checkBuildConfiguration() -> Bool {
+//#if DEBUG
+        return true
+//#else
+//        return false
+//#endif
+    }
 }

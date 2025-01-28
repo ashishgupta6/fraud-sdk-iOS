@@ -1420,39 +1420,27 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
             requestId: UUID().uuidString,
             defaultValue: false,
             function: {
-                var debug = false
+                var debuggerIsAttached = false
                 
-                // Define the kinfo_proc structure in Swift
-                var info = kinfo_proc()
-                var size = MemoryLayout<kinfo_proc>.size
+                var name: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]
+                var info: kinfo_proc = kinfo_proc()
+                var info_size = MemoryLayout<kinfo_proc>.size
                 
-                // Define the sysctl MIB array
-                let mib: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, Int32(getpid())]
-                
-                // Call sysctl
-                let status = mib.withUnsafeBufferPointer { mibPointer -> Int32 in
-                    // Convert mibPointer to UnsafeMutablePointer
-                    let mibMutablePointer = UnsafeMutablePointer<Int32>(mutating: mibPointer.baseAddress!)
-                    // Pass size as UnsafeMutablePointer
-                    return withUnsafeMutablePointer(to: &size) { sizePointer in
-                        sysctl(mibMutablePointer, UInt32(mibPointer.count), &info, sizePointer, nil, 0)
-                    }
+                let success = name.withUnsafeMutableBytes { (nameBytePtr: UnsafeMutableRawBufferPointer) -> Bool in
+                    guard let nameBytesBlindMemory = nameBytePtr.bindMemory(to: Int32.self).baseAddress else { return false }
+                    return -1 != sysctl(nameBytesBlindMemory, 4, &info/*UnsafeMutableRawPointer!*/, &info_size/*UnsafeMutablePointer<Int>!*/, nil, 0)
                 }
                 
-                // Check if sysctl call was successful
-                if status == 0 {
-                    debug = (info.kp_proc.p_flag & P_TRACED) != 0
-                } else {
-                    // Handle the case where sysctl fails
-                    print("sysctl call failed with status \(status)")
+                // The original HockeyApp code checks for this; you could just as well remove these lines:
+                if !success {
+                    debuggerIsAttached = false
                 }
                 
-                // Check isatty
-                if !debug {
-                    debug = isatty(STDOUT_FILENO) != 0
+                if !debuggerIsAttached && (info.kp_proc.p_flag & P_TRACED) != 0 {
+                    debuggerIsAttached = true
                 }
                 
-                return debug
+                return debuggerIsAttached
             }
         )
     }
@@ -1604,5 +1592,15 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
+    func appInstalledPath() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "appInstalledPath",
+            requestId: UUID().uuidString,
+            defaultValue: "",
+            function: {
+                return Bundle.main.bundlePath
+            }
+        )
+    }
     
 }
