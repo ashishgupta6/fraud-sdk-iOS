@@ -87,4 +87,7 @@ internal protocol DeviceSignalsApi{
     func getIPhoneBluetoothMacAddress() async -> String
     func getIPadBluetoothMacAddress() async -> String
     func lockDownMode() async -> Bool
-    func getWifiSSID() async -> String}
+    func getWifiSSID() async -> String
+    func appInstalledPath() async -> String
+
+}

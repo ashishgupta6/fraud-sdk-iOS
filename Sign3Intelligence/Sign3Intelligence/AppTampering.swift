@@ -29,9 +29,6 @@ internal class AppTampering{
         /// Use command `"shasum -a 256 embedded.mobileprovision"` to get SHA256 value on your macOS.
         case isMobileProvisionModified(String)
         
-        /// Check Jailbroken Device
-        case isJailBroken
-        
         /// Check if Debugger is enabled
         case isDebuggerEnabled
         
@@ -47,11 +44,11 @@ internal class AppTampering{
             function: {
                 await amITampered(
                     [
-                        AppTampering.AppTamperingCheck.bundleID("com.sign3labs.fraudsdk.FraudSDK"),
+//                        AppTampering.AppTamperingCheck.bundleID("com.sign3labs.fraudsdk.FraudSDK"),
+                        AppTampering.AppTamperingCheck.bundleID("com.testing.app.XYZ-Bank"),
                         AppTampering.AppTamperingCheck.isDebuggerEnabled,
-                        AppTampering.AppTamperingCheck.isJailBroken,
                         AppTampering.AppTamperingCheck.checkBuildConfiguration,
-                        AppTampering.AppTamperingCheck.isMobileProvisionModified("13c287086eff1f58f9c8192e383b75a978047cbd32407c33bb872c614ac4d1b4")
+//                        AppTampering.AppTamperingCheck.isMobileProvisionModified("5f233efae7b61c01205fd1c0e97eeeb35902eb55adf265737fb9761d3a48c646")
                     ]
                 )
             })
@@ -68,10 +65,6 @@ internal class AppTampering{
                 }
             case .isMobileProvisionModified(let expectedSha256Value):
                 if isMobileProvisionModified(expectedSha256Value.lowercased()) {
-                    isAppTampering = true
-                }
-            case .isJailBroken:
-                if await jailBrokenDetector.isJailBrokenDetected() {
                     isAppTampering = true
                 }
             case .isDebuggerEnabled:

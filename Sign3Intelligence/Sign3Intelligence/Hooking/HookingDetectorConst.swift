@@ -60,7 +60,7 @@ internal struct HookingDetectorConst {
         "cheatengine",
         "GameGuardian",
         "libinject",
-        "Reveal",
+//        "Reveal", 
         "RevealServer",
         "FridaServer",
         "Interpose"

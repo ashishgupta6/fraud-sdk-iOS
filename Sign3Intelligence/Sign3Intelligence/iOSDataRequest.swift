@@ -56,7 +56,8 @@ internal actor iOSDataRequest: Codable {
     let mirroredScreen: Bool
     let gpsLocation: GPSLocation
     let cloned: Bool
-
+    let appInstalledPath: String
+    
     enum CodingKeys: String, CodingKey {
         case iOSDeviceID = "a"
         case applicationId = "b"
@@ -72,6 +73,7 @@ internal actor iOSDataRequest: Codable {
         case mirroredScreen = "l"
         case gpsLocation = "m"
         case cloned = "n"
+        case appInstalledPath = "o"
     }
 
     init(
@@ -88,7 +90,8 @@ internal actor iOSDataRequest: Codable {
         proxy: Bool,
         mirroredScreen: Bool,
         gpsLocation: GPSLocation,
-        cloned: Bool
+        cloned: Bool,
+        appInstalledPath: String
     ) {
         self.iOSDeviceID = iOSDeviceID
         self.applicationId = applicationId
@@ -104,6 +107,7 @@ internal actor iOSDataRequest: Codable {
         self.mirroredScreen = mirroredScreen
         self.gpsLocation = gpsLocation
         self.cloned = cloned
+        self.appInstalledPath = appInstalledPath
     }
 
     nonisolated func encode(to encoder: Encoder) throws {
@@ -122,6 +126,7 @@ internal actor iOSDataRequest: Codable {
         try container.encode(mirroredScreen, forKey: .mirroredScreen)
         try container.encode(gpsLocation, forKey: .gpsLocation)
         try container.encode(cloned, forKey: .cloned)
+        try container.encode(appInstalledPath, forKey: .appInstalledPath)
     }
 
     init(from decoder: Decoder) throws {
@@ -140,7 +145,8 @@ internal actor iOSDataRequest: Codable {
             proxy: try container.decode(Bool.self, forKey: .proxy),
             mirroredScreen: try container.decode(Bool.self, forKey: .mirroredScreen),
             gpsLocation: try container.decode(GPSLocation.self, forKey: .gpsLocation),
-            cloned: try container.decode(Bool.self, forKey: .cloned)
+            cloned: try container.decode(Bool.self, forKey: .cloned),
+            appInstalledPath: try container.decode(String.self, forKey: .appInstalledPath)
         )
     }
 }

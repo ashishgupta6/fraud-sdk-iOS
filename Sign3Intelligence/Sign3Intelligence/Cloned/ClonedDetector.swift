@@ -44,9 +44,9 @@ internal class ClonedDetector{
             function: {
                 await amICloned(
                     [
-                        ClonedCheck.bundleID("com.sign3labs.fraudsdk.FraudSDK"),
-                        ClonedCheck.isJailBroken,
-                        ClonedCheck.isMobileProvisionModified("7307a99b67ce4e8e7997e613123162a52a7dc6b18807ad5f4a4de1a9cda54287"),
+//                        ClonedCheck.bundleID("com.sign3labs.fraudsdk.FraudSDK"), // For Sign3 Fraud
+                        ClonedCheck.bundleID("com.testing.app.XYZ-Bank"), // For XYZ Bank
+//                        ClonedCheck.isMobileProvisionModified("7307a99b67ce4e8e7997e613123162a52a7dc6b18807ad5f4a4de1a9cda54287"),
                         ClonedCheck.isProvisioningProfileTampered,
                         ClonedCheck.isRunningFromValidPath,
                         ClonedCheck.validateAppReceipt

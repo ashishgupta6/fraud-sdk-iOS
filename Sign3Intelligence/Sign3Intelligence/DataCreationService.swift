@@ -124,7 +124,8 @@ internal struct DataCreationService{
         let lockdownMode = await deviceSignalsApi.lockDownMode()
         let wifiSSID = await deviceSignalsApi.getWifiSSID()
         let deviceReference = KeychainHelper.shared.retrieveDeviceFingerprint()
-                
+        let appInstalledPath = await deviceSignalsApi.appInstalledPath()
+
         let iOSDataRequest = await iOSDataRequest(
             iOSDeviceID: deviceId,
             applicationId: appId,
@@ -143,7 +144,8 @@ internal struct DataCreationService{
                 longitude: location.longitude,
                 altitude: location.altitude
             ),
-            cloned: appCloned
+            cloned: appCloned,
+            appInstalledPath: appInstalledPath
         )
         
         let iOSDeviceIDs = iOSDeviceIDs(
