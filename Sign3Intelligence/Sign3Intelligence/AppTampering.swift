@@ -48,7 +48,7 @@ internal class AppTampering{
                         AppTampering.AppTamperingCheck.bundleID("com.testing.app.XYZ-Bank"),
                         AppTampering.AppTamperingCheck.isDebuggerEnabled,
                         AppTampering.AppTamperingCheck.checkBuildConfiguration,
-                        AppTampering.AppTamperingCheck.isMobileProvisionModified("5f233efae7b61c01205fd1c0e97eeeb35902eb55adf265737fb9761d3a48c646")
+//                        AppTampering.AppTamperingCheck.isMobileProvisionModified("5f233efae7b61c01205fd1c0e97eeeb35902eb55adf265737fb9761d3a48c646")
                     ]
                 )
             })
