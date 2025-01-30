@@ -242,10 +242,10 @@ internal actor Utils{
     }
     
     internal static func checkBuildConfiguration() -> Bool {
-//#if DEBUG
+#if DEBUG
         return true
-//#else
-//        return false
-//#endif
+#else
+        return false
+#endif
     }
 }
