@@ -56,7 +56,7 @@ internal struct DataCreationService{
         let usedDiskSpace = await deviceSignalsApi.getUsedDiskSpace()
         let deviceModel = await deviceSignalsApi.getDeviceModel()
         let deviceName = await deviceSignalsApi.getDeviceName()
-        let wifiIpAddress = await deviceSignalsApi.getWifiIPAddress()
+        let wifiIPV4Address = await deviceSignalsApi.getWifiIPV4Address()
         let displayScale = await deviceSignalsApi.getDisplayScale()
         let displayWidth = await deviceSignalsApi.getDisplayWidth()
         let displayHeight = await deviceSignalsApi.getDisplayHeight()
@@ -125,6 +125,8 @@ internal struct DataCreationService{
         let wifiSSID = await deviceSignalsApi.getWifiSSID()
         let deviceReference = KeychainHelper.shared.retrieveDeviceFingerprint()
         let appInstalledPath = await deviceSignalsApi.appInstalledPath()
+        let wifiBSSID = await deviceSignalsApi.getwifiBSSID()
+        let wifiIPV6Address = await deviceSignalsApi.getWifiIPV6Address()
 
         let iOSDataRequest = await iOSDataRequest(
             iOSDeviceID: deviceId,
@@ -212,14 +214,16 @@ internal struct DataCreationService{
             totalDiskSpace: totalDiskSpace,
             deviceModel: deviceModel,
             deviceName: deviceName,
-            wifiIPAddress: wifiIpAddress,
+            wifiIPV4Address: wifiIPV4Address,
             macAddress: macAddress,
             iPhonebluetoothMacAddress: iPhoneBluetoothMacAddress,
             iPadbluetoothMacAddress: iPadBluetoothMacAddress,
             cameraList: cameraList,
             abiType: abiType,
             glesVersion: glesVersion,
-            simInfo: simInfoList
+            simInfo: simInfoList,
+            wifiIPV6Address: wifiIPV6Address,
+            wifiBSSID: wifiBSSID
         )
         
         let installedAppsRawData = InstalledAppsRawData(

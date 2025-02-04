@@ -264,7 +264,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
-    func getWifiIPAddress() async -> String {
+    func getWifiIPV4Address() async -> String {
         return await Utils.getDeviceSignals(
             functionName: "getWifiIPAddress",
             requestId: UUID().uuidString,
@@ -281,6 +281,7 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                         let interface = ptr?.pointee
                         let addrFamily = interface?.ifa_addr.pointee.sa_family
                         
+                        // Check for both IPv4 (AF_INET) and IPv6 (AF_INET6)
                         if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6),
                            let name = interface?.ifa_name,
                            String(cString: name) == "en0",
@@ -290,7 +291,13 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                             defer { host.deallocate() }
                             
                             if getnameinfo(addr, socklen_t(addr.pointee.sa_len), host, socklen_t(NI_MAXHOST), nil, socklen_t(0), NI_NUMERICHOST) == 0 {
-                                address = String(cString: host)
+                                // Return IPv4 first, then fallback to IPv6
+                                if addrFamily == UInt8(AF_INET) {
+                                    address = String(cString: host)
+                                    break // Prefer IPv4 and exit the loop
+                                } else if address == nil { // If IPv4 not found, set IPv6
+                                    address = String(cString: host)
+                                }
                             }
                         }
                     }
@@ -298,6 +305,51 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
                 }
                 
                 return address ?? "Unable to retrieve IP address"
+            }
+        )
+    }
+
+    func getWifiIPV6Address() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getWifiIPV6Address",
+            requestId: UUID().uuidString,
+            defaultValue: "Unknown",
+            function: {
+                var address: String?
+                var ifaddr: UnsafeMutablePointer<ifaddrs>?
+                
+                if getifaddrs(&ifaddr) == 0 {
+                    var ptr = ifaddr
+                    while ptr != nil {
+                        defer { ptr = ptr?.pointee.ifa_next }
+                        
+                        let interface = ptr?.pointee
+                        let addrFamily = interface?.ifa_addr.pointee.sa_family
+                        
+                        // Check for IPv6 (AF_INET6)
+                        if addrFamily == UInt8(AF_INET6),
+                           let name = interface?.ifa_name,
+                           String(cString: name) == "en0",
+                           let addr = interface?.ifa_addr {
+                            
+                            let host = UnsafeMutablePointer<Int8>.allocate(capacity: Int(NI_MAXHOST))
+                            defer { host.deallocate() }
+                            
+                            if getnameinfo(addr, socklen_t(addr.pointee.sa_len), host, socklen_t(NI_MAXHOST), nil, socklen_t(0), NI_NUMERICHOST) == 0 {
+                                let ipAddress = String(cString: host)
+                                
+                                // Filter out link-local addresses (fe80::/10)
+                                if !ipAddress.hasPrefix("fe80") {
+                                    address = ipAddress
+                                    break // Exit loop once a global IPv6 address is found
+                                }
+                            }
+                        }
+                    }
+                    freeifaddrs(ifaddr)
+                }
+                
+                return address ?? "No global IPv6 address found"
             }
         )
     }
@@ -1603,4 +1655,23 @@ internal class DeviceSignalsApiImpl : DeviceSignalsApi{
         )
     }
     
+    /// BSSID is the MAC address of the Wi-Fi router (access point) the device is connected to. It is NOT the device’s MAC address. Used for router identification and Wi-Fi monitoring. In iOS 13+, access to BSSID requires location permissions and a Wi-Fi connection.
+    func getwifiBSSID() async -> String {
+        return await Utils.getDeviceSignals(
+            functionName: "getBSSID",
+            requestId: UUID().uuidString,
+            defaultValue: "",
+            function: {
+                if let interfaces = CNCopySupportedInterfaces() as? [String] {
+                    for interface in interfaces {
+                        if let info = CNCopyCurrentNetworkInfo(interface as CFString) as NSDictionary? {
+                            let bssid = info["BSSID"] as? String ?? ""
+                            return bssid
+                        }
+                    }
+                }
+                return ""
+            }
+        )
+    }
 }

@@ -21,7 +21,7 @@ internal protocol DeviceSignalsApi{
     func getUsedDiskSpace() async -> CLong
     func getDeviceModel() async -> String
     func getDeviceName() async -> String
-    func getWifiIPAddress() async -> String
+    func getWifiIPV4Address() async -> String
     func getDisplayWidth() async -> Float
     func getDisplayHeight() async -> Float
     func getDisplayScale() async -> Float
@@ -89,5 +89,7 @@ internal protocol DeviceSignalsApi{
     func lockDownMode() async -> Bool
     func getWifiSSID() async -> String
     func appInstalledPath() async -> String
+    func getwifiBSSID() async -> String
+    func getWifiIPV6Address() async -> String
 
 }
