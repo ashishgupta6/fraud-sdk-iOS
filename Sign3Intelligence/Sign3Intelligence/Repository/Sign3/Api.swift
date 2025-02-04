@@ -345,9 +345,10 @@ internal struct Api{
     }
     
     internal func ingestion(_ dataRequest: DataRequest, _ sign3Intelligence: Sign3IntelligenceInternal, _ source: String, completion: @escaping (Resource<IntelligenceResponse>) -> Void) async {
-        var dataRequest = await dataRequest.getData()
+        
         do {
-            dataRequest.clientParams = Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence)
+            await dataRequest.setClientParams(Utils.getClientParams(source: source, sign3Intelligence: sign3Intelligence))
+            let dataRequest = await dataRequest.getData()
             Log.i("ClientParams:", Utils.convertToJson(dataRequest.clientParams))
             let jsonData = try JSONEncoder().encode(dataRequest)
             let byteArray = try Utils.gzip(jsonData)

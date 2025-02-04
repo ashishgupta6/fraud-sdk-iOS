@@ -56,7 +56,7 @@ internal struct ActionHandlerImpl {
         }
         let clientParams = ClientParams.fromOptions(options)
         
-        let deviceParamsHash = DataHashUtil.generateHash(deviceParams, sign3Intelligence)
+        let deviceParamsHash = await DataHashUtil.generateHash(deviceParams, sign3Intelligence)
         
         let dataRequest = DataRequest(
             requestId: requestId,

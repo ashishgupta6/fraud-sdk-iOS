@@ -43,11 +43,11 @@ internal class ActionHandlerContinuousIntegrationImpl {
         }
         let clientParams = ClientParams.fromOptions(options)
         
-        let deviceParamsHash = DataHashUtil.generateHash(deviceParams, sign3Intelligence)
+        let deviceParamsHash = await DataHashUtil.generateHash(deviceParams, sign3Intelligence)
         Log.i("Old Hash:", sign3Intelligence.payloadHash.description)
         Log.i("New Hash:", deviceParamsHash.description)
         
-        let includeExtraOptions = isExtraOptionChanged(clientParams)
+        let includeExtraOptions = await isExtraOptionChanged(clientParams)
 
         let shouldHitApi = shouldHitApi(deviceParamsHash,includeExtraOptions)
 
@@ -103,7 +103,7 @@ internal class ActionHandlerContinuousIntegrationImpl {
     }
 
     
-    private func isExtraOptionChanged(_ clientParams: ClientParams) -> Bool {
+    private func isExtraOptionChanged(_ clientParams: ClientParams) async -> Bool {
         return DataHashUtil.generateHash(clientParams) !=
                DataHashUtil.generateHash(sign3Intelligence.sentClientParams)
     }
