@@ -34,7 +34,7 @@ internal class KeychainHelper {
     func saveDeviceFingerprint(deviceFingerprint: String) -> Bool {
         do {
             let fpKey = "fpInfo"
-            let iv = try CryptoGCM.getIvHeader()
+            let iv = CryptoGCM.getIvHeader()
             let frameworkBuildNumber = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleVersion"] as? String ?? ""
             let frameworkVersion = Bundle(for: Sign3SDK.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
             let encryptedDeviceFingerprint = try CryptoGCM.encrypt(deviceFingerprint, iv)

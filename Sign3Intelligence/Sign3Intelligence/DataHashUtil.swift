@@ -10,7 +10,7 @@ import CoreLocation
 
 internal class DataHashUtil {
     
-    static func generateHash(_ deviceParams: DeviceParams, _ sign3Intelligence: Sign3IntelligenceInternal) -> Int {
+    static func generateHash(_ deviceParams: DeviceParams, _ sign3Intelligence: Sign3IntelligenceInternal) async -> Int {
         var latValue: String? = nil
         var longValue: String?
         let hasList = ConfigManager.hasList
@@ -19,7 +19,7 @@ internal class DataHashUtil {
         let hashData = getHashData(deviceParams: deviceParams)
         
         for data in hasList {
-            if let field = getFieldBySerializedName(hashData: hashData, serializedName: data) {
+            if let field = await getFieldBySerializedName(hashData: hashData, serializedName: data) {
                 if let value = field as? String {
                     switch data {
                     case "latitude":
@@ -101,40 +101,38 @@ internal class DataHashUtil {
         )
     }
     
-    private static func getFieldBySerializedName(hashData: HashData, serializedName: String) -> String? {
+    private static func getFieldBySerializedName(hashData: HashData, serializedName: String) async -> String? {
         var result: String?
         
-        Task {
-            switch serializedName {
-            case "isJailbroken":
-                result = "\(await hashData.isJailbroken ?? false)"
-            case "isHooking":
-                result = "\(await hashData.isHooking ?? false)"
-            case "isVpn":
-                result = "\(await hashData.isVpn ?? false)"
-            case "isProxy":
-                result = "\(await hashData.isProxy ?? false)"
-            case "isGeoSpoofed":
-                result = "\(await hashData.isGeoSpoofed ?? false)"
-            case "isSimulator":
-                result = "\(await hashData.isSimulator ?? false)"
-            case "isMirroredScreen":
-                result = "\(await hashData.isMirroredScreen ?? false)"
-            case "isAppTampering":
-                result = "\(await hashData.isAppTampering ?? false)"
-            case "availableMemory":
-                result = "\(await hashData.availableMemory)"
-            case "latitude":
-                if let latitude = await hashData.latitude {
-                    result = "\(latitude)"
-                }
-            case "longitude":
-                if let longitude = await hashData.longitude {
-                    result = "\(longitude)"
-                }
-            default:
-                break
+        switch serializedName {
+        case "isJailbroken":
+            result = "\(await hashData.isJailbroken ?? false)"
+        case "isHooking":
+            result = "\(await hashData.isHooking ?? false)"
+        case "isVpn":
+            result = "\(await hashData.isVpn ?? false)"
+        case "isProxy":
+            result = "\(await hashData.isProxy ?? false)"
+        case "isGeoSpoofed":
+            result = "\(await hashData.isGeoSpoofed ?? false)"
+        case "isSimulator":
+            result = "\(await hashData.isSimulator ?? false)"
+        case "isMirroredScreen":
+            result = "\(await hashData.isMirroredScreen ?? false)"
+        case "isAppTampering":
+            result = "\(await hashData.isAppTampering ?? false)"
+        case "availableMemory":
+            result = "\(await hashData.availableMemory)"
+        case "latitude":
+            if let latitude = await hashData.latitude {
+                result = "\(latitude)"
             }
+        case "longitude":
+            if let longitude = await hashData.longitude {
+                result = "\(longitude)"
+            }
+        default:
+            break
         }
         
         return result
